@@ -1,0 +1,43 @@
+\section{Challenges and Motivation} \label{Sec:motivation}
+
+\input{funcCovgExample} 
+
+%The goal of our work is to automatically generate unit tests and oracles for detecting faults in \javascript applications. 
+%Manually locating the source of error in \javascript is a daunting task in many different ways. 
+%Automated test generation is challenging due to the event-driven dynamic nature of \javascript, and its extensive interaction with the DOM  resulting in many execution paths and states.
+%and because there can be significant amounts of error masking 
+In this section, we illustrate some of the challenges associated with test generation for \javascript applications. 
+%
+
+\figref{funcCovgExample} presents a snippet of a \javascript game application that we use as a running example throughout the paper. This simple example uses the popular jQuery library \cite{jquery-api} and contains four main \javascript functions: 
+%\ali{before going to the details of the code, say something about the type/functionality of this application. Is this a game application? Same game?}
+
+\begin{enumerate} [noitemsep]
+
+\item \code{cellClicked} is bound to the event-handlers of DOM elements with IDs \code{cell0} and  \code{cell1} (Lines 34--35). These two DOM elements become available when the DOM is fully loaded (Line 32). Depending on the element clicked, \code{cellClicked} inserts a \code{div} element with ID \code{divElem} (Line 3) after the clicked element and makes it clickable by attaching either \code{setup} or \code{setDim} as its event-handler function (Lines 5--6, 9--10).    
+
+\item \code{setup} calls \code{setDim} (Line 15) to change the value of the global variable \code{currentDim}. It further makes an element with ID \code{startCell} clickable by setting its event- handler to \code{start} (Line 16).
+
+\item \code{setDim} receives an input variable. It performs some computations to set the \code{height} value of the \code{css} property of a DOM element with ID \code{endCell}  and the value of \code{currentDim} (Lines 20--22). It also returns the computed dimension.
+
+\item \code{start} is called at runtime when the element with ID \code{startCell} is clicked (Line 16), which either updates the width dimension of the element on which it was called, or removes the element (Lines 27-29).
+\end{enumerate}
+
+There are four main challenges in testing \javascript applications. 
+ 
+The first challenge is that a fault may not immediately propagate into a DOM-level observable failure. %become immediately apparent due to the event-driven nature of the execution. 
+For example, if the `\code{+}' sign in Line 21 is mistakenly replaced by `\code{-}', the affected result does not immediately propagate to the observable DOM state after the function exits. While this mistakenly changes the value of a global variable, \code{currentDim}, which is 
+later used in  \code{start} (Line 27), it neither affects the returned value of the \code{setDim} function nor the \code{css} value of element \code{endCell}. Therefore, a GUI-level event-based testing approach does not help to detect the fault in this case.
+%Considering the complex interactions between various \javascript functions, 
+
+The second challenge is related to fault localization; even if the fault propagates to a future DOM state and a DOM-level test case detects it, finding the actual location of the fault is still challenging for the tester as the DOM-level test case is agnostic of the \javascript code.
+However, a unit test case that targets individual functions, e.g., \code{setDim} in this running example, helps a tester to spot the fault, and thus easily resolve it. %This is the reason we believe  generating unit tests with oracles in this paper.
+
+The third challenge pertains to the event-driven dynamic nature of \javascript, and its extensive interaction with the DOM  resulting in many state permutations and execution paths. In the initial state of the example, clicking on \code{cell0} or \code{cell1} takes the browser to two different states as a result of the \code{if-else} statement in Lines 4 and 8 of the function \code{cellClicked}. 
+Even in this simple example, expanding either of the resulting states has different consequences due to different functions that can be potentially triggered. 
+Executing either \code{setup} or \code{setDim} in Lines 6 and 10 results in different execution paths, DOM states, and code coverage. 
+It is this dynamic interaction of the \javascript code with the DOM (and indirectly CSS) at runtime that makes it challenging to generate test cases for \javascript applications.  
+
+The fourth important challenge in unit testing \javascript functions that have DOM interactions, such as \code{setDim}, is that the DOM tree in the state expected by the function, has to be present during unit test execution. Otherwise the test will fail due to a \code{null} or \code{undefined} exception. This situation arises often in modern web applications that have many DOM interactions.
+%In the following sections, we describe how we automatically generate \javascript unit tests that target (1) functions, and (2) DOM events to achieve high coverage.  
+%\ali{Challenges: unit testing JS code that has DOM API calls is challenging. We need to have the DOM tree available (as input) otherwise the test fails.}

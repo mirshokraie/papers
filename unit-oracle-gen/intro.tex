@@ -1,0 +1,53 @@
+\section{Introduction} \label{Sec:intro}
+
+\javascript plays a prominent role in \javascript-based web applications. To test \javascript applications, developers often write test cases using web testing frameworks such as \selenium (GUI tests) and \qunit (\javascript unit tests). Although such frameworks help to automate test execution, the test cases still need to be written manually, which is tedious and time-consuming. 
+%at the GUI level (e.g., Selenium) or \javascript function level (e.g., QUnit).
+%ALi: (this is still the case with our test cases). Further, the test cases may break whenever there are changes to the application, which make them unstable. 
+Further, the event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make it challenging to effectively write stable test cases that achieve high coverage. %\karthik{Should we define stable ?} 
+%Despite these challenges, little attention has been paid to automated test generation for \javascript applications.
+%
+%Several previous research projects have explored automated testing of \javascript applications. 
+%For instance, Mesbah \etal \cite{mesbah:tse12} use dynamic analysis  to construct a model of the application's state space, from which test cases are created.
+%Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring the application's event space as well as its value space.
+%Artzi \etal \cite{artzi:icse11} present a framework for automated feedback-directed test generation of \javascript towards inputs that yield increased coverage. 
+%While these approaches support the automated generation of sequence of test cases, they do not address the oracle creation problem to check the correctness of the application's behaviour for the test sequences generated.
+%
+%
+%While such tools help testers to design their test suite by providing an environment to record the event-enabled GUI actions, \javascript testing remains a challenging task as manually exploring different possible executions of the application is difficult. 
+%The event driven and highly dynamic nature of the \javascript, as well as its complex interaction with Document Object Model (DOM) make it difficult for  test suites to achieve high coverage. 
+%While tools such as Selenium test the correct functionality of the application after a particular event is triggered,
+
+Researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}. However, current web test generation techniques suffer from two main  shortcomings, namely, they:
+
+\begin{enumerate}[noitemsep, nolistsep]
+\item Target the generation of \emph{event sequences}, which operate at the event-level or DOM-level to cover the state space of the application. These techniques fail to capture faults that  do not propagate to an observable DOM state. As such, they potentially miss this portion of code-level \javascript faults. In order to capture such faults, effective test generation techniques need to target the code at the \javascript unit-level, in addition to the event-level.
+\item Either ignore the oracle problem altogether or simplify it through generic \emph{soft oracles}, such as  W3C HTML  validation \cite{artzi:icse11,mesbah:tse12}, or  \javascript runtime exceptions \cite{artzi:icse11}.
+A generated test case without assertions is not useful since coverage alone is not the goal of software testing. For such generated test cases, the tester still needs to  manually write many assertions, which is time and effort intensive. 
+On the other hand, soft oracles  target generic fault types and are limited in their fault finding capabilities.   %\cite{Richardson:icse92}. 
+%While there has been some work on the generation of test inputs \cite{song:symb10},  
+%Despite such limitations, the automatic creation of strong test oracles, \ie assertions, has not gained much attention. 
+However, to be practically useful, unit testing requires strong oracles  to determine whether the application under test executes correctly.
+%While automated test generation helps in achieving higher code coverage,  
+\end{enumerate}
+%Unit testing at the \javascript code level, in which each function is individually examined against the correct output, is particularly helpful in locating the root cause of a \javascript error. This is especially true if the fault in the application does not propagate to the observable DOM state. 
+To address these two shortcomings, we propose an automated regression test case and oracle generation technique for \javascript applications. Our approach operates through a three step process. First, it dynamically explores and crawls the application, using a function coverage maximization greedy algorithm, to infer a test model. Then, it generates test cases at two complementary levels, namely, DOM event and \javascript functions. Finally,   it automatically generates  test oracles for both levels, through a mutation-based algorithm. 
+%
+%, in which a modified version of the program called a mutant is
+%generated by seeding a single fault into the program. A mutant is killed, if a test input can distinguish
+%the mutant from the original application~\cite{demillo:computer1978}. 
+%Mutation testing is typically used to evaluate the quality of a test suite~\cite{demillo:computer1978}, or to generate test cases that kill  mutants~\cite{fraser:tse12}. In our work, we adopt mutation testing to efficiently generate test oracles for \javascript applications. 
+%\ali{remember to FILL in numbers}
+%{\em 
+To the best of our knowledge, we are the first to automatically generate unit tests at the function-level, coupled with test oracles, for  \javascript-based applications.
+
+Our main contributions in this work include:
+\begin{itemize}[noitemsep, nolistsep]
+\item A novel algorithm for abstracting function states to reduce the state space in unit test generation;
+\item A generic browser-engine independent technique to generate client-side \javascript-level unit test cases;
+\item A backward slicing-based technique for selecting effective set of test oracles;
+\item The implementation of our approach in an open-source tool called \tool;
+\item An empirical evaluation to assess the efficacy of \tool.
+\end{itemize} 
+
+
+
