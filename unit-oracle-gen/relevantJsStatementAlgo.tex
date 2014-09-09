@@ -3,7 +3,7 @@
 {\scriptsize
 \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 \Input{Test case $t$ composed of $(input, event)$ pairs}
-\Output{The obtained assertion candidates $map[funcState, potentialAssertions]$ for each function state $funcState$}
+\Output{The obtained assertion candidates $map[funcState, assertions]$ for each function state $funcState$}
 \BlankLine
 
 \Begin {
@@ -18,15 +18,15 @@
 \nl     \If{$\textsc{IsAccessible}(wrtVar)$}{
 \nl      $observers\leftarrow \bigcup\textsc{GetObserverFunc}(wrtVar)$\\
          }
-\nl     $wrtDomProps\leftarrow \bigcup\textsc{GetWrtDOM}(stm)$\\       
+\nl     $domProps\leftarrow \bigcup\textsc{GetWrtDOM}(stm)$\\       
 
        }
-\nl    $potentialAssertions_{funcState}.\textsc{ADD}([observers,wrtDomProps])$\\
-\nl    $map[funcState, potentialAssertions]\leftarrow potentialAssertions_{funcState}$\\       
+\nl    $assertions_{funcState}.\textsc{ADD}([observers,domProps])$\\
+\nl    $map[funcState, assertions]\leftarrow assertions_{funcState}$\\       
       }
     }  
    }
-\nl return $map[funcState, potentialAssertions]$
+\nl return $map[funcState, assertions]$
 }
 
 
