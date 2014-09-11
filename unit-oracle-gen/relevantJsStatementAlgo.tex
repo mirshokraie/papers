@@ -1,0 +1,36 @@
+\IncMargin{0em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Test case $t$ composed of $(input, event)$ pairs}
+\Output{The obtained assertion candidates $map[funcState, assertions]$ for each function state $funcState$}
+\BlankLine
+
+\Begin {
+\nl \For{$(input, event) \in t$}{
+\nl  $\textsc{PerformAction}(input, event)$\\
+\nl  $domMuts\leftarrow \textsc{GrabDOMMutations}(event)$\\
+\nl  \For{$dm \in domMuts$}{
+\nl   \If{$\textsc{ChangeType}(dm) \in {\textsc{TextChange, ClassChange, SizeChange}}$}{
+\nl    $map[funcState, relvStms]\leftarrow \textsc{GetJsDependencies}(dm)$\\
+\nl    \For{$stm \in relvStms[funcState]$}{
+\nl     $wrtVar\leftarrow \textsc{GetWrittenVar}(stm)$\\
+\nl     \If{$\textsc{IsAccessible}(wrtVar)$}{
+\nl      $observers\leftarrow \bigcup\textsc{GetObserverFunc}(wrtVar)$\\
+         }
+\nl     $domProps\leftarrow \bigcup\textsc{GetWrtDOM}(stm)$\\       
+
+       }
+\nl    $assertions_{funcState}.\textsc{ADD}([observers,domProps])$\\
+\nl    $map[funcState, assertions]\leftarrow assertions_{funcState}$\\       
+      }
+    }  
+   }
+\nl return $map[funcState, assertions]$
+}
+
+
+\caption{Retrieving assertion candidates} \label{Alg:assertionCandidates}
+}
+\end{algorithm}
+%\DecMargin{lem}
