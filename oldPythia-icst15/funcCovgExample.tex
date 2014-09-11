@@ -1,0 +1,47 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	var currentDim=20;
+	function cellClicked() {	
+		var divTag = '<div id='divElem' />';
+		if($(this).attr('id') == 'cell0'){
+			$('#cell0').after(divTag);
+			$('div #divElem').click(setup);
+		}
+		else if($(this).attr('id') == 'cell1'){
+			$('#cell1').after(divTag);
+			$('div #divElem').click(function(){setDim(20)});
+		}
+	}
+			 			
+	function setup() {
+		setDim(10);
+		$('#startCell').click(start);
+	}
+	
+	function setDim(dimension) {
+		var dim=($('#endCell').width() + $('#endCell').height()))/dimension;
+		currentDim += dim;
+		$('#endCell').css('height', dim+'px');
+		return dim;
+	}
+	
+	function start() {
+		if(currentDim > 40)
+		  $(this).css('height', currentDim+'px');
+		else $(this).remove(); 
+	}
+	
+	$document.ready(function() {
+		...
+		$('#cell0').click(cellClicked);	
+		$('#cell1').click(cellClicked);	
+	});
+\end{lstlisting}
+\vspace{-0.1in} 
+
+\caption{\javascript code of the running example.}
+\label{Fig:funcCovgExample}
+\vspace{-0.1in} 
+
+\end{figure}

@@ -1,0 +1,96 @@
+\subsection{Generating Test Oracles} \label{Sec:oracleGen}
+%Although automated test case generation can help in maximizing the code coverage, the tester still requires to assess the results of the generated executions through writing hundreds of test oracles.
+In the third step, our approach automatically generates test oracles for the two levels of test cases generated in the previous step, as depicted in the third step of Figure \ref{Fig:approach-view}. 
+Instead of randomly generating assertions, our oracle generation uses a mutation-based process.
+%By exploiting mutations, we can guide the tester towards {\em where} and {\em what} to test for, and thus generate effective test oracles. \ali{I don't understand this last sentence. It is still not really clear why we use mutations! This could come back at us again.}
+
+Mutation testing is typically used to evaluate the quality of a test suite~\cite{demillo:computer1978}, or to generate test cases that kill mutants~\cite{fraser:tse12}. In our approach, we adopt mutation testing to (1) reduce the number of assertions automatically generated, (2) target critical  and error-prone portions of the application. %, which are critical to be checked in a test suite. %for \javascript applications, i.e., we only include assertions that are essential in fault detection 
+Hence, the tester would only need to examine a small set of effective assertions to verify the correctness of the generated oracles.
+%\ali{explain why we use mutation testing. How does it help us to generate assertions efficiently? How does it help the tester?}
+%The gaol of the oracle generation step targets two different levels of the application. %DOM mutations are used to produce effective oracles for the generated DOM-level event-based tests, and  \javascript code mutations are used to generate assertions for the generated function-level unit tests.
+%
+%
+\algref{oracleGenAlgo} shows our algorithm for generating test oracles. 
+At a high level, the technique iteratively executes the following steps:
+
+\input{oracleGenAlgo}
+
+\begin{enumerate}[noitemsep]
+\item A mutant is created by injecting a single fault into the original version of the web application (Line 9 and 19 in \algref{oracleGenAlgo} for DOM mutation and code-level mutation, respectively), 
+\item Related entry/exit program states at the DOM and \javascript function levels of the mutant and the original version are captured. $OnEvDomSt$ in Line 4 is the original DOM state on which the event $Ev$ is triggered, $AfterEvDomSt$ in line 5 is the observed DOM state after the event is triggered, $MutDom$ in line 9 is the mutated DOM, and $ChangedSt$ in line 10 is the corresponding affected state for DOM mutations. $FcExit$ in Line 22 is the exit
+state of the function in the original application and $MutFcExit$ in line 23 is the corresponding exit state for that function after the application is mutated for function-level mutations.
+\item Relevant observed state differences at each level are detected and abstracted into test oracles (\textsc{Diff} in Line 11 and 24 for DOM and function-level oracles,  respectively),
+\item The generated assertions (Lines 15 and 28) are injected into the corresponding test cases. %(Line 9 and 17 for DOM and function-level test cases,  respectively).
+\end{enumerate}
+
+%\ali{how many mutants are generated? When do we have enough oracles? Or How do we know when to stop?} 
+%\ali{The number of mutants and oracles generated should also be reported in the evaluation.}
+
+\headbf{DOM-level event-based test oracles} After an event is triggered in the generated \selenium test case, the resulting DOM state needs to be compared against the expected structure. One naive approach would be to compare the DOM tree in its entirety, after the event execution. 
+Not only is this approach inefficient, it results in brittle test-cases, \ie the smallest update on the user interface can break the test case. 
+We propose an alternative approach that utilizes  \emph{DOM mutation testing} to detect and selectively compare only those DOM elements and attributes that are affected by an injected fault at the DOM-level of the application.
+Our DOM mutations target only the elements that have been accessed (read/written) during execution, and thus have a larger impact on the application's behaviour. 
+ % Such mutations modify the dynamic state of the DOM as they can be accessed and modified through different parts of the application other than the \javascript code, such as HTML or server side code. 
+To select proper DOM elements for mutation, we instrument \javascript functions that interact with the DOM, i.e., code that either accesses or modifies  DOM elements. 
+
+We execute the instrumented application by running the generated \selenium test cases and record each accessed DOM element,
+ its attributes, the triggered event on the DOM state, and the DOM state after the event is triggered (\textsc{GetOnEvDomSt} in line 4, \textsc{GetAfterEvDomSt} in line 5, and \textsc{GetAccdDomNds} in line 6 to retrieve the original DOM state, DOM state after event $Ev$ is triggered, and the accessed DOM properties as event $Ev$ is triggered, respectively, in \algref{oracleGenAlgo}). To perform the actual mutation, as the application is re-executed using the same sequence of events, we mutate the recorded DOM elements, one at a time, before the corresponding event is fired. \textsc{MutateDom} in line 9 mutates the DOM elements, and $EvSeq$\textsc{.ExecEvent} in line 10 executes the event sequence on the mutated DOM. 
+The mutation operators include (1) deleting a DOM element, and (2) changing the attribute, accessed during the original execution. 
+As we mutate the DOM, we collect the current state of DOM elements and attributes. 
+
+\figref{domTestSample} shows part of a DOM-level test case generated for the running example.
+Going back to our running example, as a result of clicking on \code{\$(`div \#divElem')} in our previously obtained event sequence (\code{\$(`\#cell0').click$\rightarrow$\$(`div \#\-divElem').click$\rightarrow$\-\$(`\#sta\-rtCell')}),
+the \code{height} and \code{width} properties of DOM element with ID \code{endCell}, and the DOM element with ID \code{startCell} are accessed. One possible DOM mutation is altering the \code{width} value of the \code{endCell} element before click on \code{\$(`div \#divElem')} happens. %Considering such a DOM mutation, \figref{domTestSample} shows part of a DOM test case generated for the running example.
+We log the consequences of this modification after the click event on \code{\$(`div \#divElem')} as well as the remaining events.
+This mutation affects the \code{height} property of DOM element with ID \code{endCell} in the resulting DOM state from clicking on \code{\$(`div \#divElem')}. Line 6 in \figref{domTestSample} shows the corresponding assertion.
+Furthermore, Assuming that the DOM mutation makes \code{currentDim}$\leq$ 40 in line 27, after click on element \code{\#startCell} happens, the element is removed and no longer exists in the resulting DOM state. The generated assertion is shown in line 10 of \figref{domTestSample}. 
+
+
+\input{domTestSample}
+
+Hence, we obtain two sets of execution traces that contain information about the state of DOM elements for each fired event in the original and mutated application. By comparing these two traces (\textsc{Diff} in line 11 in \algref{oracleGenAlgo}), we identify all changed DOM elements and generate assertions for these elements. 
+Note that  any changes detected by the \textsc{Diff} operator (line 12 in \algref{oracleGenAlgo}) is an indication that the corresponding DOM mutation is \emph{not equivalent} (line 13); if no change is detected, another DOM mutation is generated. 
+We automatically place the generated assertion immediately after the corresponding line of code that executed the event, in the generated event-based (\selenium) test case. $DomAsserts_{Ev,AfterEvDomSt}$ in line 15 contains all DOM assertions for the state $AfterEvDOMSt$ and the triggered event $Ev$.
+  
+\headbf{Function-level test oracles} To seed code level faults, we use our recently developed \javascript mutation testing tool, \mutandis \cite{mirshokraie:icst13}. Mutations generated by \mutandis are selected through a \emph{function rank} metric, which ranks functions in terms of their relative importance from the application's behaviour point of view. 
+%Mutations within highly ranked functions are applied on parts of the code that capture the main characteristics of the application (\ie program invariants or variables with high usage frequency).
+The mutation operators are chosen from a list of common operators, such as changing the value of a variable or modifying a conditional statement. 
+Once a mutant is produced (\textsc{MutateJsCode} in line 19), it is automatically instrumented.
+We collect a new execution trace from the mutated  program by executing the same sequence of events that was used on the original version of the application. This way, the state of each \javascript function is extracted at its entry and exit points. $AbsFcSts.$\textsc{GetFcEntries} in line 21 retrieves the function's entries from the abstracted function's states. \textsc{GetFcExit} in line 22 , and \textsc{GetMutFcExit} in line 23 retrieve the corresponding function's exit state in the original and mutated application. This process is similar to the function state extraction algorithm explained in \secref{jsFuncTesting}.
+
+%Similar to the trace comparison technique proposed by Fraser and Zeller \cite{fraser:tse12}, 
+After the execution traces are collected for all the generated mutants, we generate function-level test oracles by comparing the execution trace of the original application with the traces we obtained from the modified versions (\textsc{Diff} in line 24 in \algref{oracleGenAlgo}). 
+If the \textsc{Diff} operator detects no changes (line 25 of the algorithm), an equivalent mutant is detected, and thus another mutant will be generated. 
+
+Our function-level oracle generation targets \emph{postcondition assertions}.
+%The postcondition is an observable state after the unit test execution. Therefore,
+Such postcondition assertions can be used to examine the expected behaviour of a given function after it is executed in a unit test case.
+Our technique generates postcondition assertions for all functions that exhibit a \emph{different exit-point state} but the \emph{same entry-point state}, in the mutated execution traces. $FcAssert_i$ in line 27 contains all such post condition assertions. 
+Due to the dynamic and asynchronous behaviour of \javascript applications, a function with the same entry state can exhibit different outputs when executed multiple times. %though the entry state of the function remains the same.
+In this case, we need to combine assertions to make sure that the generated test cases do not mistakenly fail. $FcAsserts_{FcEntry}$ in line 28
+contains the union of function assertions generated for the same entry but different outputs during multiple executions.  
+ %\ali{again line number references don't make much sense,  double check!} 
+Let's consider a function $f$ with an entry state $entry$ in the original version of the application ($A$), with two different exit states $exit_1$ and $exit_2$. If in the mutated version of the application ($A_m$),  $f$ exhibits an exit state $exit_m$ that is different from both $exit_1$ and $exit_2$, then we combine the resulting assertions as follows: 
+%
+\code{assert1}($exit_1$,$expRes_1$)$\parallel$\code{a\-ssert2}($exit_2$,$expRes_2$), where the expected values $expRes_1$ and $expRes_2$ are obtained from the execution trace of  $A$. 
+%\karthik{how do you handle multiple inputs ?} 
+
+Each assertion for a function contains (1) the function's returned value, (2) the used global variables in that function, and/or (3) the accessed DOM element in that function. Each assertion is coupled with the expected value obtained from the execution trace of the original version. 
+%Going back to the running example of  \figref{funcCovgExample}, if we mutate the plus sign into a minus sign in Line 20, the affected elements are: the return value of \code{setDim} in Line 23, the global variable \code{currentDim} in Line 21, and the \code{height} value of the DOM element with ID \code{endCell} in Line 22.
+%
+\input{qunitTestSample}
+
+The generated assertions that target variables, compare the value as well as the runtime type against the expected ones. 
+%Assuming that \code{width} and \code{height} are 100 and 200 accordingly in \figref{funcCovgExample}, one such assertion would be: \code{equal(\-setDim(10), 30)}. To check the type of the \code{currentDim} as the function exits, we generate: \code{equal(typeof(currentDim), `number')}.
+%
+An oracle that targets a DOM element, first checks the existence of that DOM element. If the element exists,  it checks the attributes of the element by comparing them against the observed values in the original execution trace. 
+%For example, DOM related assertions in our example for the \code{setDim} function are: \code{ok(\$(\#endCell).length > 0))} and \code{equal(\$(\#endCell).css(`height'), 30)}.
+Assuming that \code{width} and \code{height} are 100 and 200 accordingly in \figref{funcCovgExample}, and
+`+' sign is mutated to `-' in line 20 of the running example in \figref{funcCovgExample}, the mutation affects the global variable \code{currentDim}, \code{height} property of element with ID \code{endCell}, and the returned value of the function \code{setDim}. \figref{qunitTestSample} shows a \qunit test case for \code{setDim} function according to this mutation with the generated assertions.  
+   
+
+
+
+
+
+

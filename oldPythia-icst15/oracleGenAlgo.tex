@@ -1,0 +1,50 @@
+\IncMargin{0em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{A Web application ($App$), list of event sequences obtained from SFG ($EvSeq$), maximum number of mutations ($n$) }
+\Output{Assertions for function-level ($FcAsserts$) and DOM event-level tests ($DomAsserts$)}
+\BlankLine
+\nl \textit{App} $\leftarrow \textsc{Instrument}(App)$ \\
+\Begin {
+\nl \While{$GenMuts<n$}{
+\nl  \ForEach{$EvSeq \in SFG$}{
+\nl   $OnEvDomSt \leftarrow Trace.\textsc{GetOnEvDomSt}(Ev \in EvSeq)$\\
+\nl   $AfterEvDomSt \leftarrow Trace.\textsc{GetAfterEvDomSt}(Ev \in EvSeq)$\\
+\nl   $AccdDomProps \leftarrow \textsc{GetAccdDomNds}(OnEvDomSt)$\\
+\nl		$EquivalentDomMut \leftarrow true$\\
+\nl		\While{$EquivalentDomMut$}{	
+\nl   	$MutDom \leftarrow \textsc{MutateDom}(AccdDomProps, OnEvDomSt)$\\
+\nl   	$ChangedSt \leftarrow EvSeq\textsc{.ExecEvent}(MutDom)$\\
+\nl   	$Diff_{ChangedSt, AfterEvDomSt} \leftarrow \textsc{Diff}(ChangedSt, AfterEvDomSt)$\\
+\nl   	\If{$Diff_{ChangedSt, AfterEvDomSt} \neq \emptyset$}{
+\nl				$EquivalentDomMut \leftarrow false$\\	
+\nl		  	$DomAssert_i= Diff_{ChangedSt, AfterEvDomSt}$\\
+\nl   		$DomAsserts_{Ev,AfterEvDomSt}=\bigcap DomAssert_i $\\
+				}
+			}
+\nl   $AbsFcSts \leftarrow Trace\textsc{.GetAbsFcSts()}$\\
+\nl		$EquivalentCodeMut \leftarrow true$\\
+\nl		\While{$EquivalentCodeMut$}{
+\nl   	$MutApp \leftarrow \textsc{MutateJsCode}(App)$\\
+\nl   	$MutFcSts \leftarrow EvSeq\textsc{.ExecEvent}(MutApp)$\\
+\nl   	\ForEach{$FcEntry \in AbsFcSts.\textsc{GetFcEntries}$}{
+\nl   		$FcExit \leftarrow AbsFcSts\textsc{.GetFcExit}(FcEntry)$\\
+\nl   		$MutFcExit \leftarrow MutFcSts\textsc{.GetMutFcExit}(FcEntry)$\\
+\nl				$Diff_{FcExit,MutFcExit} \leftarrow \textsc{Diff}(FcExit,MutFcExit)$\\
+\nl				\If{$Diff_{FcExit,MutFcExit} \neq \emptyset$}{
+\nl					$EquivalentCodeMut \leftarrow false$\\
+\nl   			$FcAssert_i= \bigcap Diff_{FcExit,MutFcExit}$\\
+\nl   			$FcAsserts_{FcEntry}=\bigcup FcAssert_i$
+					}   
+       	}
+      }
+    } 
+  }    
+
+\nl return {$\{FcAsserts,DOMAsserts\}$}
+}
+\caption{Oracle Generation}
+\label{Alg:oracleGenAlgo}
+}
+\end{algorithm}
