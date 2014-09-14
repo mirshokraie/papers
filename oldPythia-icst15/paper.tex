@@ -1,9 +1,12 @@
 \documentclass[10pt, conference, compsocconf]{IEEEtran}
-\usepackage{graphicx}
+\def\IEEEbibitemsep{2pt plus .5pt}
+
+\usepackage{url,moreverb,graphicx}
 \usepackage{latexsym}
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{mdwlist}
 \usepackage{xspace}
 \usepackage{epstopdf}
 \usepackage{hhline}
@@ -18,9 +21,8 @@
 \usepackage{amssymb}
 \usepackage{subfigure}
 
-
 \usepackage{lipsum}
-\usepackage{paralist}
+%\usepackage{paralist}
 \usepackage{fixmath}
 \usepackage{rotating}
 \usepackage{listings}
@@ -30,14 +32,14 @@
 \usepackage{array}
 \let\labelindent\relax
 \usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{lipsum}
 \usepackage{balance}
 
 
 \usepackage{color}
 
 \usepackage{textcomp}
-
-\definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \lstset{
 	%backgroundcolor=\color{lbcolor},
@@ -103,7 +105,7 @@
 %\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
 %\textwidth 17.8cm
 %\textheight 22.7cm
-%\setstretch{0.95}
+\setstretch{0.95}
 
 %%Terminology
 \newcommand{\rest}{\textsc{Rest}\xspace}
@@ -266,9 +268,11 @@ Test generation; regression testing; oracles; JavaScript; DOM
 
 
 \balance
+\footnotesize
+\begin{spacing}{0.9}
 \bibliographystyle{IEEEtran}
 \bibliography{../biblio}
-
+\end{spacing}
 
 % that's all folks
 \end{document}
