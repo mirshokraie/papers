@@ -32,7 +32,7 @@ However, to be practically useful, unit testing requires strong oracles  to dete
 %Unit testing at the \javascript code level, in which each function is individually examined against the correct output, is particularly helpful in locating the root cause of a \javascript error. This is especially true if the fault in the application does not propagate to the observable DOM state. 
 To address these two shortcomings, we propose an automated test case  generation technique for \javascript applications. 
 
-Our approach operates through a three step process. 
+Our approach, called \tool (JavaScript Event and Function Testing) operates through a three step process. 
 First, it dynamically explores the event-space of the application using a \emph{function coverage maximization} method, to infer a test model. Then, it generates test cases at two complementary levels, namely, DOM event and \javascript functions. Our technique employs a novel \emph{function state abstraction} algorithm to minimize the number of function-level states needed for test generation.
 Finally,  it automatically generates test oracles, through a mutation-based algorithm.
 

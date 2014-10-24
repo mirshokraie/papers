@@ -1,11 +1,11 @@
 \begin{abstract}
 % MUST be 150 words or less
 %Developers often test their web applications using frameworks such as Selenium. Although such frameworks help to automate test execution, the test cases need to be written manually, which is tedious and inefficient.
-The event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make it  challenging to test \javascript applications.
-Although current web test automation techniques target the generation of event sequences, they ignore testing the \javascript code at the unit level. Further they either ignore the oracle problem completely or simplify it through generic soft oracles such as HTML validation and runtime exceptions. We present a framework to automatically generate
+The event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make it  challenging to test \javascript-based applications.
+Current web test automation techniques target the generation of event sequences, but they ignore testing the \javascript code at the unit level. Further they either ignore the oracle problem completely or simplify it through generic soft oracles such as HTML validation and runtime exceptions. We present a framework to automatically generate
  test cases for \javascript applications at two complementary levels, namely events and individual \javascript  
-functions. In addition, these test cases are strengthened by automatically generated mutation-based oracles. % capable of detecting regression faults in \javascript code and the DOM. 
-Our approach employs a combination of function converge maximization and function state abstraction algorithms to efficiently generate unit test cases.
+functions. 
+Our approach employs a combination of function converge maximization and function state abstraction algorithms to efficiently generate  test cases. In addition, these test cases are strengthened by automatically generated mutation-based oracles. % capable of detecting regression faults in \javascript code and the DOM. 
 We empirically evaluate the implementation of our approach, called \tool, to assess its efficacy. 
 The results, on 13 \javascript-based applications, show that the generated test cases achieve a coverage of 68\% and that \tool can detect injected \javascript and DOM faults with a high accuracy (100\% precision, 70\% recall).
 We also find that \tool outperforms an existing \javascript test automation framework both in terms of coverage and detected faults.
