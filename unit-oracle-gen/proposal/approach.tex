@@ -24,10 +24,22 @@ that are either accessed or checked in the manually written DOM-based test suite
 $DOMUsgFrq(elem)=\frac{NoOfElemAccss(elem)}{TotalElemsAccss}$, where $DOMUsgFrq(elem)$ is the usage frequency of DOM element $elem$, $NoOfelemAccss$ is the number of times that DOM element $elem$ is accessed, and $TotalElemsAccss$ is the total number of DOM accesses;
 \item Select accessed DOM elements that their usage frequency is greater than or equal to $\frac{1}{NoOfDOMElems}$, where $NoOfDOMElems$ is the total number of DOM elements. Our final set of DOM elements $ElemsToTrack$ is computed as:
 $ElemsToTrack=SelcAccssElems\cup AssertedElems$, where $SelcAccssElems$ is set of selected DOM elements according to their usage frequency, and $AssertedElems$ are DOM elements that are asserted in the test suite;    
-\item Track DOM
-mutations of the selected elements in the previous step ($ElemsToTrack$). We subsequently find relevant portions of the code, which are responsible for the such DOM mutations by utilizing backward slicing technique; 
-\item Extract accessible variables/objects per function from the obtained relevant code;
-\item Rank the extracted variables/objects according to the following formula:
+\item Track DOM mutations of the selected elements in the previous step ($ElemsToTrack$). We subsequently find relevant portions of the code, which are responsible for the such DOM mutations by utilizing backward slicing technique; 
+\item Extract accessible variables/objects $BWVars$ per function from the obtained relevant code;
+\item Perform forward slicing on the previously extracted variables ($BWVars$) to find statements, that are influenced by these variables. This allows us to further predict parts of the code that will be affected by a modification to such variables. The final set of obtained variables per function is: $CandidateVars=BWVars\cup FWVars$, where $FWVars$ is the list of variables obtained by forward slicing.  
+\item Rank $CandidateVars$ according to the following formula:
+
+$rank(v\in CandidateVars)=\frac{\# UsedForMutAcc(v)}{\# MutAcc} + \frac{\# UsedForMutChked(v)}{\# MutChked}$
+
+Where $rank(v)$ is the ranking value of variable $v$, $\# UsedForMutAcc(v)$ is the total number of
+times that variable $v$ appears in the extracted portions of the code, $\# MutAcc$ is the total number of times that the
+accessed DOM elements change during the test suite run. $\# UsedForMutChked(v)$ is the total
+number of times that variable $v$ appears in the extracted code for mutations happen to the checked
+DOM elements in the test suite, and $\# MutChked$ is the total number of times that checked DOM
+elements are mutated. The ranking value of each variable indicates the relative importance of
+that variable in mutating the accessed as well as checked DOM elements. We sort variables
+associated with each function according to their rank value and select the first $n$ variables as the
+oracle candidates for that function.
 \end{enumerate}
 
 To assess the efficacy of our oracle generation approach, we conduct an empirical study, in
