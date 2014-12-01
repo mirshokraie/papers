@@ -1,0 +1,268 @@
+\documentclass[10pt, onecolumn]{IEEEtran}
+%\def\IEEEbibitemsep{2pt plus .5pt}
+
+\usepackage{url,moreverb,graphicx}
+%\usepackage{latexsym}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{float}
+%\usepackage{mdwlist}
+\usepackage{xspace}
+\usepackage{epstopdf}
+\usepackage{hhline}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%\usepackage{algorithmwh}
+\usepackage[vlined,ruled]{algorithm2e}
+%\SetAlFnt{\small}
+%\SetAlCapFnt{\small}
+
+
+\usepackage{amssymb}
+\usepackage{subfigure}
+
+\usepackage{lipsum}
+%\usepackage{paralist}
+\usepackage{fixmath}
+\usepackage{rotating}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{array}
+\let\labelindent\relax
+\usepackage{enumitem}
+\usepackage{setspace}
+%\usepackage{lipsum}
+\usepackage{balance}
+
+
+\usepackage{color}
+
+\usepackage{textcomp}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	%backgroundcolor=\color{lbcolor},
+	tabsize=2,
+	rulecolor=,
+	language=html,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={0.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        %emphstyle=\color[rgb]{0.827,0.126,0.941},
+}
+
+
+%Listings for JS
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, for, in, while, do, else, case, break, assertEquals, assertTrue,equal, ok},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this, By, int,@Test},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{forestgreen}\ttfamily,
+  stringstyle=\color{purple}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+   language=JavaScript,
+   %backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\scriptsize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\scriptsize,
+   numbersep=-6pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b,
+   numberblanklines=false,
+   escapeinside=\[\]}
+%\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
+%\textwidth 17.8cm
+%\textheight 22.7cm
+\setstretch{0.95}
+
+%%Terminology
+\newcommand{\rest}{\textsc{Rest}\xspace}
+\newcommand{\jsf}{\textsc{Jsf}\xspace}
+\newcommand{\ajax}{\textsc{Ajax}\xspace}
+\newcommand{\headbf}[1]{\par\noindent\textbf{#1.}}
+\newcommand{\head}[1]{\subsubsection{#1}}
+\newcommand{\headed}[1]{\noindent\textbf{#1}\ \ }
+\newcommand{\webtwo}{\textit{Web~2.0}\xspace}
+\newcommand{\crawljax}{\textsc{Crawljax}\xspace}
+\newcommand{\petstore}{\textsc{PetStore}\xspace}
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\ie}{{i.e.,}\xspace}
+\newcommand{\eg}{{e.g.,}\xspace}
+\newcommand{\atusatwo}{\textsc{Atusa~2.0}\xspace}
+\newcommand{\tudu}{\textsc{TUDU}\xspace}
+\newcommand{\todo}{\textsc{Todo}\xspace}
+\newcommand{\taskfreak}{\textsc{TaskFreak}\xspace}
+\newcommand{\tocview}{\textsc{TocView}\xspace}
+\newcommand{\javascript}{Java\-Script\xspace}
+\newcommand{\jquery}{\textsc{jQuery}\xspace}
+\newcommand{\hitlist}{\textsc{HitList}\xspace}
+\newcommand{\googlereader}{\textsc{Google Reader}\xspace}
+\newcommand{\testsuite}[1]{\textsc{Test Suite #1}\xspace}
+\newcommand{\version}[1]{\textsc{V#1}\xspace}
+\newcommand{\proc}[2]{{\textbf{Procedure} \textsc{#1}(\textit{#2})}}
+
+\newcommand{\mutandis}{\textsc{Mutandis}\xspace}
+\newcommand{\jsart}{\textsc{JSart}\xspace}
+%\newcommand{\tool}{\textsc{Pyt\-hia}\xspace}
+%\newcommand{\tool}{\textsc{JSAttestor}\xspace}
+%\newcommand{\tool}{\textsc{JStera}\xspace}
+\newcommand{\tool}{\textsc{JSeft}\xspace}
+\newcommand{\artemis}{\textsc{Artemis}\xspace}
+\newcommand{\qunit}{\textsc{QUnit}\xspace}
+\newcommand{\junit}{\textsc{JUnit}\xspace}
+\newcommand{\selenium}{\textsc{Selenium}\xspace}
+\newcommand{\blanket}{\textsc{Blanket}\xspace}
+\newcommand{\jscover}{\textsc{JSCover}\xspace}
+
+
+\newcommand{\cssparser}{\textsc{CSSParser}\xspace}
+
+\newcommand{\myspace}{\hspace{1mm}}
+
+
+%% abbreviations and commands
+\newcommand{\secref}[1]{Section~\ref{Sec:#1}}
+\newcommand{\figref}[1]{Figure~\ref{Fig:#1}}
+\newcommand{\listref}[1]{Listing~\ref{List:#1}}
+\newcommand{\tabref}[1]{Table~\ref{Table:#1}}
+\newcommand{\algref}[1]{Algorithm~\ref{Alg:#1}}
+\newcommand{\curl}[1]{\footnote{~\scriptsize\url{#1}}}
+\newcommand{\fn}[1]{\footnote{~\scriptsize{#1}}}
+\newcommand{\code}[1]{{\texttt{#1}}}
+\newtheorem{mydef}{Definition}
+
+
+\newcommand{\mycaption}[1]{%
+\vspace{-1.3\baselineskip}
+\caption{#1}
+}
+
+\lstloadlanguages{Java,XML,HTML}
+
+
+
+\newcommand{\aff}[1]{{\normalsize \textsl{#1}}}
+
+% TeX hack to make timestamp
+
+%
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+%
+ \def\now{{\def\Time{3}\def\Hour{4}\def\Minute{5}%
+  \count\Time=\time\relax\ifnum\count\Time=0\count\Time=1440\fi%
+  \count\Hour=\count\Time\relax\divide\count\Hour by 60\relax%
+  \count\Minute=\count\Hour\relax\multiply\count\Minute by -60\relax%
+  \advance\count\Minute by \count\Time\relax\the\count\Hour\relax:%
+  \ifnum\count\Minute<10 0 \fi\the\count\Minute\relax}}
+  
+\newboolean{showcomments}
+\setboolean{showcomments}{false}
+\ifthenelse{\boolean{showcomments}}
+{\newcommand{\nb}[2]{
+\fbox{\bfseries\sffamily\scriptsize#1}
+{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
+}
+}
+{\newcommand{\nb}[2]{}
+}
+\newcommand\ali[1]{\nb{Ali}{#1}}
+\newcommand\shabnam[1]{\nb{Shabnam}{#1}}
+\newcommand\karthik[1]{\nb{Karthik}{#1}}
+
+
+\newcommand{\theadturn}[1]{%
+\begin{turn}{90}\textbf{#1}\end{turn}
+}
+
+\newcommand{\thead}[1]{%
+\textbf{#1}
+}
+
+\newcommand{\footnoteremember}[2]{\footnote{~\scriptsize{#2}}
+  \newcounter{#1}
+  \setcounter{#1}{\value{footnote}}}
+\newcommand{\footnoterecall}[1]{\footnotemark[\value{#1}]
+}
+
+% Save space in lists. Use this after the opening of the list
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%remove for camera ready
+%\pagestyle{plain}
+
+%\clubpenalty = 10000
+%\widowpenalty = 10000
+%\displaywidowpenalty = 10000
+
+\begin{document}%\conferenceinfo{}
+\title{
+%\tool: Automated Test Generation\\ for JavaScript Applications
+%Generating Test Cases with Oracles for\\ JavaScript Applications
+%\tool: Generating Regression Tests\\ for JavaScript Applications
+%\tool:  Automated Tool for JavaScript Event and Function Testing
+ Generating Unit Tests with Selective Oracles for JavaScript Applications
+}
+
+
+%\author{\IEEEauthorblockN{Shabnam Mirshokraie
+%\hspace{0.5in}Ali Mesbah
+%\hspace{0.5in}Karthik Pattabiraman}
+%\IEEEauthorblockA{
+%%Dept of Electrical and Computer Engineering\\
+%\aff{University of British Columbia}\\
+%\aff{Vancouver, BC, Canada}\\
+%\aff{ \{shabnamm, amesbah, karthikp\}@ece.ubc.ca}}
+%}
+\maketitle
+
+
+
+\IEEEpeerreviewmaketitle
+
+\input{approach}
+
+% use section* for acknowledgement
+%\section*{Acknowledgment}
+
+
+
+
+
+% that's all folks
+\end{document}
