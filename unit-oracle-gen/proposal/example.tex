@@ -12,15 +12,17 @@
 	function selectCoupon() {
 		...
 		coupElem = $('#couponButt');
+		var price= $('#merchPrice').text();
 		if(coupSt != 'used'){
 			coupSt = 'used';
-			discountCode = coupElem.data('value');
+			discountVal = calcDiscount(coupElem.data('value'), customer.Id, coupon.Id);
+			discountCode = coupon.Id + '-' + discountVal ;
 			coupElem.removeClass(discountCode); 
-			coupon.Id = discountCode;
+			price -= discountVal;
+			
 		}
-		var discountVal = calcDiscount(discountCode,customer.Id);
-		var finalVal = $('#merchPrice').text() - discountVal;
-		$('#calcPrice').text(finalVal);
+		
+		$('#calcPrice').text(price);
 		customer.couponStatus = coupon.Id + '-' + coupSt;  
 	}
 
