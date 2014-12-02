@@ -2,6 +2,7 @@
 %\medskip
 \begin{lstlisting}
 	var customer = {Id:"", couponStatus:"", ...};
+	var coupon = {Id:"", ...}
 	var coupSt = 'default';
 	...
 	$document.ready(function() {
@@ -10,17 +11,18 @@
 	});
 	function selectCoupon() {
 		...
-		elem = $('#couponButt');
+		coupElem = $('#couponButt');
 		if(coupSt != 'empty'){
 			coupSt = 'empty';
-			elem.removeClass('readyToSelect');
-			elem.addClass('coupSt');  
-			discountCode = elem.data('value');
+			coupElem.removeClass('readyToSelect');
+			coupElem.addClass('empty');  
+			discountCode = coupElem.data('value');
+			coupon.Id = discountCode;
 		}
 		var discountVal = calcDiscount(discountCode,customer.Id);
 		var finalVal = $('#merchPrice').text() - discountVal;
 		$('#calcPrice').text(finalVal);
-		customer.couponStatus = customer.Id + coupSt;  
+		customer.couponStatus = coupon.Id + '-' + coupSt;  
 	}
 
 \end{lstlisting}
