@@ -1,0 +1,33 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	var customer = {Id:"", couponStatus:"", ...};
+	var coupSt = 'default';
+	...
+	$document.ready(function() {
+		...
+		$('#couponButt').click(selectCoupon);
+	});
+	function selectCoupon() {
+		...
+		elem = $('#couponButt');
+		if(coupSt != 'empty'){
+			coupSt = 'empty';
+			elem.removeClass('readyToSelect');
+			elem.addClass('coupSt');  
+			discountCode = elem.data('value');
+		}
+		var discountVal = calcDiscount(discountCode,customer.Id);
+		var finalVal = $('#merchPrice').text() - discountVal;
+		$('#calcPrice').text(finalVal);
+		customer.couponStatus = customer.Id + coupSt;  
+	}
+
+\end{lstlisting}
+\vspace{-0.1in} 
+
+\caption{\javascript code of the running example.}
+\label{Fig:example}
+\vspace{-0.2in} 
+
+\end{figure}
