@@ -12,11 +12,10 @@
 	function selectCoupon() {
 		...
 		coupElem = $('#couponButt');
-		if(coupSt != 'empty'){
-			coupSt = 'empty';
-			coupElem.removeClass('readyToSelect');
-			coupElem.addClass('empty');  
+		if(coupSt != 'used'){
+			coupSt = 'used';
 			discountCode = coupElem.data('value');
+			coupElem.removeClass(discountCode); 
 			coupon.Id = discountCode;
 		}
 		var discountVal = calcDiscount(discountCode,customer.Id);
