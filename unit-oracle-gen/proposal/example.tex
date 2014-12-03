@@ -1,7 +1,7 @@
 \begin{figure}
 %\medskip
 \begin{lstlisting}
-	var customer = {Id:"", couponStatus:"", ...};
+	var customer = {Id:"", couponStatus:"", shopCart:"", ...};
 	var coupon = {Id:"", ...}
 	var coupSt = 'default';
 	...
@@ -9,21 +9,27 @@
 		...
 		$('#couponButt').click(selectCoupon);
 	});
-	function selectCoupon() {
-		...
+	function calculatePrice(customerId, couponId) {
 		coupElem = $('#couponButt');
 		var price= $('#merchPrice').text();
 		if(coupSt != 'used'){
 			coupSt = 'used';
-			discountVal = calcDiscount(coupElem.data('value'), customer.Id, coupon.Id);
-			discountCode = coupon.Id + '-' + discountVal ;
+			discountVal = calcDiscount(coupElem.data('value'), customerId, couponId);
+			discountCode = couponId + '-' + discountVal ;
 			coupElem.removeClass(discountCode); 
 			price -= discountVal;
-			
+			customer.shopCart = price;	
 		}
-		
 		$('#calcPrice').text(price);
-		customer.couponStatus = coupon.Id + '-' + coupSt;  
+		customer.couponStatus = couponId + '-' + coupSt;  
+	}
+	
+	function selectCoupon(){
+		coupSt = 'readyToUse';
+		...
+		customer.Id = customerFromServer($('#user').val());
+		coupon.Id = couponFromServer(url + customer.Id);
+		calculatePrice(customer.Id, coupon.Id);
 	}
 
 \end{lstlisting}
