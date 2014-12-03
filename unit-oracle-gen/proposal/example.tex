@@ -9,6 +9,7 @@
 		...
 		$('#couponButt').click(selectCoupon);
 	});
+	
 	function calculatePrice(customerId, couponId) {
 		coupElem = $('#couponButt');
 		var price= $('#merchPrice').text();
@@ -20,8 +21,8 @@
 			price -= discountVal;	
 		}
 		customer.shopCart = price;
-		$('#calcPrice').text(price);
-		customer.couponStatus = couponId + '-' + coupSt;  
+		customer.couponStatus = couponId + '-' + coupSt;
+		$('#calcPrice').text(price);  
 	}
 	
 	function selectCoupon(){
