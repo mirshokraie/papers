@@ -17,9 +17,9 @@
 			discountVal = calcDiscount(coupElem.data('value'), customerId, couponId);
 			discountCode = couponId + '-' + discountVal ;
 			coupElem.removeClass(discountCode); 
-			price -= discountVal;
-			customer.shopCart = price;	
+			price -= discountVal;	
 		}
+		customer.shopCart = price;
 		$('#calcPrice').text(price);
 		customer.couponStatus = couponId + '-' + coupSt;  
 	}
