@@ -1,0 +1,20 @@
+\IncMargin{0em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Test suite $T$; The set of test cases $tc_i \in T$}
+\Output{The ordered set of oracles $oracle$}
+\BlankLine
+
+\Begin {
+\nl \For{$tc_i \in T$}{
+\nl	 $trace\left textsc{Exec}(tc_i)$\\
+\nl	 $domAccss\left \textsc{GetDomAcc}(trace)$   	
+
+
+}
+
+\caption{Oracle Generation} \label{Alg:algorithm}
+}
+\end{algorithm}
+%\DecMargin{lem}
