@@ -1,27 +1,28 @@
 \begin{figure}
 %\medskip
 \begin{lstlisting}
-	var customer = {Id:"", couponStatus:"readyToUse", shopCart:"", ...};
+	var customer = {Id:"", couponStatus:"default", shopCart:0, ...};
 	var coupon = {Id:"", ...}
 	...
 	$document.ready(function() {
 		...
 		$('#couponButt').click(selectCoupon);
+		$('#viewCart').click(viewCart);
 	});
 	
 	function calculatePrice(customer, coupon) {
-		coupElem = $('#couponButt');
+		var coupElem = $('#couponButt');
 		var price= $('#merchPrice').text();
 		coupon.Id = couponFromServer(url + customer.Id);
-		if(customer.couponStatus != 'used'){
+		if(customer.couponStatus != coupon.Id + '-' + 'used'){
 			coupElem.removeClass(customer.couponStatus);
 			customer.couponStatus = coupon.Id + '-' + 'used';
-			discountVal = calcDiscount(coupElem.data('value'), customer.Id, coupon.Id);
+			discountVal = calcDiscount(coupElem.data('value'), customer.Id);
 			price -= discountVal;	
 			coupElem.addClass(customer.couponStatus);
 		} 	
-		customer.shopCart = price;
-		$('#calcPrice').text(price);  
+		$('#calcPrice').text(price);
+		customer.shopCart += price;
 	}
 	
 	function selectCoupon(){
@@ -29,6 +30,14 @@
 		customer.Id = customerFromServer($('#user').val());
 		calculatePrice(customer, coupon);
 	}
+	function viewCart(){
+		...
+		if(customer.shopCart==0 && customer.couponStatus == 'default')
+			alert('Shopping cart is empty');
+		else
+			$("#cart").append('Total purchases: ' + customer.shopCart);
+	}
+
 
 \end{lstlisting}
 \vspace{-0.1in} 
