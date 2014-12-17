@@ -1,3 +1,12 @@
 \section{Approach} \label{Sec:approach}
+At high level, our approach generates function level assertions for the \javascript code by utilizing human written DOM-based tests and assertions. Our code level assertions fall in the following three categories: (1) explicit assertions, which are directly inferred from analyzing the manually written DOM-based assertions, (2) implicit assertions, which are indirectly connected to human written DOM-based assertions, and (3) potential candidate assertions, which are not included in the written DOM-based assertions, yet are potentially useful to be checked by the function level test suite. We discuss each of the aforementioned categories in the following subsections in more details.
 \input{algorithm}
+\begin{figure*}
+  \centering
+  \includegraphics[width=.7\hsize]{fig/approachDiagram}
+  \mycaption{Overview of our assertion generation approach.}
+  \vspace{-0.1in} 
+  \label{Fig:approachDiagram}
+  \vspace{-0.1in} 
+\end{figure*}
 %mutation of customer.couponStatus = coupon.Id + '-' + 'used' to customer.couponStatus = coupon.Id + 'used';'
