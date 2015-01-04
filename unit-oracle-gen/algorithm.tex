@@ -1,0 +1,44 @@
+\IncMargin{0em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Test suite $T$; The set of test cases $tc_i \in T$}
+\Output{The ordered set of oracles $oracles$}
+\BlankLine
+
+\Begin {
+\nl \For{$tc_i \in T$}{
+\nl  $trace \leftarrow textsc{Exec}(tc_i)$\\
+\nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
+\nl  $freqAccdDOM\leftarrow \emptyset$\\
+\nl  \For{$dom \in domAccss $}{
+\nl   \If{$\textsc{DOMUsgFreq}(dom) \geq \frac{1}{NoOfDOMElems} $}{
+\nl    $freqAccdDOM \leftarrow dom \cup freqAccdDOM$\\       
+      }
+     }
+\nl  \For{$asstn \in assertions_{tc_i}$}{
+\nl   $asserDOMAcc \leftarrow \textsc{GetDOMAcc}(asstn)$\\
+\nl   $asserDOMMuts \leftarrow \textsc{GetDOMMuts}(asserDOMAcc)$\\
+\nl   \For{$domMut \in asserDOMMuts$}{
+\nl    $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
+\nl    $asstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
+\nl    $potAsstnRel \leftarrow \textsc{GetFWSlice}(asstnRel, trace)$\\
+      }
+     }
+\nl  $nonAsserDOMMuts \leftarrow \textsc{GetDOMMuts}(freqAccdDOM)$\\
+\nl  \For{$domMut \in nonAsserDOMMuts$}{
+\nl   $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
+\nl   $nonAsstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
+     }
+\nl  $asstnRelOrcls[func]_{f=1}^{n} \leftarrow \textsc{GetValue}(\textsc{Accessibles}([func]_{f=1}^{n}, asstnRel))$\\
+\nl  $candidOrcls[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [potAsstnRel \cup nonAsstnRel])$\\
+\nl  $oracles[func]_{f=1}^{n}.\textsc{Add}(asstnRelOrcls \cup candidOrcls)$\\
+   }
+\nl $\textsc{Rank}(oracles[func]_{f=1}^{n})$\\
+\nl return $(oracles[func]_{f=1}^{n})$
+}
+\caption{Oracle Generation} 
+\label{Alg:algorithm}
+}
+\end{algorithm}
+%\DecMargin{lem}

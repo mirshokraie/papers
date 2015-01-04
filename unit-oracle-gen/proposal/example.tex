@@ -1,0 +1,43 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	var customer = {Id:"", couponStatus:"", shopCart:"", ...};
+	var coupon = {Id:"", ...}
+	var coupSt = 'default';
+	...
+	$document.ready(function() {
+		...
+		$('#couponButt').click(selectCoupon);
+	});
+	
+	function calculatePrice(customerId, couponId) {
+		coupElem = $('#couponButt');
+		var price= $('#merchPrice').text();
+		if(coupSt != 'used'){
+			coupSt = 'used';
+			discountVal = calcDiscount(coupElem.data('value'), customerId, couponId);
+			discountCode = couponId + '-' + discountVal ;
+			coupElem.removeClass(discountCode); 
+			price -= discountVal;	
+		}
+		customer.shopCart = price;
+		customer.couponStatus = couponId + '-' + coupSt;
+		$('#calcPrice').text(price);  
+	}
+	
+	function selectCoupon(){
+		coupSt = 'readyToUse';
+		...
+		customer.Id = customerFromServer($('#user').val());
+		coupon.Id = couponFromServer(url + customer.Id);
+		calculatePrice(customer.Id, coupon.Id);
+	}
+
+\end{lstlisting}
+\vspace{-0.1in} 
+
+\caption{\javascript code of the running example.}
+\label{Fig:example}
+\vspace{-0.2in} 
+
+\end{figure}

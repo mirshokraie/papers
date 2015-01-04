@@ -1,9 +1,12 @@
-\documentclass{sig-alternate}
-\usepackage{graphicx}
-\usepackage{latexsym}
+\documentclass[10pt, onecolumn]{IEEEtran}
+%\def\IEEEbibitemsep{2pt plus .5pt}
+
+\usepackage{url,moreverb,graphicx}
+%\usepackage{latexsym}
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{float}
+%\usepackage{mdwlist}
 \usepackage{xspace}
 \usepackage{epstopdf}
 \usepackage{hhline}
@@ -18,9 +21,8 @@
 \usepackage{amssymb}
 \usepackage{subfigure}
 
-
 \usepackage{lipsum}
-\usepackage{paralist}
+%\usepackage{paralist}
 \usepackage{fixmath}
 \usepackage{rotating}
 \usepackage{listings}
@@ -28,16 +30,16 @@
 \usepackage{threeparttable}
 \usepackage{multirow}
 \usepackage{array}
-
+\let\labelindent\relax
 \usepackage{enumitem}
+\usepackage{setspace}
+%\usepackage{lipsum}
 \usepackage{balance}
 
 
 \usepackage{color}
 
 \usepackage{textcomp}
-
-\definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \lstset{
 	%backgroundcolor=\color{lbcolor},
@@ -103,13 +105,13 @@
 %\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
 %\textwidth 17.8cm
 %\textheight 22.7cm
-%\setstretch{0.95}
+\setstretch{0.95}
 
 %%Terminology
 \newcommand{\rest}{\textsc{Rest}\xspace}
 \newcommand{\jsf}{\textsc{Jsf}\xspace}
 \newcommand{\ajax}{\textsc{Ajax}\xspace}
-\newcommand{\headbf}[1]{\par\smallskip\noindent\textbf{#1.}}
+\newcommand{\headbf}[1]{\par\noindent\textbf{#1.}}
 \newcommand{\head}[1]{\subsubsection{#1}}
 \newcommand{\headed}[1]{\noindent\textbf{#1}\ \ }
 \newcommand{\webtwo}{\textit{Web~2.0}\xspace}
@@ -133,7 +135,10 @@
 
 \newcommand{\mutandis}{\textsc{Mutandis}\xspace}
 \newcommand{\jsart}{\textsc{JSart}\xspace}
-\newcommand{\tool}{\textsc{Atrina}\xspace}
+%\newcommand{\tool}{\textsc{Pyt\-hia}\xspace}
+%\newcommand{\tool}{\textsc{JSAttestor}\xspace}
+%\newcommand{\tool}{\textsc{JStera}\xspace}
+\newcommand{\tool}{\textsc{JSeft}\xspace}
 \newcommand{\artemis}{\textsc{Artemis}\xspace}
 \newcommand{\qunit}{\textsc{QUnit}\xspace}
 \newcommand{\junit}{\textsc{JUnit}\xspace}
@@ -221,58 +226,41 @@
 %remove for camera ready
 %\pagestyle{plain}
 
-\clubpenalty = 10000
-\widowpenalty = 10000
-\displaywidowpenalty = 10000\begin{document}%\conferenceinfo{}
+%\clubpenalty = 10000
+%\widowpenalty = 10000
+%\displaywidowpenalty = 10000
+
+\begin{document}%\conferenceinfo{}
 \title{
-Atrina: Unit Oracle Generation for JavaScript Applications
+%\tool: Automated Test Generation\\ for JavaScript Applications
+%Generating Test Cases with Oracles for\\ JavaScript Applications
+%\tool: Generating Regression Tests\\ for JavaScript Applications
+%\tool:  Automated Tool for JavaScript Event and Function Testing
+ Generating Unit Tests with Selective Oracles for JavaScript Applications
 }
 
 
-\numberofauthors{3}
-\author{
-      \alignauthor
-       Shabnam Mirshokraie
-       \alignauthor
-       Ali Mesbah
-       \alignauthor
-       Karthik Pattabiraman
-       \sharedaffiliation
-       \affaddr{University of British Columbia}\\
-       \affaddr{Vancouver, BC, Canada}\\
-       \email{\{shabnamm, amesbah, karthikp\}@ece.ubc.ca}
- }
-%\date{}
+%\author{\IEEEauthorblockN{Shabnam Mirshokraie
+%\hspace{0.5in}Ali Mesbah
+%\hspace{0.5in}Karthik Pattabiraman}
+%\IEEEauthorblockA{
+%%Dept of Electrical and Computer Engineering\\
+%\aff{University of British Columbia}\\
+%\aff{Vancouver, BC, Canada}\\
+%\aff{ \{shabnamm, amesbah, karthikp\}@ece.ubc.ca}}
+%}
 \maketitle
 
 
-\input{abstract}
-\category{D.2.5}{Software Engineering}{Testing and Debugging}
-\terms{Design, Algorithms, Experimentation}
-\keywords{Test generation, oracles, JavaScript, DOM
 
+\IEEEpeerreviewmaketitle
 
-
-
-\input{intro}
-\input{related}
-\input{motivation}
 \input{approach}
-\input{tool}
-\input{evaluation}
-\input{concs}
 
 % use section* for acknowledgement
 %\section*{Acknowledgment}
 
 
-
-\newpage
-
-\balance
-
-\bibliographystyle{abbrv}
-\bibliography{../biblio}
 
 
 

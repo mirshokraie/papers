@@ -1,45 +1,17 @@
-\section{Approach} \label{Sec:approach}
-%Our main goal in this work is to generate client-side test cases coupled with
-%effective test oracles, capable of detecting regression \javascript and DOM-level faults. 
-%Further, we aim to achieve this goal as efficiently as possible. Hence, we make two design decisions. First, we assume that there is a finite amount of time available to generate test cases. Consequently we guide the test generation  to maximize coverage under a given time constraint. 
-%The second decision is to minimize the number of test cases and oracles generated to only include those that are essential in detecting potential faults. %Thus, we only include useful oracles that help testers to find the fault without the need for checking the whole state of the system. 
-%Consequently, to examine the correctness of the test suite generated, the tester would only need to examine a small set of assertions, which minimizes their effort.
-%
-%Our approach generates test cases and oracles at two complimentary levels:
-%\begin{description}[noitemsep, nolistsep]
-%\item[DOM-level event-based tests] consist of DOM-level event sequences and assertions to check the application's behaviour from an end-user's perspective. 
-%\item[Function-level unit tests]  consist of unit tests with assertions that verify the functionality of \javascript code at the function level.
-%\end{description}
-%
-%An overview of the technique is depicted in \figref{approach-view}. 
-%At a high level, our approach is composed of three main steps:
-%
-%\begin{figure}[!t]
-%  \centering
-%  \includegraphics[width=1\hsize]{fig/approach-view-revised}
-%  \mycaption{Overview of our test generation approach.}
-%  \vspace{-0.1in} 
-%  \label{Fig:approach-view}
-%\end{figure}
-%
-%\begin{enumerate}[noitemsep,nolistsep]
-% 
-%\item In the first step (Section~\ref{Sec:funcCovg}), we dynamically explore various states of a given web 
-%application, in such a way as to maximize the number of functions that are covered throughout the program execution. The output of this initial step is a state-flow graph (SFG) \cite{mesbah:tse12}, capturing the explored dynamic DOM states and event-based transitions between them. 
-%
-%\item In the second step (Section~\ref{Sec:testCaseGen}), %test cases are generated at the DOM event and \javascript function levels. We 
-%we use the inferred SFG to generate event-based test cases. %The execution trace is collected through instrumenting the code and then automatically executing the application using the application's state machine obtained from the function exploration phase.
-%We run the generated tests against an instrumented version of the application. From the execution trace obtained, we extract DOM element states as well as \javascript function states at the entry and exit points, from which we generate function-level unit tests.
-%To reduce the number of generated test cases to only those that are constructive, we devise a \emph{state abstraction} algorithm that minimizes the number of states by selecting representative function states.
-%
-%\item To create effective test oracles for the two test case levels, we automatically generate mutated versions of the application (Section~\ref{Sec:oracleGen}).
-%Assuming that the original version of the application is fault-free, the test oracles are then generated at the DOM and \javascript code levels by comparing the states traced from the original and the mutated versions.
-%
-%\end{enumerate}
-%Next, we describe each of these three steps in detail.
+\section{Overview of Approach} \label{Sec:approach}
+\input{algorithm}
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=.7\hsize]{fig/approachDiagram}
+  \mycaption{Overview of our assertion generation approach.}
+  \vspace{-0.1in} 
+  \label{Fig:approachDiagram}
+  \vspace{-0.1in} 
+\end{figure*}
+An overview of our \javascript function-level assertion generation technique is depicted \figref{approachDiagram}.
+At high level, our approach generates function level assertions for the \javascript code by utilizing human written DOM-based tests and assertions. Our code level assertions fall in the following three categories: (1) explicit assertions, which are directly inferred from analyzing the manually written DOM-based assertions, (2) implicit assertions, which are indirectly affected by the human written DOM-based assertions, and (3) candidate assertions, which are not considered in the written DOM-based assertions, yet are potentially useful to be checked by the function level test suite. We describe our approach below. The numbers below in parentheses correspond to those in the boxes of \figref{approachDiagram}.
 
-%\input{funcCovg}
-\input{testCaseGen}
-\input{oracleGen}  
-
-   
+In the first part of our approach we (1) instrument the \javascript code and execute the instrumented application by running the existing DOM-based test suite. In this step we gather detailed execution trace of the application. We then extract (2) DOM assertions, which are DOM element accesses for each assertion, and (3) candidate DOM elements, which are useful DOM elements that can potentially be utilized for the purpose of assertion generation. We (4) identify the initial point of connection between the \javascript code and checked DOM element. We collect lines of code responsible for updating the corresponding DOM element. After determining DOM mutating statements, we (5) apply a backward slice on these statements to find the entire code blocks that update the checked DOM element. We (6) extract \javascript entities including variables and objects associated with each of the obtained statements. Accessible entities form our explicit function level assertions (7). We further (8) perform a forward slice on the extracted \javascript entities to identify statements, that are implicitly affected by such entities. The accessible \javascript variables/objects associated with collected statements form our implicit function level assertions (9). In addition to explicit and implicit assertions, which are either directly responsible for mutating checked DOM elements or indirectly affected by checked DOM elements, we also generate candidate assertions (10). Candidate assertions are involved with updating potentially useful DOM elements, which are not checked in the existing DOM-based assertions. To obtain candidate function level assertions, we perform step (4), (5), and (6) on the inferred candidate DOM elements (3).
+\input{domToCode}
+\input{unitLevelAssertion}         
+%mutation of customer.couponStatus = coupon.Id + '-' + 'used' to customer.couponStatus = coupon.Id + 'used';'
