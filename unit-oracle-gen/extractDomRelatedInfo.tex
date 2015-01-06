@@ -4,7 +4,7 @@ The DOM connects a test case to the web application's \javascript code. Therefor
 Any generated test case requires to check the correctness of the application's behaviour. In a DOM-based test case the expected behaviour is verified through DOM-based assertions. 
 DOM assertions play a significant role in our approach as they can guide us towards important portions of the underlying \javascript code that need to be checked in unit-level assertions.
 
-DOM assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. $text$, $size$, DOM attributes), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element features as DOM properties.
+DOM assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute/property, and textual values), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element features as DOM properties.
 For each DOM assertion we record the accessed DOM properties as well as the accessed DOM elements in the test case pertaining to the assertion. In order to link DOM assertions to the relevant \javascript code we further need to track DOM's evolution as the test case runs. We make use of \code{document.onload} event to log the initial DOM state. An observer module is then used to monitor any mutations on the DOM during the test case execution. In addition to DOM mutations, we also keep track of \javascript events as well as invoked event handlers. These information is later used to find the initial point of contact between a DOM mutation and the executed code segments. 
 %test suit instrumentation
 \headbf{Candidate DOM Elements}
