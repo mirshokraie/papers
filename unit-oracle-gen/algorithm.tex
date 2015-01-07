@@ -12,7 +12,7 @@
 \nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
 \nl  $freqAccdDOM\leftarrow \emptyset$\\
 \nl  \For{$dom \in domAccss $}{
-\nl   \If{$\textsc{DOMUsgFreq}(dom) \geq \frac{1}{NoOfDOMElems} $}{
+\nl   \If{$\textsc{acc}(prop_{dom}) \geq \frac{1}{\textsc{ReadProperties}(tc_i)}$}{
 \nl    $freqAccdDOM \leftarrow dom \cup freqAccdDOM$\\       
       }
      }
@@ -21,21 +21,23 @@
 \nl   $asserDOMMuts \leftarrow \textsc{GetDOMMuts}(asserDOMAcc)$\\
 \nl   \For{$domMut \in asserDOMMuts$}{
 \nl    $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
-\nl    $asstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
-\nl    $potAsstnRel \leftarrow \textsc{GetFWSlice}(asstnRel, trace)$\\
+\nl    $expAsstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
+\nl    $impAsstnRel \leftarrow \textsc{GetFWSlice}(expAsstnRel, trace)$\\
       }
      }
-\nl  $nonAsserDOMMuts \leftarrow \textsc{GetDOMMuts}(freqAccdDOM)$\\
-\nl  \For{$domMut \in nonAsserDOMMuts$}{
+\nl  $cndDOMMuts \leftarrow \textsc{GetDOMMuts}(freqAccdDOM)$\\
+\nl  \For{$domMut \in cndDOMMuts$}{
 \nl   $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
-\nl   $nonAsstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
+\nl   $cndAsstn \leftarrow \textsc{GetWrVars}(bwSts)$\\
      }
-\nl  $asstnRelOrcls[func]_{f=1}^{n} \leftarrow \textsc{GetValue}(\textsc{Accessibles}([func]_{f=1}^{n}, asstnRel))$\\
-\nl  $candidOrcls[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [potAsstnRel \cup nonAsstnRel])$\\
-\nl  $oracles[func]_{f=1}^{n}.\textsc{Add}(asstnRelOrcls \cup candidOrcls)$\\
+%\nl  $expAsstns[func]_{f=1}^{n} \leftarrow \textsc{GetValue}(\textsc{Accessibles}([func]_{f=1}^{n}, expAsstnRel))$\\
+\nl  $explicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [exppAsstnRel])$\\
+\nl  $implicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [impAsstnRel])$\\
+\nl  $candidateAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [cndAsstn])$\\
+\nl  $oracles[func]_{f=1}^{n} \leftarrow \{explicitAsstn \cup explicitAsstn \cup candidiateAsstn\}$\\
    }
-\nl $\textsc{Rank}(oracles[func]_{f=1}^{n})$\\
-\nl return $(oracles[func]_{f=1}^{n})$
+\nl return $\textsc{Rank}(oracles[func]_{f=1}^{n})$\\
+%\nl return $(oracles[func]_{f=1}^{n})$
 }
 \caption{Oracle Generation} 
 \label{Alg:algorithm}
