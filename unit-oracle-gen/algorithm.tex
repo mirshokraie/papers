@@ -22,7 +22,8 @@
 \nl   \For{$domMut \in asserDOMMuts$}{
 \nl    $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
 \nl    $expAsstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
-\nl    $impAsstnRel \leftarrow \textsc{GetFWSlice}(expAsstnRel, trace)$\\
+\nl    $fwSts \leftarrow \textsc{GetFWSlice}(bwSts, trace)$\\
+\nl    $impAsstnRel \leftarrow \textsc{GetWrVars}(fwSts)$\\
       }
      }
 \nl  $cndDOMMuts \leftarrow \textsc{GetDOMMuts}(freqAccdDOM)$\\
@@ -34,7 +35,7 @@
 \nl  $explicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [exppAsstnRel])$\\
 \nl  $implicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [impAsstnRel])$\\
 \nl  $candidateAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [cndAsstn])$\\
-\nl  $oracles[func]_{f=1}^{n} \leftarrow \{explicitAsstn \cup explicitAsstn \cup candidiateAsstn\}$\\
+\nl  $oracles[func]_{f=1}^{n} \leftarrow \{explicitAsstn \cup implicitAsstn \cup candidiateAsstn\}$\\
    }
 \nl return $\textsc{Rank}(oracles[func]_{f=1}^{n})$\\
 %\nl return $(oracles[func]_{f=1}^{n})$

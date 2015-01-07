@@ -12,9 +12,9 @@
 	
 	function calculatePrice(customer, coupon) {
 		var coupElem = $('#couponButt');
-		var price= $('#merchPrice').text();
+		var price= getPrice($('.merchandise'));
 		coupon.Id = couponFromServer(url + customer.Id);
-		if(customer.couponStatus != coupon.Id + '-' + 'used'){
+		if(coupElem.attr('class') != coupon.Id + '-' + 'used'){
 			coupElem.removeClass(customer.couponStatus);
 			customer.couponStatus = coupon.Id + '-' + 'used';
 			discountVal = calcDiscount(coupElem.data('value'), customer.Id);
@@ -30,6 +30,7 @@
 		customer.Id = customerFromServer($('#user').val());
 		calculatePrice(customer, coupon);
 	}
+
 	function viewCart(){
 		...
 		if(customer.shopCart==0 && customer.couponStatus == 'default')
