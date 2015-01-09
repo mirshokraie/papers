@@ -1,42 +1,41 @@
 \begin{figure}
 %\medskip
 \begin{lstlisting}
-	var customer = {Id:"", couponStatus:"default", shopCart:0, ...};
-	var coupon = {Id:"", ...}
+	var customer= {Id:"", couponStatus:"default", payable:0, ...};
+	var coupon= {Id:"", expired:false...}
+	var availItems= {{name:"", count:0}}
 	...
 	$document.ready(function() {
-		...
-		$('#couponButt').click(selectCoupon);
+		...	
+		$('#couponButt').click(selectItem);
 		$('#viewCart').click(viewCart);
 	});
 	
-	function calculatePrice(customer, coupon) {
-		var coupElem = $('#couponButt');
-		var price= getPrice($('.merchandise'));
-		coupon.Id = couponFromServer(url + customer.Id);
-		if(coupElem.attr('class') != coupon.Id + '-' + 'used'){
+	function selectItem() {
+		var coupElem= $('#couponButt');
+		var selItem= {name:"", price:0, quantity:0};
+		selItem= getSelectedItem($('.merchandise');
+		for(var i=0; i<availItems.length; i++){
+			if(availItems[i].name == selItem.name)
+				availItems[i].count -= selItem.quantity;		
+		}
+		var price= selItem.price * selItem.quantity;
+		coupon= getCouponFromServer(url + customer.Id);
+		if(!coupon.expired){
 			coupElem.removeClass(customer.couponStatus);
-			customer.couponStatus = coupon.Id + '-' + 'used';
-			discountVal = calcDiscount(coupElem.data('value'), customer.Id);
-			price -= discountVal;	
-			coupElem.addClass(customer.couponStatus);
+			customer.couponStatus= coupon.Id + '-' + 'used';
+			price -= coupElem.data('value');	
+			coupElem.addClass(customer.couponStatus);	
 		} 	
-		$('#calcPrice').text(price);
-		customer.shopCart += price;
-	}
-	
-	function selectCoupon(){
-		...
-		customer.Id = customerFromServer($('#user').val());
-		calculatePrice(customer, coupon);
+		customer.payable += price;
 	}
 
 	function viewCart(){
 		...
-		if(customer.shopCart==0 && customer.couponStatus == 'default')
-			alert('Shopping cart is empty');
+		if(customer.payable==0 && customer.couponStatus == 'default')
+			showMsg('Shopping cart is empty');
 		else
-			$("#cart").append('Total purchases: ' + customer.shopCart);
+			$("#cart").append('Total purchase is: ' + "$" + customer.payable);
 	}
 
 
