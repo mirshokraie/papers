@@ -1,4 +1,17 @@
 \section{Challenges and Motivation} \label{Sec:motivation}
-
+\figref{example} presents a snippet of a \javascript-based shopping cart application that we will use as a running example through out this paper. The application contains two main functions as follows:
+\begin{enumerate}
+\item \code{addToCart} is bound to the event handler of DOM elements with class \code{merchandise}. When the element is clicked, \code{addToCart} gets the information of the selected merchandise, and sets the quantity of the current available items by updating the \code{availItems} object. If a valid discount coupon exists, \code{addToCart} calculates the discount value, and disables the selected  coupon button with ID \code{couponButt} by removing the corresponding class. Finally, \code{addToCart} updates the payable amount by setting the \code{payable} property of the \code{customer} object.
+\item \code{viewCart} is invoked by clicking on DOM element with ID \code{viewCart}. It shows a message containing the final payable amount of the customer. If the  coupon button with ID \code{couponButt} is not selected and the payable amount is equal to zero, then the empty cart message is shown.    
+\end{enumerate}
+%
+%
+%an expected value oracle for the given test input, confident
+%that their effort is directed towards aspects of the system
+%behavior that are relevant under that input
+%
+%easy to write DOM test and assert the final behaviour--difficult to write unit test and assert many intermediate behaviours that are also relevant to the final output. DOM-based tester may also miss some other important DOM-based behaviours to check.
+%
+%we can get more info from the sequence of events used in the dom-based test as the basis line of execution test + the dom-based assertion: from sequence we can infer missed dom checks. from dom-based assertion we can infer intermediate behaviours that are directly focused on the dom-based assertion + the rest of program points that are influenced by the assertion. this gives us an important set of oracles which falls in the neighbourhood area of the assertion, plus some important other oracles which are out of this neighbourhood zone but still important.  
 \input{example} 
 

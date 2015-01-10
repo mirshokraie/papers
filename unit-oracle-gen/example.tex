@@ -7,14 +7,14 @@
 	...
 	$document.ready(function() {
 		...	
-		$('#couponButt').click(selectItem);
-		$('#viewCart').click(viewCart);
+		$(".merchandise").click(addToCart);
+		$("#viewCart").click(viewCart);
 	});
 	
-	function selectItem() {
-		var coupElem= $('#couponButt');
+	function addToCart() {
+		var coupElem= $("#couponButt");
 		var selItem= {name:"", price:0, quantity:0};
-		selItem= getSelectedItem($('.merchandise');
+		selItem= getItemInfo($(this));
 		for(var i=0; i<availItems.length; i++){
 			if(availItems[i].name == selItem.name)
 				availItems[i].count -= selItem.quantity;		
@@ -32,7 +32,7 @@
 
 	function viewCart(){
 		...
-		if(customer.payable==0 && customer.couponStatus == 'default')
+		if($("#couponButt").attr("class") == 'default' && customer.payable==0)
 			showMsg('Shopping cart is empty');
 		else
 			$("#cart").append('Total purchase is: ' + "$" + customer.payable);
