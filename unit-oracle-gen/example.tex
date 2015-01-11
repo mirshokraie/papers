@@ -6,6 +6,7 @@
 	var availItems= {{name:"", count:0}}
 	...
 	$document.ready(function() {
+		availItems=getItemsFromServer(url);		
 		...	
 		$(".merchandise").click(addToCart);
 		$("#shopCart").click(viewCart);
