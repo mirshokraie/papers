@@ -1,0 +1,21 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	@Test
+	public void testCase1(){
+		Select quantity = new Select(driver.findElement(By.id("quantityDropDown")));
+		quantity.selectByIndex(1);
+		WebElement item = driver.findElements(By.css("merchandise"));
+		item.click();
+		WebElement cart = driver.findElements(By.id("shopCart"));
+		cart.click();		
+		String expectedMsg = "Total purchase is: $70";	
+		String msg=driver.findElements(By.cssSelector("div.shopContainer")).getText();
+		assertEquals(msg, expectedMsg);
+	}
+\end{lstlisting}
+\vspace{-0.1in} 
+\caption{DOM-based \selenium test case.}
+\label{Fig:domTest}
+\vspace{-0.2in} 
+\end{figure}
