@@ -8,7 +8,7 @@
 	$document.ready(function() {
 		...	
 		$(".merchandise").click(addToCart);
-		$("#viewCart").click(viewCart);
+		$("#shopCart").click(viewCart);
 	});
 	
 	function addToCart() {
@@ -35,7 +35,7 @@
 		if($("#couponButt").attr("class") == 'default' && customer.payable==0)
 			showMsg('Shopping cart is empty');
 		else
-			$("#cart").append('Total purchase is: ' + "$" + customer.payable);
+			$("div.shopContainer").append("<p>" + "Total purchase is: $" + customer.payable +"</p>");
 	}
 
 
