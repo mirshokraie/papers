@@ -6,7 +6,8 @@
 	var availItems= {{name:"", count:0}}
 	...
 	$document.ready(function() {
-		availItems=getItemsFromServer(url);		
+		availItems=getItemsFromServer(url);
+		coupon= getCouponFromServer(url + customer.Id);		
 		...	
 		$(".merchandise").click(addToCart);
 		$("#shopCart").click(viewCart);
@@ -21,12 +22,12 @@
 				availItems[i].count -= selItem.quantity;		
 		}
 		var price= selItem.price * selItem.quantity;
-		coupon= getCouponFromServer(url + customer.Id);
 		if(!coupon.expired){
 			coupElem.removeClass(customer.couponStatus);
 			customer.couponStatus= coupon.Id + '-' + 'used';
 			price -= coupElem.data('value');	
-			coupElem.addClass(customer.couponStatus);	
+			coupElem.addClass(customer.couponStatus);
+			coupon.expired=true;	
 		} 	
 		customer.payable += price;
 	}
@@ -38,13 +39,9 @@
 		else
 			$("div.shopContainer").append("<p>" + "Total purchase is: $" + customer.payable +"</p>");
 	}
-
-
 \end{lstlisting}
-\vspace{-0.1in} 
-
+%\vspace{-0.1in} 
 \caption{\javascript code of the running example.}
 \label{Fig:example}
-\vspace{-0.2in} 
-
+%\vspace{-0.2in} 
 \end{figure}

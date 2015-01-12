@@ -1,4 +1,6 @@
 \section{Challenges and Motivation} \label{Sec:motivation}
+Unlike DOM-based testing, asserting the behaviour of a \javascript application through unit-level tests requires tester to check the correctness of several intermediate code-level variables and object's properties. For this purpose, the tester needs to analyze the relation between the \javascript code and the DOM's evolution. Moreover, in order to prevent generating fragile unit tests, the testing effort should be directed towards aspects of the system behavior that are relevant to important DOM changes. We believe DOM-based assertions can be utilized as a guideline to generate unit test assertions at \javascript code level. 
+
 \figref{example} presents a snippet of a \javascript-based shopping cart application that we will use as a running example through out this paper. The application contains two main functions as follows:
 \begin{enumerate}
 \item \code{addToCart} is bound to the event handler of DOM elements with class \code{merchandise}. When the element is clicked, \code{addToCart} gets the information of the selected merchandise, and sets the quantity of the current available items by updating the \code{availItems} object. If a valid discount coupon exists, \code{addToCart} calculates the discount value, and disables the selected  coupon button with ID \code{couponButt} by removing the corresponding class. Finally, \code{addToCart} updates the payable amount by setting the \code{payable} property of the \code{customer} object.
@@ -6,10 +8,10 @@
 \end{enumerate}
 \figref{domTest} shows a sample DOM-based \selenium test case written for the running example. Let's assume that the original price of the merchandise is 100, the quantity selected through the drop down element with ID \code{quantity} is 1 and the discount calculated based on the coupon associated with the selected item is 30. 
 The DOM-based assertion checks the correctness of a text appended to a \code{div} element with class \code{shopContainer} containing the final amount payable by the customer, which is equal to 70 in this example.
-The 
-%Asserting the behaviour of a \javascript application through unit-level tests requires tester to understand the relation between the \javascript code and the DOM's evolution.
-%
-%
+Analyzing the assertion in line 11 of \figref{domTest} indicates that the expected value of the assertion is directly influenced by the \code{payable} property of \code{customer} object as well as the object's property \code{coupon.expired} in function \code{addToCart}. We also infer that a variable in line 16 which directly influences the value of \code{customer.payable}, is also used in updating the value of \code{availItems.count} in line 19.
+
+Further, by leveraging the execution information obtained from running the DOM-based test case, we can infer potentially important DOM's evolution, which are not checked by the existing DOM dependent assertions. For instance, DOM element with ID \code{couponButt} is accessed several times as the test case runs, however it remains unchecked. Since mutations of \code{couponButt} element pertains to the underlying \javascript code, it is important to assert code statements responsible for mutating the aforementioned DOM element.             
+
 %an expected value oracle for the given test input, confident
 %that their effort is directed towards aspects of the system
 %behavior that are relevant to important dom changes and thus not fragile
