@@ -7,17 +7,21 @@ DOM assertions play a significant role in our approach as they can guide us towa
 DOM assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property.
 For each DOM assertion we record the accessed DOM property within the assertion as well as the accessed DOM elements in the test case pertaining to the assertion. 
 In order to find DOM dependencies of an assertion in the test case, we instrument the test case by wrapping around method calls that accesses DOM elements.
+Going back to our example in \figref{domTest}, tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
  
 In order to link DOM assertions to the relevant \javascript code we further need to track DOM's evolution as the test case runs. We make use of \code{document.onload} event to log the initial DOM state. An observer module is then used to monitor any mutations on the DOM during the test case execution. In addition to DOM mutations, we also keep track of \javascript events as well as invoked event handlers. These information is later used to find the initial point of contact between a DOM mutation and the executed code segments. 
 %test suit instrumentation
 \headbf{Candidate DOM Elements}
 In addition to DOM-based assertions, we further consider DOM element properties, that are frequently accessed within the application as the test case runs. The intuition is that frequent use of a given DOM property can point to the extent of application's behaviour dependency on the DOM property. Thus, if changes happen to that property through the \javascript code, it is important to assert the correctness of such mutations. We define the access frequency of a DOM element property as the number of times that the element's property has been read during the execution of a test case. DOM properties include attribute as well as textual value of the elements.
 In order to record DOM property accesses within the application, we rewrite native function calls used by programmers to access DOM element such as \code{getElementById}, \code{getElementsByClassName}, and/or \code{getElementsByTagName}. The returned object from these functions is later used to access attributes or textual values of the element. Thus, we apply a forward slice on the returned object to find instances of element's property access in the code.
+For example in function \code{addToCart} of \figref{example}, Dom element with ID \code{couponButt} is assigned to \code{coupElem} variable. The assigned variable is later used to access the \code{class} attribute as well as the \code{value}
+of the DOM element in lines 23, 25, and 26.
 
 Let $acc(prop_{el})$ be the access frequency computed for property $prop$ of DOM element $el$, then:
  
 $acc(prop_{el})=\frac{read(prop_{el})}{\sum _{e=1}^{n} read(domElem_e)}$, where $read(domElem_{e})$ is the number of times that DOM element $domElem$ is read, given that the total number of DOM elements during the execution of a test case is $n$.
 We choose element's property with access frequencies above a threshold $\alpha$ as potential candidates, which are later used for the purpose of unit-level assertion generation. We automatically compute this threshold for each test case as: 
 
-$\alpha=\frac{1}{ReadProperties(tc_i)}$, where $ReadProperties(tc_i)$ is the total number of properties that at some point during the execution of test case $tc_i$ their value have been read.      
+$\alpha=\frac{1}{ReadProperties(tc_i)}$, where $ReadProperties(tc_i)$ is the total number of properties that at some point during the execution of test case $tc_i$ their value have been read.
+Going back to our example in \figref{example}, DOM element with ID \code{couponButt} is selected as a potential candidate.        
 %application instrumentaion native event wrapping    
