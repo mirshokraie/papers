@@ -58,8 +58,8 @@
 			<integer>55</integer>
 			<key>Points</key>
 			<array>
-				<string>{116.23911158303409, 106.49999996350951}</string>
-				<string>{116.23204366322096, 125.00000001368417}</string>
+				<string>{116.24467983446881, 106.49999999128835}</string>
+				<string>{116.24122639368213, 125.00000000326693}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -311,7 +311,7 @@ Candidate Func. Assertions}</string>
 
 \f0\b\fs24 \cf0 (3)
 \b0 \
-Candidate DOM Elements}</string>
+Candidate DOM Properties}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -702,7 +702,7 @@ Run Test Suite}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-12-19 00:14:47 +0000</string>
+	<string>2015-01-13 01:51:44 +0000</string>
 	<key>Modifier</key>
 	<string>Shabnam Mirshokraie</string>
 	<key>NotesVisible</key>
@@ -729,6 +729,11 @@ Run Test Suite}</string>
 		<array>
 			<string>float</string>
 			<string>18</string>
+		</array>
+		<key>NSPaperName</key>
+		<array>
+			<string>string</string>
+			<string>ANSI A</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -774,13 +779,13 @@ Run Test Suite}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>BottomSlabHeight</key>
-		<real>373</real>
+		<real>344</real>
 		<key>CurrentSheet</key>
 		<integer>0</integer>
 		<key>Expanded_Canvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{136, 19}, {1202, 717}}</string>
+		<string>{{78, 90}, {1202, 688}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -790,7 +795,7 @@ Run Test Suite}</string>
 		<key>SidebarWidth</key>
 		<integer>0</integer>
 		<key>VisibleRegion</key>
-		<string>{{-147, 0}, {871, 575}}</string>
+		<string>{{-147, 0}, {871, 546}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
