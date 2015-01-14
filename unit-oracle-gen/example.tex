@@ -3,7 +3,8 @@
 \begin{lstlisting}
 	var customer= {Id:"", couponStatus:"default", payable:0, ...};
 	var coupon= {Id:"", expired:false...}
-	var availItems= {{name:"", count:0}}
+	var availItems= {{name:"", price:0, count:0},...}
+	var selItem= {name:"", price:0, quantity:0};
 	...
 	$document.ready(function() {
 		availItems=getItemsFromServer(url);
@@ -15,7 +16,6 @@
 	
 	function addToCart() {
 		var coupElem= $("#couponButt");
-		var selItem= {name:"", price:0, quantity:0};
 		selItem= getItemInfo($(this));
 		for(var i=0; i<availItems.length; i++){
 			if(availItems[i].name == selItem.name)
