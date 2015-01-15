@@ -1,6 +1,21 @@
 \section{Introduction} \label{Sec:intro}
+A large body of research on automated testing of \javascript web applications has focused on automatically generating test input data to fulfill the coverage criteria, however, coverage alone is not the goal of software testing.
+Current test generation techniques for \javascript applications are limited in the following categories:
+\begin{itemize}
+\item They rely on soft oracles such as HTML validation, or runtime exceptions \cite{artzi:icse11}. These oracles fail to capture logical and computational errors. 
+\item They target DOM-based test cases. Our previous findings\cite{mirshokraie:icst15} indicate that DOM-based assertions can potentially miss the related portion of
+code-level failure, while a more fine grained unit-level assertions are capable of detecting such faults.
+\item They generate test oracles based on mutation testing techniques \cite{mirshokraie:icst15, fraser:tse12}. Mutation-based approaches suffer from computational cost and equivalent mutant problem.
+\end{itemize}
+%In this work we focus on generating unit test oracles at the \javascript code-level for  web applications that have rich interaction with the DOM through their \javascript code.
+Unit testing of \javascript libraries are often less challenging as the \javascript library code does not have business logic or direct knowledge of the relationship between the DOM, CSS, and the \javascript. Therefore such libraries often come with comprehensive unit test cases. However, generating 
+unit test oracles at the \javascript code-level for web applications that have rich interaction with the DOM through their \javascript code is tedious since the tester needs to precisely understand the interaction between the DOM and \javascript code, which is responsible for updating DOM elements. On the other hand,
+writing DOM-based test and assertion using frameworks such as Selenium
+requires little knowledge about the underlying client side code which makes it easier for the tester to write DOM-based test suite.
+In this work we focus on generating unit level assertions at the \javascript code-level for those applications that highly interact with the DOM through the underlying \javascript code.  
 
- 
+
+
 
 
 
