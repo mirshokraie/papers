@@ -8,11 +8,18 @@ code-level failure, while a more fine grained unit-level assertions are capable 
 \item They generate test oracles based on mutation testing techniques \cite{mirshokraie:icst15, fraser:tse12}. Mutation-based approaches suffer from computational cost and equivalent mutant problem.
 \end{itemize}
 %In this work we focus on generating unit test oracles at the \javascript code-level for  web applications that have rich interaction with the DOM through their \javascript code.
-Unit testing of \javascript libraries are often less challenging as the \javascript library code does not have business logic or direct knowledge of the relationship between the DOM, CSS, and the \javascript. Therefore such libraries often come with comprehensive unit test cases. However, generating 
-unit test oracles at the \javascript code-level for web applications that have rich interaction with the DOM through their \javascript code is tedious since the tester needs to precisely understand the interaction between the DOM and \javascript code, which is responsible for updating DOM elements. On the other hand,
+Comparing to \javascript libraries that do not have business logic or direct knowledge of the relationship between the DOM, CSS, and the \javascript, generating unit test oracles  
+at \javascript code-level for web applications that have rich interaction with the DOM through their \javascript code is more tedious. To write unit-level assertions for such web applications, the tester needs to precisely understand the interaction between the DOM and \javascript code, which is responsible for updating DOM elements. On the other hand,
 writing DOM-based test and assertion using frameworks such as Selenium
-requires little knowledge about the underlying client side code which makes it easier for the tester to write DOM-based test suite.
-In this work we focus on generating unit level assertions at the \javascript code-level for those applications that highly interact with the DOM through the underlying \javascript code.  
+requires little knowledge about the underlying client side code. Moreover, the tester may have basic knowledge of common event sequences to cover or important DOM elements to assert. This makes it easier for the tester to write DOM-based test suite.
+In this work, we propose to exploit existing DOM-based test suite to generate unit-level assertions at the \javascript code-level for those applications that highly interact with the DOM through the underlying \javascript code. We utilize
+existing DOM-dependent assertions as well as useful execution information inferred from a DOM-based test suite to automatically generate assertions used for testing individual \javascript functions. The main contributions of our work include:
+\begin{itemize}
+\item A novel technique to generate unit-level assertions capable of testing \javascript functions by utilizing existing DOM-based test cases.
+\item An implementation of our approach in a tool, called \tool. 
+\item An empirical evaluation to assess the efficacy of \tool.
+\end{itemize}
+    
 
 
 
