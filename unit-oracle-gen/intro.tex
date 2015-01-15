@@ -15,7 +15,8 @@ requires little knowledge about the underlying client side code. Moreover, the t
 In this work, we propose to exploit existing DOM-based test suite to generate unit-level assertions at the \javascript code-level for those applications that highly interact with the DOM through the underlying \javascript code. We utilize
 existing DOM-dependent assertions as well as useful execution information inferred from a DOM-based test suite to automatically generate assertions used for testing individual \javascript functions. The main contributions of our work include:
 \begin{itemize}
-\item A novel technique to generate unit-level assertions capable of testing \javascript functions by utilizing existing DOM-based test cases.
+\item A slicing-based technique to generate unit-level assertions capable of testing \javascript functions by utilizing existing DOM-based test assertions.
+\item A method for detecting unchecked important DOM properties with ties to the \javascript code.   
 \item An implementation of our approach in a tool, called \tool. 
 \item An empirical evaluation to assess the efficacy of \tool.
 \end{itemize}
