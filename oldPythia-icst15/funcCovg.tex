@@ -8,7 +8,7 @@ To that end, our approach combines static and dynamic analysis to decide which s
 selects a next state for exploration, which has the maximum value of the sum of the following two metrics:
 
 \headbf{1. Potential Uncovered Functions}  This pertains to 
-the total number of uncovered functions that can potentially be visited through the execution of DOM events in a given DOM state $s_i$. When a given function $f_i$ is set as the event-handler of a DOM element $d \in s_i$, it makes the element a potential clickable element in $s_i$. This can be achieved through various patterns in web applications depending on which DOM event model level is adopted. To calculate this metric, our algorithm identifies all \javascript functions that are directly or indirectly attached to DOM elements as event handlers, in $s_i$ through code instrumentation and execution trace monitoring.  
+the total number of unexecuted functions that can potentially be visited through the execution of DOM events in a given DOM state $s_i$. When a given function $f_i$ is set as the event-handler of a DOM element $d \in s_i$, it makes the element a potential clickable element in $s_i$. This can be achieved through various patterns in web applications depending on which DOM event model level is adopted. To calculate this metric, our algorithm identifies all \javascript functions that are directly or indirectly attached to DOM elements as event handlers, in $s_i$ through code instrumentation and execution trace monitoring.  
 %Patterns that our approach currently detects include:
 %\begin{itemize}[noitemsep]
 %\item Inline in HTML code, e.g., \code{<DIV onclick="foo();">};

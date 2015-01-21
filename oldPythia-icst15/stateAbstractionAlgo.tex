@@ -26,9 +26,9 @@
 }  
 		}
 \nl \While{$StSet_{K+L}\neq \emptyset$}{
-\nl  $SelectedSt \leftarrow \textsc{SelectMaxSt}({st_i|st_i\cap StateSet_{j=1}^{K+L}})$\\
-\nl  $AbsStates.\textsc{add}(SelectedState)$\\
-\nl  $StSet_{K+L} \leftarrow StSet_{K+L}-StSet_j$
+\nl  $SelectedSt \leftarrow \textsc{SelectMaxSt}({st_i|st_i\cap StSet_{j=1}^{K+L}})$\\
+\nl  $AbsStates.\textsc{add}(SelectedSt)$\\
+\nl  $StSet_{K+L} \leftarrow StSet_{K+L}-SelectedSt$
 
 		}
 \nl return $AbsStates$
