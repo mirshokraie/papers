@@ -5,7 +5,7 @@
 	public void testCase1(){
 		WebElement divElem=driver.findElements(By.id("divElem"));
 		divElem.click();
-		int endCellHeight=driver.findElements(By.id("endCell")).getSize().hight;
+		int endCellHeight=driver.findElements(By.id("endCell")).getSize().height;
 		assertEquals(endCellHeight, 30);
 		WebElement startCell=driver.findElements(By.id("startCell"));
 		startCell.click();

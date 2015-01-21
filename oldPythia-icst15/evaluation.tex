@@ -96,8 +96,8 @@ Next we run the whole generated test suite (including both function-level and ev
 We measure the precision and recall as follows:
 
 \begin{description}[noitemsep, nolistsep]
-\item[Precision] is the rate of injected faults found by the tool that are correct: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FP}}$
-\item[Recall] is the rate of correct injected faults that the tool finds: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FN}}$ 
+\item[Precision] is the rate of injected faults found by the tool that are actual faults: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FP}}$
+\item[Recall] is the rate of actual injected faults that the tool finds: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FN}}$ 
 \end{description}
 where $\textit{TP}$ (true positives), $\textit{FP}$ (false positives), and $\textit{FN}$ (false negatives) respectively represent the number of faults that are correctly detected, falsely reported, and missed.
 
