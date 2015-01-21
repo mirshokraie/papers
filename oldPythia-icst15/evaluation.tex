@@ -41,7 +41,7 @@ We give \tool 10 minutes in total for each application.
 %\jscover \cite{jscover}, an open-source tool for measuring \javascript code coverage, is used to measure the statement coverage. We collect the traces of the executed statements after each event is triggered. 
 %Finally, we compare the statement coverage achieved by running the generated event sequences separately.
 \headbf{Test Case Generation (RQ1)} \label{test-gen-setup}
-To measure client-side code coverage, we use \jscover \cite{jscover}, an open-source tool for measuring \javascript code coverage. We report the average results over five runs.
+To measure client-side code coverage, we use \jscover \cite{jscover}, an open-source tool for measuring \javascript code coverage. We report the average results over five runs to account for the non-determinism behaviour that stems from crawling the application.
 In addition,  we assess each step in our approach separately as follows: 
 (1) compare the statement coverage achieved by our function coverage maximization with a method that chooses the next state/event for the expansion uniformly at random, 
 (2) assess the efficacy of our function state abstraction method (\algref{stateAbstractionAlgo}), and 

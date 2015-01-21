@@ -40,7 +40,7 @@ Going back to our running example in \figref{funcCovgExample}, at the entry poin
 
 In addition to the values logged above, we need to capture the DOM state for functions that interact with the DOM. This is to address the fourth challenge outlined in \secref{motivation}.
 %To be able to unit test functions that contain DOM API calls, the expected DOM elements need to be present for the function to proceed during test execution.  Otherwise, the function may throw a null exception or produce an incorrect output. 
-To mitigate this problem, we capture the state of the DOM just before the function starts its execution, and include that as a \emph{test fixture} in the generated unit test case.
+To mitigate this problem, we capture the state of the DOM just before the function starts its execution, and include that as a \emph{test fixture} \cite{quint} in the generated unit test case.
 
 In the running example, at the entry point of  \code{setDim}, we log the \code{innerHTML} of the current DOM as the function contains several calls to the DOM, e.g., retrieving the element with ID \code{endCell} in Line 22. We further include in our execution trace the way DOM elements and their attributes are modified by the \javascript function at runtime. 
 %Based on the pattern in which the \javascript DOM modifications occur, we add instrumentation code to record the accessed DOM elements. 

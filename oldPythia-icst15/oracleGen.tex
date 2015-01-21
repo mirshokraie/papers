@@ -66,7 +66,7 @@ Our function-level oracle generation targets \emph{postcondition assertions}.
 %The postcondition is an observable state after the unit test execution. Therefore,
 Such postcondition assertions can be used to examine the expected behaviour of a given function after it is executed in a unit test case.
 Our technique generates postcondition assertions for all functions that exhibit a \emph{different exit-point state} but the \emph{same entry-point state}, in the mutated execution traces. $FcAssert_i$ in line 27 contains all such post condition assertions. 
-Due to the dynamic and asynchronous behaviour of \javascript applications, a function with the same entry state can exhibit different outputs when executed multiple times. %though the entry state of the function remains the same.
+Due to the dynamic and asynchronous behaviour of \javascript applications, a function with the same entry state can exhibit different outputs when called multiple times. %though the entry state of the function remains the same.
 In this case, we need to combine assertions to make sure that the generated test cases do not mistakenly fail. $FcAsserts_{FcEntry}$ in line 28
 contains the union of function assertions generated for the same entry but different outputs during multiple executions.  
  %\ali{again line number references don't make much sense,  double check!} 
