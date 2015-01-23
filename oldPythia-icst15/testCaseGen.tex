@@ -29,14 +29,14 @@ Note that complex \javascript objects can contain circular or multiple reference
 of ${\$ref: Path}$, where $Path$ denotes a $JSONPath$ string\curl{http://goessner.net/articles/JsonPath/} that indicates the target path of the reference.
 
 In addition to function entry and exit points, we log information required for calling  the function from the generated test cases. %\javascript functions can be treated as objects. 
-\javascript functions that are accessible in the public scope are mainly defined in  (1) the global scope directly (e.g., \code{function f()\{...\}}), (2) variable assignments   in the global scope (e.g., \code{var f = function()\{...\}}), (3) constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}}), and (4) prototyping (e.g., \code{Con\-structor.prototype.f= function() \{...\}}). 
+\javascript functions that are accessible in the public scope are mainly defined in  (1) the global scope directly (e.g., \code{function f()\{...\}}), (2) variable assignments   in the global scope (e.g., \code{var f = function()\{...\}}), (3) constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}}), and (4) prototypes (e.g., \code{Con\-structor.prototype.f= function() \{...\}}). 
 Functions in the first and second case are easy to call from test cases. For the third case, the constructor function is called via the \code{new} operator to create an object type, which can be used to access the object's properties
 (e.g., \code{container=new Constructor(); container.member();}).
 This allows us to access the inner function, which is a member of the \code{constructor} function in the above example.
 %The prototyping technique is used for inheritance in \javascript. 
 For the prototype case, the function can be invoked through \code{container.f()} from a test case. 
 
-Going back to our running example in \figref{funcCovgExample}, at the entry point of \code{setDim}, we yield the value and type of both the input parameter \code{dimension} and global variable \code{currentDim}, which is accessed in the function. Similarly, at the exit point, we log the values and types of the returned variable \code{dim} and \code{currentDim}.
+Going back to our running example in \figref{funcCovgExample}, at the entry point of \code{setDim}, we log the value and type of both the input parameter \code{dimension} and global variable \code{currentDim}, which is accessed in the function. Similarly, at the exit point, we log the values and types of the returned variable \code{dim} and \code{currentDim}.
 
 In addition to the values logged above, we need to capture the DOM state for functions that interact with the DOM. This is to address the fourth challenge outlined in \secref{motivation}.
 %To be able to unit test functions that contain DOM API calls, the expected DOM elements need to be present for the function to proceed during test execution.  Otherwise, the function may throw a null exception or produce an incorrect output. 
@@ -49,7 +49,7 @@ The information that we log for accessed DOM elements includes the ID attribute,
 %Moreover, we record any changed attributes. 
 %
 %\karthik{I find this bit confusing - the example doesn't show why or how the stack is used. Also, you'd originally called this a list, but I think a stack is more appropriate}
-We use a set collection to keep the information about DOM modifications, so that we can record the latest changes to a DOM element without any duplication within the function. 
+We use a set to keep the information about DOM modifications, so that we can record the latest changes to a DOM element without any duplication within the function. 
 For instance, we record ID as well as both \code{width} and \code{height} properties of the \code{endCell} element. 
 
 %Note that we record a deep clone of \javascript objects, global variables, and DOM elements at entry and exit points. The reason is that the trace data is buffered in the browser's memory before its size reaches to a certain threshold. Thus if changes happen to objects, global variables and DOM elements before the trace data sent to the proxy server, it does not affect the cloned entities. 
@@ -65,7 +65,7 @@ Once our instrumentation is carried out, we run the generated event sequences ob
 %\subsubsection{Function State Abstraction}
 %\label{Sec:stateAbstraction}
 \headbf{Function State Abstraction}
-As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Capturing all these different states can potentially hinder the technique's scalability for large applications. In addition, generating too many test cases can inversely affect test suite comprehension.
+As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Capturing all these different states can potentially hinder the technique's scalability for large applications. In addition, generating too many test cases can negatively affect test suite comprehension.
 %For instance, a simple dimension change in the \code{hight} property of \code{endCell} in function \code{setDim} results in a different state. On a dynamic page where the properties of DOM elements frequently changes, the number of possible function states can quickly grow. In our analysis, %we reduce To reduce the number of such states, %to productive function states, 
 We apply a function state abstraction method to minimize the number of function-level states needed for test generation.
 %To this end, we only select those function states that (1) affect the branch coverage, or capture a different behaviour in terms of the function's  (2) DOM-related operations and (3) the type of the returned value.
@@ -75,7 +75,7 @@ We apply a function state abstraction method to minimize the number of function-
 Our abstraction method is based on classification of function (entry/exit) states according to their impact on the function's behaviour, in terms of covered branches within the function, the function's return value type, and characteristics of the accessed DOM elements.
 
 \begin{description}[noitemsep, leftmargin=0.4cm]
-\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, function entry states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of two branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
+\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, function entry states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
 global variable \code{currentDim} at the entry point falls into different boundaries.   
 % \ali{so what states do we include here? what is `state' here BTW?}%However, it is not the only behaviour affecting entity in \javascript applications.
 

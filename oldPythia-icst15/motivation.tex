@@ -30,7 +30,7 @@ For example, if the `\code{+}' sign in Line 21 is mistakenly replaced by `\code{
 later used in  \code{start} (Line 27), it neither affects the returned value of the \code{setDim} function nor the \code{css} value of element \code{endCell}. Therefore, a GUI-level event-based testing approach may not help to detect the fault in this case.
 %Considering the complex interactions between various \javascript functions, 
 
-The second challenge is related to fault localization; even if the fault propagates to a future DOM state and a DOM-level test case detects it, finding the actual location of the fault is still challenging for the tester as the DOM-level test case is agnostic of the \javascript code.
+The second challenge is related to fault localization; even if the fault propagates to a future DOM state and a DOM-level test case detects it, finding the actual location of the fault is challenging for the tester as the DOM-level test case is agnostic of the \javascript code.
 However, a unit test case that targets individual functions, e.g., \code{setDim} in this running example, helps a tester to spot the fault, and thus easily resolve it. %This is the reason we believe  generating unit tests with oracles in this paper.
 
 The third challenge pertains to the event-driven dynamic nature of \javascript, and its extensive interaction with the DOM  resulting in many state permutations and execution paths. In the initial state of the example, clicking on \code{cell0} or \code{cell1} takes the browser to two different states as a result of the \code{if-else} statement in Lines 4 and 8 of the function \code{cellClicked}. 

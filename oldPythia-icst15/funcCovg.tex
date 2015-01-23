@@ -26,7 +26,7 @@ the total number of unexecuted functions that can potentially be visited through
 %that have those functions as event-handlers. In addition, by inferring the static function call graph of the application, we calculate the total number of functions that (indirectly) will be %executed if such clickable elements are exercised.
 
 \headbf{2. Potential Clickable Elements}
-The second metric, used to select a state for expansion, pertains to the number of DOM elements that can potentially become clickable elements, i.e., if the event-handlers bound to those clickables are triggered, new (uncovered) functions will be executed. To obtain this number, we statically analyze the previously obtained \emph{potential uncovered functions} within a given state in search of such elements.
+The second metric, used to select a state for expansion, pertains to the number of DOM elements that can potentially become clickable elements. If the event-handlers bound to those clickables are triggered, new (uncovered) functions will be executed. To obtain this number, we statically analyze the previously obtained \emph{potential uncovered functions} within a given state in search of such elements.
 %(\textsc{GetPotentialClbs}, Line 11). 
 %Functions that can potentially be attached to such elements should not have been covered before 
 %(\textsc{GetUniqFuncHandls}, Line 9), 

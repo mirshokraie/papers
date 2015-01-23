@@ -15,18 +15,19 @@
 
 \headbf{Web application testing}
 Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
-Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. They propose \cite{mesbah:tse12} generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.  Our earlier work, \jsart \cite{mirshokraie:icwe12},  automatically infers program invariants from \javascript execution traces and uses them as regression assertions in the code. 
+Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. In subsequent work \cite{mesbah:tse12}, they propose generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.  Our earlier work, \jsart \cite{mirshokraie:icwe12},  automatically infers program invariants from \javascript execution traces and uses them as regression assertions in the code. 
 Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
 The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
 Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
 They construct server interface descriptions through an inference technique that can learn communication patterns from sample data.
-Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring a \javascript application's event space as well as its value space, for security testing.  Perhaps the most closely related work to ours is \artemis \cite{artzi:icse11}, which supports automated testing of \javascript applications.
-\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing.
-In this paper, we quantitatively compare our approach with that of \artemis (Section \ref{Sec:evaluation}). 
-
-Our work is different in two main aspects from these works: (1) they all target the generation of event sequences at the DOM level, while we also generate unit tests at the \javascript code level, which enables us to cover more and find more faults,
+Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring a \javascript application's event space as well as its value space, for security testing.
+Our work is different in two main aspects from these: (1) they all target the generation of event sequences at the DOM level, while we also generate unit tests at the \javascript code level, which enables us to cover more and find more faults,
 and (2) they do not address the problem of test oracle generation and only check against soft oracles (e.g., invalid HTML). In contrast, we generate strong oracles that capture
 application behaviours, and can detect a much wider range of faults.
+
+Perhaps the most closely related work to ours is \artemis \cite{artzi:icse11}, which supports automated testing of \javascript applications.
+\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing.
+In this paper, we quantitatively compare our approach with that of \artemis (Section \ref{Sec:evaluation}).
 
 \headbf{Oracle generation} \label{Sec:oracleGen}
 There has been limited work on oracle generation for testing. 
