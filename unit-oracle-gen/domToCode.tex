@@ -1,4 +1,13 @@
 \subsection{Relating DOM changes to the \javascript Code} \label{Sec:domToCode}
+\input{algorithm}
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=1\hsize]{fig/candidateDOMExample}
+  \mycaption{Finding initial point of contact between DOM-based assertion and the \javascript code.}
+  \vspace{-0.1in} 
+  \label{Fig:candidateDOMExample}
+  \vspace{-0.1in} 
+\end{figure}
 To determine the initial point of contact between DOM and the underlying \javascript code, we first cross reference the DOM element as well as the property we are interested in with a set of DOM mutations obtained from the execution trace. Recall that our execution trace contains information about triggered events, event handlers, and DOM mutations caused by the events. Therefore, we can identify relevant events and invoked functions corresponding to a given DOM mutation. To figure out where the mutation originated in our execution trace we keep record of DOM accesses within the invoked functions. For each DOM access we track \javascript lines of code, that are responsible for updating the corresponding DOM element.
 Going back to our running example, the collected execution trace contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM dependent assertion in \figref{domTest}. Thus, the initial point of contact between the assertion and the relevant DOM mutating statement in the \javascript code is line 37 in function \code{viewCart}.
 
