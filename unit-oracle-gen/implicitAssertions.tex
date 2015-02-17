@@ -3,6 +3,15 @@ To this end we gather all the statements that explicitly affect the computations
 indicates how subsequently an operand at $st$ is being used. This can help the tester to ensure that $st$ properly establishes the expected outcome of the computations assumed by the later statements. 
 Given the importance of statements involved in code-level computations of a DOM-based assertion, using forward slice is useful to check that there are no unforeseen effects on the application's behavior by a modification to such statements. 
 
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=1\hsize]{fig/forwardSlicingExample}
+  \mycaption{Forward Slicing to obtain implicit assertions.}
+  \vspace{-0.1in} 
+  \label{Fig:forwardSlicingExample}
+  \vspace{-0.1in} 
+\end{figure}
+
 Dynamic forward slice is performed on the subset of code statements which is previously instrumented as explained in \secref{domToCode}. 
 \textsc{GetFWSlice} in line 14 of the algorithm computes forward slice on the variable operands of a backward slice statement.
 The process of forwards slicing is similar to the backwards slicing technique as discussed earlier (\secref{domToCode}). The only difference is that it is performed in a forward direction. The slicing criterion of the forward slice module is either a variable, object's property, or an accessed DOM property extracted from the statements in a backward slice segments of the code. The accessible entities (\textsc{Accessibles} in line 21), which have been set within the collected forward slice statements establish our implicit assertions.
