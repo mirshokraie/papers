@@ -10,29 +10,29 @@ DOM-based assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM e
 \end{mydef}
 For each DOM assertion we record the accessed DOM property within the assertion as well as the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 9 of \algref{algorithm}). 
 In order to find DOM dependencies of an assertion in the test case, we instrument the test case by wrapping around method calls that accesses DOM elements.
-Going back to our example in \figref{domTest}, tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
+Going back to our example in \figref{example}, tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
  
 In order to link DOM assertions to the relevant \javascript code we further need to track DOM's evolution as the test case runs (\textsc{GetDomMuts} in line 10 of the algorithm). We make use of \code{document.onload} event to log the initial DOM state. An observer module is then used to monitor mutations on the DOM during the test case execution. 
 We consider additions and removals of child nodes, changes to attributes, and updates to child text nodes as DOM mutations.
 In addition to DOM changes, we also keep track of \javascript events as well as invoked event handlers. This information is later used to find the initial point of contact between a DOM mutation and the executed code segments.
-For instance, running the sample test case in \figref{domTest} results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
+For instance, running the sample test case in \figref{example} (b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
 \headbf{Candidate DOM Properties}
 In addition to DOM-based assertions, we further consider DOM element properties, that are frequently accessed within the application as the test case runs (lines 3 to 7 of \algref{algorithm}). 
 \textsc{Acc} in line 6 of the algorithm computes the access frequency of a DOM property, $freqAccdDOM$ in line 7 contains the inferred candidate DOM properties, and \textsc{GetDomMuts} in line 16 records DOM mutations occur
 on candidate DOM properties.
 The intuition is that frequent use of a given DOM property can point to the extent of application's behaviour dependency on the DOM property. Thus, if changes happen to that property through the \javascript code, it is important to assert the correctness of such mutations. We define the access frequency of a DOM element property as the number of times that the element's property has been read during the execution of a test case. DOM properties include attribute as well as textual value of the elements.
 In order to record DOM property accesses within the application, we rewrite native function calls used by programmers to access DOM element such as \code{getElementById}, \code{getElementsByClassName}, and/or \code{getElementsByTagName}. The returned object from these functions is later used to access attributes or textual values of the element. Thus, we apply a forward slice on the returned object to find instances of element's property access in the code.
-For example in function \code{addToCart} of \figref{example}, Dom element with ID \code{couponButt} is assigned to \code{coupElem} variable. The assigned variable is later used to access the \code{class} attribute as well as the \code{value}
+For example in function \code{addToCart} of \figref{example} (a), Dom element with ID \code{couponButt} is assigned to \code{coupElem} variable. The assigned variable is later used to access the \code{class} attribute as well as the \code{value}
 of the DOM element in lines 23, 25, and 26.
 
 Let $acc(prop_{el})$ be the access frequency computed for property $prop$ of DOM element $el$, then:
  
 $acc(prop_{el})=\frac{read(prop_{el})}{\sum _{e=1}^{n} read(domElem_e)}$, where $read(domElem_{e})$ is the number of times that DOM element $domElem$ is read, given that the total number of DOM elements during the execution of a test case is $n$.
-Note that reading a DOM element refers to accessing the element to read the corresponding property. In \figref{example}, the \code{class} attribute of DOM element \code{couponButt} is read in lines 23 and 34, and thus the access frequency
+Note that reading a DOM element refers to accessing the element to read the corresponding property. In \figref{example} (a), the \code{class} attribute of DOM element \code{couponButt} is read in lines 23 and 34, and thus the access frequency
 computed for the \code{class} attribute of the element is equal to $\frac{2}{3}$.
 
 We choose element's property with access frequencies above a threshold $\alpha$ as potential candidates, which are later used for the purpose of unit-level assertion generation. We automatically compute this threshold for each test case as: 
 
 $\alpha=\frac{1}{ReadProperties(tc_i)}$, where $ReadProperties(tc_i)$ is the total number of properties that at some point during the execution of test case $tc_i$ their value have been read.
-Going back to our example in \figref{example} and the sample DOM-based test case in \figref{domTest}, \code{class} attribute of the \code{couponButt} is selected as a potential candidate since its access frequency ($\frac{2}{3}$) is greater than the computed threshold, which is equal to $\frac{1}{2}$ in this example.        
+Going back to our running example and the sample DOM-based test case in \figref{example}, \code{class} attribute of the \code{couponButt} is selected as a potential candidate since its access frequency ($\frac{2}{3}$) is greater than the computed threshold, which is equal to $\frac{1}{2}$ in this example.        
 %application instrumentaion native event wrapping    
