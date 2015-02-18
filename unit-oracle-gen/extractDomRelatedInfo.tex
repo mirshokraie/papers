@@ -4,7 +4,10 @@ The DOM connects a test case to the web application's \javascript code. Therefor
 Any generated test case requires to check the correctness of the application's behaviour. In a DOM-based test case the expected behaviour is verified through DOM-based assertions. 
 DOM assertions play a significant role in our approach as they can guide us towards important portions of the underlying \javascript code that need to be checked in unit-level assertions.
 
-DOM assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property.
+\begin{mydef}[DOM-based Assertion]
+\label{def:domAssertion}
+DOM-based assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property.
+\end{mydef}
 For each DOM assertion we record the accessed DOM property within the assertion as well as the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 9 of \algref{algorithm}). 
 In order to find DOM dependencies of an assertion in the test case, we instrument the test case by wrapping around method calls that accesses DOM elements.
 Going back to our example in \figref{domTest}, tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
