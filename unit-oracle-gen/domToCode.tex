@@ -1,5 +1,5 @@
 \subsection{Relating DOM changes to the \javascript Code} \label{Sec:domToCode}
-\input{algorithm}
+%\input{algorithm}
 \begin{figure}[!t]
   \centering
   \includegraphics[width=1\hsize]{fig/assertionToCode}
@@ -11,9 +11,17 @@
 To determine the initial point of contact between DOM and the underlying \javascript code, we first cross reference the DOM element as well as the property we are interested in with a set of DOM mutations obtained from the execution trace. Recall that our execution trace contains information about triggered events, event handlers, and DOM mutations caused by the events. Therefore, we can identify relevant events and invoked functions corresponding to a given DOM mutation. To figure out where the mutation originated in our execution trace we keep record of DOM accesses within the invoked functions. For each DOM access we track \javascript lines of code, that are responsible for updating the corresponding DOM element.
 Going back to our running example, the collected execution trace contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM dependent assertion in \figref{domTest}. Thus, the initial point of contact between the assertion and the relevant DOM mutating statement in the \javascript code is line 37 in function \code{viewCart}.
 
-After inferring DOM mutant statements within the code, we perform backward slice on the retrieved statements to gather the entire set of \javascript statements responsible for mutating a given DOM element. \textsc{GetBWSlice} in lines 
-12 and 18 of \algref{algorithm} computes backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
-In order to capture code-level dependencies exercised at run-time we use dynamic slicing. 
+After inferring DOM mutant statements within the code, we perform backward slice on the retrieved statements to gather the entire set of \javascript statements responsible for mutating a given DOM element.
+\begin{mydef}[Backward Slicing]
+\label{def:backwardSlicing}  
+A backward slice of a program with respect to statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that affect the value of variables in $V$ at $p$.
+\end{mydef}
+\textsc{GetBWSlice} in lines  12 and 18 of \algref{algorithm} computes backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
+In order to capture code-level dependencies exercised at run-time we use dynamic slicing.
+\begin{mydef}[Dynamic Slicing]
+\label{def:dynamicSlicing}
+A dynamic slice contains all statements that actually affect the value of a variable at a program point for a particular execution of the program 
+\end{mydef}
 Note that instrumenting the entire application's code to perform dynamic slicing incurs high performance overheads. To avoid this, we first intercept the code sent from the server to the client and then statically instrument only those statements that may affect a given DOM element.
 To extract the subset of the code statements, we first find the \javascript closure scope which contains the definition of the variable in the initial slicing criteria. Then all references to the variable within the closure scope is found. Therefore, we can identify all locations in the code where the variable is updated, read, or a new alias is created. For each variable update/read related to the variable of the slicing criteria, we track the data dependencies for such an operation. The aforementioned steps are performed iteratively for each dependencies to collect the subset of code statements, which are instrumented for a given initial slicing criteria.
 The instrumented code keeps track of all updates and accesses to all relevant data and control dependencies.   
