@@ -1,3 +1,14 @@
 \section{Empirical Evaluation} \label{Sec:evaluation}
+To quantitatively assess the efficacy of our test generation approach, we have conducted a case study, in which we address the following research questions:
 
-  
+\begin{description}[noitemsep]
+\item [RQ1] Is \tool more effective than DOM-based assertions written manually by the tester in terms of fault finding capability?
+\item [RQ2] How accurate is our tool in mapping DOM-related changes to the corresponding \javascript code?
+\item [RQ3] How does \tool compare to the existing mutation-based approach for identifying unit test assertions?
+\end{description}
+
+\tool and the experimental data are available for download \cite{atrina-dl}.
+
+\subsection{Objects}
+Our study includes four open source \javascript web applications that have \selenium test cases. \tabref{objectsTable} presents the experimental objects and their properties. Phormer \cite{phormer} is a photo gallery web application. EnterpriseStore \cite{enterpriseStore} is an asset management web application. WolfCMS \cite{wolfcms} is a content management system, and Claroline \cite{claroline} is a collaborative online learning and course management system. 
+\input{objectsTable}
