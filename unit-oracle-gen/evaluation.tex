@@ -22,7 +22,7 @@ The experimental objects do not come with a rich version history to apply \tool 
 \item [Recall] is the fraction of the correct set of related lines of code to each assertion, which is actually present in the slice produced by \tool: $\frac{TP}{TP+FN}$ 
 \end{description}
 where $TP$ (true positives), $FP$ (false positives), and $FN$ (false negatives) respectively represent the number of lines of code that are correctly reported, falsely reported, and missed to report as related to the DOM-based assertion.
-\headbf{Comparison with Mutation-based Assertion Generation (RQ3)} To assess how \tool performs with respect to the current state-of-the-art oracle generation technique, we compare our tool's fault finding capability to the mutation-based assertion generation approach \cite{mirshokraie:icst15, fraser:tse12}. We perform the following steps to generate test assertions using mutation analysis.
+\headbf{Comparison with Mutation-based Assertion Generation (RQ3)} To assess how \tool performs with respect to the current state-of-the-art oracle generation technique, we compare our tool's fault finding capability to the mutation-based assertion generation approach \cite{mirshokraie:icst15, fraser:tse12}. To generate mutation-based assertions for the \javascript code, we use human-written DOM-based test suite as a means to execute the application and infer the execution traces required for the purpose of mutation analysis. We perform the following steps to generate test assertions using mutation analysis.
 \begin{enumerate}[noitemsep, nolistsep]
 \item Remove assertions from the human-written DOM-based test suite.
 \item Execute the test suite on the original version of the application to obtain execution traces.
