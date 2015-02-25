@@ -7,8 +7,12 @@ atrinaY<-data$atrina
 mutationY<-data$mutation
 manualY<-data$manual
 
-height <- rbind(atrinaY, mutationY, manualY)
+atrinaNoFd <- data$atrinaNoFd
+mutationNoFd <- data$mutationNoFd
+manualNoFd <- data$manualNoFd
 
+height <- rbind(atrinaY, mutationY, manualY)
+length <- rbind(atrinaNoFd, mutationNoFd, manualNoFd )
 
 
 #colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)
@@ -18,6 +22,7 @@ colors<-c("white", "lightgray", "black")
 mp <- barplot(height, beside = TRUE, 
 ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)
 
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
 myaxis <- c(2.5, 6.5, 10.5, 14.5)
