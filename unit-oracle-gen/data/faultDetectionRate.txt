@@ -1,4 +1,4 @@
-appId, atrina, mutation, manual, atrinaNoFd, mutationNoFD, manualNoFd
+appId, atrina, mutation, manual, atrinaNoFd, mutationNoFd, manualNoFd
 1, 60, 44, 46, 30, 22, 23 
 2, 84, 60, 58, 42, 30, 29
 3, 42, 36, 32, 21, 18, 16
