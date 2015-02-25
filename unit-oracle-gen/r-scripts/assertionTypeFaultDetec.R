@@ -10,7 +10,14 @@ implExpY<-data$implExp
 candidExpY<-data$candidExp
 atrinaY<-data$atrina
 
+
+expNoFd <- data$expNoFd
+implExpNoFd <- data$implExpNoFd
+candidExpNoFd <- data$candidExpNoFd
+atrinaNoFd <- data$atrinaNoFd
+
 height <- rbind(expY, implExpY, candidExpY, atrinaY)
+length <- rbind(expNoFd, implExpNoFd, candidExpNoFd, atrinaNoFd )
 
 
 
@@ -20,7 +27,7 @@ colors<-c("white", "lightgray", "darkgray", "black")
 
 mp <- barplot(height, beside = TRUE, 
 ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)
-
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
 myaxis <- c(3, 8, 13, 18)
