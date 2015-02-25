@@ -22,10 +22,33 @@ labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
 legend("topright", labels, fill=colors, bty="n")#
 dev.off()
-setwd("/Users/shabnamm/phd/papers/unit-oracle-gen/r-scripts")
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
+atrina <- read.csv(file="../data/atrina.rtf", header=T)#
+mutation <- read.csv(file="../data/mutation.rtf", header=T)#
+manual <- read.csv(file="../data/manual.rtf", header=T)#
+#
+pdf("barplot-faultDetectionRate.pdf")#
+#
+x <- atrina$AppId#
+atrinaY<-atrina$faultDetectionRate#
+mutationY<-mutation$faultDetectionRate#
+manualY<-manual$faultDetectionRate#
+#
+height <- rbind(atrinaY, mutationY, manualY)#
+colors <- grey.colors(2, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+myaxis <- c(2, 5, 8, 11)#
+myaxislab <- c(1, 2, 3, 4)  #
+#
+labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+atrina <- read.csv(file="../data/atrina", header=T)#
+mutation <- read.csv(file="../data/mutation", header=T)#
+manual <- read.csv(file="../data/manual", header=T)#
 #
 pdf("barplot-faultDetectionRate.pdf")#
 #
@@ -58,7 +81,7 @@ atrinaY<-atrina$faultDetectionRate#
 mutationY<-mutation$faultDetectionRate#
 manualY<-manual$faultDetectionRate#
 #
-height <- rbind(atrinaY, mutationY)#
+height <- rbind(atrinaY, mutationY, manualY)#
 colors <- grey.colors(2, start = 0.8, end = 0.4, gamma = 2.2)#
 #
 mp <- barplot(height, beside = TRUE, #
@@ -71,171 +94,30 @@ labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
 legend("topright", labels, fill=colors, bty="n")#
 dev.off()
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$faultDetectionRate#
-mutationY<-mutation$faultDetectionRate#
-manualY<-manual$faultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$FaultDetectionRate#
-mutationY<-mutation$FaultDetectionRate#
-manualY<-manual$FaultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
 setwd("/Users/shabnamm/phd/papers/unit-oracle-gen/r-scripts")
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
 #
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$faultDetectionRate#
-mutationY<-mutation$faultDetectionRate#
-manualY<-manual$faultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$FaultDetectionRate#
-mutationY<-mutation$FaultDetectionRate#
-manualY<-manual$FaultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$FaultDetectnRate#
-mutationY<-mutation$FaultDetectionRate#
-manualY<-manual$FaultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
-atrina <- read.csv(file="../data/atrina.txt", header=T)#
-mutation <- read.csv(file="../data/mutation.txt", header=T)#
-manual <- read.csv(file="../data/manual.txt", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
-#
-x <- atrina$AppId#
-atrinaY<-atrina$FaultDetectionRate#
-mutationY<-mutation$FaultDetectionRate#
-manualY<-manual$FaultDetectionRate#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)colors<-c("white", "lightgray", "black")#
-#
-mp <- barplot(height, beside = TRUE, #
-ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
-myaxislab <- c(1, 2, 3, 4)  #
-#
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
-#inset <- c(0.1, 0.1)#
-axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
-legend("topright", labels, fill=colors, bty="n")#
-dev.off()
-data <- read.csv(file="../data/faultDetectionRate.rtf", header=T)#
-#
-pdf("barplot-faultDetectionRate.pdf")#
+pdf("assertionTypeFaultDetec.pdf")#
 #
 x <- data$appId#
-atrinaY<-data$atrina#
-mutationY<-data$mutation#
-manualY<-data$manual#
 #
-height <- rbind(atrinaY, mutationY, manualY)#
+#manualY<-data$manual#
+expY<-data$exp#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaY<-data$atrina#
+#
+height <- rbind(expY, implExpY, candidExpY, atrinaY)#
 #colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
 #
-colors<-c("white", "lightgray", "black")#
+colors<-c("white", "lightgray", "darkgray", "black")#
 #
 mp <- barplot(height, beside = TRUE, #
 ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-myaxis <- c(2, 6, 10, 14)#
+myaxis <- c(3, 8, 13, 18)#
 myaxislab <- c(1, 2, 3, 4)  #
 #
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
+labels <- c('Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions', 'Atrina')#
 #inset <- c(0.1, 0.1)#
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
 legend("topright", labels, fill=colors, bty="n")#
