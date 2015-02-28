@@ -6,18 +6,19 @@ x <- data$appId
 
 #manualY<-data$manual
 expY<-data$exp
+atrinaY<-data$atrina
 implExpY<-data$implExp
 candidExpY<-data$candidExp
-atrinaY<-data$atrina
 
 
+atrinaNoFd <- data$atrinaNoFd
 expNoFd <- data$expNoFd
 implExpNoFd <- data$implExpNoFd
 candidExpNoFd <- data$candidExpNoFd
-atrinaNoFd <- data$atrinaNoFd
 
-height <- rbind(expY, implExpY, candidExpY, atrinaY)
-length <- rbind(expNoFd, implExpNoFd, candidExpNoFd, atrinaNoFd )
+
+height <- rbind(atrinaY, expY, implExpY, candidExpY)
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )
 
 
 
@@ -33,7 +34,7 @@ text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 myaxis <- c(3, 8, 13, 18)
 myaxislab <- c(1, 2, 3, 4)  
 
-labels <- c('Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions', 'Atrina')
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')
 #inset <- c(0.1, 0.1)
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)
 legend("topright", labels, fill=colors, bty="n")

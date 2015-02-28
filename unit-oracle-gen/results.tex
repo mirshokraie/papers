@@ -1,13 +1,5 @@
 \subsection{Results} \label{Sec:results}
-\begin{figure}[!t]
-  \centering
-  \includegraphics[width=1\hsize]{r-scripts/barplot-faultDetectionRate}
-  \vspace{-0.18in}   
-  \mycaption{Fault finding capability.}
-  \vspace{-0.1in} 
-  \label{Fig:faultDetectionRate}
-
-\end{figure}
+\headbf{Effectiveness (RQ1)} \figref{assertionTypeFaultDetec} depicts the fault detection rate achieved by \tool, explicit assertions when used individually and when it is used in conjunction with either implicit assertions or candidate assertions. 
 
 \begin{figure}[!t]
   \centering
@@ -18,4 +10,22 @@
   \label{Fig:assertionTypeFaultDetec}
  
 \end{figure}
+
+\headbf{Comparison with human-written DOM-based Assertions (RQ2)}
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=1\hsize]{r-scripts/barplot-faultDetectionRate}
+  \vspace{-0.18in}   
+  \mycaption{Fault finding capability.}
+  \vspace{-0.1in} 
+  \label{Fig:faultDetectionRate}
+
+\end{figure}
+
+\headbf{Accuracy (RQ3)}
 \input{accuracyTable}
+\headbf{Comparison with Mutation-based Assertion Generation (RQ4)}
+
+
+
