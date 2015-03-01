@@ -33,6 +33,6 @@ computed for the \code{class} attribute of the element is equal to $\frac{2}{3}$
 
 We choose element's property with access frequencies above a threshold $\alpha$ as potential candidates, which are later used for the purpose of unit-level assertion generation. We automatically compute this threshold for each test case as: 
 
-$\alpha=\frac{1}{ReadProperties(tc_i)}$, where $ReadProperties(tc_i)$ is the total number of properties that at some point during the execution of test case $tc_i$ their value have been read.
+$\alpha=\frac{1}{ReadProperties(T)}$, where $ReadProperties(T)$ is the total number of properties that at some point during the execution of test suite $T$ their value have been read.
 Going back to our running example and the sample DOM-based test case in \figref{example}, \code{class} attribute of the \code{couponButt} is selected as a potential candidate since its access frequency ($\frac{2}{3}$) is greater than the computed threshold, which is equal to $\frac{1}{2}$ in this example.        
 %application instrumentaion native event wrapping    

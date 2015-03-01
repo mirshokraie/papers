@@ -7,15 +7,18 @@
 \BlankLine
 
 \Begin {
-\nl \For{$tc_i \in T$}{
-\nl  $trace \leftarrow textsc{Exec}(tc_i)$\\
+\nl  $trace \leftarrow \textsc{Exec}(T)$\\
 \nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
 \nl  $freqAccdDOM\leftarrow \emptyset$\\
+\nl  $\alpha = \frac{1}{\textsc{ReadProperties}(T)}$\\
 \nl  \For{$dom \in domAccss $}{
-\nl   \If{$\textsc{acc}(prop_{dom}) \geq \frac{1}{\textsc{ReadProperties}(tc_i)}$}{
+\nl   \If{$\textsc{acc}(prop_{dom}) \geq \alpha$}{
 \nl    $freqAccdDOM \leftarrow dom \cup freqAccdDOM$\\       
       }
      }
+\nl \For{$tc_i \in T$}{
+\nl  $trace \leftarrow \textsc{Exec}(tc_i)$\\
+\nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
 \nl  \For{$asstn \in assertions_{tc_i}$}{
 \nl   $asserDOMAcc \leftarrow \textsc{GetDOMAcc}(asstn)$\\
 \nl   $asserDOMMuts \leftarrow \textsc{GetDOMMuts}(asserDOMAcc)$\\
