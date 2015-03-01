@@ -1,5 +1,5 @@
 \subsection{Results} \label{Sec:results}
-\headbf{Effectiveness (RQ1)} \figref{assertionTypeFaultDetec} depicts the fault detection rate achieved by \tool, explicit assertions when used individually and when it is used in conjunction with either implicit assertions or candidate assertions. 
+\headbf{Effectiveness (RQ1)} \figref{assertionTypeFaultDetec} depicts the fault detection rate achieved by (1) \tool, (2) explicit assertions when included individually, and (3) explicit assertions in conjunction with either implicit assertions or (4) candidate assertions. The number on each bar represent the number of faults detected by the corresponding assertion types. As shown in \figref{assertionTypeFaultDetec}, the percentage of faults revealed by including only explicit assertions is always less than the ones that are detected through the combination of explicit with either implicit assertions or candidate assertions. This indicates that implicit as well as candidate assertions are essential entities in improving the fault finding capability of \tool. Overall, the fault finding rate achieved by \tool is 62\% on average (ranges from 42-84\%). When implicit and candidate assertions are eliminated, fault detection rate drops by 27\% on average and by up to 31\% for the EnterpriseStore application (ID 2).    
 
 \begin{figure}[!t]
   \centering
