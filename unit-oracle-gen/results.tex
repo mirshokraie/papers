@@ -14,6 +14,9 @@ The percentage of faults revealed by including only explicit assertions is alway
  
 \end{figure}
 \headbf{Accuracy (RQ2)}
+\tabref{accuracyTable} shows the number of  correctly reported (TP), the number of incorrect reported (FP), and the number of missed (FN) \javascript lines of code, which are related to human-written DOM-based assertions. The table also shows the percentage of precision and recall achieved by \tool. The Recall oscillates between 79 to 100\% (90\% on average). The precision computed for the Phormer (ID 1) and WolfCMS (ID 3) is 100\%. For EnterpriseStore application (ID 2) as well as Claroline (ID 4), the precision rate is 98\%.
+
+We noticed that the lower recall rate obtained by \tool is mainly due to the use of third party libraries. Currently, we focus only on the application source code and do not consider libraries in our slicing technique. The underlying assumption is that faults are mainly originated from the application's code. The small deviation observed in precision is due to the functions, that are called but are not instrumented due to limitations in our current implementation. If the definition of a called function is not instrumented, we assume that the function call is related to our slice, while it may not be. We also observed that in rare cases a variable is seemingly assigned by a return value of a function, though the \code{return} statement is not found in the actual code of the called function. Our current implementation includes such variable assignments in the pertaining slices, which results in a small deviation in the precision.  
 \headbf{Comparison with human-written DOM-based Assertions (RQ3)}
 
 \begin{figure}[!t]
