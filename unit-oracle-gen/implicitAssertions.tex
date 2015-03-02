@@ -18,8 +18,8 @@ Given the importance of statements involved in code-level computations of a DOM-
 \end{figure}
 
 Dynamic forward slice is performed on the subset of code statements which is previously instrumented as explained in \secref{domToCode}. 
-\textsc{GetFWSlice} in line 14 of the algorithm computes forward slice on the variable operands of a backward slice statement.
-The process of forwards slicing is similar to the backwards slicing technique as discussed earlier (\secref{domToCode}). The only difference is that it is performed in a forward direction. The slicing criterion of the forward slice module is either a variable, object's property, or an accessed DOM property extracted from the statements in a backward slice segments of the code. The accessible entities (\textsc{Accessibles} in line 21), which have been set within the collected forward slice statements establish our implicit assertions.
-$implicitAsstn$ in line 21 of \algref{algorithm} contains the inferred implicit assertions.
+\textsc{GetFWSlice} in line 17 of the algorithm computes forward slice on the variable operands of a backward slice statement.
+The process of forwards slicing is similar to the backwards slicing technique as discussed earlier (\secref{domToCode}). The only difference is that it is performed in a forward direction. The slicing criterion of the forward slice module is either a variable, object's property, or an accessed DOM property extracted from the statements in a backward slice segments of the code. The accessible entities (\textsc{Accessibles} in line 24), which have been set within the collected forward slice statements establish our implicit assertions.
+$implicitAsstn$ in line 24 of \algref{algorithm} contains the inferred implicit assertions.
 \figref{forwardSlicingExample} shows the relevant parts of the code obtained by performing forward slicing on the running example. 
 As shown in the figure, the properties of object \code{selItem} are set in line 16, that is recorded during the backward slice process. Given line 16 as the forward slice criteria, we mark \code{availItems.count} (line 19) as an implicit assertion.        

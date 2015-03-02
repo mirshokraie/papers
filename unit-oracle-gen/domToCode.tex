@@ -16,7 +16,7 @@ After inferring DOM mutant statements within the code, we perform backward slice
 \label{def:backwardSlicing}  
 A backward slice of a program with respect to statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that affect the value of variables in $V$ at $p$.
 \end{mydef}
-\textsc{GetBWSlice} in lines  12 and 18 of \algref{algorithm} computes backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
+\textsc{GetBWSlice} in lines  15 and 21 of \algref{algorithm} computes backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
 In order to capture code-level dependencies exercised at run-time we use dynamic slicing.
 \begin{mydef}[Dynamic Slicing]
 \label{def:dynamicSlicing}
@@ -35,5 +35,5 @@ and (5) Anonymous functions, which are assigned to a variable or an object prope
   
 To address aliasing when computing the slice of a variable that has been set by a non-primitive value, we need to consider possible aliases that may refer to the same object. Specifically in \javascript \textit{dot notation} and \textit{bracket notation} is frequently used to modify objects at run time. While static analysis techniques often ignore addressing this issue \cite{Feldthaus:icse13}, we incorporate dynamic analysis in our slicing method. If a reference to an object of interest is saved to a second object's property, e.g. through the use of the \textit{dot notation}, the object of interest may also be altered via aliases of the second object. For example, after executing statement \code{a.b.c = objOfInterest;}, updates to \code{objOfInterest} may be possible through \code{a}, \code{a.b}, or \code{a.b.c}. To deal with such scenarios, our slicing technique searches through the collected trace and adds the forward slice for each detected alias to the current slice for our variable of interest (e.g. \code{objOfInterest}). 
 
-Given \code{customer.payable} in line 37 of \figref{example} (a) as the initial slicing criteria, the relevant backward slice statements are lines 29, 27, 25, 21, and 16, where object properties \code{customer.payable}, \code{coupon.expired}, variable \code{price}, and properties of the object \code{selItem} are assigned respectively.
+Given \code{customer.payable} in line 37 of \figref{example}(a) as the initial slicing criteria, the relevant backward slice statements are lines 29, 27, 25, 21, and 16, where object properties \code{customer.payable}, \code{coupon.expired}, variable \code{price}, and properties of the object \code{selItem} are assigned respectively.
 By the end of backward slicing step we collect all the relevant statements to a given DOM element, which are later used to derive test assertions.    
