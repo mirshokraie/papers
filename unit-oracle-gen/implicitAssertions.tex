@@ -1,9 +1,9 @@
 \subsubsection{Implicit Assertions} \label{Sec:implicitAssertions}
 To this end we gather all the statements that explicitly affect the computations relevant to a given DOM-based assertion. While assertions inferred from such statements are inherently important, we further need to consider entities that are implicitly influenced by the checked DOM element in the manually-written test suite. For this purpose we apply a dynamic forward slice on the statements collected from a backward slice of a DOM-based assertion.
-\begin{mydef}[Forward Slicing]
-\label{def:forwardSlicing} 
-A forward slice of a program with respect to a statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that are affected by the value of variables in $V$ at $p$.
-\end{mydef}
+%\begin{mydef}[Forward Slicing]
+%\label{def:forwardSlicing} 
+%A forward slice of a program with respect to a statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that are affected by the value of variables in $V$ at $p$.
+%\end{mydef}
 A forward slice with respect to a statement $st$,
 indicates how subsequently an operand at $st$ is being used. This can help the tester to ensure that $st$ properly establishes the expected outcome of the computations assumed by later statements. 
 Given the importance of statements involved in code-level computations of a DOM-based assertion, using forward slice is useful to check that there are no unforeseen effects on the application's behavior by a modification to such statements. 

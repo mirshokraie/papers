@@ -3,7 +3,7 @@
 \begin{figure}[!t]
   \centering
   \includegraphics[width=1\hsize]{fig/assertionToCode}
-  \mycaption{Finding initial point of contact between DOM-based assertion and the \javascript code.}
+  \mycaption{Finding initial point of contact between (b) DOM-based assertion and (a) the \javascript code (a).}
   \vspace{-0.1in} 
   \label{Fig:assertionToCode}
   \vspace{-0.1in} 
@@ -12,10 +12,10 @@ To determine the initial point of contact between DOM and the underlying \javasc
 \figref{assertionToCode} shows the steps of the approach for finding the initial point of contact between DOM-based assertion and the \javascript code in our running example. The collected execution trace contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM dependent assertion. Thus, the initial point of contact between the assertion and the relevant DOM mutating statement in the \javascript code is line 37 in function \code{viewCart}.
 
 After inferring DOM mutant statements within the code, we perform backward slice on the retrieved statements to gather the entire set of \javascript statements responsible for mutating a given DOM element.
-\begin{mydef}[Backward Slicing]
-\label{def:backwardSlicing}  
-A backward slice of a program with respect to statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that affect the value of variables in $V$ at $p$.
-\end{mydef}
+%\begin{mydef}[Backward Slicing]
+%\label{def:backwardSlicing}  
+%A backward slice of a program with respect to statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that affect the value of variables in $V$ at $p$.
+%\end{mydef}
 \textsc{GetBWSlice} in lines  15 and 21 of \algref{algorithm} computes backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
 In order to capture code-level dependencies exercised at run-time we use dynamic slicing.
 \begin{mydef}[Dynamic Slicing]
