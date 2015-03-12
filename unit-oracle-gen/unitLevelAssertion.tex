@@ -1,6 +1,7 @@
 \subsection{Generating Unit-Level Assertions} \label{Sec:unitLevelAssertion}
 Our approach targets postcondition assertions which are used to examine the expected behaviour of a given function after it is executed in a unit test case.
-Through analyzing a given DOM-based test case, we generate unit-level assertions in the following three categories: (1) assertions, which are directly related to a given DOM-based assertion, (2) assertions, which are indirectly affected by a given DOM-based assertion, and (3) assertions that have direct impact on important DOM elements which are not checked by the existing DOM-based assertions. Each assertion is coupled with the expected value obtained from the execution trace of the application. The first type of assertion (type 1), which we call explicit assertion, can potentially be used in unit testing of the current version of the application. Type 2 and type 3, which we call implicit assertions and candidate assertions respectively, can be used for the purpose of regression testing.
+By analyzing a given DOM-based test case, we generate unit-level assertions in the following three categories: (1) explicit assertions, (2) implicit assertions, and (3) candidate assertions. 
+%Each assertion is coupled with the expected value obtained from the execution trace of the application. The first type of assertion (type 1), which we call explicit assertion, can potentially be used in unit testing of the current version of the application. Type 2 and type 3, which we call implicit assertions and candidate assertions respectively, can be used for the purpose of regression testing.
 \input{explicitAssertions}
 \input{implicitAssertions}
 \input{candidateAssertions}
