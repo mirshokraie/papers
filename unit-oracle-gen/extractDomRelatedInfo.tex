@@ -5,16 +5,20 @@ Any written test case needs to check the correctness of the application's behavi
 DOM-based assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property. 
 DOM-based assertions play a significant role in our approach as they can guide us towards important portions of the underlying \javascript code that need to be checked in unit-level assertions.
 
-For each DOM-based assertion we find Intra DOM assertion correlation within the test suite, which is defined as $<DOMProp, AccDOM, AccDOMDep>$, where $DOMprop$ is the accessed DOM property within the assertion, $AccDOM$ is the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 10 of \algref{algorithm}), and $AccDOMDep$ is the DOM dependencies of the assertion in the test case.
+For each DOM-based assertion we find \emph{Intra DOM assertion correlation} within the test suite, which is defined as $<DOMProp, AccDOM, AccDOMDep>$, where $DOMProp$ is the accessed DOM property within the assertion, $AccDOM$ is the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 10 of \algref{algorithm}), and $AccDOMDep$ is the DOM dependencies of the assertion in the test case.
 %, we instrument the test case by wrapping around method calls that accesses DOM elements.
 Going back to our example in \figref{example}(b), tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
  
-In order to link DOM assertions to the relevant application's code we further need to track DOM's evolution as the test case runs (\textsc{GetDomMuts} in line 13 of the algorithm). 
+We further need to link the inferred Intra DOM assertion correlation with the application's code.
+We call the correlation between the DOM-based assertion and the \javascript code of the application as \emph{inter DOM assertion correlation}. This correlation is defined as
+$<AccDOMDep, InitCode>$, where $InitCode$ is the initial point of contact in the application's code segment, that is responsible for mutating the previously extracted DOM elements from the test suite ($AccDOMDep$). 
+For this purpose we track DOM's evolution of the $AccDOMDep$ (\textsc{GetDomMuts} in line 13 of the algorithm) as well as invoked event handlers as the test case runs. 
+We consider additions and removals of child nodes, changes to attributes, and updates to child text nodes as DOM mutations. For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}.
+%We call the correlation between the DOM-based assertion and the \javascript code of the application as \emph{inter DOM assertion correlation}. This correlation is defined as $<AccDOMDep, InitCode>$, where $InitCode$ is the initial point of contact in the application's code segment, that is responsible for mutating the previously extracted DOM elements from the test suite ($AccDOMDep$).  
 %We make use of \code{document.onload} event to log the initial DOM state. 
 %An observer module is then used to monitor mutations on the DOM during the test case execution. 
-We consider additions and removals of child nodes, changes to attributes, and updates to child text nodes as DOM mutations.
-In addition to DOM changes, we also keep track of \javascript events as well as invoked event handlers. This information is later used to find the initial point of contact between a DOM mutation and the executed code segments.
-For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
+%In addition to DOM changes, we also keep track of \javascript events as well as invoked event handlers. This information is later used to find the initial point of contact between a DOM mutation and the executed code segments.
+%For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
 \headbf{Frequently Accessed DOM Properties}
 In addition to DOM-based assertions, we further consider DOM element properties, that are frequently accessed within the application as the test case runs (lines 1 to 7 of \algref{algorithm}). 
 \textsc{Acc} in line 6 of the algorithm computes the access frequency of a DOM property, $freqAccdDOM$ in line 7 contains the inferred candidate DOM properties, and \textsc{GetDomMuts} in line 19 records DOM mutations occur
