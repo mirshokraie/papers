@@ -1,15 +1,17 @@
 \subsection{Extracting DOM-Related Characteristics} \label{Sec:extractDomRelatedInfo}
-The DOM connects a test case to the web application's \javascript code. Therefore, we first need to analyze the DOM-based test suite and extract the following pieces of information: (1) DOM-related operations of the existing test suite that may have tight connection with the \javascript code, and (2) frequently accessed DOM properties, which are potentially important from the application's point of view, but often are left unchecked in the manually-written test suite.
+The DOM connects a test case to the web application's code. Therefore, we first need to analyze the DOM-based test suite and extract the following pieces of information: (1) DOM-related operations of the existing test suite that may have tight connection with the \javascript code, and (2) frequently accessed DOM properties, which potentially are potentially influential in improving the fault finding capability of the test suite, but left unchecked in the manually-written test suite.
 \headbf{DOM-Related Operations}
-Any generated test case needs to check the correctness of the application's behaviour. In a DOM-based test case the expected behaviour is checked through DOM-based assertions.
+Any written test case needs to check the correctness of the application's behaviour. In a DOM-based test case the expected behaviour is checked through DOM-based assertions.
 DOM-based assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property. 
 DOM-based assertions play a significant role in our approach as they can guide us towards important portions of the underlying \javascript code that need to be checked in unit-level assertions.
 
-For each DOM assertion we record the accessed DOM property within the assertion as well as the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 10 of \algref{algorithm}). 
-In order to find DOM dependencies of an assertion in the test case, we instrument the test case by wrapping around method calls that accesses DOM elements.
+For each DOM-based assertion we find Intra DOM assertion correlation within the test suite, which is defined as $<DOMProp, AccDOM, AccDOMDep>$, where $DOMprop$ is the accessed DOM property within the assertion, $AccDOM$ is the accessed DOM elements in the test case pertaining to the assertion (\textsc{GetDomAcc} in line 10 of \algref{algorithm}), and $AccDOMDep$ is the DOM dependencies of the assertion in the test case.
+%, we instrument the test case by wrapping around method calls that accesses DOM elements.
 Going back to our example in \figref{example}(b), tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.   
  
-In order to link DOM assertions to the relevant \javascript code we further need to track DOM's evolution as the test case runs (\textsc{GetDomMuts} in line 13 of the algorithm). We make use of \code{document.onload} event to log the initial DOM state. An observer module is then used to monitor mutations on the DOM during the test case execution. 
+In order to link DOM assertions to the relevant application's code we further need to track DOM's evolution as the test case runs (\textsc{GetDomMuts} in line 13 of the algorithm). 
+%We make use of \code{document.onload} event to log the initial DOM state. 
+%An observer module is then used to monitor mutations on the DOM during the test case execution. 
 We consider additions and removals of child nodes, changes to attributes, and updates to child text nodes as DOM mutations.
 In addition to DOM changes, we also keep track of \javascript events as well as invoked event handlers. This information is later used to find the initial point of contact between a DOM mutation and the executed code segments.
 For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
