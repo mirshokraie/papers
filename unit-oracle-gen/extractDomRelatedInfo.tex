@@ -35,9 +35,9 @@ In order to record DOM property accesses within the application, we rewrite nati
 For example in function \code{addToCart} of \figref{example}(a), DOM element with ID \code{couponButt} is assigned to \code{coupElem} variable. The assigned variable is later used to access the \code{class} attribute as well as the \code{value}
 of the DOM element in lines 23, 25, and 26.
 
-Let $acc(prop_{el})$ be the access frequency computed for property $prop$ of DOM element $el$, then:
+Let $Acc(prop_{el})$ be the access frequency computed for property $prop$ of DOM element $el$, then:
  
-$acc(prop_{el})=\frac{read(prop_{el})}{\sum _{e=1}^{n} read(domElem_e)}$, where $read(domElem_{e})$ is the number of times that DOM element $domElem$ is read, given that the total number of DOM elements during the execution of a test case is $n$.
+$Acc(prop_{el})=\frac{Read(prop_{el})}{\sum _{e=1}^{n} Read(domElem_e)}$, where $Read(domElem_{e})$ is the number of times that DOM element $domElem$ is read, given that the total number of DOM elements during the execution of a test case is $n$.
 Note that reading a DOM element refers to accessing the element to read the corresponding property. In \figref{example}(a), the \code{class} attribute of DOM element \code{couponButt} is read in lines 23 and 34, and thus the access frequency
 computed for the \code{class} attribute of the element is equal to $\frac{2}{3}$.
 
