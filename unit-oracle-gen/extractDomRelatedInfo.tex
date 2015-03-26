@@ -5,21 +5,21 @@ Any written test case needs to check the correctness of the application's behavi
 DOM-based assertion is defined as $<DOMProp,ExpVal>$, where $DOMProp$ is a DOM element feature (e.g. attribute, and/or textual value), and $ExpVal$ is the correct value expected by the assertion. Through the rest of the paper, we call DOM element feature as DOM property. 
 DOM-based assertions play a significant role in our approach as they can guide us towards important portions of the underlying \javascript code that need to be checked in unit-level assertions.
 
-For each DOM-based assertion we find \emph{Intra DOM assertion correlation} within the test suite.
-\begin{mydef}[Intra DOM Assertion Correlation]
-An intra DOM asseetion correlation is defined as a three tuple of $<DOMProp, AccDOM, AccDOMDep>$, where $DOMProp$ is the accessed DOM property within the assertion, $AccDOM$ is the accessed DOM elements in the test case pertaining to the assertion, and $AccDOMDep$ is the DOM dependencies of the assertion in the test case.
+For each DOM-based assertion we find \emph{Intra DOM assertion dependency} within the test suite.
+\begin{mydef}[Intra DOM Assertion Dependency]
+An intra DOM assertion correlation is defined as $<DOMProp, AccDOM>$, where $DOMProp$ is the accessed DOM property within the assertion, $AccDOM$ is the accessed DOM elements in the test case pertaining to the assertion.
 \end{mydef}
 \textsc{GetDomAcc} in line 10 of \algref{algorithm} retrieves DOM dependencies of the assertion in the test case.
 %, we instrument the test case by wrapping around method calls that accesses DOM elements.
 Going back to our example in \figref{example}(b), tracking the assertion in line 11 shows that it has a DOM dependency to a \code{div} element with class \code{shopContainer}, which is accessed in line 10.
 
-We further need to link the inferred Intra DOM assertion correlation with the application's code.
-We call the correlation between the DOM-based assertion and the \javascript code of the application as \emph{inter DOM assertion correlation}.
-\begin{mydef}[Inter DOM Assertion Correlation]
-An inter DOM assertion correlation is defined as\\
-$<AccDOMDep, InitCode>$, where $InitCode$ is the initial point of contact in the application's code segment, that is responsible for mutating $AccDOMDep$ the previously extracted DOM elements from the test suite.
+We further need to correlate the inferred Intra DOM assertion dependency with the application's code.
+We call the correlation between the DOM-based assertion and the source code of the application as \emph{inter DOM assertion dependency}.
+\begin{mydef}[Inter DOM Assertion Dependency]
+An inter DOM assertion dependency is defined as\\
+$<AccDOM, InitLnCode>$, where $InitLnCode$ is the initial line of code in the application, that is responsible for mutating $AccDOM$, which is the previously extracted DOM elements from the test case.
 \end{mydef}
-To infer this type of correlation we track DOM's evolution of the $AccDOMDep$ (\textsc{GetDomMuts} in line 13 of the algorithm) as well as invoked event handlers as the test case runs. 
+To infer inter DOM assertion dependency we track evolution of the accessed DOM elements (\textsc{GetDomMuts} in line 13 of the algorithm) as well as invoked event handlers as the test case runs. 
 We consider additions and removals of child nodes, changes to attributes, and updates to child text nodes as DOM mutations. For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}.
 %We call the correlation between the DOM-based assertion and the \javascript code of the application as \emph{inter DOM assertion correlation}. This correlation is defined as $<AccDOMDep, InitCode>$, where $InitCode$ is the initial point of contact in the application's code segment, that is responsible for mutating the previously extracted DOM elements from the test suite ($AccDOMDep$).  
 %We make use of \code{document.onload} event to log the initial DOM state. 
