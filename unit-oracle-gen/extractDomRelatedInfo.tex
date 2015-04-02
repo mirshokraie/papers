@@ -14,7 +14,8 @@ DOM-based assertions play a significant role in our approach as they can guide u
 \end{figure}
 For each DOM-based assertion we find \emph{intra DOM assertion dependency} within the test case.
 \begin{mydef}[Intra DOM Assertion Dependency]
-An intra DOM assertion dependency is defined as $<assert, domElems, domProps>$, where $assert$ is the intended DOM-based assertion, $domElems$ is the accessed DOM elements in the test case pertaining to the assertion, and $domProps$ is the accessed DOM properties within the assertion.
+\label{def:intraDOMDep}  
+An intra DOM assertion dependency is defined as a three tuple of $<assert, domElems, domProps>$, where $assert$ is the intended DOM-based assertion, $domElems$ is the accessed DOM elements in the test case pertaining to the assertion, and $domProps$ is the accessed DOM properties within the assertion.
 \end{mydef}
 \textsc{GetDomAcc} in line 10 of \algref{algorithm} retrieves DOM dependencies of the assertion in the test case.
 %, we instrument the test case by wrapping around method calls that accesses DOM elements.
@@ -23,6 +24,7 @@ Going back to our example in \figref{assertionToCode}(b), tracking the assertion
 We further need to correlate the inferred intra DOM assertion dependency with the application's code.
 We call the correlation between the DOM-based assertion and the application's code as \emph{inter DOM assertion dependency}.
 \begin{mydef}[Inter DOM Assertion Dependency]
+\label{def:interDOMDep}  
 An inter DOM assertion dependency is defined as\\
 $<assert, initPoint>$, where $assert$ is the intended DOM-based assertion, and $initPoint$ is the initial line of code in the application that is responsible for mutating the property of a DOM element extracted from the intra DOM assertion dependency.
 \end{mydef}

@@ -8,15 +8,18 @@
   \label{Fig:intraCodeDep}
 %  \vspace{-0.1in} 
 \end{figure}
-To determine the initial point of contact between DOM and the underlying application's code, we first cross reference the DOM element as well as the property we are interested in with a set of DOM mutations obtained from the execution trace. The desired DOM element and its property comes from either the intra DOM assertion dependency or the candidate DOM properties as described in \secref{extractDomRelatedInfo}. Recall that our execution trace contains information about triggered events, event handlers, and DOM mutations caused by the events. Therefore, we can identify relevant events and invoked functions corresponding to a given DOM mutation. To figure out where the mutation originated in our execution trace, we keep record of DOM accesses within the invoked functions. For each DOM access, we track \javascript lines of code that are responsible for updating the corresponding DOM element.
+To determine the initial point of contact between DOM and the underlying application's code, we first cross reference the DOM element as well as the property we are interested in with a set of DOM mutations obtained from the execution trace. The desired DOM element and its property are inferred from either the intra DOM assertion dependency or the candidate DOM properties as described in \secref{extractDomRelatedInfo}. Recall that our execution trace contains information about triggered events, event handlers, and DOM mutations caused by the events. Therefore, we can identify relevant events and invoked functions corresponding to a given DOM mutation.
+For example, the collected execution trace in \figref{assertionToCode} contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM-based assertion.
 
-\figref{assertionToCode} shows the steps of the approach for finding the initial point of contact between DOM-based assertion and the \javascript code in our running example. The collected execution trace contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM dependent assertion. Thus, the initial point of contact between the assertion and the relevant DOM mutating statement in the \javascript code is line 37 in function \code{viewCart}.
+To figure out where the mutation originated in our execution trace, we keep record of DOM accesses within the invoked functions. For each DOM access, we track \javascript lines of code that are responsible for updating the corresponding DOM element. Going back to our example in \figref{assertionToCode}, given that the textual property of the \code{div} element is extracted from the intra DOM assertion dependency, we identify line 37 in function \code{viewCart} as the initial point of contact responsible for changing the \code{text} of the DOM element.
 
-After inferring DOM mutant statements within the code, we perform a backward slice on the retrieved statements to gather the entire set of \javascript statements responsible for mutating a given DOM element.
-%\begin{mydef}[Backward Slicing]
-%\label{def:backwardSlicing}  
-%A backward slice of a program with respect to statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that affect the value of variables in $V$ at $p$.
-%\end{mydef}
+After inferring DOM mutant statements, we find the \emph{intra code dependency} within the application's code.
+%gather the entire set of \javascript statements responsible for mutating a given DOM element.
+\begin{mydef}[Intra Code Dependency]
+\label{def:intraCodeDep}  
+An intra code dependency is defined as $<initPoint, codeSts>$, where $initPoint$ is the initial point of contact extracted from the intra DOM assertion dependency, and $codeSts$ is the set of statements that are either affected by or influence the $initPoint$. 
+\end{mydef}
+To find the intra code dependency, we make use of backward as well as forward slicing techniques.
 \textsc{GetBWSlice} in lines  15 and 21 of \algref{algorithm} computes a backward slice with respect to assertion related DOM mutations, and candidate DOM property mutations respectively.
 We use dynamic slicing to capture run-time dependencies accurately.
 Note that instrumenting the entire application's code to perform dynamic slicing incurs high performance overheads. To avoid this, we first intercept the code sent from the server to the client, and then statically instrument only those statements that may affect a given DOM element.
@@ -26,9 +29,7 @@ Once the test case runs, we collect traces from the instrumented code. This trac
 
 The backwards slicing technique starts by extracting instances of the initial slicing criteria from the trace. For each \textit{read} operations, the trace is traversed backwards to find the nearest related \textit{write} operation. Once found, the \textit{write} operation is added to the slice under construction. This process is repeated for all the data dependencies related to that write operation. A similar approach is taken for including control dependencies in the slice. 
 Our slicing technique supports inter procedural slicing. For example, if a variable is assigned by the return value of a called function, the slicer recursively tracks the function and performs a backward slice on the statement returned by the called function.
-We track the following types of function calls during the slicing process: (1) Regular function calls e.g. \code{func()}, (2) Method calls e.g. \code{obj.func()},
-(3) Constructors e.g. \code{new func()}, (4) Function handlers e.g. \code{element.click(func)}, 
-and (5) Anonymous functions, which are assigned to a variable or an object property.
+%We track the following types of function calls during the slicing process: (1) Regular function calls e.g. \code{func()}, (2) Method calls e.g. \code{obj.func()}, (3) Constructors e.g. \code{new func()}, (4) Function handlers e.g. \code{element.click(func)}, and (5) Anonymous functions, which are assigned to a variable or an object property.
   
 To address aliasing when computing the slice of a variable that has been set by a non-primitive value, we need to consider possible aliases that may refer to the same object. Specifically in \javascript \textit{dot notation} and \textit{bracket notation} are frequently used to modify objects at run time. Since static analysis techniques often ignore this issue \cite{Feldthaus:icse13}, we use dynamic slicing. If a reference to an object of interest is saved to a second object's property, e.g. through the use of the \textit{dot notation}, the object of interest may also be altered via aliases of the second object. For example, after executing statement \code{a.b.c = objOfInterest;}, updates to \code{objOfInterest} may be possible through \code{a}, \code{a.b}, or \code{a.b.c}. To deal with such scenarios, our slicing technique searches through the collected trace and adds the forward slice for each detected alias to the current slice for our variable of interest (e.g. \code{objOfInterest}). 
 
