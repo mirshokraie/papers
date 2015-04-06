@@ -12,7 +12,8 @@ Similar to mutation-based techniques, differential test case generation approach
 Pastore \etal \cite{pastore:icst13} exploit crowd sourcing approach to check assertions. In this approach the developer produces tests and provides sufficient API documentation for the crowd such that crowd workers can determine the correctness of assertions. However, recruiting qualified crowd to generate test oracles can be quite challenging.
 
 In the context of leveraging the existing test cases to generate more complex tests, Pezz\`e \etal \cite{pezze:icst13} propose a technique to construct integration tests which focus on class interactions by utilizing the unit test cases. 
-The integration tests are formed by combining initialization and execution sequences of simple unit tests to form new ones. However, the proposed technique does not deal with assertions.  
+The integration tests are formed by combining initialization and execution sequences of simple unit tests to form new ones. However, the proposed technique does not deal with assertions.
+eToc \cite{tonella:issta04} and EvoSuite \cite{fraser:icst12} use search based techniques to evolve the initial population of test cases. Their main goal is to increase the code coverage achieved by the test suite. However, in this work our aim is to increase the fault finding capability by focusing on test assertions rather than increasing the code coverage.
 Milani Fard \etal \cite{milanifard:ase14} propose Testilizer which utilizes DOM-based test suite of the web application to explore alternative paths and consequently regenerate assertions for new detected states. Our work is different from this approach in that we exploit DOM-related information in a human written test suite to capture the behaviour of the application at the unit-level \javascript. Furthermore, they do not generate code-based assertions which we do.
   
 
