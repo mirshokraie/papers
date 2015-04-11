@@ -14,15 +14,21 @@ increasing the reliability of web applications.
 %as well as asynchronous communication with the server is used.
 \javascript is the common engine of modern web applications. 
 Developers employ \javascript to add functionality, dynamically change the Document Object Model (DOM) structure,
-and communicate with web servers.
+and communicate with web servers. Given the increasing reliance of web applications on this language, it is important to check its correct behaviour.
+Writing test suites that achieve high code coverage for \javascript applications is particularly challenging compared with traditional languages.
+The event-driven dynamic nature of \javascript, and its extensive interaction with the DOM (and indirectly CSS) can result in many execution paths and states. The huge event space of such applications makes it challenging for the tester to cover the whole state space in a limited amount of time.
+
 To test \javascript-based web applications, developers
 often write test cases using frameworks such as \selenium to examine the correct interaction of the user with web application (GUI testing) and \qunit to test the proper functionality of the individual units (unit testing).
 Although such frameworks help to automate test execution, the
 test cases need to be written manually, which can be tedious
-and inefficient. Writing stable test suites that achieve high code coverage for \javascript applications is particularly challenging compared with traditional languages.
-The event-driven dynamic nature of \javascript, and its extensive interaction with the DOM (and indirectly CSS) can result in many execution paths and states.
-Moreover, the presence of anonymous functions, as well as the frequent use of function closures by \javascript programmers result in many hidden scopes within the application that
-cannot be directly tested.
+and inefficient. 
+Using \selenium framework to write DOM-based tests and assertions
+requires little knowledge about the internal operations performed at the client side code. Rather, the tester needs only basic knowledge of common event sequences to cover important DOM elements to assert. 
+This makes it easier for the tester to write DOM-based test suites. However, DOM-based assertions can potentially miss the related portion of
+code-level failure, while more fine grained unit-level assertions are capable of detecting such faults. Furthermore, finding the root cause of an error during DOM-based testing can be more expensive than during unit testing. On the other hand,
+writing unit test assertions at code-level for web applications that have rich interaction with the DOM through their \javascript code is more tedious. 
+To write unit-level assertions, the tester needs to precisely understand the full range of interaction between the code level operations of a unit and the DOM level operations of a system, and thus may fail to assert the correctness of a particular behaviour when the unit is used as a part of a system. The inherent characteristics of unit and DOM-based tests, indicate that they are complementary and that there is a trade-off in individually using each to detect faults. 
 
 Researchers have recently started exploring test generation for \javascript-based web applications.
 Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
