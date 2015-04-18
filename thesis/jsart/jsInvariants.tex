@@ -1,0 +1,191 @@
+\section{JavaScript Invariants}
+\label{Sec:jsInvariants}
+In this section, we focus on our approach for automatically detecting dynamic JavaScript program 
+invariants by tracing and analyzing client-side variables as well as JavaScript DOM modifications. We discuss how
+those invariants are automatically injected as assertions in the application's JavaScript source code.
+
+\subsection{JavaScript Instrumentation}
+In order to log JavaScript variables, we modify JavaScript source code on-the-fly to add instrumentation code. 
+We intercept all the JavaScript code, both in JavaScript files and HTML pages,
+which passes from the server to the browser using a proxy\cite{?}. We first parse the intercepted source code into 
+an Abstract Syntax Tree (AST). We then traverse the AST in search of interesting program points to add instrumentation
+code. We instrument program variables as well as DOM modifications as we describ below. Once the code is instrumented, we
+serialize the AST back to the corresponding source code file and pass it to the browser.
+
+{\bf JavaScript DOM Modifications.} One type of trace data which we include in the execution trace is how certain
+DOM elements and their attributes are modified at runtime through JavaScript. For instance, by tracing how a {\bf class}
+attribute of an anchor (i.e. {\bf A}) element is changed during various execution runs, we can infer the range of values for
+the class attribute of the anchor tag. Based on our observations, JavaScript DOM modifications usually follow a certain pattern.
+Once the pattern is reverse engineered, we can add proper instrumentation code around the pattern to trace the changes.
+In patterns that we observed, first a JavaScript API is used to find the desired DOM element. Next, a function is called on the returned object
+which is responsible for the actual modification of the DOM-tree.
+After recognizing a pattern in the parsed AST, we add instrumentation code that records the value of the
+DOM attribute before and after the actual modification. Therefore, we are able to trace DOM modifications that happen programmatically through JavaScript.
+
+\figref{example_dom_instrumentation} shows the automatically instrumented JavaScript code for DOM manipulations. The {\bf save} function,
+is called at each program point with a new array argument, which has a program point identifier as the first element, 
+followed by a number of arrays for the variables. These arrays contain the name, type, and value of the variables. 
+The {\bf addvariable} function finds out the types of the variables passed by the save function at runtime and creates 
+the arrays. The {\bf height} value of the {\bf css} style property is traced before and after the DOM modification. Note that apart
+from the DOM modification patterns, reading the value of a DOM element property is also done in different patterns by
+various JavaScript libraries. For instance, in the case of jQuery, the number of arguments passed to the attr function 
+is determining whether we are setting the property or getting the current value.
+
+{\bf JavaScript Program Variables.} We search for function entry and function exit points through identifying function
+definitions in the AST and injecting statements at the start, end, and before every return statement. We instrument the
+code to monitor value changes of global variables, function arguments, and local variables.
+Per program point, we record information on script name, the function name, and the line number which are used for debugging
+purposes. for each variable we collect information on name, run-time type and the actual values. The runtime type is stored
+because JavaScript is a loosely typed language, i.e. the types of variables cannot be determined syntactically, thus
+we log the variable types at runtime.
+
+\figref{example_var_instrumentation} shows the automatically instrumented JavaScript code for program local variables as well as function arguments.
+Similar to DOM modifications, we trace variables and function arguments through calling {\bf save} function. 
+In order to trace value changes of local variables, we instrument the JavaScript code at exit point of the function. 
+However, to keep track of function arguments as well as global variables, we instrument the code at both entry and exit point of the function.  
+
+
+
+\begin{figure}
+\medskip
+\begin{lstlisting}
+	function playIt() {
+		...	
+		/* Save the attribute value before manipulation */
+		save (new Array('GhostBusters.js:playIt:POINT80', addVariable("$('#end').css('height')", $('#end').css('height')));
+	
+		/* jQuery DOM manipulation */
+		$(#end).css("height", (getDim().h) + 'px');
+	
+		/* Save the attribute value after manipulation */
+		save (new Array('GhostBusters.js:playIt:POINT81', addVariable("$('#end').css('height')", $('#end').css('height')));
+		...
+	}	
+
+\end{lstlisting}
+\caption{Instrumented JavaScript code for tracing JavaScript DOM modifications.}
+\label{Fig:example_dom_instrumentation}
+\end{figure}
+
+
+
+
+\begin{figure}
+\medskip
+\begin{lstlisting}
+	function getDim(height, width) {
+		
+		/* Save function arguments at entry point of the function */
+		save (new Array('GhostBusters.js:getDim:ENTER:POINT50', addVariable("height", height)));
+		save (new Array('GhostBusters.js:getDim:ENTER:POINT50', addVariable("width", width))); 
+
+		var h = height, w = width;		
+ 		h = h*2;
+ 		w = w*3;		
+ 		
+		/* Save variables and function arguments before the function returns */
+		save (new Array('GhostBusters.js:getDim:EXIT:POINT50', addVariable("height", height)));
+		save (new Array('GhostBusters.js:getDim:EXIT:POINT50', addVariable("width", width)));
+		save (new Array('GhostBusters.js:getDim:EXIT:POINT50', addVariable("h", h)));
+		save (new Array('GhostBusters.js:getDim:EXIT:POINT50', addVariable("w", w)));
+	
+		return {h:h, w:w}
+	}	
+
+\end{lstlisting}
+\caption{Instrumented JavaScript code for tracing program variables and function arguments.}
+\label{Fig:example_var_instrumentation}
+\end{figure}
+
+  
+
+
+\begin{figure}
+\medskip
+\begin{lstlisting}
+	function playIt() {
+		...	
+		/* Checking assertion before manipulation. Add an entry to the assertionFailure, if it is violated. */
+		if ($('#end').css('height') != 40)
+  		  window.assertionFailure.push(new Array("$('#end').css("height") == 40", "GhostBusters.js:playIt:POINT80")); 
+	
+		/* jQuery DOM manipulation */
+		$(#end).css("height", (getDim().h) + 'px');
+	
+		/* Checking assertion after manipulation. Add an entry to the assertionFailure, if it is violated. */
+		if ($('#end').css('height') != 200 && $('#end').css('height') != 400)
+  		  window.assertionFailure.push(new Array("$('#end').css('height') == 200 || $('#end').css('height') == 400", 											  
+  		  "GhostBusters.js:playIt:POINT81")); 	
+  	...
+	}	
+
+\end{lstlisting}
+\caption{Invariant assertion code for JavaScript DOM modifications.}
+\label{Fig:example_dom_assertion}
+\end{figure}
+
+
+\begin{figure}
+\medskip
+\begin{lstlisting}
+	function getDim(height, width) {
+		
+		/* Checking assertions at function entry point. Add an entry to the assertionFailure, if it is violated. */
+		if (width <= height) 
+  		  window.assertionFailure.push(new Array('width > height', 'GhostBusters.js:getDim:ENTER:POINT50'));		
+		
+		var  h = height, w = width;					
+ 		h = h*2;
+ 		w = w*3;	
+		
+		/* Checking assertions before the function returns. Add an entry to the assertionFailure, if it is violated. */
+		if (width <= height)
+  		  window.assertionFailure.push(new Array('width > height', 'GhostBusters.js:getDim:EXIT:POINT50'));   	
+		if (w <= h) 
+  		  window.assertionFailure.push(new Array('w > h', 'GhostBusters.js:getDim:EXIT:POINT50'));	   	
+	
+		return {h:h, w:w}
+	}	
+
+\end{lstlisting}
+\caption{JavaScript invariant assertion code for program variables and function arguments.}
+\label{Fig:example_var_assertion}
+\end{figure}
+
+\subsection{Logging Execution Traces}
+Once the JavaScript code is instrumented, we need to run the application to produce an execution trace. 
+We automate this step by using our AJAX crawling tool CRAWLJAX \cite{?}, which opens the web application
+in a browser, detects possible state transitions on the DOM-tree, and clicks through the state space.
+
+Next step is saving the trace data that is being produced at runtime as we navigate through the various
+states of the web application.
+Keeping the trace data in the browser's memory during the program execution can make the browser very slow when a
+huge trace is produced. On the other hand, sending data item to the server as soon as the item is generated, can 
+put a heavy load on the server, due to the huge amounts of data and high frequency of HTTP requests.
+In order to tackle the aforementioned challenges, in our approach we buffer a certain amount of trace data in the 
+memory in an array, post the data as an HTTP request to a proxy server when the buffer's size reaches a predefined threshold,
+and immediately clear the buffer in the browser's memory afterwards. Since the data arrives at the server in 
+a synchronized manner, we concatenate the tracing data into a single trace file on the server side. 
+This way the, the extra work that the browser and server have to conduct for our tracing step becomes manageable.
+
+\subsection{Deriving JavaScript Invariants}
+In order to infer JavaScript invariants, we automatically analyze the obtained trace data and generate 
+input files for Daikon \cite{?}. We have extended Daikon with support for accepting input and generating 
+output in JavaScript syntax. The input files are fed to Daikon to derive likely invariants.
+
+\subsection{Injecting Invariants as Assertions}
+Once the initial invariants are derived, we automatically detect unstable invariants and filter them as described earlier. Then
+from each invariant, we generate an assertion in JavaScript format. We use on-the-fly transformation to inject the assertions 
+directly into the JavaScript code in the browser. Since we have all the information about the program points and the location 
+of the invariants, we can inject the assertions at the correct position in the JavaScript source code through a proxy, as 
+they are served by the server. This way the assertions gain access to all variables needed at runtime.
+Once the assertions are in place, the web application is ready for regression testing a different version of the original application. 
+The actual testing can be done by manually clicking through the application, running an existing test suite, or using an automated crawler.
+Failed assertions during testing phase are used to generate a test report after the test execution session.
+
+\figref{example_dom_assertion} shows the automatically injected invariant assertions, checking the {\bf css} property of the example shown in
+\figref{example_dom_instrumentation}. Assertions are checked before and after the DOM modification, against the {\bf height} value of {\bf css} property which
+is derived from the corresponding invariants. Similarly, in \figref{example_var_assertion}, we depict injected assertions which are checking 
+value of variables and function arguments of the example shown in \figref{example_var_instrumentation}. In this example, inferred invariants yield information
+about the inequality relation between function arguments, {\bf width} and {\bf height}, as well as local variables, {\bf w} and {\bf h}. Assertions check 
+the corresponding ineqaulities to be hold during the application run-time.  

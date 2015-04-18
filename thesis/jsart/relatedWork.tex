@@ -1,0 +1,30 @@
+\section{Related Work}
+\label{Sec:relatedWork}
+
+Automated testing of modern web applications is becoming an active area of research \cite{artzi:icse11,tonella:icst08,mesbah:tse12,dodom:2010}.
+Most of the existing work on \javascript analysis is, however, focused on spotting errors and security vulnerabilities through static analysis \cite{Guarnieri-2009,Guha-2009,Zheng-2011}.
+We classify related work into two broad categories: web application regression testing and program invariants.
+
+%\begin{description}
+%\item[JavaScript Analysis]
+%\head{JavaScript Analysis.}
+%Automated testing of modern web applications is becoming an active area of research \cite{artzi:icse2011,tonella:icst08,mesbah:tse12,dodom:2010}.
+%Most of the existing work on \javascript analysis is, however, focused on spotting errors and security vulnerabilities through static analysis \cite{Guarnieri-2009,Guha-2009,Zheng-2011}.
+%Kudzu \cite{song:symb10} is a symbolic execution system for \javascript aimed at automated security vulnerability analysis. %This is done by automatically generating a test suite using symbolic execution of the \javascript source code. 
+%BrowserShield \cite{reis:tweb} applies 
+%dynamic instrumentation to rewrite \javascript code to conduct vulnerability driven filtering. Yu \etal \cite{yu:javascript} propose a method in which untrusted \javascript code is analyzed and instrumented \cite{Kikuchi08javascript} to identify and modify questionable behaviour.
+
+
+\head{Web Application Regression Testing.}
+Regression testing of web applications has received relatively limited attention from the research community \cite{lei:reg03,tarhini:reg08}.
+Alshahwan and Harman~\cite{harman:icst08} discuss an algorithm for regression testing of web applications that is based on session data \cite{sprenkle:replayweb,elbaum:webtest} repair. Roest et al. \cite{Roest:2010.icst} propose a technique to cope with the dynamism in Ajax web interfaces while conducting automated regression testing. None of these works, however, target regression testing of \javascript in particular.
+
+\head{Program Invariants.}
+The concept of using invariants to assert program behaviour at runtime is as old as programming itself \cite{Clarke:2006}. A more recent development is the automatic detection of program invariants through dynamic analysis. Ernst \etal have developed Daikon \cite{ernst2007daikon}, a tool capable of inferring likely invariants from program execution traces. Other related tools for detecting invariants include Agitator \cite{agitator:issta06}, DIDUCE \cite{Hangal02trackingdown}, and DySy \cite{Csallner08dysy}. Recently, Ratcliff \etal \cite{ratcliff:gecco11} have proposed a technique to reuse the trace generation of Daikon and integrate it with genetic programming to produce useful invariants.  %DySy is somewhat different than the rest, since it is based on an algorithm that uses symbolic execution of the program as well as its concrete execution to detect likely invariants. Swaddler \cite{CovaBFV2007} is an invariant detection tool for PHP that is based on Daikon.
+Conceptually related to our work, Rodr{\'\i}guez-Carbonell and Kapur \cite{rodrikapurICTAC04} use  inferred invariant assertions for program verification.
+
+Mesbah \etal \cite{mesbah:tse12} proposed a framework called \atusa for manually specifying generic and application-specific invariants on the DOM-tree and \javascript code. These invariants were subsequently used as test oracles to detect erroneous behaviours in modern web applications. Pattabiraman and Zorn proposed DoDOM \cite{dodom:2010}, a tool for inferring invariants from the DOM tree of web applications for reliability testing.
+
+To the best of our knowledge, our work in this paper is the first to propose an automated regression testing approach for \javascript, which is based on  \javascript invariant assertion generation and runtime checking.
+
+

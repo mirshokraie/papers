@@ -1,0 +1,36 @@
+\section{Motivation and Challenges}
+\label{Sec:motivation}
+
+\begin{figure}[t]
+\medskip
+\begin{lstlisting}
+	function setDim(height, width) {		
+		var h = 4*height, w = 2*width;		
+		...
+		return{h:h, w:w};
+	}
+	
+	function play(){
+		$(#end).css("height", setDim($('body').width(), $('body').height()).h + 'px');		
+		...
+	}	
+\end{lstlisting}
+\vspace{0.1in} 
+\mycaption{Motivating \javascript example.}
+\label{Fig:motivating_example}
+\end{figure}
+%\subsection{Challenges}
+%\label{challenges}
+
+%In this section we provide a simple example from a real \javascript application. The example shows how prevelant errors can happen in applications.  
+\figref{motivating_example} shows a simple \javascript code snippet. %taken from a real-world web application and modified for simplicity.
+%We modified the real sample to make the code readable.
+Our motivating example consists of two functions, called \code{setDim} and \code{play}. The \code{setDim} function has two parameters, namely \code{height} and \code{width}, with a 
+simple mathematical operation (Line 2). The function returns local variables, \code{h} and \code{w} (Line 4). \code{setDim} is called in the \code{play} function (Line 8) to set the \code{height} value of the CSS property of the DOM element with ID \code{end}.
+Any modification to the values of \code{height} or \code{width} would influence the returned values of \code{setDim} as well as the property of the DOM element.
+Typical programmatic errors include swapping the order of \code{height} and \code{width} when they are respectively assigned to local variables \code{h} and \code{w} or calling \code{setDim} with wrong arguments, i.e., changing the order of function arguments. 
+
+Detecting such regression errors is a daunting task for web developers, especially in programming languages such as \javascript, which are known to be challenging to test.
+One way to check for these regressions is to define invariant expressions of expected behaviour \cite{Meyer:1992} over program variables and assert their correctness at runtime. 
+This way any modification to \code{height}, \code{width}, \code{h}, or \code{w} that violates the invariant expression will be detected. However, manually expressing such assertions for web applications with thousands of lines of \javascript code and several DOM states, is a challenging and time-consuming task. Our aim in this work is to provide a technique that automatically captures regression faults through generated \javascript  assertions.
+

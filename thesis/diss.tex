@@ -73,6 +73,9 @@
 %% to create a bullet list with the provided character.
 \usepackage{pifont}
 
+\usepackage{import}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Configure fonts for XeTeX / XeLaTeX using the fontspec package.
 %% Be sure to check out the fontspec documentation.
@@ -143,6 +146,18 @@
 %\usepackage{natbib}
 \usepackage[small,compact]{titlesec}
 % \usepackage{subfigure}
+\newcommand{\theadturn}[1]{%
+\begin{turn}{90}\textbf{#1}\end{turn}
+}
+\newcommand{\thead}[1]{%
+\textbf{#1}
+}
+\newcommand{\footnoteremember}[2]{\footnote{~\scriptsize{#2}}
+  \newcounter{#1}
+  \setcounter{#1}{\value{footnote}}}
+\newcommand{\footnoterecall}[1]{\footnotemark[\value{#1}]
+}
+
 \newcommand{\refFormula}[1]{(\ref{#1})}
 \newcommand{\refFigure}[1]{Figure~\ref{#1}}
 % \usepackage{rotating} 
@@ -279,11 +294,12 @@
 \newcommand{\junit}{\textsc{JUnit}\xspace}
 \newcommand{\selenium}{\textsc{Selenium}\xspace}
 \newcommand{\qunit}{\textsc{Selenium}\xspace}
-\newcommand{\codename}{\textsc{Mutandis}\xspace}
+\newcommand{\mutandis}{\textsc{Mutandis}\xspace}
 \newcommand{\dustme}{\textsc{DMS}\xspace}
 \newcommand{\helium}{\textsc{Helium}\xspace}
 \newcommand{\cssess}{\textsc{CSSess}\xspace}
 \newcommand{\jsart}{\textsc{JSart}\xspace}
+\newcommand{\atusa}{\textsc{Atusa}\xspace}
 
 
 \newcommand{\cssparser}{\textsc{CSSParser}\xspace}
@@ -445,6 +461,7 @@
 \renewcommand{\subsectionautorefname}{Section}
 \renewcommand{\subsubsectionautorefname}{Section}
 
+
 %% If you have long page numbers (e.g., roman numbers in the 
 %% preliminary pages for page 28 = xxviii), you might need to
 %% uncomment the following and tweak the \@pnumwidth length
@@ -566,6 +583,8 @@
 
 %    1. Introduction
 \include{intro}
+\subimport{jsart/}{jsartIntro}
+%\include{jsart/jsartIntro}
 
 %    2. Main body
 % Generally recommended to put each chapter into a separate file

@@ -1,0 +1,275 @@
+\documentclass[runningheads,a4paper]{llncs}
+\usepackage{pslatex}
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+
+\usepackage{url}
+
+
+\usepackage{moreverb}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{xspace}
+\usepackage{rotating}
+\usepackage{fixmath}
+%\usepackage{relsize}
+\usepackage{mdwlist}
+%\usepackage{enumitem}
+%\usepackage{paralist}
+\usepackage{pseudocode}
+\usepackage[lined,boxruled]{algorithm2e}
+\usepackage{theorem}
+\usepackage{amsmath}
+%\usepackage{multirow}
+% \let\labelindent\relax
+\usepackage{enumitem}
+%\usepackage{floatflt}
+%\usepackage{caption}
+%\usepackage{natbib}
+%\usepackage[small]{caption} %reduces the size of captions under tables and figures.
+
+
+\usepackage{subfigure}
+
+
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	%backgroundcolor=\color{lbcolor},
+	tabsize=2,
+	rulecolor=,
+	language=html,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={0.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        %emphstyle=\color[rgb]{0.827,0.126,0.941},
+}
+
+
+%Listings for JS
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{forestgreen}\ttfamily,
+  stringstyle=\color{purple}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+   language=JavaScript,
+   %backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\scriptsize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+%   numbersep=-6pt,
+   tabsize=1,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b,
+   numberblanklines=false,
+   escapeinside=\[\]
+}
+
+
+
+%%Terminology
+
+\newcommand{\rest}{\textsc{Rest}\xspace}
+\newcommand{\jsf}{\textsc{Jsf}\xspace}
+\newcommand{\ajax}{\textsc{Ajax}\xspace}
+%\newcommand{\head}[1]{\par\medskip\noindent\textbf{#1}}
+\newcommand{\headbf}[1]{\textbf{#1.}\ \ }
+\newcommand{\head}[1]{\vspace{5pt}\noindent\textbf{#1}\ \ }
+\newcommand{\webtwo}{\textit{Web~2.0}\xspace}
+\newcommand{\crawljax}{\textsc{Crawljax}\xspace}
+\newcommand{\petstore}{\textsc{PetStore}\xspace}
+\newcommand{\etal}{{et al.}\xspace}
+\newcommand{\ie}{{i.e.}\xspace}
+\newcommand{\eg}{{e.g.}\xspace}
+\newcommand{\atusa}{\textsc{Atusa}\xspace}
+\newcommand{\tudu}{\textsc{TUDU}\xspace}
+\newcommand{\todo}{\textsc{Todo}\xspace}
+\newcommand{\taskfreak}{\textsc{TaskFreak}\xspace}
+\newcommand{\tocview}{\textsc{TocView}\xspace}
+\newcommand{\javascript}{\textsc{JavaScript}\xspace}
+\newcommand{\hitlist}{\textsc{HitList}\xspace}
+\newcommand{\googlereader}{\textsc{Google Reader}\xspace}
+\newcommand{\testsuite}[1]{\textsc{Test Suite #1}\xspace}
+\newcommand{\version}[1]{\textsc{V#1}\xspace}
+\newcommand{\proc}[2]{{\textbf{Procedure} \textsc{#1}(\textit{#2})}}
+\newcommand{\codename}{\textsc{Jsart}\xspace}
+% JSART: JavaScript Assertion-based Regression Tester
+% JAINT (JAvascript INvariant-based Testing)
+% Maya(latin: creative power...)
+% Aida(latin: helper)
+
+
+
+\newcommand{\myspace}{\hspace{1mm}}
+
+
+%% abbreviations and commands
+\newcommand{\secref}[1]{Section~\ref{Sec:#1}}
+\newcommand{\figref}[1]{Figure~\ref{Fig:#1}}
+\newcommand{\listref}[1]{Listing~\ref{List:#1}}
+\newcommand{\tabref}[1]{Table~\ref{Table:#1}}
+\newcommand{\algref}[1]{Algorithm~\ref{Alg:#1}}
+\newcommand{\curl}[1]{\footnote{~\scriptsize\url{#1}}}
+\newcommand{\fn}[1]{\footnote{~\scriptsize{#1}}}
+\newcommand{\code}[1]{{\texttt{#1}}}
+\newtheorem{mydef}{Definition}
+
+
+\newcommand{\mycaption}[1]{%
+\vspace{-1.2\baselineskip}
+\caption{#1}
+\vspace{-1.2\baselineskip}
+}
+
+\lstloadlanguages{Java,XML,HTML}
+
+
+
+\newcommand{\aff}[1]{{\normalsize \textsl{#1}}}
+
+% TeX hack to make timestamp
+ \def\now{{\def\Time{3}\def\Hour{4}\def\Minute{5}%
+  \count\Time=\time\relax\ifnum\count\Time=0\count\Time=1440\fi%
+  \count\Hour=\count\Time\relax\divide\count\Hour by 60\relax%
+  \count\Minute=\count\Hour\relax\multiply\count\Minute by -60\relax%
+  \advance\count\Minute by \count\Time\relax\the\count\Hour\relax:%
+  \ifnum\count\Minute<10 0 \fi\the\count\Minute\relax}}
+  
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+\ifthenelse{\boolean{showcomments}}
+{\newcommand{\nb}[2]{
+\fbox{\bfseries\sffamily\scriptsize#1}
+{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
+}
+}
+{\newcommand{\nb}[2]{}
+}
+\newcommand\ali[1]{\nb{Ali}{#1}}
+\newcommand\sm[1]{\nb{Shabnam}{#1}}
+
+
+\newcommand{\theadturn}[1]{%
+\begin{turn}{90}\textbf{#1}\end{turn}
+}
+
+\newcommand{\thead}[1]{%
+\textbf{#1}
+}
+
+\newcommand{\footnoteremember}[2]{\footnote{~\scriptsize{#2}}
+  \newcounter{#1}
+  \setcounter{#1}{\value{footnote}}}
+\newcommand{\footnoterecall}[1]{\footnotemark[\value{#1}]
+}
+
+
+
+
+%\urldef{\mailsa}\path|{alfred.hofmann, ursula.barth, ingrid.haas, frank.holzwarth,|
+%\urldef{\mailsb}\path|anna.kramer, leonie.kunz, christine.reiss, nicole.sator,|
+\urldef{\mailece}\path|{shabnamm, amesbah}@ece.ubc.ca|    
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{
+%Automated Invariant-based Regression Testing of JavaScript
+%JavaScript Regression Testing through Automated Invariant Assertions
+JSART: JavaScript Assertion-based Regression Testing
+}
+
+% a short form should be given in case it is too long for the running head
+%\titlerunning{Regvariant: Automated Invariant-based Regression Testing of JavaScript}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Shabnam Mirshokraie
+%\thanks{}%
+\and Ali Mesbah}
+%
+%\authorrunning{Lecture Notes in Computer Science: Authors' Instructions}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{University of British Columbia\\
+Vancouver, BC, Canada\\
+\mailece%\\
+%\url{http://www.springer.com/lncs}
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+%\toctitle{Lecture Notes in Computer Science}
+%\tocauthor{Authors' Instructions}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty} 
+
+\input{abstract}
+
+\input{intro}
+\input{motivation}
+\input{approach}
+\input{tool}
+\input{evaluation}
+\input{discussion}
+\input{relatedWork}
+\input{conclusion}
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{../biblio}
+
+\end{document}
