@@ -183,7 +183,8 @@
 \usepackage{theorem}
 \usepackage{amsmath}
 \usepackage{multirow}
- \let\labelindent\relax
+\usepackage{array}
+% \let\labelindent\relax
 \usepackage{enumitem}
 %\usepackage{floatflt}
 %\usepackage{caption}
@@ -287,7 +288,7 @@
 \newcommand{\tocview}{\textsc{TocView}\xspace}
 \newcommand{\javascript}{{JavaScript}\xspace}
 \newcommand{\artemis}{{Artemis}\xspace}
-\newcommand{\tool}{{Pythia}\xspace}
+\newcommand{\jseft}{{JSEFT}\xspace}
 \newcommand{\jscover}{{JSCover}\xspace}
 \newcommand{\jquery}{\textsc{jQuery}\xspace}
 \newcommand{\hitlist}{\textsc{HitList}\xspace}
@@ -590,6 +591,7 @@
 \include{intro}
 \subimport{jsart/}{jsart}
 \subimport{mutandis/}{mutandis}
+\subimport{jseft/}{jseft}
 %\include{jsart/jsartIntro}
 
 %    2. Main body

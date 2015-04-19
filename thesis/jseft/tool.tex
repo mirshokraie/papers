@@ -1,0 +1,12 @@
+\subsection{Tool Implementation} \label{Sec:tool}
+We have implemented our \javascript test and oracle generation approach in an automated tool called \jseft. The tool is written in Java and is publicly available for download \cite{jseft-dl}. Our implementation requires no browser modifications, and is hence portable. For \javascript code interception, we use a web proxy, which enables us to automatically instrument \javascript code before it reaches the browser. 
+The crawler for \jseft extends and builds on top of the  event-based crawler, \crawljax \cite{mesbah:tweb11}, with random input generation enabled for  form inputs.
+%
+As mentioned before, to mutate \javascript code, we use our recently developed mutation testing tool, \mutandis \cite{mirshokraie:icst13}. The upper-bound for the number of mutations can be specified by the 
+user. However, the default is 50 for code-level and 20 for DOM-level mutations. We observed that these default numbers  provide a balanced trade-off between oracle generation time, and the fault finding capability of the tool. %In the current implementation of \tool, we ignore semantic equivalence in the DOM, meaning that we assume that any modification to the DOM is potentially an undesirable behaviour from the tester's perspective.
+ % 
+ %To instrument the intercepted code, Mozilla Rhino \cite{rhino} is used to parse \javascript code to an AST, and back to the source code after the instrumentation is performed. %We use Rhino's APIs to search for program points where instrumentation code needs to be added. 
+%To generate DOM-level event-based tests, %we extend our previously developed test generation plugin\curl{https://github.com/crawljax/testcasegenerator-plugin/} \cite{mesbah:tse12} in 
+%
+DOM-level test cases are generated in a \junit format that uses \selenium (WebDriver) APIs to fire events on the application's DOM inside the browser. \javascript function-level tests are generated in the \qunit unit testing framework \cite{quint}, capable of testing any generic \javascript code. 
+

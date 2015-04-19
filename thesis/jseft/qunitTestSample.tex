@@ -1,0 +1,21 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	test("Testing setDim",4,function(){
+		var fixture = $("#qunit-fixture");
+		fixture.append("<button id=\"cell0\"> <div id=\"divElem\"/> </button> <div id=\"endCell\" style=\"height:200px;width:100px;\"/>");
+		var currentDim=20;
+		var result= setDim(10);
+		equal(result, 30);
+		equal(currentDim, 50);
+		ok($(#endCell).length > 0));
+		equal($(#endCell).css('height'), 30); });
+	
+\end{lstlisting}
+\vspace{-0.1in} 
+
+\caption{Generated \qunit test case.}
+\vspace{-0.2in}
+\label{Fig:qunitTestSample}
+
+\end{figure}

@@ -1,0 +1,16 @@
+\begin{abstract}
+% MUST be 150 words or less
+%Developers often test their web applications using frameworks such as Selenium. Although such frameworks help to automate test execution, the test cases need to be written manually, which is tedious and inefficient.
+The event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make it  challenging to test \javascript-based applications.
+Current web test automation techniques target the generation of event sequences, but they ignore testing the \javascript code at the unit level. Further they either ignore the oracle problem completely or simplify it through generic soft oracles such as HTML validation and runtime exceptions. We present a framework to automatically generate
+ test cases for \javascript applications at two complementary levels, namely events and individual \javascript  
+functions. 
+Our approach employs a combination of function coverage maximization and function state abstraction algorithms to efficiently generate  test cases. In addition, these test cases are strengthened by automatically generated mutation-based oracles. % capable of detecting regression faults in \javascript code and the DOM. 
+We empirically evaluate the implementation of our approach, called \tool, to assess its efficacy. 
+The results, on 13 \javascript-based applications, show that the generated test cases achieve a coverage of 68\% and that \tool can detect injected \javascript and DOM faults with a high accuracy (100\% precision, 70\% recall).
+We also find that \tool outperforms an existing \javascript test automation framework both in terms of coverage and detected faults.
+%Testing JavaScript-based applications is challenging as manually exploring various execution paths of the application is difficult.
+%Also JavaScript's highly dynamic nature as well as its complex interaction with the DOM make it difficult for the tester to achieve high coverage. 
+
+%In current practice of \javascript testing, developers often write test cases manually using unit testing frameworks such as Selenium. While such tools help testers to design a test suite by providing an environment to record GUI actions, \javascript testing still remains a challenging task as manually exploring various execution paths of the application is difficult. Even after detecting an incorrect behaviour of the application, \javascript's highly dynamic nature as well as its complex interaction with Document Object Model (DOM) make it difficult for the tester to achieve high coverage. In this paper, we present a framework to automatically generate unit tests for web applications at two levels: (1) individual \javascript functions, (2) DOM event sequences. These  test cases are strengthened by automatically generated mutation-based oracles capable of detecting faults in \javascript code as well as the DOM tree. We implement our approach in a tool called \tool. We empirically evaluate \tool, by comparing it to another existing \javascript test generator, to assess its efficacy in terms of achieved coverage by the generated test suite as well as fault finding capability.
+\end{abstract}
