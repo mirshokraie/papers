@@ -1,10 +1,10 @@
 \chapter{JavaScript Invariant Detector}
-\label{Sec:jsart}
+\label{Chap:jsart}
 Web applications usually evolve fast by going through rapid development cycles and are, therefore, susceptible to regressions, i.e., new faults in existing functionality after changes have been made to the system. One way of ensuring that such modifications (e.g., bug fixes, patches) have not introduced new faults in the modified system is through systematic regression testing.
 While regression testing of classical web applications
 has been difficult \cite{tarhini:reg08}, dynamism and non-determinism pose an even greater challenge \cite{Roest:2010.icst} for Web 2.0 applications.
 
-In this work, we propose an automated technique for \javascript regression testing, which is based on dynamic analysis to infer invariant assertions. These obtained assertions are injected back into the \javascript code to uncover regression faults in subsequent revisions of the web application under test. 
+In response to our first research question (RQ 1.3.A), we propose an automated technique for \javascript regression testing, which is based on dynamic analysis to infer invariant assertions. These obtained assertions are injected back into the \javascript code to uncover regression faults in subsequent revisions of the web application under test. 
 Our technique automatically (1) intercepts and instruments \javascript on-the-fly to add tracing code (2) navigates the web application to produce execution traces, (3) generates dynamic invariants from the trace data, (4) transforms the invariants into stable assertions and injects them back into the web application for regression testing.
 
 Our approach is orthogonal to server-side technology, and it requires no manual modification of the source code. It is implemented in an open source tool called \jsart (\javascript Assertion-based Regression Testing).  We have empirically

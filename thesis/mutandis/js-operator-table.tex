@@ -1,0 +1,39 @@
+\begin{table*}
+%\vspace{5pt}
+        \caption{\javascript specific mutation operators.}
+{\scriptsize
+   
+       \begin{center}
+      %  \subtable[Experimental subjects and the corresponding exploration data]
+            {
+          \begin{tabular}{p{12cm}|{c}} \hline
+\thead{\javascript Mutation Operator} & \thead{Sources} \\  \hline \hline
+
+   Adding/Removing the \code{var} keyword in the variable declaration. & \cite{hsuJsAntiPatterns, osmaniJsPatterns,Crockford:2008} \\ \hline
+  
+    Removing the \code{/g}, global search sign, from the \code{replace}. & \cite{weylJsGotchas, jsStringReplace, roy3commmonJsMistakes}\\ \hline
+  
+    Removing the integer base argument from the \code{parseInt}. & \cite{weylJsGotchas, burgess11jsMistakes} \\ \hline
+  
+ Changing \code{setTimeout(function, xsec)} to \code{setTimeout(function(), xsec)} 
+(same change is applicable to \code{setInterval}). & \cite{hoPrematureInvocation, osmaniJsPatterns, gurbani13jsMistakes} \\ \hline
+  
+  Changing \code{setTimeout('function(x)', xsec)} to either 
+\code{setTimeout(function, xsec)} or \code{setTimeout('function', xsec)} 
+(same changes are applicable to \code{setInterval}). & \cite{osmaniJsPatterns, gurbani13jsMistakes} \\ \hline
+  
+ Replacing \code{'undefined'} with \code{null} (and vice versa) in the condition. & \cite{weylJsGotchas, roy3commmonJsMistakes,Crockford:2008}\\ \hline
+
+ Removing \code{this} keyword from \code{this.x}. & \cite{weylJsGotchas, porteneuveJsBinding, Crockford:2008} \\ \hline
+ 
+ Replacing \code{(function() !== false)} or \code{(function() === true)} with \code{(function())}. & \cite{roy3commmonJsMistakes} \\ \hline
+ Replacing \code{(function() === false)} or \code{(function() !== true)} with \code{(!function())}.   & \cite{roy3commmonJsMistakes} \\ \hline
+ 	
+\hline\end{tabular}\centering
+            }
+
+\label{Table:js-operator-table}
+\end{center}
+}  
+\vspace{-0.1in} 
+\end{table*}

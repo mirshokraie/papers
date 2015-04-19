@@ -1,0 +1,11 @@
+\subsection{Threats to Validity} \label{threats}
+An external threat to the validity of our results is the limited number 
+of web applications we use to evaluate the usefulness of our approach
+in assessing existing test cases (RQ4). Unfortunately, few \javascript applications with up-to-date test suites are publicly available.
+Another external threat to validity is that we do not perform a quantitative comparison 
+of our technique with other mutation techniques. However, to the
+best of our knowledge, there is no mutation testing tool available for \javascript, 
+which limits our ability to perform such comparisons.
+A relatively low number of generated mutants in our experiments is also a threat to validity. However, detecting equivalent mutants is a labour intensive task. For example it took us more than 4 hours to distinguish the equivalent mutants for \jquery in our study.  
+In terms of internal threat to validity, we had to manually inspect the 
+application's code to detect equivalent mutants. This is a time intensive task, which may be error-prone and biased towards our judgment. However, this threat is shared by other studies that attempt to detect equivalent mutants. As for the replicability of our study, \mutandis and all the experimental objects used are publicly available, making our results  reproducible. 

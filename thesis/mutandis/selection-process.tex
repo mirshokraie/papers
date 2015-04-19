@@ -1,0 +1,44 @@
+\section{Selection process} \label{selection}
+\figref{selectionBlockDiagram} shows the block diagram of our approach for selecting a proper candidate for the mutation process.
+
+\begin{figure}
+\centering
+\includegraphics[width=1.05\hsize]{fig/selectionBlockDiagram}
+\mycaption{Overview of the function and variable selection phase.}
+\label{Fig:selectionBlockDiagram}
+\end{figure}
+
+As discussed in the overview section, we target variables, branch statements, and \javascript specific operators to perform the actual mutation. Our mutant generation technique is based on a single mutation at a time. Thus, we need to choose a proper candidate among all the potential candidates obtained from the previous step of our approach.
+In the following, we discuss the selection process for each of the above categories.
+
+\headbf{Variable Mutations} We guide the mutant generation process towards mutating useful variables within the scope of critical functions. As discussed earlier, we employ $FunctionRank$ value of a given function as a probability of selecting that function. To target a single variable within the scope of the selected function, we randomly choose
+one of the potential variables among all the candidate ones obtained from the previous section. The selected $<function,variable>$ pair
+is used as an input to the mutation process step.  
+
+%\headbf{Branch Mutations} In addition to calculating $FunctionRank$ based on the dynamic analysis of application, we also take the structural complexity of functions into account in order to mutate branch statements of the program. Cyclomatic complexity is one of widely used metrics to measure the structural complexity of a function \cite{mccabe:tse76}.
+%It measures the number of linearly independent paths through a program's source code.
+%Numerous studies have shown that the cyclomatic complexity
+%correlates with errors in software modules \cite{nagappan:icse06, subramanyam:tse03, basili:tse96}.
+%The more complex the structure of a function is, the more likely it is to contain errors.
+%Moreover, cyclomatic complexity indicates the required testing effort by leveraging the correlation
+%between the complexity and the error \cite{watson:cyclcomplexity96}. By using this metric, we are able to 
+%concentrate the testing effort on the error-prone modules depending on the complexity of their structure.
+%We measure cyclomatic complexity frequency for each function based on static analysis of the code. Let $fcc(f_i)$ be the cyclomatic complexity frequency measured for function $f_i$:
+%$fcc(f_i)=\frac{cc(f_i)}{\sum _{j=1}^{n} cc(f_j)}$, where $cc(f_i)$ is the cyclomatic complexity of function $f_i$, given that the total number of functions in the application
+%is equal to $n$.
+%
+%We compute the probability of choosing a function for branch mutation by employing our previously measured $FunctionRank$ as
+%well as cyclomatic complexity frequency. Let $p(f_i)$ be the probability of selecting function $f_i$ for branch mutation:
+%\begin{equation}
+%p(f_i)= \frac{s(f_i)}{\sum _{j=1}^{n} s(f_j)},
+%\label{fr-cc-formula}
+%\end{equation} 
+%where $s(f_i)= fcc(f_i) \times FunctionRank(f_i)$, $fcc(f_i)$ is the cyclomatic complexity frequency measured for function $f_i$, and $n$ is the total number of 
+%functions. Note that $s(f_i)$ is normalized such that it can be used as a probability value.
+%
+%\input{cycloMultFr-table}
+%\tabref{cycloMultFr-table}, shows the cyclomatic complexity along with its frequency, and the function selection
+%probability measured for functions in our example (\figref{example}). The probabilities are obtained using equation \ref{fr-cc-formula}.
+%As shown in the table, \code{getDim} achieves the highest selection probability as its $FunctionRank$ and cyclomatic complexity
+%are both significantly larger than the other functions.  
+

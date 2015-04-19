@@ -1,0 +1,51 @@
+\begin{table}
+%\vspace{5pt}
+        \caption{Generic mutation operators for branch statements.}
+{\scriptsize
+   
+       \begin{center}
+      %  \subtable[Experimental subjects and the corresponding exploration data]
+            {
+           \begin{tabular}{p{1.2 cm}|p{6.5 cm}} \hline
+\thead{Type}&  \thead{Mutation Operator} \\  \hline \hline
+
+
+  
+  & Change literal values in the condition (including lower/upper bound). \\ \cline{2-2} 
+\multirow{9}{*}{Loop}
+\multirow{9}{*}{Statement}
+  & Replace relational operators ($<$, $>$, $<=$, $>=$, $==$, $!=$, $===$, $!==$).  \\ \cline{2-2}
+  & Replace logical operators ($\|$, \&\&). \\ \cline{2-2}
+  & Swap consecutive nested \code{for}/\code{while}.\\  \cline{2-2}  
+  & Replace arithmetic operators ($+$, $-$, $++$, $--$, $+=$, $-=$, $/$, $*$).\\  \cline{2-2}
+  & Replace \code{x++}/\code{x--} with \code{++x}/\code{--x} (and vice versa). \\ \cline{2-2}  
+  & Remove \code{break}/\code{continue}. \\ \hline
+  
+  & Change literal values in the condition.  \\ \cline{2-2} 
+  \multirow{10} {*} {Conditional} 
+    \multirow{10} {*} {Statement} 
+  & Replace relational operators ($<$, $>$, $<=$, $>=$, $==$, $!=$, $===$, $!==$). \\ \cline{2-2}
+  & Replace logical operators ($\|$, \&\&). \\ \cline{2-2}
+  & Remove \code{else if} or \code{else} from the \code{if} statement. \\ \cline{2-2}
+  & Change the condition value of \code{switch-case} statement. \\ \cline{2-2}
+  & Remove \code{break} from \code{switch-case}. \\ \cline{2-2} 
+  & Replace 0/1 with \code{false/true} (and vice versa) in the condition. \\ \hline
+
+  \multirow{3} {*} {Return} 
+    \multirow{3} {*} {Statement} 
+  & Remove \code{return} statement. \\ \cline{2-2}
+  & Replace \code{true} with \code{false} (and vice versa) in \code{return (true/false)}. \\ \hline
+
+
+  
+%  \multirow{3}{*}{DOM manipulation} & Changing the name of attribute/property  \\ \cline{2-2} 
+%  & Removing the DOM manipulation methods \\ \cline{2-2}
+%  & Changing the name of the element\\ \hline
+
+\hline\end{tabular}\centering
+            }
+\label{Table:branch-operator-table}
+\end{center}
+}  
+\vspace{-0.1in} 
+\end{table}

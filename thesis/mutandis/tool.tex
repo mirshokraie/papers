@@ -1,0 +1,10 @@
+\section{Tool Implementation: \mutandis} \label{Sec:tool}
+
+We have implemented our \javascript mutation testing approach in a tool called \mutandis. \mutandis is written in Java and is publicly available for download.\footnoteremember{mutandisDownload}{\url{https://github.com/saltlab/mutandis/}}
+%\mutandis is written in Java and is available for download \footnoterecall{download}.
+
+To infer \javascript dynamic invariants, we use our recently developed tool, \jsart \cite{mirshokraie:icwe12}.
+For \javascript code interception, we employ a proxy between the client and the server. 
+This enables us to automatically analyze the content of HTTP responses before they reach the browser. To instrument or mutate the intercepted code, Mozilla Rhino\curl{http://www.mozilla.org/rhino/} is used to parse \javascript code to an AST, and back to the source code after the instrumentation or mutation is performed.
+The execution trace profiler is able to collect trace data from the instrumented application code by exercising the web application under test through one of the following methods: (1) exhaustive automatic crawling using \crawljax \cite{mesbah:tweb11},  (2) the execution of existing test cases, or (3) a combination of crawling and test suite execution.
+

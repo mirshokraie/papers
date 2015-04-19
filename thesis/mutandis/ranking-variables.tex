@@ -1,0 +1,53 @@
+\section{Ranking Variables}  \label{variable-ranking}
+
+Applying mutations on arbitrarily chosen variables may have no effect on the semantics of the program and hence lead to equivalent mutants. Thus, in addition to functions, we  measure the importance of variables in terms of their impact on the behaviour of the function.  We target local and global variables, as well as function parameters for mutation. 
+
+%\karthik{What are equivalent variable mutants below ?}
+In order to avoid generating equivalent mutants, within each selected function, we need to mutate variables that are more likely to change the expected behaviour of the application (lines 7-12 in \algref{mutationAlgo}).
+We divide such variables into two categories: 
+%\begin{itemize}
+%\item 
+(1) those that are part of the program's dynamic invariants ($invars_{mutF}$ in line 9);
+%\item 
+and (2) those with high usage frequency throughout the application's execution ($varUsgFrq_{mutF}(v_i)>\alpha$ in line 9).
+%\end{itemize}
+
+\subsection{Variables Involved in Dynamic Invariants} 
+A recent study \cite{schuler:issta09} showed that if a mutation violates dynamic invariants, it is very likely to be non-equivalent. 
+This suggests that mutating variables that are involved in
+forming invariants affects the expected behaviour of the application with a high probability.
+Inspired by this finding, we infer invariants from the execution traces, as depicted in \figref{mutation}. We log variable value changes during run-time, and analyze the collected traces to infer stable dynamic invariants. The details of our \javascript invariant generation technique can be found in  \cite{mirshokraie:icwe12}. From each obtained invariant, we identify all the variables that are involved in the invariant and mark them as potential variables for mutation. 
+
+In our running example (\figref{example}), an inferred invariant in \code{getDim} yields information about the inequality relation between function parameters \code{width} and \code{height}, e.g.,  ($width>height$). Based on this invariant, we choose
+\code{width} and \code{height} as potential variables for mutation.
+
+\subsection{Variables with High Usage Frequency} 
+In addition to dynamic invariants, we  consider the impact of variables on the expected behaviour based on their dynamic usage. %(See \figref{mutation}).
+We define the {\em usage frequency} of a variable as the number of times that the variable's value has been read during the execution in the scope of a given function. 
+%asits usage frequency. 
+Let $u(v_i)$ be the usage frequency of variable $v_i$, then $u(v_i)=\frac{r(v_i)}{\sum _{j=1}^{n} r(v_j)}$,  
+where $r(v_i)$ is the number of times that the value of variable $v_i$ is read, given that the total number of variables in the scope of the function is $n$.
+
+We identify the usage of a variable by identifying and measuring the frequency of a given variable being read in the following
+scenarios: (1) variable initialization, (2) mathematical computation, (3) condition checking in conditional statements, (4) function arguments, and (5) returned value of the function. 
+We assign the same level of importance to all the five scenarios. 
+     
+From the degree of a variable's usage frequency in the scope of a given function, we infer to what extent
+the behaviour of the function relies on that variable. Leveraging the collected execution traces, 
+we compute the usage frequencies in the scope of a function. 
+We choose variables with usage frequencies above a threshold $\alpha$ as potential candidates for the mutation process. 
+We automatically compute (line 8 in \algref{mutationAlgo}) this threshold for each function as:
+
+\begin{equation}
+\alpha = \frac{1}{ReadVariables_{f(i)}}, 
+\end{equation}
+where $ReadVariables_{f(i)}$ is 
+the total number of variables that at some point during the execution their value have been read within function $f(i)$.
+
+Going back to the \code{getDim} function in our running example of \figref{example}, the values of function parameters \code{width} and \code{height}, as well as the local variables \code{w} and \code{h} are read just once in lines 19 and 20, when they are involved in a  number of simple computations.
+The result of the calculation is assigned to the local variable \code{v}, which then is checked as a condition for the \code{if}-\code{else} statement. \code{v} is returned from the function in either line 22 or 24,
+depending on the outcome of the \code{if} statement.
+In this example, variable \code{v} has the highest usage frequency since it has been used as a condition in a conditional statement as
+well as the returned value of the \code{getDim} function.
+
+Overall, we gather a list of potential variables for mutation, which are obtained based on the inferred dynamic invariants  and their usage frequency (line 9 in \algref{mutationAlgo}). Therefore, in our running example, in addition to function parameters \code{width} and \code{height}, which are part of the invariants inferred from \code{getDim}, the local variable \code{v} is also among the potential variables for the mutation process because of its high usage frequency. Note that the local variables \code{w} and \code{h} are not  in the list of candidates for variable mutation as they have a low usage frequency and are not part of any dynamic invariants directly.

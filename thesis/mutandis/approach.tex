@@ -1,0 +1,68 @@
+\section{Overview of Approach} \label{Sec:approach}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.7\hsize]{fig/approach-view}
+\mycaption{Overview of our mutation testing approach.}
+\vspace{-0.1in} 
+\label{Fig:mutation}
+\end{figure*}
+
+
+An  overview of our mutation testing technique is depicted in \figref{mutation}. Our main goal is to narrow the scope of the mutation process to parts of the code that affect the application's behaviour, and/or are more likely  to be error-prone and difficult to test. We describe our approach below.  The numbers below in parentheses correspond to those in the boxes of \figref{mutation}.
+
+In the first part of our approach, we
+(1) intercept the \javascript code of a given web application, by setting up a  proxy between the server and the browser, and instrument the code, 
+(2) execute the 
+%software under test (SUT) to produce execution traces.
+instrumented program by either crawling the application automatically, or by running the existing test suite (or a combination of the two), and (3) gather detailed execution traces of the application under test. 
+
+We then extract the following pieces of information from the 
+execution traces, namely (5) variable usage frequency, 
+(6) dynamic invariants, and (7) the functions' call frequency.
+In addition to dynamically inferred information from the execution traces, 
+we also construct the function call graph of the application by incorporating both static and dynamic information.
+%Because we use the execution trace, we can extract the precise call graph, 
+%as opposed to a static approximation. 
+
+Using the function call graph and the dynamic call frequencies, we (9) rank the program's functions in terms of their relative importance from the application's behaviour point of view. The higher a function's ranking, the more likely it will be selected for mutation in our approach.
+
+Further, within the highly ranked functions, our technique (10)  identifies variables 
+that have a significant impact on the function's outcome based on the 
+usage frequency and dynamic invariants extracted from the execution traces, 
+and (11) selectively mutates only those variables to reduce the likelihood of equivalent mutants. 
+%\karthik{I made variable mutation box as box 11 ?}
+%Our technique  based on the dynamic invariants
+
+%\karthik{I changed the figure to add an arc leading from the cyclomatic complexity and function rank box to the branch mutation} 
+In addition to variables, our technique mutates branch conditions, including loops. %and conditional statements. 
+%based on the cyclomatic complexity (also known as structural complexity) of the \javascript code.
+Functions with high cyclomatic complexity are known to be more error-prone and challenging to test \cite{basili:tse96, nagappan:icse06},  as the tester needs to detect and 
+exercise all the different paths of the function. 
+We therefore (4) statically analyze
+the \javascript code of the web application, and (8) measure its
+cyclomatic complexity. To perform branch mutation (12), we target the highly ranked functions (selected in 9) that also exhibit high cyclomatic complexity.
+%\karthik{Can we number the branch mutation box as 12 ?}.
+
+%\karthik{Can we number the ]javascript mutation box as 13 ?}
+In addition to the generic mutation operators, our technique considers (13) a number of \javascript
+specific mutation operators, based on an investigation of common errors made by web programmers. %as well as DOM specific mutations  at the \javascript code level.
+These specific operators are applied without any ranking or selection process. %and do not take into account the dynamic execution characteristics of the application. 
+
+%Our mutation technique is composed of the following main steps: 
+%(1) ranking functions , (2) ranking variables, and (3) mutation process, which applies the mutation operators to the code.  
+%In the following three sections, we describe each step in detail.
+Our overall guided mutation testing algorithm is presented in \algref{mutationAlgo}.
+In the following three sections, we describe in detail our technique for ranking functions 
+(\secref{ranking}), ranking and selecting variables (Section \ref{variable-ranking}), and performing the actual mutations, including the mutation operators (\secref{mutation-process}). 
+
+
+\input{ranking-functions}
+
+\input{ranking-variables} 
+   
+\input{mutation-process}
+
+
+  
+  

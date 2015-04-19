@@ -1,0 +1,82 @@
+\section{Running Example and Motivation} \label{motivation}
+
+\begin{figure}
+\medskip
+\begin{lstlisting}
+	function startPlay(){
+		...		
+		for(i=0; i<$("div").get().length; i++){
+				setup($("div").get(i).prop('className'));	
+		}	
+		endGame();
+	}
+	
+	function setup(cellClass){
+		var elems=document.getElementsByClassName(cellClass);
+		if(elems.length == 0)
+				endGame();
+		for(i=0; i<elem.length; i++){
+				dimension= getDim($(elems).get(i).width(), $(elems).get(i).height());
+				$(elems).get(i).css('height', dimension+'px');
+		}
+	}
+	
+	function getDim(width, height){
+		var w = width*2, h = height*4;
+		var v = w/h;
+		if(v > 1)
+			return (v);
+		else
+			return (1/v);
+	}
+	
+	function endGame(){
+		...
+		$('#startCell').css('height', ($('body').width()+$('body').height())/2+'px');
+		...
+	}	
+\end{lstlisting}
+\vspace{-0.1in} 
+
+\caption{\javascript code of the running example.}
+\label{Fig:example}
+\vspace{-0.1in} 
+
+\end{figure}
+
+%Though Mutation Testing can effectively assess the
+%quality of test cases, it suffers from a number of
+%problems. One of the challenges against applying mutation testing
+%in practice is its computational cost. Executing huge number of
+%mutants against a test case can result in considerable
+%computational cost \cite{jia:tse10}. The other main problem of mutation testing is originated
+%from the amount of human effort required for detecting equivalent mutants \cite{budd:acta82}.
+
+Equivalent mutants are syntactically different but semantically equivalent to the original application.
+Manually analyzing the program code for detecting equivalent mutants is a daunting task especially in programming languages such as \javascript, which are known to be challenging to use, analyze and test. This is because of (1) the dynamic, loosely typed, and asynchronous nature of \javascript, and (2) its complex 
+interaction with the Document Object Model (DOM) at runtime for user interface state updates.
+%make its manuall analysing a difficult endeavour for web developers. 
+
+\figref{example} presents a snippet of a \javascript-based game that we will use as a running example throughout this thesis. 
+The application contains four main functions as follows:
+
+\begin{enumerate}
+\item \code{startPlay} function calls \code{setup} to set the dimension of all \code{div} DOM elements;
+\item \code{setup} function is responsible for setting the \code{height} value of the \code{css} property of all the DOM elements with the given class name. The actual dimension computation is performed by calling the \code{getDim} function;
+\item \code{getDim} receives two parameters \code{width} and \code{height} based on which it returns the calculated dimension; %The returned value is guaranteed to be larger than one through the \code{if-else} conditional statement. 
+\item Finally, \code{endGame} sets the \code{height} value of the \code{css} property of a DOM element with id \code{startCell}, to indicate a game termination.
+\end{enumerate}
+
+Even in this small example, one can observe that the number of possible mutants to generate is quite large, i.e., they span from a changed relational operator in either of
+the branching statements or a mutated variable name, to completely removing a conditional statement or variable initialization.
+However, not all possible mutants necessarily affect the behaviour of the application. 
+%Even for the mutations that do affect the behaviour, they might not necessarily touch important or error-prone sections of the program. 
+For example, changing the ``$==$'' sign
+in the \code{if} statement of line 11 to  ``$<=$'', will not affect the application.
+This is because the number of DOM elements can never
+become less than zero,
+and hence the injected fault does not semantically change the application's behaviour.  
+Therefore, it results in an equivalent mutant. 
+
+In this thesis, we propose to guide the mutation generation towards behaviour-affecting,
+non-equivalent mutants as described in the next section. %In particular, we rank code segments based on their propensity to generate non-equivalent mutants and mutate the highly ranked segments. The details of our ranking mechanism are presented in Section~\ref{sec:approach}.

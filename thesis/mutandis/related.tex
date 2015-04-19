@@ -1,0 +1,82 @@
+\section{Related Work} \label{Sec:related}
+A large body of research has been conducted to turn mutation testing into a practical  approach.
+To reduce the computational cost of  mutation testing, researchers have
+proposed three main approaches to generate a smaller subset of all possible mutants: 
+(1) \emph{mutant clustering} \cite{ji:seke09}, which is an approach that chooses a subset of
+mutants using clustering algorithms; (2)  \emph{selective mutation} \cite{barbosa:stvr01, siami:icse08, zhang:icse10}, which is based on a  
+careful selection of more effective mutation operators to generate less mutants; and 
+ (3) \emph{higher order mutation} (HOM) testing \cite{jia:scam08}, which tries to find 
+rare but valuable higher order mutants that denote subtle faults \cite{jia:tse10}. 
+
+Our guided mutation testing approach is a form of selective mutation. However, in addition to selecting a small set of effective mutation operators, our  approach focuses on deciding which portions of the original code to select such that (1) the severity of  injected faults impacting  the application's behaviour increases, (2) the likelihood of generating equivalent mutants diminishes. 
+%While we use previously found selective operators to mutate non-specific \javascript code, we propose a small set of mutation operators which are specific to \javascript language.  
+
+The problem of detecting equivalent mutants has been tackled by many researchers (discussed below). The main goal of all equivalent mutant detection techniques is to help the tester identify the equivalent mutants after they are generated. We, on the other hand, aim at reducing the probability of generating equivalent mutants in the first place.
+
+According to the taxonomy suggested by Madeyski \etal \cite{madeyski:tse13}, there are three main categories of approaches that address the problem of equivalent mutants: (1) detecting equivalent mutants, (2) avoiding equivalent mutant generation, and (3) suggesting equivalent mutants. As far as equivalent mutant detection techniques are concerned, 
+the most effective approach is proposed by
+Offutt and Pan \cite{offutt:tvr97, offutt:compass96}, which uses constraint
+solving and path analysis. The results of their evaluation showed that the approach is able to detect on average the 45\% of the equivalent mutants. 
+However, these solutions are involved with considerable amount of manual effort and are error-prone.
+%Baldwin and Sayward \cite{baldwin:equivalentMutant79} propose a compiler optimization technique to detect equivalent
+%mutants. The idea is that the optimization of program code produces an
+%equivalent program, and hence a mutant can be identified as equivalent through either an optimization or de-optimization
+%procedure. However, these approaches are able to detect only 10\% of equivalent mutants~\cite{offutt:tvr94}.
+Among equivalent detection methods, program slicing has also been used in equivalent mutants detection \cite{hieron:tvr99}. %suggest slicing to assist
+The goal there is to guide a tester in detecting the locations that are affected by a mutant.
+Such equivalent mutant detection techniques are orthogonal to our approach. If a mutation has been statically proven to be equivalent, we do not need to measure its impact on the application's expected behaviour and we focus only on  those that cannot be handled using static techniques. Moreover, static  techniques are not able to fully address unpredictable and highly dynamic aspects of programming languages such as \javascript.
+%Harman and Hierons  \cite{harman:mutation00} use dependence analysis to help the tester in identifying equivalent mutants.
+
+Among avoiding equivalent mutant generation techniques, Adamopoulos \etal \cite{adamopoulos:gecco04} present a co-evolutionary approach by designing a fitness function to detect and avoid possible equivalent mutants.
+Dom\'inguez-Jim\'enez \etal \cite{dominguez:ist11} propose an evolutionary mutation testing
+technique based on a genetic algorithm to cope with the high computational cost of mutation 
+testing by reducing the number of mutants. Their system generates a strong subset
+of mutants, which is composed of surviving and difficult to kill mutants. 
+Their technique, however, cannot distinguish equivalent mutants from surviving non-equivalent mutants.
+%\karthik{I don't understand the statement below}
+%A limitation of their approach is that it favors equivalent mutants as it cannot distinguish them from stubborn non-equivalent mutants. 
+%Furthermore, evolutionary techniques currently require that all test cases are run against every mutant, which is not cost effective.
+Langdon \etal have applied multi-object genetic programming to generate higher order mutants 
+\cite{langdon:jss10}.
+An important limitation of these approaches is that the generated
+mutant needs to be executed against the test suite to compute its fitness function.
+In contrast, our approach avoids  generating equivalent mutants in the first place,
+thereby achieving greater efficiency.
+Bottaci \cite{bottaci:icstw10} presents a mutation analysis technique based on the available type information at run-time to avoid generating incompetent mutants. 
+This approach is applicable for dynamically typed programs such as \javascript. 
+However, the efficiency of the technique is unclear as they do not provide any empirical evaluation of their approach.
+Gligoric \etal \cite{gligoric:issta13} conduct the first study on performing selective mutation to avoid generating equivalent mutants in concurrent code. The results show that there are important differences between the concurrent mutation and sequential mutation operators. The authors show that sequential and concurrent mutation operators are independent, and thus they propose sets of operators that can be used for mutation testing of concurrent codes. While we also make use of a small set of mutation operators, we aim to support sequential programs. 
+
+Among the equivalent mutant suggestion techniques, Schuler \etal \cite{schuler:issta09} suggest possible equivalent mutants by checking invariant violations. They
+generate multiple mutated versions and then classify the versions based on the number of violated invariants.
+The system recommends testers to focus on those mutations that violate the most invariants.
+In a follow-up paper \cite{schuler:tvr12}, they extend their work to assess the role of code coverage changes in detecting equivalent mutants. 
+Kintis \etal \cite{kintis:icst12} present a technique called I-EQM to dynamically isolate first order equivalent mutants. They
+further extend the coverage impact approach \cite{schuler:tvr12} to classify more killable mutants.  
+In addition to coverage impact, the classification scheme utilizes second order mutation to assess first order mutants as killable. 
+To generate mutants, they utilize Javalanche \cite{schuler:tvr12}.
+Our work is again different from these approaches in the sense that instead of classifying mutants, 
+we avoid generating equivalent mutants a priori by identifying behaviour-affecting portions of the code.
+
+Deng \etal \cite{deng:icst13} implement a version of statement deletion (SDL) mutation operator for Java within the muJava mutation system. The design of SDL operator is based on a theory that performing mutation testing using only one mutation operator can result in generating effective tests. However, the authors cannot conclude that SDL-based mutation is as effective as selective mutation, which contains a sufficient set of mutation operators from all possible operators. Therefore, they only recommend for future mutation systems to include SDL as a choice, which we have already taken into account in this paper.  
+
+Ayari \etal \cite{ayari:gecco07} and Fraser \etal \cite{fraser:tse12} apply search based techniques to automatically generate test cases using mutation testing for Java applications. Harman \etal \cite{harman:fse11} propose SHOM approach which combines dynamic symbolic execution and Search based software testing to generate strongly adequate test data to kill first and higher order mutants for C programs. However, all these approaches make use of mutation testing for the purpose of test case generation, and thus to generate mutants they rely on the available mutation testing frameworks.
+
+Zhang \etal \cite{zhang:issta13} present FaMT approach which incorporates a family
+of techniques for prioritizing and reducing tests to reduce the time required for mutation
+testing. FaMT is designed based on regression test prioritization and reduction. Our approach is orthogonal to this work as our goal is to optimize the mutant generation to produce useful mutants, which can later be executed against the test suite.
+Our mutation generation approach can be combined with this technique to further speed up mutation testing.
+
+Bhattacharya \etal \cite{bhattacharya:icse12} propose $NodeRank$ to identify parts of code that are prone to bugs of high severity. 
+%and show that nodes with higher values of $NodeRank$ are prone to bugs of higher severity. 
+%$NodeRank$ is a metric similar to PageRank \cite{brin:cnis98}, which represents the stationary distribution of the graph
+%interpreted as a Markov chain to determine the importance of a page among several webpages.
+Similar to our work, $NodeRank$ uses the $PageRank$ algorithm to assign a value to each node in a graph, indicating the relative importance of that node 
+in the whole program according to the program's static call graph. The authors empirically show that such important portions of the code require more maintenance and testing effort as the program evolves.
+%
+%to each node in a graph by using the $PageRank$ algorithm %for calculating the relative importance of the node in the software, 
+%using the static call graph of an application. 
+In our approach we propose a new metric, $FunctionRank$, which takes advantage of dynamic information collected at execution time for measuring the importance of a function in terms of the program's behaviour. 
+Weighting the ranking metric with call frequencies as we do makes it more practical in web application testing, as the likelihood of exercising different parts of the application can be different.
+Further, to the best our knowledge, we are the first to apply such a metric to mutation testing.
+

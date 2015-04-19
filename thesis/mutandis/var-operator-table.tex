@@ -1,0 +1,31 @@
+\begin{table}
+%\vspace{5pt}
+        \caption{Generic mutation operators for variables and function parameters.}
+{\scriptsize
+   
+       \begin{center}
+      %  \subtable[Experimental subjects and the corresponding exploration data]
+            {
+           \begin{tabular}{p{1.4 cm}|p{6 cm}} \hline
+\thead{Type}&  \thead{Mutation Operator} \\  \hline \hline
+
+\multirow{4}{*}{Local/Global} 
+  & Change the value assigned to the variable.\\ \cline{2-2} 
+  \multirow{4}{*}{Variable} 
+  & Remove variable declaration/initialization.\\ \cline{2-2}
+  & Change the variable type by converting \code{x = number} to \code{x = string}. \\ \cline{2-2} 
+  & Replace arithmetic operators ($+$, $-$, $++$, $--$, $+=$, $-=$, $/$, $*$) used for calculating and assigning a value to
+the selected variable. \\ \hline  
+  \multirow{2}{*}{Function} 
+  \multirow{2}{*}{Parameter} 
+  &  Swap parameters/arguments.\\ \cline{2-2} 
+  & Remove parameters/arguments. \\  \hline
+
+
+ \hline\end{tabular}\centering
+            }
+\label{Table:var-operator-table}
+\end{center}
+}  
+\vspace{-0.1in} 
+\end{table}

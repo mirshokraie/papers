@@ -146,12 +146,16 @@
 %\usepackage{natbib}
 \usepackage[small,compact]{titlesec}
 % \usepackage{subfigure}
+\mathchardef\mhyphen="2D
 \newcommand{\theadturn}[1]{%
 \begin{turn}{90}\textbf{#1}\end{turn}
 }
 \newcommand{\thead}[1]{%
 \textbf{#1}
 }
+\newcommand{\answer}[1]{%
+\medskip\noindent\fbox{\parbox[l]{.97\hsize}{\emph{#1}}}\smallskip}
+
 \newcommand{\footnoteremember}[2]{\footnote{~\scriptsize{#2}}
   \newcounter{#1}
   \setcounter{#1}{\value{footnote}}}
@@ -309,6 +313,7 @@
 
 %% abbreviations and commands
 \newcommand{\secref}[1]{Section~\ref{Sec:#1}}
+\newcommand{\chapref}[1]{Chapter~\ref{Chap:#1}}
 \newcommand{\figref}[1]{Figure~\ref{Fig:#1}}
 \newcommand{\listref}[1]{Listing~\ref{List:#1}}
 \newcommand{\tabref}[1]{Table~\ref{Table:#1}}
@@ -397,7 +402,7 @@
 
 %% subfig: provides for including subfigures within a figure,
 %% and includes being able to separately reference the subfigures.
-%\usepackage{subfig}
+\usepackage{subfig}
 
 %% ragged2e: provides several new new commands \Centering, \RaggedLeft,
 %% \RaggedRight and \justifying and new environments Center, FlushLeft,
@@ -583,7 +588,8 @@
 
 %    1. Introduction
 \include{intro}
-\subimport{jsart/}{jsartIntro}
+\subimport{jsart/}{jsart}
+\subimport{mutandis/}{mutandis}
 %\include{jsart/jsartIntro}
 
 %    2. Main body

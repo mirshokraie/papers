@@ -1,0 +1,39 @@
+\IncMargin{0.5em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{A Web application $App$, the maximum number of variable mutations $MaxVarMut$ and branch mutations $MaxBrnMut$}
+\Output{The mutated versions of application \textit{Mutants}}
+\BlankLine
+\nl \textit{App} $\leftarrow \textsc{Instrument}(App)$ \\
+\Begin {
+\nl \textit{trace} $\leftarrow \textsc{CollectTrace}(App)$ \\
+\nl $\{callFrq_{f_{i,j}}, varUsgFrq_{f_{i}}, invars_{f_{i}}\}$ $\leftarrow \textsc{GetRequiredInfo}(\textit{trace})$\\
+\nl $l=m=0$\\
+\nl \While {$l<MaxVarMut$}{
+\nl 	$\{FR(f_i)_{i=0}^n\}$ $\leftarrow \textsc{FunctionRank}(callGraph, callFrq_{f_{i,j}})$\\
+\nl 	\textit{mutF} $\leftarrow \textsc{SelectFunc}(\big(FR(f_i)\big)_{i=0}^n)$\\
+\nl 	$\alpha$ $\leftarrow$ $\frac{1}{1-ReadVar_{f_{i}}}$\\
+\nl 	$candidVars_{mutF}$ $\leftarrow invars_{mutF} \cup \{v_i|varUsgFrq_{mutF}(v_i)>\alpha\}$\\
+\nl 	$\{pr(v_i\in candidVars_{mutF})\}$ $\leftarrow \frac{1}{|candidVars_{mutF}|}$\\
+\nl 	\textit{mutVar} $\leftarrow \textsc{SelectVar}(candidVars_{mutF}, pr(v_i))$ \\
+\nl 	$mutant_l \leftarrow \textsc{VariableMutation}(mutF,mutVar,varMutOps)$\\ 	
+\nl 	$l++$\\
+}
+\nl \textit{varMutants} $\leftarrow \bigcup mutant_{l=1}^{MaxVarMut}$\\
+\nl \While {$m<MaxBrnMut$}{
+\nl 	$\{pr(f_i)_{i=0}^n\}$ $\leftarrow \frac{fcc(f_i) \times FR(f_i)}{\sum _{j=1}^{n} fcc(f_i) \times FR(f_i)}$\\
+\nl 	\textit{mutF} $\leftarrow \textsc{SelectFunc}(\big(pr(f_i)\big)_{i=0}^n)$\\  
+\nl 	\textit{mutBrn} $\leftarrow \textsc{SelectRandomBrn}(mutF)$ \\
+\nl 	$mutant_m \leftarrow \textsc{BranchMutation}(mutBrn,brnMutOps)$\\
+\nl 	$m++$\\
+}
+\nl \textit{brnMutants} $\leftarrow \bigcup mutant_{m=1}^{MaxBrnMut}$\\
+\nl \textit{Mutants} $\leftarrow varMutants \cup brnMutants$\\
+\nl return \textit{Mutants}
+}
+\caption{Guided Mutation Algorithm.}
+\label{Alg:mutationAlgo}
+}
+\end{algorithm}
+%\DecMargin{lem}

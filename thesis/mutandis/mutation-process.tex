@@ -1,0 +1,119 @@
+\section{Mutation Operators} \label{Sec:mutation-process}
+%\shabnam{This section includes the information asked by Reviewer2-Q11} 
+We employ generic mutation operators as well as \javascript specific mutation operators for performing mutations. 
+
+\subsection{Generic Mutation Operators}
+Our mutant generation technique is based on a single mutation at a time. Thus, we need to choose an appropriate candidate among all the potential candidates obtained from the previous ranking steps of our approach.
+Our overall guided mutation process includes:
+\begin{itemize}
+\item Selecting a function as described in \secref{rankfunc-var} and mutating a \emph{variable} randomly selected from the list of 
+potential candidates obtained from the variable ranking phase (Section \ref{variable-ranking}), 
+
+\item Selecting a function as described in \secref{funcrank-branch} and mutating a  \emph{branch statement} selected randomly (lines 16-19 in \algref{mutationAlgo}).
+
+\end{itemize}
+
+\tabref{var-operator-table} shows the generic mutation operators we use for mutating global variables, local variables as well as function parameters/arguments.
+\tabref{branch-operator-table} presents the operators we use for changing \code{for} loops, \code{while} loops, \code{if} and \code{switch-case} statements, as well as \code{return} statements.
+
+
+% \textit{Mutants} in line 22 of \algref{mutationAlgo} contains all the variable (\textit{varMutants} in line 14) and branch mutants (\textit{brnMutants} in line 21).
+
+%Note that the first two generic mutation operator types are applied using the ranking techniques, while the third type is applied regardless of the ranking, as these \javascript specific operators are known to be error-prone. Hence, we believe that they are important enough to be checked on their own. %by themselves.
+%the function from which they are called..
+
+%and (3) applying a number of \javascript specific operators.
+
+
+\input{var-operator-table} 
+
+%\headbf{Variable Mutation}
+%We guide the mutant generation process towards mutating useful variables within the scope of critical functions. 
+
+%As discussed earlier, we employ $FunctionRank$ value of a given function as a probability of selecting that function. The variable selection
+%block in \figref{mutation}, targets a single variable within the scope of the selected function. It randomly chooses
+%one of the potential variables among all the candidate ones obtained from the previous section. The selected $<function,variable>$ pair
+%is used as an input to the variable mutation process. 
+ 
+%In order to inject the mutation operator in the application's code, we first parse the intercepted source code into an Abstract Syntax
+%Tree (AST). We apply a mutation operator on a variables, by traversing the AST in search of $<function,variables>$ pair candidates. If multiple such candidates are found, we randomly choose one of them.
+%We randomly select a mutation operator from \tabref{var-operator-table}
+%which shows a list of operators for mutating global variables, local variables as well as function parameters/arguments. 
+%As far as local/global variables
+%are concerned, these operators are able to modify the assigned values whether they are string or number literal, or obtained through 
+%a mathematical computation. Removing a variable declaration (e.g. \code{var x}) or initialization (e.g. \code{var x=5}) is also part
+%of these operators. In order to mutate function parameters/arguments, we either swap the ordering or remove them.
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=1.05\hsize]{fig/selectionBlockDiagram}
+%\mycaption{Overview of the function and variable selection phase.}
+%\label{Fig:selectionBlockDiagram}
+%\end{figure}
+
+\input{branch-operator-table}
+
+%\headbf{Branch Mutation} 
+%We randomly mutate a branch statement within the scope of the function obtained from the function ranking step. \tabref{branch-operator-table} presents the list of 
+%operators for changing \code{for} loops, \code{while} loops as well as \code{if} and \code{switch-case} statements.
+
+%\input{js-operator-table}
+
+
+\subsection{\javascript-Specific Mutation Operators} 
+%In addition to general mutation operators,
+We propose the following \javascript-specific mutation operators, based on an investigation of various online resources (see below)
+to understand  common mistakes in \javascript programs from the programmer's point of view.  In accordance to the definition of mutation operator concept, which is representing typical programming errors, the motivation behind the presented selection of operators is to mimic typical \javascript related programming errors.
+%common mistakes that \javascript programmers make, collected from various online resources (see below).
+{\em To our knowledge, ours is the first attempt to collect and analyze these resources to formulate \javascript mutation operators.}
+% Karthik - do we need these citations here ? We repeat them below anyways.  
+%(\cite{hsuJsAntiPatterns, osmaniJsPatterns, Crockford:2008, weylJsGotchas, jsStringReplace, roy3commmonJsMistakes, burgess11jsMistakes, hoPrematureInvocation, gurbani13jsMistakes, porteneuveJsBinding}), and are as follows:
+%\tabref{js-operator-table} represents the list of these operators. The first column of the table
+%is the operator description, and the second column is the list of sources used to identify common \javascript 
+%programming mistakes. 
+%Whenever we observe a pattern that matches one of these operators, we perform the corresponding mutation, regardless
+%of the function it belongs to. Because these operators can significantly affect the application's behaviour by themselves, we ignore the criticality of
+%the function from which they are called.   The operators are as follows:
+%In the following, we describe our \javascript specific mutation operators in detail.
+
+
+%\begin{description}
+
+\headbf{Adding/Removing the \code{var} keyword} Using \code{var} inside a function declares the variable in local scope, thus preventing overwriting of global variables (\cite{hsuJsAntiPatterns, osmaniJsPatterns,Crockford:2008}). A common mistake is to forget to add \code{var}, or to add a redundant \code{var}, both of which we consider. 
+
+\headbf{Removing the global search flag from \code{replace}} A common mistake is assuming that the string \code{replace} method affects all possible matches. The \code{replace} method only changes the first occurrence.
+To replace all occurrences, the global modifier needs to be set (\cite{weylJsGotchas, jsStringReplace, roy3commmonJsMistakes}).
+
+\headbf{Removing the integer base argument from \code{parseInt}} One of the common errors with parsing integers
+in \javascript is to assume that \code{parseInt} returns the integer value to base 10, however the second argument, which is the base, varies from 2 to 36 (\cite{weylJsGotchas, burgess11jsMistakes}).
+
+\headbf{Changing \code{setTimeout} function} The first parameter of the \code{setTimeout} should be a function. Consider \code{f} in 
+\code{setTimeout(f, 3000)} to be the function that should be executed after 3000 milliseconds.
+The addition of parentheses ``()'' to the right 
+of the function name, i.e., \code{setTimeout(f(), 3000)} invokes the function immediately, which is likely not the intention of the programmer. Furthermore, in the \code{setTimeout} calls, when the function is invoked without
+passing the expected parameters, the parameter is set to \code{undefined} when the function is executed (same changes are applicable to \code{setInterval}) (\cite{hoPrematureInvocation, osmaniJsPatterns, gurbani13jsMistakes}).
+% {\bf Changing \code{setTimeout(function, xsec)} to \code{setTimeout(function(), xsec)} :} The addition of the paranthese () to the right 
+% of the function name invokes the function immediately which is not intended (same change is applicable to \code{setInterval}).
+% 
+% {\bf Changing \code{setTimeout('function(x)', xsec)} to either 
+% \code{setTimeout(function, xsec)} or \code{setTimeout('function', xsec)}: }In the \code{setTimeout} calls, when the function is invoked without
+% passing the expected parameter, the parameter is set to a random value when the function is executed (same changes are applicable to \code{setInterval}).
+
+\headbf{Replacing \code{undefined} with \code{null}} A common mistake is to check whether an object is \code{null}, when it is not defined. To be \code{null}, the object has to be defined first (\cite{weylJsGotchas, roy3commmonJsMistakes,Crockford:2008}). Otherwise, an error will result. 
+
+\headbf{Removing \code{this} keyword} \javascript requires the programmer to explicitly state which object
+is being accessed, even if it is the current one. Forgetting to use \code{this}, may cause binding complications (\cite{weylJsGotchas, porteneuveJsBinding, Crockford:2008}), and result in errors.
+
+\headbf{Replacing \code{(function()!==false)} by \code{(function())}} If the default value should be true, use of \code{(function())} should be avoided. If a function in some cases does not
+return a value, while the programmer expects a boolean outcome, then the returned value is \code{undefined}.
+Since \code{undefined} is coerced to false, the condition statement will not be satisfied. A similar issue arises  when replacing \code{(function() === false)} with \code{(!function())} (\cite{roy3commmonJsMistakes}). 
+  
+%\end{description}
+
+\input{dom-operator-table}
+
+%\headbf{\javascript DOM Specific Mutation Operators}
+In addition, we propose a list of DOM specific mutation operators within the \javascript code. \tabref{dom-operator-table} shows a list of DOM
+operators that match DOM modification patterns in either pure \javascript language or the \jquery library. We further include two mutation operators that target the \code{XmlHttpRequest} type and state as shown in \tabref{dom-operator-table}.
+
+We believe these specific operators are important to be applied on their own. Hence, they  are applied randomly without any ranking scheme, as they are based on  errors commonly made by programmers.

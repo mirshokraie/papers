@@ -1,0 +1,6 @@
+AppId, Mutandis, MutandisPerc, Random, RandomPerc, PageRank, PageRankPerc, RandVarMut, RandVarMutPerc
+1, 2, 5, 3, 7.5, 2, 5, 3,7.5
+2, 4, 10, 6, 15, 4, 10,6,15
+3, 3, 7.5, 5, 12.5, 4, 10,3,7.5
+4, 3, 7.5, 4, 10, 3, 7.5,4,10
+5, 2, 5, 5, 12.5, 3,7.5,3,7.5

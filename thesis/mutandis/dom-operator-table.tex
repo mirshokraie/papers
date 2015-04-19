@@ -1,0 +1,46 @@
+\begin{table}
+%\vspace{5pt}
+        \caption{DOM, jQuery, and XmlHttpRequest (XHR) operators.}
+{\scriptsize
+   
+       \begin{center}
+      %  \subtable[Experimental subjects and the corresponding exploration data]
+            {
+           \begin{tabular}{p{0.7cm}|p{7cm}} \hline
+           
+           \thead{Type}&  \thead{Mutation Operator} \\  \hline \hline
+
+\multirow{4}{*}{DOM} 
+ & Change the order of arguments in \code{insertBefore}/\code{replaceChild} methods. \\ \cline{2-2} 
+
+  
+ & Change the name of the id/tag used in \code{getElementById} and \code{getElementByTagName} methods.  \\ \cline{2-2} 
+
+
+ & Change the attribute name in \code{setAttribute}, \code{getAttribute}, and \code{removeAttribute} methods.  \\ \cline{2-2} 
+
+  
+ & Swap \code{innerHTML} and \code{innerText} properties. \\ \hline
+  
+  
+   \multirow{3}{*}{\jquery}  
+  & Swap \code{\{\#\}} and \code{\{.\}} sign used in selectors.  \\  \cline{2-2} 
+  &  Remove \code{\{\$\}} sign that returns a \jquery object. \\  \cline{2-2} 
+  & Change the name of the property/class/element in the following methods: \code{addClass}, \code{removeClass}, \code{removeAttr},  \code{remove}, \code{detach}, \code{attr}, \code{prop}, \code{css}. \\ \hline 
+  
+   \multirow{2}{*}{XHR}
+   & Modify request type (Get/Post), URL, and the value of the 
+  boolean asynch argument in the \code{request.open} method.\\ \cline{2-2} 
+  
+  & Change the integer number against which the \code{request.readyState}/\code{request.status} 
+  is compared with; \{0, 1, 2, 3, 4\} for \code{readyState} and \{200, 404\} for 
+  \code{status}. \\ 
+  
+  
+ \hline\end{tabular}\centering
+            }
+\label{Table:dom-operator-table}
+\end{center}
+}  
+\vspace{-0.1in} 
+\end{table}
