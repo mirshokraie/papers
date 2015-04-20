@@ -17,3 +17,22 @@ To address the second research question (RQ2), we made the following contributio
 \begin{itemize}
 \item The first \javascript mutation testing tool, which is capable of guiding the mutation generation towards behaviour-affecting mutants in error-prone portions of the code; The mutation testing method combines dynamic and static analysis to mutate branches that are within highly ranked functions and exhibit high structural complexity.
 \end{itemize}
+\section{Threats to Validity}
+In this section we discuss the threats to validity of our results.
+An external threat to the validity of our results is the limited number 
+of web applications we use to evaluate the usefulness of the proposed techniques.
+Unfortunately, few real-world \javascript applications with up-to-date test suites and rich version history are publicly available. We mitigated this threat by (1) using web applications from various domains, code size, and functionality, as well as \selenium test cases, which are written by developers, and (2) mimicking regression faults through injecting mutations that represent common \javascript applications faults.
+
+One challenge in conducting our experiments was the lack of existing \javascript tools to form a baseline for comparison, and as a result, one of the external threat to validity of evaluating \mutandis (\chapref{mutandis}) is that we do not perform a quantitative comparison 
+of our technique with other mutation techniques.
+
+Another threat concerns validating failed assertions through manual inspection during the evaluation of \jseft (\chapref{jseft}) and \atrina (\chapref{atrina}). This is a time intensive task, and thus could be error-prone. To mitigate this threat, we carefully examine the code in which the assertion failed to make sure that the injected fault was indeed responsible for the assertion failure.
+
+A relatively low number of generated mutants to evaluate the effectiveness of \mutandis (\chapref{mutandis}) is also a threat to validity. 
+In order to find equivalent mutants, the application's code should be manually inspected, and thus this threat is shared by other studies that attempt to detect equivalent mutants.
+For example it took us more than 4 hours to distinguish the equivalent mutants for \jquery in our study. Since this is labour and time intensive task it can be error-prone and biased towards our judgment, though we made every effort to mitigate this threat by precisely examining the application's code. 
+
+
+
+
+
