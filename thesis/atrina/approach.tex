@@ -1,0 +1,24 @@
+\section{Overview of Approach} \label{Sec:approach}
+\input{algorithm}
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=1\hsize]{fig/approachDiagram}
+  \mycaption{Overview of our assertion generation approach.}
+ % \vspace{-0.1in} 
+  \label{Fig:approachDiagram}
+ % \vspace{-0.1in} 
+\end{figure*}
+An overview of our unit-level assertion generation technique is depicted in \figref{approachDiagram}.
+At a high level, our approach generates unit-level assertions by utilizing human written DOM-based tests and assertions. Our code level assertions fall in the following three categories: (1) explicit assertions, which are directly inferred from analyzing the manually written DOM-based assertions, (2) implicit assertions, which are indirectly affected by the human written DOM-based assertions, and (3) candidate assertions, which are not considered in the written DOM-based assertions, yet are potentially useful to be checked by the function level test suite. We describe our approach below. The numbers below in parentheses correspond to those in the boxes of \figref{approachDiagram}.
+
+In the first part of our approach we (1) execute the instrumented application by running the existing DOM-based test suite. In this step we gather a detailed execution trace of the application. We then extract (2) DOM-based assertions, and (3) candidate DOM element properties, which are useful DOM properties that can potentially be utilized for the purpose of assertion generation. We (4) identify the initial point of connection between the application's source code and checked DOM element. 
+%We collect lines of code responsible for updating the corresponding DOM element. 
+%We determine DOM mutating statements, 
+We (5) calculate the backward slice of the DOM mutating statements to find the entire code blocks that update the checked DOM element. We then (6) extract accessible entities from the obtained statements. Accessible entities form our explicit assertions (7). We further (8) perform a forward slice on the extracted entities to identify statements, that are implicitly affected by such entities. The accessible entities associated with the collected statements form our implicit assertions (9). In addition to explicit and implicit assertions, we also generate candidate assertions (10). Candidate assertions are involved with updating potentially useful DOM element properties, which are not checked in the existing DOM-based assertions. To obtain candidate assertions, we perform step (4), (5), and (6) on the inferred candidate DOM element properties (3).
+
+Our overall unit-level assertion generation is presented in \algref{algorithm}. In the following sections we describe our technique for extracting DOM related information from the execution (\secref{extractDomRelatedInfo}), relating
+DOM mutations to the \javascript code (\secref{domToCode}), and generating unit test assertions (\secref{unitLevelAssertion}).   
+\input{extractDomRelatedInfo}
+\input{domToCode}
+\input{unitLevelAssertion}         
+%mutation of customer.couponStatus = coupon.Id + '-' + 'used' to customer.couponStatus = coupon.Id + 'used';'

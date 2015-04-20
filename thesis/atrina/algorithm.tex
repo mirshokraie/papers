@@ -1,0 +1,50 @@
+\IncMargin{0em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Test suite $T$; The set of test cases $tc_i \in T$}
+\Output{The ordered set of oracles $oracles$}
+\BlankLine
+
+\Begin {
+\nl  $trace \leftarrow \textsc{Exec}(T)$\\
+\nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
+\nl  $freqAccdDOM\leftarrow \emptyset$\\
+\nl  $\alpha = \frac{1}{\textsc{ReadProperties}(T)}$\\
+\nl  \For{$dom \in domAccss $}{
+\nl   \If{$\textsc{acc}(prop_{dom}) \geq \alpha$}{
+\nl    $freqAccdDOM \leftarrow dom \cup freqAccdDOM$\\       
+      }
+     }
+\nl \For{$tc_i \in T$}{
+\nl  $trace \leftarrow \textsc{Exec}(tc_i)$\\
+\nl  $domAccss \leftarrow \textsc{GetDOMAcc}(trace)$\\   	
+\nl  \For{$asstn \in assertions_{tc_i}$}{
+\nl   $asserDOMAcc \leftarrow \textsc{GetDOMAcc}(asstn)$\\
+\nl   $asserDOMMuts \leftarrow \textsc{GetDOMMuts}(asserDOMAcc)$\\
+\nl   \For{$domMut \in asserDOMMuts$}{
+\nl    $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
+\nl    $expAsstnRel \leftarrow \textsc{GetWrVars}(bwSts)$\\
+\nl    $fwSts \leftarrow \textsc{GetFWSlice}(bwSts, trace)$\\
+\nl    $impAsstnRel \leftarrow \textsc{GetWrVars}(fwSts)$\\
+      }
+     }
+\nl  $cndDOMMuts \leftarrow \textsc{GetDOMMuts}(freqAccdDOM)$\\
+\nl  \For{$domMut \in cndDOMMuts$}{
+\nl   $bwSts \leftarrow \textsc{GetBWSlice}(domMut, trace)$\\
+\nl   $cndAsstn \leftarrow \textsc{GetWrVars}(bwSts)$\\
+     }
+%\nl  $expAsstns[func]_{f=1}^{n} \leftarrow \textsc{GetValue}(\textsc{Accessibles}([func]_{f=1}^{n}, expAsstnRel))$\\
+\nl  $explicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [expAsstnRel])$\\
+\nl  $implicitAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [impAsstnRel])$\\
+\nl  $candidateAsstn[func]_{f=1}^{n} \leftarrow \textsc{Accessibles}([func]_{f=1}^{n}, [cndAsstn])$\\
+\nl  $oracles[func]_{f=1}^{n} \leftarrow \{explicitAsstn \cup implicitAsstn \cup candidiateAsstn\}$\\
+   }
+\nl return $(oracles[func]_{f=1}^{n})$\\
+%\nl return $(oracles[func]_{f=1}^{n})$
+}
+\caption{Oracle Generation} 
+\label{Alg:algorithm}
+}
+\end{algorithm}
+%\DecMargin{lem}

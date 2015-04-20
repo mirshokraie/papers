@@ -1,0 +1,47 @@
+\begin{figure}
+%\medskip
+\begin{lstlisting}
+	var customer= {Id:"", couponStatus:"default", payable:0, ...};
+	var coupon= {Id:"", expired:false...}
+	var availItems= {{name:"", price:0, count:0},...}
+	var selItem= {name:"", price:0, quantity:0};
+	...
+	$document.ready(function() {
+		availItems=getItemsFromServer(url);
+		coupon= getCouponFromServer(url + customer.Id);		
+		...	
+		$(".merchandise").click(addToCart);
+		$("#shopCart").click(viewCart);
+	});
+	
+	function addToCart() {
+		var coupElem= $("#couponButt");
+		selItem= getItemInfo($(this));
+		for(var i=0; i<availItems.length; i++){
+			if(availItems[i].name == selItem.name)
+				availItems[i].count -= selItem.quantity;		
+		}
+		var price= selItem.price * selItem.quantity;
+		if(!coupon.expired){
+			coupElem.removeClass(customer.couponStatus);
+			customer.couponStatus= coupon.Id + '-' + 'used';
+			price -= coupElem.data('value');	
+			coupElem.addClass(customer.couponStatus);
+			coupon.expired=true;	
+		} 	
+		customer.payable += price;
+	}
+
+	function viewCart(){
+		...
+		if($("#couponButt").attr("class") == 'default' && customer.payable==0)
+			showMsg('Shopping cart is empty');
+		else
+			$("div.shopContainer").append("<p>" + "Total purchase is: $" + customer.payable +"</p>");
+	}
+\end{lstlisting}
+%\vspace{-0.1in} 
+\caption{\javascript code of the running example.}
+\label{Fig:example}
+%\vspace{-0.2in} 
+\end{figure}
