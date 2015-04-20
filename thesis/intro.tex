@@ -8,16 +8,13 @@ applications. Testing helps to improve the quality and dependability of these ap
 Automatic test case generation can significantly reduce the time and manual effort, while
 increasing the reliability of web applications.
 
-%For building responsive  web applications, a technique called
-%Ajax (Asynchronous \javascript and XML) has gained a prominent role, in which a
-%combination of \javascript and Document Object Model (DOM),
-%as well as asynchronous communication with the server is used.
 \javascript is the common engine of modern web applications. 
 Developers employ \javascript to add functionality, dynamically change the Document Object Model (DOM) structure,
 and communicate with web servers. Given the increasing reliance of web applications on this language, it is important to check its correct behaviour.
 
 Writing test suites that achieve high code coverage and high fault finding capability for \javascript applications is particularly challenging compared with traditional languages.
-The event-driven dynamic nature of \javascript, and its extensive interaction with the DOM (and indirectly CSS) can result in many execution paths and states. The huge event space of such applications makes it challenging for the tester to cover the whole state space in a limited amount of time. Moreover, writing test oracles with high fault finding capability requires a tester to precisely analyze the interaction between the \javascript and the DOM. Mapping between the two component becomes difficult as the \javascript code and the DOM increase in size. 
+The event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test.
+The extensive interaction of \javascript with the DOM (and indirectly CSS) can result in many execution paths and states. The huge event space of such applications makes it challenging for the tester to cover the whole state space in a limited amount of time. Moreover, writing test oracles with high fault finding capability requires a tester to precisely analyze the interaction between the \javascript and the DOM. Mapping between the two component becomes difficult as the \javascript code and the DOM increase in size. 
 
 To test \javascript-based web applications, developers
 often write test cases using frameworks such as \selenium to examine the correct interaction of the user with web application (GUI testing) and \qunit to test the proper functionality of the individual units (unit testing).
@@ -31,17 +28,27 @@ code-level failure, while more fine grained unit-level assertions are capable of
 writing unit test assertions for web applications that have rich interaction with the DOM through their \javascript code is more tedious. 
 To write unit-level assertions, the tester needs to understand the full range of interaction between the code level operations of a unit and the DOM level operations of a system, and thus may fail to assert the correctness of a particular behaviour when the unit is used as a part of a system. The inherent characteristics of unit and DOM-based tests, indicate that they are complementary and that there is a trade-off in individually using each to detect faults. 
 
-Researchers have recently started exploring test generation for \javascript-based web applications.
-Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
-Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. They propose \cite{mesbah:tse12} generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications. 
-Sen \etal \cite{sen:fse13} proposed a record and replay framework called Jalangi which incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses. %While dynamic analysis needs be implemented by the user, 
-%The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
+As far as test generation is concerned, Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
+Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. In subsequent work \cite{mesbah:tse12}, they propose generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.
+Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
+The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
 Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
-%They construct server interface descriptions through an inference technique that can learn communication patterns from sample data.
-%Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring a \javascript application's event space as well as its value space, for security testing.  
-Artzi \etal \cite{artzi:icse11} presents \artemis, which supports automated testing of \javascript applications using event-driven execution model of the application. %\artemis is a feedback-directed framework that generates event-based tests for \javascript applications.
-%\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing
-However, current web test generation techniques suffer from two main shortcomings:
+They construct server interface descriptions through an inference technique that can learn communication patterns from sample data.
+Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring a \javascript application's event space as well as its value space, for security testing.
+
+There has been limited work on oracle generation for testing. 
+Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension.
+%\shabnam{differential test generation added for issta}
+Differential test case generation approaches \cite{taneja:ase08, elbaum:tse09} are similar to mutation-based techniques in that they aim to generate test cases that show the difference between two versions of a program. However, mutation-based techniques such as ours, do not require two different versions of the application.
+Rather, the generated differences are in the form of controllable mutations that can be used to generate test cases capable of detecting
+regression faults in future versions of the program.
+%\karthik{So what's the advantage of having the differences in the form of controllable mutations ?}
+Staats \etal \cite{staats:icse11} address the problem of selecting oracle data,  which is formed as a subset of internal state variables as well as outputs for which the expected values are determined.
+They apply mutation testing to produce oracles and rank the inferred oracles in terms of their fault finding capability. 
+
+Artzi \etal propose \artemis \cite{artzi:icse11}, which supports automated testing of \javascript applications.
+\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing. 
+Although, researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}, current techniques suffer from two main shortcomings, namely, they:
 \begin{enumerate} 
 %\vspace{-0.15in}
 \item Target the generation of \emph{event sequences}, which operate at the event-level or DOM-level to cover the state space of the application. These techniques fail to capture faults that  do not propagate to an observable DOM state. As such, they potentially miss this portion of code-level \javascript faults. In order to capture such faults, effective test generation techniques need to target the code at the \javascript unit-level, in addition to the event-level.
