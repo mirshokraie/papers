@@ -1,5 +1,7 @@
 \chapter{Conclusions} \label{Chap:conc}
-\javascript is increasingly being used to create modern interactive web applications that offload a considerable amount of their execution to the client-side. \javascript is a notoriously challenging language for web developers to use, maintain, analyze and test. This thesis has focused on exploring strategies for testing \javascript-based web applications. In accordance to the goal of this dissertation we designed two research questions:
+\javascript is increasingly being used to create modern interactive web applications that offload a considerable amount of their execution to the client-side. \javascript is a notoriously challenging language for web developers to use, maintain, analyze and test. %This thesis has focused on exploring strategies for testing \javascript-based web applications.
+The work presented in this dissertation aims at improving the state-of-the-art in testing \javascript web applications by proposing a new set of techniques and tools.
+In accordance to the goal of this dissertation we designed two research questions:
 \begin{itemize}
 \item [RQ1] How can we generate effective test cases for \javascript web applications?
 \item [RQ2] How can we effectively assess the quality of the written test suites for \javascript applications?
@@ -31,8 +33,20 @@ Another threat concerns validating failed assertions through manual inspection d
 A relatively low number of generated mutants to evaluate the effectiveness of \mutandis (\chapref{mutandis}) is also a threat to validity. 
 In order to find equivalent mutants, the application's code should be manually inspected, and thus this threat is shared by other studies that attempt to detect equivalent mutants.
 For example it took us more than 4 hours to distinguish the equivalent mutants for \jquery in our study. Since this is labour and time intensive task it can be error-prone and biased towards our judgment, though we made every effort to mitigate this threat by precisely examining the application's code. 
+\section{Future Work}
+As web browsers become more powerful, building large-scale web applications using \javascript is increasingly becoming popular. This dissertation indeed needs to be incrementally revised to address the new emerging challenges from the continuously growing size of the deployed \javascript as well as the use of various \javascript utility plugins. 
 
+Writing a testable code is crucial in the new web app era. However, using hidden scopes (\ie function closures) is quite popular in writing \javascript-based web applications. 
+Hidden scopes in \javascript language provide a way to make variables and functions private, thus keeping them out of the global scope.
+This is particularly important in the browser since all scripts share the same scope. Therefore it is quite easy to inadvertently select a variable or function name which is used by another library.
+While function closures can be called at the highest program scope they belong to, it is not possible
+to call them directly in test cases, which makes it challenging to assess their outcomes. 
+If there are several self-contained hidden modules in the application, when a test fails while testing functions in the public API, it may be difficult for the tester to detect the cause of the failure.
+To generate effective test cases we need to identify such hidden scopes, and if possible expose them to our testing unit through automated code refactoring. Therefore, one possible future direction is to measure the unit testability extent of the real-world \javascript web applications by conducting a thorough empirical study. The results of the study will help to identify the extent of either untestable or hard to test code written by developers as well as the correlation between the location of the error in the code and the difficulty of pin pointing the root cause and resolving the error. \javascript developers can make use of the results of empirical study as a coding recommendation to make their future applications more testable and consequently more maintainable. 
 
+In this thesis we considered DOM-level mutations as a means of generating DOM-level assertions. However, this can be improved in many different ways. n traditional mutation testing, the output is defined over the returned values of functions, however in DOM-level mutation, the output is the resulting DOM state from an executed event. As the scope of the mutation operators differs from the traditional code-based mutant generators, we need to define new DOM-based operators that can be applied on DOM elements. We further need to design a new equivalent mutant detection technique. In code-based mutation, the output of an individual unit is analyzed to observe differences between the original and the mutated version, and therefore detect a potential equivalent mutant. However, at the DOM-level mutation, DOM elements can be accessed through the entire application execution, thus making the mutation analysis more challenging.
+
+In this dissertation, we mostly relied on dynamic analysis of the \javascript to infer the application's behaviour. However, because of the huge event space of such applications, dynamic analysis techniques may not be able to explore the full scale functionality of the application in a limited amount of time. Therefore, another possible future direction is to investigate hybrid approaches that take dynamic as well as static analysis of the code into account without facing the negative side effects of each techniques. The more complete model of the application's behaviour through a hybrid analysis will enable our current testing technique to detect more errors in the application.  
 
 
 
