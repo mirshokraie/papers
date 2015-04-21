@@ -56,7 +56,7 @@ For instance, we record ID as well as both \code{width} and \code{height} proper
 % Once the AST is instrumented, we serialize it back to the corresponding \javascript source code and pass it to the browser. 
 Once our instrumentation is carried out, we run the generated event sequences obtained from the state-flow graph. This way, we produce an execution trace that contains:
  
-\begin{itemize}[noitemsep]
+\begin{itemize}
 \item Information required for preparing the environment for each function to be executed in a test case, including its input parameters, used global variables, and the DOM tree in a state that is expected by the function;
 \item Necessary entities that need to be assessed after the function is executed, including the function's output as well as the touched DOM elements and their attributes (The actual assessment process is explained in \secref{oracleGen}).
 \end{itemize}
@@ -74,7 +74,7 @@ We apply a function state abstraction method to minimize the number of function-
 
 Our abstraction method is based on classification of function (entry/exit) states according to their impact on the function's behaviour, in terms of covered branches within the function, the function's return value type, and characteristics of the accessed DOM elements.
 
-\begin{description}[noitemsep, leftmargin=0.4cm]
+\begin{description}[leftmargin=0.4cm]
 \item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, function entry states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
 global variable \code{currentDim} at the entry point falls into different boundaries.   
 % \ali{so what states do we include here? what is `state' here BTW?}%However, it is not the only behaviour affecting entity in \javascript applications.

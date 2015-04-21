@@ -6,7 +6,7 @@ The second decision is to minimize the number of test cases and oracles generate
 Consequently, to examine the correctness of the test suite generated, the tester would only need to examine a small set of assertions, which minimizes their effort.
 
 Our approach generates test cases and oracles at two complementary levels:
-\begin{description}[noitemsep, nolistsep]
+\begin{description}
 \item[DOM-level event-based tests] consist of DOM-level event sequences and assertions to check the application's behaviour from an end-user's perspective. 
 \item[Function-level unit tests]  consist of unit tests with assertions that verify the functionality of \javascript code at the function level.
 \end{description}
@@ -23,7 +23,7 @@ At a high level, our approach is composed of three main steps:
   \vspace{-0.1in} 
 \end{figure}
 
-\begin{enumerate}[noitemsep,nolistsep]
+\begin{enumerate}
  
 \item In the first step (Section~\ref{Sec:funcCovg}), we dynamically explore various states of a given web 
 application, in such a way as to maximize the number of functions that are covered throughout the program execution. The output of this initial step is a state-flow graph (SFG) \cite{mesbah:tse12}, capturing the explored dynamic DOM states and event-based transitions between them. 

@@ -12,7 +12,7 @@ In this section, we illustrate some of the challenges associated with test gener
 \figref{funcCovgExample} presents a snippet of a \javascript game application that we use as a running example throughout the thesis. This simple example uses the popular jQuery library \cite{jquery-api} and contains four main \javascript functions: 
 %\ali{before going to the details of the code, say something about the type/functionality of this application. Is this a game application? Same game?}
 
-\begin{enumerate} [noitemsep]
+\begin{enumerate} 
 
 \item \code{cellClicked} is bound to the event-handlers of DOM elements with IDs \code{cell0} and  \code{cell1} (Lines 34--35). These two DOM elements become available when the DOM is fully loaded (Line 32). Depending on the element clicked, \code{cellClicked} inserts a \code{div} element with ID \code{divElem} (Line 3) after the clicked element and makes it clickable by attaching either \code{setup} or \code{setDim} as its event-handler function (Lines 5--6, 9--10).    
 

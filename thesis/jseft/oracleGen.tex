@@ -15,7 +15,7 @@ At a high level, the technique iteratively executes the following steps:
 
 \input{oracleGenAlgo}
 
-\begin{enumerate}[noitemsep]
+\begin{enumerate}
 \item A mutant is created by injecting a single fault into the original version of the web application (Line 9 and 19 in \algref{oracleGenAlgo} for DOM mutation and code-level mutation, respectively), 
 \item Related entry/exit program states at the DOM and \javascript function levels of the mutant and the original version are captured. $OnEvDomSt$ in Line 4 is the original DOM state on which the event $Ev$ is triggered, $AfterEvDomSt$ in line 5 is the observed DOM state after the event is triggered, $MutDom$ in line 9 is the mutated DOM, and $ChangedSt$ in line 10 is the corresponding affected state for DOM mutations. $FcExit$ in Line 22 is the exit
 state of the function in the original application and $MutFcExit$ in line 23 is the corresponding exit state for that function after the application is mutated for function-level mutations.

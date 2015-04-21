@@ -4,7 +4,7 @@ To quantitatively assess the efficacy of our test generation approach, we have c
 
 \input{objectsChar-table}
 
-\begin{description}[noitemsep]
+\begin{description}
 %\item [RQ1] How effective is our \emph{function coverage maximization} technique?
 \item [RQ1] How effective is \jseft in generating test cases with high coverage? 
 \item [RQ2] How capable is \jseft of generating test oracles that detect regression faults?
@@ -95,7 +95,7 @@ Next we run the whole generated test suite (including both function-level and ev
 %\ali{how do we know we have detected the right fault?}
 We measure the precision and recall as follows:
 
-\begin{description}[noitemsep, nolistsep]
+\begin{description}
 \item[Precision] is the rate of injected faults found by the tool that are actual faults: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FP}}$
 \item[Recall] is the rate of actual injected faults that the tool finds: $\frac{\mathit{TP}}{\mathit{TP} + \mathit{FN}}$ 
 \end{description}
