@@ -8,7 +8,7 @@ We generate test cases at two complementary levels, as described below. %to inve
 \headbf{DOM-level event-based testing} %\label{Sec:DOMEventTesting}
 To verify the behaviour of the application at the user interface level, each event path, taken from the initial state (\code{Index}) to a leaf node in the state-flow graph, is used to generate DOM event-based test cases. 
 Each extracted path is converted into a \junit \selenium-based test case, which executes the sequence of events, starting from the initial DOM state. %The generated JUnit test case is able to trigger events by using the information included in the state flow graph such as the element on which the event is triggered as well as  type of the fired event.
-Going back to our running example, one possible event sequence to generate is: \code{\$(`\#cell0').click$\rightarrow$\$(`div \#divElem').click$\rightarrow$\$(`\#st\-artCell').click}. 
+Going back to our running example, one possible event sequence to generate is: \code{\$(`\#cell0').click$\rightarrow$\$(`div \#divElem').click$\rightarrow$\\\$(`\#st\-artCell').click}. 
 
 To collect the required trace data, we capture all DOM elements and their attributes after each event in the test path is fired. This trace is later used in our DOM oracle comparison, as explained in \secref{oracleGen}. 
 
@@ -29,12 +29,18 @@ Note that complex \javascript objects can contain circular or multiple reference
 of ${\$ref: Path}$, where $Path$ denotes a $JSONPath$ string\curl{http://goessner.net/articles/JsonPath/} that indicates the target path of the reference.
 
 In addition to function entry and exit points, we log information required for calling  the function from the generated test cases. %\javascript functions can be treated as objects. 
-\javascript functions that are accessible in the public scope are mainly defined in  (1) the global scope directly (e.g., \code{function f()\{...\}}), (2) variable assignments   in the global scope (e.g., \code{var f = function()\{...\}}), (3) constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}}), and (4) prototypes (e.g., \code{Con\-structor.prototype.f= function() \{...\}}). 
+\javascript functions that are accessible in the public scope are mainly defined in:
+\begin{enumerate}
+\item The global scope directly (e.g., \code{function f()\{...\}});
+\item Variable assignments in the global scope (e.g., \code{var f = function()\{...\}});
+\item Constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}});
+\item Prototypes (e.g., \code{Con\-structor.prototype.f= function() \{...\}}); 
+\end{enumerate}
 Functions in the first and second case are easy to call from test cases. For the third case, the constructor function is called via the \code{new} operator to create an object type, which can be used to access the object's properties
 (e.g., \code{container=new Constructor(); container.member();}).
 This allows us to access the inner function, which is a member of the \code{constructor} function in the above example.
 %The prototyping technique is used for inheritance in \javascript. 
-For the prototype case, the function can be invoked through \code{container.f()} from a test case. 
+For the prototype case, the function can be invoked through \code{container.f()} from a test case.
 
 Going back to our running example in \figref{funcCovgExample}, at the entry point of \code{setDim}, we log the value and type of both the input parameter \code{dimension} and global variable \code{currentDim}, which is accessed in the function. Similarly, at the exit point, we log the values and types of the returned variable \code{dim} and \code{currentDim}.
 

@@ -39,7 +39,7 @@ The mutation operators include (1) deleting a DOM element, and (2) changing the 
 As we mutate the DOM, we collect the current state of DOM elements and attributes. 
 
 \figref{domTestSample} shows part of a DOM-level test case generated for the running example.
-Going back to our running example, as a result of clicking on \code{\$(`div \#divElem')} in our previously obtained event sequence (\code{\$(`\#cell0').click$\rightarrow$\$(`div \#\-divElem').click$\rightarrow$\-\$(`\#sta\-rtCell')}),
+Going back to our running example, as a result of clicking on \code{\$(`div \#divElem')} in our previously obtained event sequence (\code{\$(`\#cell0').click\\$\rightarrow$\$(`div \#\-divElem').click$\rightarrow$\-\$(`\#sta\-rtCell')}),
 the \code{height} and \code{width} properties of DOM element with ID \code{endCell}, and the DOM element with ID \code{startCell} are accessed. One possible DOM mutation is altering the \code{width} value of the \code{endCell} element before click on \code{\$(`div \#divElem')} happens. %Considering such a DOM mutation, \figref{domTestSample} shows part of a DOM test case generated for the running example.
 We log the consequences of this modification after the click event on \code{\$(`div \#divElem')} as well as the remaining events.
 This mutation affects the \code{height} property of DOM element with ID \code{endCell} in the resulting DOM state from clicking on \code{\$(`div \#divElem')}. Line 6 in \figref{domTestSample} shows the corresponding assertion.
