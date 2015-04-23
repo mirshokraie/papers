@@ -11,7 +11,7 @@ increasing the reliability of web applications.
 
 Determining the desired behaviour of the application under test for a given input is called the Oracle Problem.
 Automating the oracle generation is an important part of the testing process since
-manual testing is expensive and time consuming, mostly because of the manual effort that should be spent in identifying the proper oracle. Our goal is to improve the dependability and reliability of the modern web applications by automating the test and oracle generation process with different techniques and tools proposed in this thesis.
+manual testing is expensive and time consuming, mainly because of the manual effort that should be spent in identifying the proper oracle. Our goal is to improve the dependability and reliability of the modern web applications by automating the test and oracle generation process with different techniques and tools proposed in this thesis.
 
 \subsection{Web Testing}
 One of the common engines of today's modern web applications is \javascript.
@@ -20,7 +20,7 @@ and communicate with web servers. Given the increasing reliance of web applicati
 
 Automatically generating effective test suites for \javascript applications is particularly challenging compared with traditional languages.
 The event-driven and highly dynamic nature of \javascript, as well as its run-time interaction with the DOM make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test. The huge event space of such applications hinders model inferring techniques to cover the whole state space in a limited amount of time. Moreover, inferring test assertions with high fault finding capability requires a precise analysis of the interaction between the \javascript and the DOM. 
-Providing an accurate mapping between the two components becomes difficult as the \javascript code and the DOM increase in size. 
+Providing an accurate mapping between the two components becomes difficult as the \javascript code and the DOM increase in size. It is also challenging to identify a proper set of test oracles from the large number of oracles that potentially can be selected.
 
 To test \javascript-based web applications, developers
 often write test cases using frameworks such as \selenium cite{selenium} to examine the correct interaction of the user with web application (GUI testing) and \qunit \cite{quint} to test the proper functionality of the individual units (unit testing).
