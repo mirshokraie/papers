@@ -1,0 +1,77 @@
+\section{Introduction} \label{intro}
+Mutation testing is a fault-based testing technique to assess and improve the quality of a test suite.
+The technique first generates a set of mutants, \ie modified versions of the program, by applying a set of well-defined mutation operators on the original version of the system under test. 
+These mutation operators typically represent subtle mistakes, such as typos, commonly made by programmers. A test suite's adequacy is then measured by its ability to detect (or `kill') the mutants, which is known as the adequacy score (or mutation score).
+
+Despite being an effective test adequacy assessment method~\cite{andrews:icse05,jia:tse10}, mutation testing suffers from two main issues.  First, there is a high \emph{computational cost} in executing the test suite against a potentially large set of generated mutants. Second, there is a significant amount of effort  involved in distinguishing \emph{equivalent mutants}, which are syntactically different but semantically identical to the original program~\cite{budd:acta82}.  Equivalent mutants have no observable effect on the application's behaviour, and as a result, cannot be killed by test cases. Empirical studies indicate that about 45\% of all undetected mutants are equivalent~\cite{schuler:tvr12, madeyski:tse13}. 
+%In order to obtain an accurate estimate of the adequacy score of a test suite, one needs
+%In order to avoid mixing the valuable and useless mutations in one set, we need to assess
+% to eliminate equivalent mutants.  
+Establishing mutant equivalence is an undecidable problem~\cite{budd:acta82}. 
+According to a recent study~\cite{madeyski:tse13}, it takes on average 15 minutes to manually assess one single first-order mutant. While detecting equivalent mutants consumes considerable amount of time, there is still no fully automated technique that is capable of detecting all the equivalent mutants \cite{madeyski:tse13}. %the detection of equivalent mutants involves a considerable amount of manual effort.
+%Therefore, it is important to reduce the cost of detecting equivalent mutants. 
+
+ %A large body of research has been accomplished on selective mutation \cite{barbosa:stvr01, siami:icse08, zhang:icse10}.
+%In selective mutation, a subset of effective operators that can generate fewer mutants such that the
+%test suite with a high mutation score for the these mutants obtains a high mutation score for all the mutants produced by all mutation operators as well.  
+
+There has been significant work on reducing the cost of detecting equivalent mutants.
+According to the taxonomy suggested by Madeyski \etal \cite{madeyski:tse13}, three main categories of approaches
+deal with the problem of equivalent mutants: (1) detecting equivalent mutants \cite{offutt:tvr97, offutt:compass96}, (2) avoiding equivalent mutant generation \cite{adamopoulos:gecco04}, and (3) suggesting equivalent
+mutants \cite{schuler:tvr12}. Our proposed technique falls in the second category (these categories are further described in \secref{related}).
+%for instance, through program slicing~\cite{harman:mutation00, hieron:tvr99},  compiler optimization~\cite{offutt:tvr94}, constraint test data generation  \cite{offutt:tvr97, offutt:compass96}, or  evolutionary techniques \cite{adamopoulos:gecco04, dominguez:ist11}.
+%More recently, equivalent mutant detection has been investigated by assessing the impact of generated mutants on the application's expected behaviour in terms of program invariant violations \cite{schuler:issta09} 
+%and code  coverage \cite{schuler:tvr12}. While these approaches are effective in detecting equivalent mutants, they take the approach
+%of first generating mutants and then examining the mutants for equivalence, which is computationally expensive and inefficient.
+
+In this work, we propose a generic mutation testing approach that guides the mutation generation process towards effective mutations that (1)  affect error-prone sections of the program, (2)  impact the program's behaviour and as such are potentially non-equivalent. In our work, \emph{effectiveness} is defined in terms of the severity of the impact of a single generated mutation on the applications observable behaviour.  %such that the mutations are not trivial as well as being non-equivalent.
+Our technique leverages static as well as dynamic program data to rank, select, and mutate potentially behaviour-affecting portions of the program code. %(i.e., functions, branches, variables).
+
+Our mutation testing approach is generic and can be applied to any programming language. However, in this work, we implement our technique for \javascript, a loosely-typed dynamic language that is known to be error-prone \cite{Crockford:2008, Ocariza-2011} and difficult to test \cite{mesbah:tse12, artzi:icse11}. In particular, we propose a set of \javascript specific mutation operators, capturing  common  \javascript programmer mistakes. \javascript is widely used in modern web applications, which often consist of thousands of lines of \javascript code, and is critical to their functionality. %Therefore, it is critical to ensure the reliability of \javascript based web applications.
+
+%eliminating equivalent mutant generation, 
+% by leveraging high-level static and dynamic program information.% to generate mutants.
+%Our technique is based on the assumption that certain critical portions  of the program (e.g., functions, branches, variables) are more error-prone, and are harder to test due to their highly dynamic interaction with other parts of the program.  This is especially so for loosely-typed dynamic programming languages such as \javascript, which are known to be error-prone \cite{Ocariza-2011} and difficult to test \cite{mesbah:tse12}. Further, languages such as \javascript have certain specific constructs that are not covered by existing mutation testing techniques. \ali{what are these specific constructs?} We also cover these constructs in our technique.
+%\karthik{I removed "for javascript" as it dilutes the claim}
+To the best of our knowledge, our work is the first to provide an automated mutation testing technique, %for \javascript,
+which is capable of guiding the mutation generation towards behaviour-affecting mutants in error-prone portions of the code. 
+In addition, we present the first \javascript mutation testing tool in this work.
+%The criticality of a function is defined as its relative importance among other functions 
+%in terms of the frequency of the number of times it has been executed as well as the number 
+%of distinct functions from which the function has been called. Faults which are present in such 
+%functions can critically affect the application's behavior. We target variables and branch statements
+%within the scope of critical functions as well as a set of \javascript specific mutation operators
+%that are known as anti-pattern \javascript mistakes.   
+%While our proposed technique for mutating variables and branch statements is independent of the
+%type of programming language, the \javascript mutation operators are exclusively designed
+%for the \javascript programming language.
+
+The key contributions of this work are:
+
+\begin{itemize}
+\item A new metric, called $FunctionRank$, for ranking functions in terms of their relative importance based on the application's dynamic  behaviour;
+
+\item A method combining dynamic and static analysis to mutate branches that are within highly ranked functions and exhibit high structural complexity; 
+
+\item A process that favours behaviour-affecting variables for mutation, to reduce the likelihood of equivalent mutants;
+\item A set of \javascript-specific mutation operators, based on common mistakes made by programmers;
+\item An implementation of our mutation testing approach in a tool, called \mutandis\fn{\mutandis is a Latin word meaning ``things needing to be changed''.},  
+ which is freely available from \url{https://github.com/saltlab/mutandis/}; 
+\item An empirical evaluation to assess the efficacy of the proposed technique using eight \javascript applications.
+\end{itemize}
+%The results of our evaluation indicate that the
+% equivalent mutants generated by the approach is less than 10\%.
+
+Our results show that, on average,  93\% of the mutants generated by \mutandis are non-equivalent.
+Further, the mutations generated have a high bug severity rank, and are capable of
+identifying shortcomings in existing \javascript test suites. 
+While the aim of this work is not particularly generating hard-to-kill mutants, our experimental results indicate that the guided approach does not adversely influence the stubbornness of the generated mutants.
+
+
+
+
+%and guide testers towards improving the suites.  
+%we run \codename on two additional web applications
+%to evaluate the quality of their test suites. 
+%In this case, \codename is able
+%to identify gaps in the test suites and guide testers towards improving them.  

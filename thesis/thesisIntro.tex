@@ -1,0 +1,139 @@
+\chapter{Introduction} \label{chap:intro}
+In this section, we provide an introduction to modern web application testing, followed by some of the current techniques used for automating the testing process.
+
+\section{Test Automation} \label{Sec:web-testing}
+Software testing is an integral part of the software engineering.
+Testing helps to improve the quality and dependability of the applications.
+However, software systems have become more complex in last decades, with using different technologies and programming languages, that are even implemented by different developers.
+As a result, writing high-quality test cases for such applications that can assure their correct behaviour becomes more complicated, time consuming, and effort intensive for developers \cite{anand:jss13}.
+Automatic test case generation can significantly reduce the time and manual effort, while
+increasing the reliability of web applications.
+
+Determining the desired behaviour of the application under test for a given input is called the Oracle Problem.
+Automating the oracle generation is an important part of the testing process since
+manual testing is expensive and time consuming, mainly because of the manual effort that should be spent in identifying the proper oracle. Our goal is to improve the dependability and reliability of the modern web applications by automating the test and oracle generation process with different techniques and tools proposed in this thesis.
+
+\subsection{Web Testing}
+One of the common engines of today's modern web applications is \javascript.
+Developers employ \javascript to add functionality, dynamically change the Document Object Model (DOM) structure,
+and communicate with web servers. Given the increasing reliance of web applications on this language, it is important to check its correct behaviour.
+
+Automatically generating effective test suites for \javascript applications is particularly challenging compared with traditional languages.
+The event-driven and highly dynamic nature of \javascript, as well as its run-time interaction with the DOM make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test. The huge event space of such applications hinders model inferring techniques to cover the whole state space in a limited amount of time. Moreover, inferring test assertions with high fault finding capability requires a precise analysis of the interaction between the \javascript and the DOM. 
+Providing an accurate mapping between the two components becomes difficult as the \javascript code and the DOM increase in size. It is also challenging to identify a proper set of test oracles from the large number of oracles that potentially can be selected.
+
+To test \javascript-based web applications, developers
+often write test cases using frameworks such as \selenium cite{selenium} to examine the correct interaction of the user with web application (GUI testing) and \qunit \cite{quint} to test the proper functionality of the individual units (unit testing).
+Although such frameworks help to automate test execution, the
+test cases need to be written manually, which can be tedious
+and inefficient. 
+Using \selenium to write DOM-based tests and assertions
+requires little knowledge about the internal operations performed at the client side code; The tester needs only basic knowledge of common event sequences to cover important DOM elements to assert. 
+This makes it easier for the tester to write DOM-based test suites. However, DOM-based assertions can potentially miss some portion of the
+code, while more fine grained unit-level assertions might be capable of detecting such faults. Furthermore, since DOM-based tests are agnostic of the \javascript code, finding the root cause of an error during DOM-based testing is more expensive than during unit testing. 
+\figref{domTestExample} shows a sample DOM-based test case. The test case contains the sequence of clicking on different DOM elements without observable communication with the executed \javascript code.  
+On the other hand,
+writing unit test assertions for web applications that have rich interaction with the DOM through their \javascript code is more tedious. 
+To generate unit-level assertions, the technique needs to precisely interpret the full range of interaction between the code level operations of a unit and the DOM level operations of a system, otherwise it may not be able to assert the correctness of a particular behaviour when the unit is used as a part of a system. The inherent characteristics of unit and DOM-based tests, indicate that they are complementary and that there is a trade-off in individually using each to detect faults. 
+\input{domTestExample}
+\subsection{Current Test Generation Techniques} 
+Different test and oracle generation technqiues have been proposed to overcome the aforementioned problems.
+Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
+The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
+Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
+They construct server interface descriptions through an inference technique that can learn communication patterns from sample data.
+
+There has been limited work on oracle generation for testing. 
+Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension.
+Artzi \etal proposed \artemis \cite{artzi:icse11}, which supports automated testing of \javascript applications.
+\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing. 
+
+\headbf{Open Problems} Although, researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}, current techniques suffer from two main shortcomings, namely, they:
+\begin{enumerate} 
+%\vspace{-0.15in}
+\item Target the generation of \emph{event sequences}, which operate at the event-level or DOM-level to cover the state space of the application. These techniques fail to capture faults that  do not propagate to an observable DOM state. As such, they potentially miss this portion of code-level \javascript faults. In order to capture such faults, effective test generation techniques need to target the code at the \javascript unit-level, in addition to the event-level.
+\item Either ignore the oracle problem altogether or simplify it through generic \emph{soft oracles}, such as  W3C HTML  validation \cite{artzi:icse11,mesbah:tse12}, or  \javascript runtime exceptions \cite{artzi:icse11}.
+A generated test case without assertions is not useful since coverage alone is not the goal of software testing. For such generated test cases, the tester still needs to  manually write many assertions, which is time and effort intensive. 
+On the other hand, soft oracles  target generic fault types and are limited in their fault finding capabilities.   %\cite{Richardson:icse92}. 
+%While there has been some work on the generation of test inputs \cite{song:symb10},  
+%Despite such limitations, the automatic creation of strong test oracles, \ie assertions, has not gained much attention. 
+However, to be practically useful, unit testing requires strong oracles to determine whether the application under test executes correctly.
+\end{enumerate}
+To address these two shortcomings, we proposed an automated test case and assertion generation technique for \javascript applications.
+
+\section{Adequacy Assessment} \label{Sec:adequacy}
+While automated testing can help the tester to assure the application's dependability and detect faults in the application code, it does not reveal the trustworthiness of the written tests.
+In order to understand how well the functionality and the data is being tested, we need to assess the quality of the tests.
+A large body of research has been accomplished to assess the quality of test suites
+from different perspectives: (1) code coverage, and (2) mutation analysis.
+%\begin{description} [noitemsep, nolistsep]
+%\item [Code coverage] which measures the degree to which the application's code is covered through a particular test suite.
+%\item [Mutation analysis] which measures the effectiveness of a test suite in terms of its ability to detect injected faults.
+%\end{description}
+While code coverage tells how much of the source code is exercised by the test suite, it does not provide sufficient insight into the actual quality of the tests. Mutation testing has been proposed as a fault-based testing technique to assess and improve the quality of a test suite.
+
+The main idea of mutation testing is to create mutants (i.e., modified versions of the program) and check if the test suite is effective at detecting the mutants. 
+The technique first generates a set of mutants by applying a set of well-defined mutation operators on the original version of the system under test. 
+These mutation operators typically represent subtle mistakes, such as typos, commonly made by programmers. A test suite's adequacy is then measured by its ability to detect (or `kill') the mutants, which is known as the adequacy score (or mutation score).
+
+\subsection{Mutation Testing Challenges}
+Despite being an effective test adequacy assessment method~\cite{andrews:icse05,jia:tse10}, mutation testing suffers from two main issues.  First, there is a high \emph{computational cost} in executing the test suite against a potentially large set of generated mutants. Second, there is a significant amount of effort  involved in distinguishing \emph{equivalent mutants}, which are syntactically different but semantically identical to the original program~\cite{budd:acta82}.  Equivalent mutants have no observable effect on the application's behaviour, and as a result, cannot be killed by test cases. Empirical studies indicate that about 45\% of all undetected mutants are equivalent~\cite{schuler:tvr12, madeyski:tse13}.   
+Establishing mutant equivalence is an undecidable problem~\cite{budd:acta82}. 
+According to a recent study~\cite{madeyski:tse13}, it takes on average 15 minutes to manually assess one single first-order mutant. While detecting equivalent mutants consumes considerable amount of time, there is still no fully automated technique that is capable of detecting all the equivalent mutants \cite{madeyski:tse13}.
+
+A large body of research has been conducted to turn mutation testing into a practical approach.
+To reduce the computational cost of  mutation testing, researchers have
+proposed three main approaches to generate a smaller subset of all possible mutants: 
+(1) \emph{mutant clustering} \cite{ji:seke09}, which is an approach that chooses a subset of
+mutants using clustering algorithms; (2)  \emph{selective mutation} \cite{barbosa:stvr01, siami:icse08, zhang:icse10}, which is based on a  
+careful selection of more effective mutation operators to generate less mutants; and 
+ (3) \emph{higher order mutation} (HOM) testing \cite{jia:scam08}, which tries to find 
+rare but valuable higher order mutants that denote subtle faults \cite{jia:tse10}.   
+
+The problem of detecting equivalent mutants has been tackled by many researchers. The main goal of all equivalent mutant detection techniques is to help the tester identify the equivalent mutants after they are generated. We, on the other hand, aim at reducing the probability of generating equivalent mutants in the first place.
+According to the taxonomy suggested by Madeyski \etal \cite{madeyski:tse13}, there are three main categories of approaches that address the problem of equivalent mutants: (1) detecting equivalent mutants \cite{offutt:tvr97}, (2) avoiding equivalent mutant generation \cite{gligoric:issta13}, and (3) suggesting equivalent mutants \cite{schuler:tvr12}. 
+
+However, these solutions suffer from the following limitations:
+\begin{enumerate}
+\item They are involved with considerable amount of manual effort, and thus are error-prone;
+\item The mutants need to be executed against the test suite, which limits the efficiency of the technique as the number of mutants increase.
+\item The system only recommends testers to focus on those mutations that are more likely to be non-equivalent. These techniques are not fully automated and are used as a supporting system for the tester;  
+\end{enumerate}
+To tackle the above mentioned issues, we proposed a fully automated mutation generation technique that reduces the number of equivalent mutants and guides testers towards designing test cases for important portions of the code from the application's behaviour point of view. 
+ 
+\section{Research Questions} \label{Sec:researchq}
+To improve the dependability of \javascript web applications, we designed two high-level research questions: 
+
+{\bf RQ 1.3.A.} \emph{How can we automatically generate effective test cases for \javascript applications?}
+
+In response to web testing challenges, we (1) designed an automated test case and oracle generator, which is capable of detecting faults
+in the \javascript applications for both unit and DOM level, and (2) proposed an approach to exploit the existing DOM-based test suite in order to generate unit-level assertions. 
+
+{\bf RQ 1.3.B.} \emph{How can we effectively assess the quality of the existing \javascript test cases?}
+
+To assess the quality of test cases, we proposed a new \javascript mutation testing approach, which helps to guide the
+mutation generation process towards parts of the code that are error-prone or likely to influence the program's output.
+
+\section{Contributions} \label{Sec:contrib}
+In response to the first and second research questions as outlined in \secref{researchq}, the following papers have been published:
+\begin{itemize}
+\item \chapref{jsart}: "JavaScript Assertion-based Regression Testing" \cite{mirshokraie:icwe12},
+S. Mirshokraie and A. Mesbah, ICWE, 2012, 238-252.
+\item \chapref{mutandis}: "Efficient JavaScript Mutation Testing" \cite{mirshokraie:icst13},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, ICST, 2013, 74-83 (Best paper Runner-up award);
+"Guided Mutation Testing for JavaScript Web Applications" \cite{mirshokraie:tse15},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, in press (TSE 2015);
+\item \chapref{jseft}: "JSEFT: Automated JavaScript Unit Test Generation" \cite{mirshokraie:icst15},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, To appear (ICST 2015); "PYTHIA: Generating Test Cases with Oracles
+for JavaScript Applications" \cite{shabnam:ase13},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, ASE, 2013, New Ideas Track, 610-615.
+\item \chapref{atrina}: "Atrina: Inferring Unit Oracles from GUI Test Cases", under preparation.
+\end{itemize}
+
+I have also contributed to the following related publications:
+\begin{itemize}
+\item Automated Analysis of CSS Rules to Support Style Maintenance \cite{mesbah:icse12}: 
+A. Mesbah and S. Mirshokraie, ICSE'12, 408-418;
+\item A Systematic Mapping Study of Web Application Testing \cite{garousi:ist13}: 
+V. Garousi, A. Mesbah, A. Betin Can and S. Mirshokraie, IST, vol. 55, no. 8, 1374-1396, 2013;
+\end{itemize}

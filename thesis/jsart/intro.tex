@@ -1,0 +1,28 @@
+\section{Introduction}
+\label{Sec:intro}
+Web applications usually evolve fast by going through rapid development cycles and are, therefore, susceptible to regressions, i.e., new faults in existing functionality after changes have been made to the system. One way of ensuring that such modifications (e.g., bug fixes, patches) have not introduced new faults in the modified system is through systematic regression testing.
+%Regression testing is also used to determine whether a change in one part of the software affects other parts of the software.
+While regression testing of classical web applications
+has been difficult \cite{tarhini:reg08}, dynamism and non-determinism pose an even greater challenge \cite{Roest:2010.icst} for Web 2.0 applications.
+
+%To the best of our knowledge, \javascript regression testing has not been addressed in the literature yet. %Therefore, new techniques need to be developed to test this new class of web applications.
+
+In this work, we propose an automated technique for \javascript regression testing, which is based on dynamic analysis to infer invariant assertions. These obtained assertions are injected back into the \javascript code to uncover regression faults in subsequent revisions of the web application under test. 
+Our technique automatically (1) intercepts and instruments \javascript on-the-fly to add tracing code (2) navigates the web application to produce execution traces, (3) generates dynamic invariants from the trace data, (4) transforms the invariants into stable assertions and injects them back into the web application for regression testing.
+
+Our approach is orthogonal to server-side technology, and it requires no manual modification of the source code. It is implemented in an open source tool called \jsart (\javascript Assertion-based Regression Testing).  We have empirically
+evaluated the technique on nine open-source web applications. The results of our evaluation show that the approach generates stable invariant assertions, which are capable of spotting injected faults with a high rate of accuracy.
+%
+%There is a growing trend towards developing web applications under the
+%Web 2.0 umbrella. Using Web 2.0 technique, positively affects the user-friendliness
+%and interactivity of web applications. However, it comes with a number of challenges.
+%Such applications are based on client-side run-time manipulation of the browser's document object model (DOM-tree),
+%they rely on the loosely typed \javascript, and are stateful as well as asynchronous in nature. 
+%The combination of these techniques, which is called AJAX \cite{garrett:ajax}, makes the programming of web applications 
+%an error prone task \cite{tonella:icst08}.
+%In our previous work \cite{mesbah:tse12}, we proposed to use invariants on the DOM structure and automatically 
+%check those invariants at run-time. However, manually creating invariants is difficult and time consuming.
+%The focus of this paper is on the automatic detection of client-side \javascript invariants in modern web 
+%applications for the purpose of regression testing. 
+%Our aim is to explore whether re-using of such inferred invariants can help to 
+%uncover regression faults in web based applications.
