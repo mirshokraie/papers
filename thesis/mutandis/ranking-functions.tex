@@ -91,10 +91,12 @@ This way,  all the functions called by $Recf_i$ are now linked to $f_{ci}$ (and 
 After the $FunctionRank$ metric is computed over all functions, we assign the new $FunctionRank$ value of the recursive node as follows: 
 $FR(Recf_i)=FR(f_i)+FR(f_{ci})$, where $FR(Recf_i)$ is the new $FunctionRank$ value assigned to the recursive function $Recf_i$. %\ali{I don't understand this previous paragraph. We need a better explanation of what we are doing and why we are doing it.}
 
-\begin{figure*} [tp]
+\begin{figure*} %[tp]
 \centering
+\hspace*{-0.4in} 
 \subfloat[Call graph with call numbers.]{\label{Fig:origGraph}
        \includegraphics[width=.6\textwidth]{fig/exampleGraph0}}
+\hspace*{-0.4in}       
 \subfloat[Call graph with call frequencies.]{\label{Fig:modifGraph}
        \includegraphics[width=.6\textwidth]{fig/exampleGraph}}
 \vspace{0.2in}             

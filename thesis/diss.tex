@@ -134,6 +134,7 @@
 % \usepackage{psfrag}
 \usepackage{makeidx} 
 \usepackage{amssymb,amsmath,color}
+
 %  \usepackage[hang,small,bf]{caption}
 %\usepackage{subfig}
 %\usepackage[subfigure]{tocloft}
@@ -200,7 +201,6 @@
 
 \usepackage{color}
 \usepackage{textcomp}
-\definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \lstset{
 	%backgroundcolor=\color{lbcolor},
@@ -234,9 +234,9 @@
 \definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
 
 \lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, for, in, while, do, else, case, break},
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, for, in, while, do, else, case, break, assertEquals, assertTrue,equal, ok},
   keywordstyle=\color{blue}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywords={class, export, boolean, throw, implements, import, this, By, int,@Test},
   ndkeywordstyle=\color{darkgray}\bfseries,
   identifierstyle=\color{black},
   sensitive=false,
@@ -255,15 +255,14 @@
    showstringspaces=false,
    showspaces=false,
    numbers=left,
-   numberstyle=\footnotesize,
-%   numbersep=-6pt,
-   tabsize=1,
+   numberstyle=\scriptsize,
+   numbersep=-6pt,
+   tabsize=2,
    breaklines=true,
    showtabs=false,
    captionpos=b,
    numberblanklines=false,
-   escapeinside=\[\]
-}
+   escapeinside=\[\]}
 
 %\textwidth 17.8cm
 %\textheight 22.7cm

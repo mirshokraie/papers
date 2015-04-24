@@ -12,7 +12,7 @@ height <- rbind(atrinaY, mutationY)
 
 #colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)
 
-colors<-c("white", "black")
+colors<-c("white", "gray")
 
 mp <- barplot(height, beside = TRUE, 
 ylim = c(0, 200), ylab="Time (Seconds)", xlab="Experimental Objects", col=colors)
