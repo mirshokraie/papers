@@ -1,38 +1,33 @@
 \chapter{Conclusions} \label{Chap:conc}
 \javascript is increasingly being used to create modern interactive web applications that offload a considerable amount of their execution to the client-side. \javascript is a notoriously challenging language for web developers to use, maintain, analyze and test. %This thesis has focused on exploring strategies for testing \javascript-based web applications.
 The work presented in this dissertation aims at improving the state-of-the-art in testing \javascript web applications by proposing a new set of techniques and tools.
-In accordance to the goal of this dissertation we designed two research questions:
-\begin{itemize}
-\item [RQ1] How can we generate effective test cases for \javascript web applications?
-\item [RQ2] How can we effectively assess the quality of the written test suites for \javascript applications?
-\end{itemize}
 \section{Contributions}
 %The main contributions of the thesis can be summarized as follows:
-The main contributions of the thesis in response to the first research question (RQ1) are as follows: 
+The main contributions of the thesis are as follows: 
 \begin{itemize}
 \item A new automated technique for \javascript regression testing, which is based on dynamic analysis to infer invariant assertions; The obtained assertions are injected back into the \javascript code to uncover regression faults in subsequent revisions of the web application under test. 
+\item The first \javascript mutation testing tool, which is capable of guiding the mutation generation towards behaviour-affecting mutants in error-prone portions of the code; The mutation testing method combines dynamic and static analysis to mutate branches that are within highly ranked functions and exhibit high structural complexity.
 \item An automatic technique to generate test cases for \javascript functions and events; We use a mutation-based algorithm to effectively generate test oracles, capable of detecting regression \javascript and DOM-level faults. The technique uses a combination of function converge maximization and function state abstraction algorithms to efficiently generate unit test cases.
 \item Exploiting an existing DOM-based test suite to generate unit-level assertions for applications that highly interact with the DOM through the underlying \javascript code; We utilize
 existing DOM-dependent assertions as well as useful execution information inferred from a DOM-based test suite to automatically generate assertions used for testing individual \javascript functions.
 \end{itemize}
-To address the second research question (RQ2), we made the following contribution:
-\begin{itemize}
-\item The first \javascript mutation testing tool, which is capable of guiding the mutation generation towards behaviour-affecting mutants in error-prone portions of the code; The mutation testing method combines dynamic and static analysis to mutate branches that are within highly ranked functions and exhibit high structural complexity.
-\end{itemize}
-\section{Threats to Validity}
-In this section we discuss the threats to validity of our results.
-An external threat to the validity of our results is the limited number 
-of web applications we use to evaluate the usefulness of the proposed techniques.
-Unfortunately, few real-world \javascript applications with up-to-date test suites and rich version history are publicly available. We mitigated this threat by (1) using web applications from various domains, code size, and functionality, as well as \selenium test cases, which are written by developers, and (2) mimicking regression faults through injecting mutations that represent common \javascript applications faults.
+\section{Revisiting Research Questions} 
+In the beginning of this thesis, we designed two research questions. We believe that the contributions show that we have addressed the research questions.
+\headbf{Research Question 1}
 
-One challenge in conducting our experiments was the lack of existing \javascript tools to form a baseline for comparison, and as a result, one of the external threat to validity of evaluating \mutandis (\chapref{mutandis}) is that we do not perform a quantitative comparison 
-of our technique with other mutation techniques.
+\emph{How can we generate effective test cases for \javascript web applications?}
 
-Another threat concerns validating failed assertions through manual inspection during the evaluation of \jseft (\chapref{jseft}) and \atrina (\chapref{atrina}). This is a time intensive task, and thus could be error-prone. To mitigate this threat, we carefully examine the code in which the assertion failed to make sure that the injected fault was indeed responsible for the assertion failure.
+In order to answer the first research question, \chapref{jsart} targets web application testing from the invariant assertions points of view. These invariants formulate the main characteristics of the application under test that will remain unchanged as the application evolves. Therefore, these type of assertions can be used towards regression testing. The empirical study on nine open source \javascript applications show that the proposed approach is able to effectively infer stable assertions and 
+detect regression faults with minimal performance overhead.
 
-A relatively low number of generated mutants to evaluate the effectiveness of \mutandis (\chapref{mutandis}) is also a threat to validity. 
-In order to find equivalent mutants, the application's code should be manually inspected, and thus this threat is shared by other studies that attempt to detect equivalent mutants.
-For example it took us more than 4 hours to distinguish the equivalent mutants for \jquery in our study. Since this is labour and time intensive task it can be error-prone and biased towards our judgment, though we made every effort to mitigate this threat by precisely examining the application's code. 
+Our invariant generation technique is based on the assumption that the program specifications are not changed frequently in subsequent revisions. However, if major changes affect the core properties of the application, the inferred invariants from the original version may not be valid any longer. Moreover, unlike post-condition assertions, invariant-based ones are inline assertions, which are checked at different points of the program's code. Therefore, it can become difficult for the tester to comprehend these type of assertions.
+
+In order to generate oracles that can be used during the common testing cycles of a large system, including unit and GUI testing, we proposed \jseft in \chapref{jseft}. \jseft generates test cases combined with post-condition assertions at the two complementary levels of unit and event-based tests. To evaluate the effectiveness of our approach we further consider a state-of-the-art \javascript test generation framework as a basis to compare our technique. The results of the empirical evaluation indicate that the approach generates test cases with high fault finding capability. One of the important observations from the results is that event-based tests can potentially miss the code-related errors (32\% on average) if the fault does not propagate to the observable DOM. We observed that the rate of missed faults are higher for the applications that have tight interaction with the DOM through the underlying \javascript code. This observation forms the basis of \chapref{atrina}, where we make use of the existing DOM-dependent assertions to generate code related unit-level assertions.
+
+In \chapref{atrina}   
+
+\emph{How can we effectively assess the quality of the written test suites for \javascript applications?}
+
 \section{Future Work}
 As web browsers become more powerful, building large-scale web applications using \javascript is increasingly becoming popular. This dissertation indeed needs to be incrementally revised to address the new emerging challenges from the continuously growing size of the deployed \javascript as well as the use of various \javascript utility plugins. 
 
