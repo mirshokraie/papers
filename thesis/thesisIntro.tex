@@ -37,7 +37,7 @@ writing unit test assertions for web applications that have rich interaction wit
 To generate unit-level assertions, the technique needs to precisely interpret the full range of interaction between the code level operations of a unit and the DOM level operations of a system, otherwise it may not be able to assert the correctness of a particular behaviour when the unit is used as a part of a system. The inherent characteristics of unit and DOM-based tests, indicate that they are complementary and that there is a trade-off in individually using each to detect faults. 
 \input{domTestExample}
 \subsection{Current Test Generation Techniques} 
-Different test and oracle generation technqiues have been proposed to overcome the aforementioned problems.
+Different test and oracle generation techniques have been proposed to overcome the aforementioned problems.
 Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
 The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
 Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
@@ -117,17 +117,17 @@ mutation generation process towards parts of the code that are error-prone or li
 \section{Contributions} \label{Sec:contrib}
 In response to the first and second research questions as outlined in \secref{researchq}, the following papers have been published:
 \begin{itemize}
-\item \chapref{jsart}: "JavaScript Assertion-based Regression Testing" \cite{mirshokraie:icwe12},
+\item \chapref{jsart}: ``JavaScript Assertion-based Regression Testing" \cite{mirshokraie:icwe12},
 S. Mirshokraie and A. Mesbah, ICWE, 2012, 238-252.
-\item \chapref{mutandis}: "Efficient JavaScript Mutation Testing" \cite{mirshokraie:icst13},
+\item \chapref{mutandis}: ``Efficient JavaScript Mutation Testing" \cite{mirshokraie:icst13},
 S. Mirshokraie, A. Mesbah and K. Pattabiraman, ICST, 2013, 74-83 (Best paper Runner-up award);
-"Guided Mutation Testing for JavaScript Web Applications" \cite{mirshokraie:tse15},
+``Guided Mutation Testing for JavaScript Web Applications" \cite{mirshokraie:tse15},
 S. Mirshokraie, A. Mesbah and K. Pattabiraman, in press (TSE 2015);
-\item \chapref{jseft}: "JSEFT: Automated JavaScript Unit Test Generation" \cite{mirshokraie:icst15},
-S. Mirshokraie, A. Mesbah and K. Pattabiraman, To appear (ICST 2015); "PYTHIA: Generating Test Cases with Oracles
+\item \chapref{jseft}: ``JSEFT: Automated JavaScript Unit Test Generation" \cite{mirshokraie:icst15},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, To appear (ICST 2015); ``PYTHIA: Generating Test Cases with Oracles
 for JavaScript Applications" \cite{shabnam:ase13},
 S. Mirshokraie, A. Mesbah and K. Pattabiraman, ASE, 2013, New Ideas Track, 610-615.
-\item \chapref{atrina}: "Atrina: Inferring Unit Oracles from GUI Test Cases", under preparation.
+\item \chapref{atrina}: ``Atrina: Inferring Unit Oracles from GUI Test Cases", under preparation.
 \end{itemize}
 
 I have also contributed to the following related publications:
