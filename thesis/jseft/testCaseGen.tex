@@ -32,15 +32,15 @@ In addition to function entry and exit points, we log information required for c
 \javascript functions that are accessible in the public scope are mainly defined in:
 \begin{enumerate}
 \item The global scope directly (e.g., \code{function f()\{...\}});
-\item Variable assignments in the global scope (e.g., \code{var f = function()\{...\}});
-\item Constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}});
-\item Prototypes (e.g., \code{Con\-structor.prototype.f= function() \{...\}}); 
+\item Variable assignments in the global scope (e.g., \code{var f = function()\-\{...\}});
+\item Constructor functions (e.g,  \code{function constructor() \{this.\ me\-mber= function()\{...\}\}});
+\item Prototypes (e.g., \code{Con\-structor.prototype.f= function() \{.\-..\}}); 
 \end{enumerate}
 Functions in the first and second case are easy to call from test cases. For the third case, the constructor function is called via the \code{new} operator to create an object type, which can be used to access the object's properties
 (e.g., \code{container=new Constructor(); container.member();}).
 This allows us to access the inner function, which is a member of the \code{constructor} function in the above example.
 %The prototyping technique is used for inheritance in \javascript. 
-For the prototype case, the function can be invoked through \code{container.f()} from a test case.
+For the prototype case, the function can be invoked through \code{container.\-f()} from a test case.
 
 Going back to our running example in \figref{funcCovgExample}, at the entry point of \code{setDim}, we log the value and type of both the input parameter \code{dimension} and global variable \code{currentDim}, which is accessed in the function. Similarly, at the exit point, we log the values and types of the returned variable \code{dim} and \code{currentDim}.
 

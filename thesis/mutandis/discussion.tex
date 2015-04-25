@@ -11,7 +11,7 @@ In the following, we discuss different types of stubborn mutants we observed in 
 We notice that the type of the mutation operator as well as the ultimate location of the mutation affect the stubbornness of generated mutant. As far as the variable and branch mutations are concerned, the following mutations can result in stubborn mutants based on our observations:  %Such mutants remain undetected despite the moderate to high quality of the test suites.
 \begin{itemize}
 \item Variable mutations that happen in the body of conditional statements with more than one nested statement, where the conditions are involved with both variable as well as DOM related expressions. To satisfy such conditions, not only the variables should hold proper values, but also the proper structure as well as the properties of the involved DOM elements are required to be in place. This intertwined interaction limits the input space to only a few and challenging ones that are capable of satisfying the condition.  
-\item Replacing the prefix unary operators with postfix unary operators, e.g., \code{++variable} to \code{variable++}.
+\item Replacing the prefix unary operators with postfix unary operators, e.g., \code{++va\-riable} to \code{variable++}.
 \item Replacing the logical operators in conditional statements when the statement contains more than one different logical operator (e.g., \code{if(A \&\& B || C)\{...\}} to \code{if(A \&\& B \&\& C)\{...\}}).
 \item Swapping \code{true/false} in conditional statements when the statement contains more than two conditions (e.g., \code{if(A \&\& B \&\& C)\{...\}} to \code{if(A \&\& !B \&\& C)\{...\}}).
 \item Removing a parameter from a function call where the function contains more than three parameters.
