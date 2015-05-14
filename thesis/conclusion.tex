@@ -1,6 +1,6 @@
 \chapter{Conclusions} \label{Chap:conc}
 \javascript is increasingly being used to create modern interactive web applications that offload a considerable amount of their execution to the client-side. \javascript is a notoriously challenging language for web developers to use, maintain, analyze and test. %This thesis has focused on exploring strategies for testing \javascript-based web applications.
-The work presented in this dissertation aims at improving the state-of-the-art in testing \javascript web applications by proposing a new set of techniques and tools.
+The work presented in this dissertation aims at improving the state-of-the-art in testing \javascript web applications.
 %\section{Contributions}
 %The main contributions of the thesis can be summarized as follows:
 %The main contributions of the thesis are as follows: 
@@ -17,7 +17,9 @@ In the beginning of this thesis, we designed two research questions. We believe 
 
 \emph{How can we generate effective test cases for \javascript web applications?}
 
-\headbf{\chapref{jsart}} To this end, we proposed \jsart, which targets web application testing from the invariant assertions points of view. Program invariants formulate the main characteristics of the application under test that remain unchanged as the application evolves. Therefore, they can be used towards regression testing. Our technique first infers such invariants from the application, and then convert them to test assertions. Our empirical study shows that the proposed approach is able to infer stable assertions and accurately detect regression faults. Our technique is involved with minimal performance overhead, and thus it may also scale well for industrial applications in practice.  Moreover, manual detection of invariants is a time consuming task. Therefore, using our tool can reduce the manual effort involved with inferring invariants. 
+To this end, we proposed a set of techniques to automatically test the correct behaviour of the application. Mutation analysis has subsequently been used to assess the effectiveness of the generated tests. 
+
+\headbf{\chapref{jsart}} We proposed \jsart, which targets web application testing from the invariant assertions points of view. Program invariants formulate the main characteristics of the application under test that remain unchanged as the application evolves. Therefore, they can be used towards regression testing. Our technique first infers such invariants from the application, and then convert them to test assertions. Our empirical study shows that the proposed approach is able to infer stable assertions and accurately detect regression faults. Our technique is involved with minimal performance overhead, and thus it may also scale well for industrial applications in practice.  Moreover, manual detection of invariants is a time consuming task. Therefore, using our tool can reduce the manual effort involved with inferring invariants. 
 
 However, our invariant generation technique is based on the assumption that the program specifications are not changed frequently in subsequent revisions. If major changes affect the core properties of the application, the inferred invariants from the original version may not be valid any longer. Furthermore, it may not be possible to convert every program's characteristic into a useful invariant. For instance, game applications are usually involved with huge amount of state changes as the application executes. In such cases, the application may contain only a few invariants. 
 
@@ -29,7 +31,7 @@ Further analysis of the results obtained from \jseft revealed that (1) although,
 
 \headbf{\chapref{atrina}} Fruitful observations from analyzing the results of \jseft led us to propose \atrina, which utilizes the existing GUI-based (\ie DOM) assertions as well as useful execution information inferred from a GUI test suite to automatically generate assertions used for testing individual functions. This work is currently under preparation, however, the initial results confirm that the generated unit-level assertions surpass the fault finding capability of DOM-based assertions. We also found out that \atrina outperforms mutation-based assertion generation technique in terms of the time efficiency.
 
-During the evaluation of different test generation techniques proposed in this thesis, we realized that using function closures is quite popular in writing \javascript applications. 
+\headbf{Further Observations} During the evaluation of different test generation techniques proposed in this thesis, we realized that using function closures is quite popular in writing \javascript applications. 
 Function closures in \javascript language provide a way to make variables and functions private, thus keeping them out of the global scope.
 While function closures can be called during the testing process at the highest program scope they belong to, it is not possible to call them directly in test cases, which makes it challenging to assess their outcomes.
 One possible future direction is to measure the extent of such hard-to-test code written by developers by conducting a thorough empirical study.
@@ -38,6 +40,8 @@ The results of the study can be used towards generating effective test cases by 
 \subsection{Research Question 2}
 
 \emph{How can we effectively assess the quality of the existing \javascript test cases?}
+
+We used mutation analysis as the test assessment technique. In the following, we explain our observations as well as potential future works to further improve and expand the use of mutation analysis. 
 
 \headbf{\chapref{mutandis}} To assess the quality of test cases, we proposed \mutandis, a generic mutation testing approach, that guides the mutation generation towards behaviour-affecting mutants in error-prone portions of the code. The empirical evaluation indicates that \mutandis can (1) significantly reduce the number of equivalent mutants, and (2) guide testers towards designing test cases for important portions of the code from the application's behaviour point of view. 
 
