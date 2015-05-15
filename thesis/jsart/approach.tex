@@ -150,22 +150,25 @@ The generated test report provides precise information on the failed assertion, 
 
 \begin{figure}[h]
 %\medskip
-\begin{lstlisting}
-function setDim(height, width) {
-	[\textbf{assert((width < height), `example.js:setDim:ENTER:POINT1');}] 			
-	var h = 4*height, w = 2*width;		
-	...
-	[\textbf{assert((width < height), `example.js:setDim:EXIT:POINT1');}]
-	[\textbf{assert((w < h), `example.js:setDim:EXIT:POINT1');}]
-	return{h:h, w:w};
-}
 
-function play(){
-	$(#end).css("height", setDim($('body').width(), $('body').height()).h + 'px');
-	[\textbf{assert(isIn(\$(`\#end').css(`height'), \{100, 200, 300\}),`example.js:play:POINT3');}]
-	...
-}
+\begin{mdframed}
+\begin{lstlisting}[frame=none]
+	function setDim(height, width) {
+		[\textbf{assert((width < height), `example.js:setDim:ENTER:POINT1');}] 			
+		var h = 4*height, w = 2*width;		
+		...
+		[\textbf{assert((width < height), `example.js:setDim:EXIT:POINT1');}]
+		[\textbf{assert((w < h), `example.js:setDim:EXIT:POINT1');}]
+		return{h:h, w:w};
+	}
+
+	function play(){
+		$(#end).css("height", setDim($('body').width(), $('body').height()).h + 'px');
+		[\textbf{assert(isIn(\$(`\#end').css(`height'), \{100, 200, 	300\}),`example.js:play:POINT3');}]
+		...
+	}
 \end{lstlisting}
+\end{mdframed}
 \vspace{.2in}
 \mycaption{Invariant assertion code for \javascript function parameters, local variables and DOM modifications. Injected assertions are shown in bold.}
 \label{Fig:example_assertion}
