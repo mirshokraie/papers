@@ -39,7 +39,7 @@ We then traverse the AST in search of \emph{program variables} as well as \emph{
 % Once the code is instrumented, we
 % serialize the AST back to the corresponding source code file and pass it to the browser.
 
-{\bf Tracing Program Variables.} Our first interest is the range of values of \javascript program variables. We probe function entry and function exit points, by identifying function definitions in the AST and injecting statements at the start, end, and before every \code{return} statement. We instrument the code to monitor value changes of \emph{global variables}, \emph{function arguments}, and \emph{local variables}. 
+{\bf Tracing Program Variables.} Our first interest is the range of values of JavaSc\-ript program variables. We probe function entry and function exit points, by identifying function definitions in the AST and injecting statements at the start, end, and before every \code{return} statement. We instrument the code to monitor value changes of \emph{global variables}, \emph{function arguments}, and \emph{local variables}. 
 Per program point, we yield information on \emph{script name}, \emph{function name}, and \emph{line number}, used for debugging purposes. Going back to our running example (\figref{motivating_example}), our technique adds instrumentation code to trace \code{width}, \code{height}, \code{h}, and \code{w}. For each variable, we collect information on \emph{name}, \emph{runtime type}, and \emph{actual values}. The runtime type is stored because \javascript is a loosely typed language, i.e., the types of variables cannot be determined syntactically, thus we log the variable types at runtime.
 
 {\bf Tracing DOM Modifications.} In modern web applications, \javascript code
