@@ -1,8 +1,8 @@
-\section*{Abstract}
+\section*{Abstract\footnote{This chapter appeared at the following references: \cite{mirshokraie:icst15, shabnam:ase13}}}
 % MUST be 150 words or less
 %Developers often test their web applications using frameworks such as Selenium. Although such frameworks help to automate test execution, the test cases need to be written manually, which is tedious and inefficient.
 The event-driven and highly dynamic nature of \javascript, as well as its runtime interaction with the Document Object Model (DOM) make it  challenging to test \javascript-based applications.
-Current web test automation techniques target the generation of event sequences, but they ignore testing the \javascript code at the unit level. Further they either ignore the oracle problem completely or simplify it through generic soft oracles such as HTML validation and runtime exceptions. We present a framework \cite{mirshokraie:icst15, shabnam:ase13} to automatically generate test cases for \javascript applications at two complementary levels, namely events and individual \javascript  
+Current web test automation techniques target the generation of event sequences, but they ignore testing the \javascript code at the unit level. Further they either ignore the oracle problem completely or simplify it through generic soft oracles such as HTML validation and runtime exceptions. We present a framework to automatically generate test cases for \javascript applications at two complementary levels, namely events and individual \javascript  
 functions. 
 Our approach employs a combination of function coverage maximization and function state abstraction algorithms to efficiently generate  test cases. In addition, these test cases are strengthened by automatically generated mutation-based oracles. % capable of detecting regression faults in \javascript code and the DOM. 
 We empirically evaluate the implementation of our approach, called \jseft, to assess its efficacy. 
