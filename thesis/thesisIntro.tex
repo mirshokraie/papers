@@ -60,11 +60,12 @@ Mutation testing is applied to produce oracles and rank the inferred oracles in 
 They merely focus on supporting the creation of test oracles by the programmer, rather than fully automating the process of test case generation.
 Loyola \etal \cite{loyola:issta14} propose Dodona, which ranks program variables based on their dependencies during the program execution. Using this ranking, they suggest a set of variables to be monitored by the tester as assertion-based oracles. Dodona is also among the test oracle generation supporting systems.  
 
-\headbf{Test Automation Challenges} Although, researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}, current techniques suffer from two main shortcomings, namely, they:
+\subsection{Test Automation Challenges}
+Although, researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}, current techniques suffer from two main shortcomings, namely, they:
 \begin{enumerate} 
 %\vspace{-0.15in}
 \item Target the generation of \emph{event sequences}, which operate at the event-level or DOM-level to cover the state space of the application. These techniques fail to capture faults that  do not propagate to an observable DOM state. As such, they potentially miss this portion of code-level \javascript faults. In order to capture such faults, effective test generation techniques need to target the code at the \javascript unit-level, in addition to the event-level.
-\item Either ignore the oracle problem altogether or simplify it through generic \emph{soft oracles}, such as  W3C HTML  validation \cite{artzi:icse11,mesbah:tse12}, or  \javascript runtime exceptions \cite{artzi:icse11}.
+\item Either ignore the oracle problem altogether or simplify it through generic \emph{soft oracles}, such as  W3C HTML  validation \cite{artzi:icse11,mesbah:tse12}, or  \javascript runtime exceptions \cite{artzi:icse11}. These type of oracles are not able to detect application specific errors.
 A generated test case without assertions is not useful since code coverage alone is not the goal of software testing. For such generated test cases, the tester still needs to  manually write many assertions, which is time and effort intensive. 
 On the other hand, soft oracles  target generic fault types and are limited in their fault finding capabilities.   %\cite{Richardson:icse92}. 
 %While there has been some work on the generation of test inputs \cite{song:symb10},  
@@ -72,7 +73,7 @@ On the other hand, soft oracles  target generic fault types and are limited in t
 However, to be practically useful, unit testing requires strong oracles to determine whether the application under test executes correctly.
 \item They merely focus on supporting the test oracle generation by the programmer. Thus, these approaches are not fully automating the process of test case creation \cite{staats:icse12,loyola:issta14}.
 \end{enumerate}
-To address the above mentioned shortcomings, we proposed a set of fully automated test case and assertion generation techniques for \javascript applications. Our techniques can capture error-prone dynamic interactions of \javascript with the DOM. We also generate unit-level tests, which enable us to find \javascript code-related faults.
+To address the above mentioned shortcomings, we proposed a set of fully automated test case and assertion generation techniques for \javascript applications. Our techniques can capture application specific DOM as well as \javascript code related faults.
 
 \section{Adequacy Assessment} \label{Sec:adequacy}
 While automated testing can help the tester to assure the application's dependability and detect faults in the application code, it does not reveal the trustworthiness of the written tests.
