@@ -21,7 +21,7 @@ Automatically generating effective test suites for \javascript applications is p
 The event-driven and highly dynamic nature of \javascript make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test.
 Moreover, \javascript is used to seamlessly change the Document Object Model (DOM) at run-time.
 DOM is an interface that allows programs to dynamically access and update the content, structure, and style of a document.
-The dynamic interaction between \javascript and the DOM, as two separate components, can become quite complex cite{Ocariza:esem2013}. 
+The dynamic interaction between \javascript and the DOM, as two separate components, can become quite complex \cite{Ocariza:esem2013}. 
 
 The huge event space of such applications hinders model inferring techniques to cover the whole state space in a limited amount of time. Moreover, inferring test assertions with high fault finding capability requires a precise analysis of the interaction between the \javascript and the DOM. 
 Providing an accurate mapping between the two components becomes difficult as the \javascript code and the DOM increase in size. It is also challenging to identify a proper set of test oracles from the large number of oracles that potentially can be selected.
@@ -43,7 +43,7 @@ To generate unit-level assertions, the technique needs to precisely interpret th
 \subsection{Current Test and Oracle Generation Techniques} 
 Different test and oracle generation techniques have been proposed to overcome the aforementioned problems.
 \headbf{Web Test Generation} Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
-Mesbah et al. \cite{mesbah:tse12}, use generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.
+Mesbah et al. \cite{mesbah:tse12} use generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.
 Sen \etal \cite{sen:fse13} propose a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
 The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
 
@@ -151,15 +151,22 @@ mutation generation process towards parts of the code that are error-prone or li
 In response to the first and second research questions as outlined in \secref{researchq}, the following papers have been published:
 \begin{itemize}
 \item \chapref{jsart}: ``JavaScript Assertion-based Regression Testing" \cite{mirshokraie:icwe12},
-S. Mirshokraie and A. Mesbah, ICWE, 2012, 238-252.
-\item \chapref{mutandis}: ``Efficient JavaScript Mutation Testing" \cite{mirshokraie:icst13},
-S. Mirshokraie, A. Mesbah and K. Pattabiraman, ICST, 2013, 74-83 (Best paper Runner-up award);
-``Guided Mutation Testing for JavaScript Web Applications" \cite{mirshokraie:tse15},
-S. Mirshokraie, A. Mesbah and K. Pattabiraman, in press (TSE 2015);
-\item \chapref{jseft}: ``JSEFT: Automated JavaScript Unit Test Generation" \cite{mirshokraie:icst15},
-S. Mirshokraie, A. Mesbah and K. Pattabiraman, To appear (ICST 2015); ``PY\-THIA: Generating Test Cases with Oracles
+S. Mirshokraie and A. Mesbah, International Conferencee on Web Engineering (ICWE), 2012, 238-252.
+\item \chapref{mutandis}:
+\begin{itemize}
+\item ``Efficient JavaScript Mutation Testing" \cite{mirshokraie:icst13},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, International Conference on Software Testing, Verification, and Validation (ICST), 2013, 74-83 (Best paper Runner-up award).
+\item ``Guided Mutation Testing for JavaScript Web Applications" \cite{mirshokraie:tse15},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, IEEE Transaction on Software Engineering (TSE), 2015, 429–444.
+\end{itemize}
+\item \chapref{jseft}:
+\begin{itemize}
+\item ``JSEFT: Automated JavaScript Unit Test Generation" \cite{mirshokraie:icst15},
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, International Conference on Software Testing, Verification, and Validation (ICST), 2015, 1-10.
+\item ``PY\-THIA: Generating Test Cases with Oracles
 for JavaScript Applications" \cite{shabnam:ase13},
-S. Mirshokraie, A. Mesbah and K. Pattabiraman, ASE, 2013, New Ideas Track, 610-615.
+S. Mirshokraie, A. Mesbah and K. Pattabiraman, Automated Software Engineering (ASE), 2013, New Ideas Track, 610-615.
+\end{itemize} 
 \item \chapref{atrina}: ``Atrina: Inferring Unit Oracles from GUI Test Cases", under preparation.
 \end{itemize}
 
