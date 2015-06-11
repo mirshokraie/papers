@@ -4,8 +4,9 @@ In this section, we provide an introduction to modern web application testing, f
 \section{Test Automation} \label{Sec:web-testing}
 Software testing is an integral part of the software engineering.
 Testing helps to improve the quality and dependability of the applications.
-However, software systems have become more complex in last decades, with using different technologies and programming languages, that are even implemented by different developers.
-As a result, writing high-quality test cases for such applications that can assure their correct behaviour becomes more complicated, time consuming, and effort intensive for developers \cite{anand:jss13}.
+The importance of web application testing arises from the ever increasing reliance on these systems in social and organizational applications. Companies use web applications to transmit, collect, and process customer's data. Web applications are also used in webmail, content management systems (CMS), social media tools, and many other systems.
+Such applications have become more complex in last decades, with using different technologies and programming languages, that are even implemented by different developers.
+As a result, writing high-quality test cases for web applications that can assure their correct behaviour becomes more complicated, time consuming, and effort intensive for developers \cite{anand:jss13}.
 Automatic test case generation can significantly reduce the time and manual effort, while
 increasing the reliability of web applications.
 
@@ -14,13 +15,16 @@ Manual testing is expensive and time consuming, mainly because of the manual eff
 
 \subsection{Web Testing}
 One of the common engines of today's modern web applications is \javascript.
+According to a recent survey conducted by Stack Overflow, \javascript is the most popular programming language \cite{stackoverflow15}.
+It is also the most-used programming language in GitHub repositories \cite{githut15}.
 Developers employ \javascript to add functionality, dynamically change the GUI state,
 and communicate with web servers. Given the increasing reliance of web applications on this language, it is important to check its correct behaviour.
 
 Automatically generating effective test suites for \javascript applications is particularly challenging compared with traditional languages.
 The event-driven and highly dynamic nature of \javascript make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test.
 Moreover, \javascript is used to seamlessly change the Document Object Model (DOM) at run-time.
-DOM is an interface that allows programs to dynamically access and update the content, structure, and style of a document.
+DOM is a language independent convention for representing and interacting with objects in HTML documents. DOM nodes are organized in a tree structure, which is called the DOM tree. 
+\javascript can dynamically update the content, structure, and style of a document by accessing and manipulating the DOM tree. 
 The dynamic interaction between \javascript and the DOM, as two separate components, can become quite complex \cite{Ocariza:esem2013}. 
 
 The huge event space of such applications hinders model inferring techniques to cover the whole state space in a limited amount of time. Moreover, inferring test assertions with high fault finding capability requires a precise analysis of the interaction between the \javascript and the DOM. 
@@ -167,7 +171,7 @@ S. Mirshokraie, A. Mesbah and K. Pattabiraman, International Conference on Softw
 for JavaScript Applications" \cite{shabnam:ase13},
 S. Mirshokraie, A. Mesbah and K. Pattabiraman, Automated Software Engineering (ASE), 2013, New Ideas Track, 610-615.
 \end{itemize} 
-\item \chapref{atrina}: ``Atrina: Inferring Unit Oracles from GUI Test Cases", under preparation.
+\item \chapref{atrina}: ``Atrina: Inferring Unit Oracles from GUI Test Cases", Preparing for submission to the Software Testing, Verification and Reliability (STVR).
 \end{itemize}
 
 I have also contributed to the following related publications:
