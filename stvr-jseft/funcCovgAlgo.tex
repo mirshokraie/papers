@@ -1,0 +1,41 @@
+\IncMargin{0.5em}
+\begin{algorithm}[t]
+{\scriptsize
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{A Web application $App$, the maximum exploration time $t$, the maximum number of states to explore $n$}
+\Output{The obtained state-flow graph \textit{SFG}}
+\BlankLine
+\nl \textit{App} $\leftarrow \textsc{Instrument}(App)$ \\
+\nl \textit{SFG} $\leftarrow \textsc{AddInitialState}(App)$ \\
+\Begin {
+\nl \While {$\textsc{ConstraintSatisfied}(t,n)$}{
+\nl 	\textit{NES} $\leftarrow \textsc{GetNotExpandedStates}($\textit{SFG}$)$\\
+\nl    \textit{Trace} $\leftarrow \textsc{CollectTrace}(App)$ \\
+\nl 	\textit{NEF} $\leftarrow \textsc{GetNotVisitedFuncs}(\textit{Trace})$\\
+\nl 	\For {$s_i \in$ \textit{NES}}{
+\nl			$C_{s_i} \leftarrow \textsc{GetClickables}(s_i)$\\
+\nl			$F \leftarrow \textsc{GetUniqFuncHandls}(C_{s_i}, \textit{NEF})$\\
+\nl			\For {$f \in$ \textit{F}}{
+\nl				$\textit{PotClb} \leftarrow \textsc{GetPotentialClbs}(f, \textit{NEF})$
+				}
+\nl			$\textit{Score}_{s_i} \leftarrow F + PotClb$	
+			}
+\nl		$\textit{MaxState} \leftarrow \textsc{GetMaxScoreState}(\textit{Score}_s)$\\			
+\nl 	$\textit{UniqFuncHandlsClb} \leftarrow \textsc{GetUniqFuncHandls}(\textit{MaxState})$\\	 	
+\nl 	\For {$c \in UnqFuncHandlsClb$}{
+\nl			\If { ($\textsc{FireEvent}(c)$) }{
+					$state \leftarrow \textsc{GetBrowserState}()$\\
+\nl				$\textit{SFG}.\textsc{Update}(state, c)$\\
+\nl				\textit{Trace} $\leftarrow \textsc{CollectTrace}(App)$ \\					
+\nl				\textit{NEF} $\leftarrow \textsc{GetNotVisitedFuncs}(\textit{Trace})$\\
+\nl				$state.\textsc{UpdateClickables}()$\\
+				}
+			}
+		}
+\nl return \textit{SFG}
+}
+\caption{Function Coverage Maximization}
+\label{Alg:funcCovgMax}
+}
+\end{algorithm}
+%\DecMargin{lem}

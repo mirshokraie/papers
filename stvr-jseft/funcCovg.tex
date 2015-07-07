@@ -1,0 +1,49 @@
+\subsection{Maximizing Function Coverage} 
+\label{Sec:funcCovg}
+
+%\input{funcCovgAlgo}
+In this step, our goal is to maximize the number of functions that can be covered, while exercising the program's event space. 
+To that end, our approach combines static and dynamic analysis to decide which state and event(s) should be selected for expansion to maximize the probability of covering uncovered \javascript functions. While exploring the web application under test, our function coverage maximization algorithm 
+%, depicted in \algref{funcCovgMax}, 
+selects a next state for exploration, which has the maximum value of the sum of the following two metrics:
+
+\headbf{1. Potential Uncovered Functions}  This pertains to 
+the total number of unexecuted functions that can potentially be visited through the execution of DOM events in a given DOM state $s_i$. When a given function $f_i$ is set as the event-handler of a DOM element $d \in s_i$, it makes the element a potential clickable element in $s_i$. This can be achieved through various patterns in web applications depending on which DOM event model level is adopted. To calculate this metric, our algorithm identifies all \javascript functions that are directly or indirectly attached to DOM elements as event handlers, in $s_i$ through code instrumentation and execution trace monitoring.  
+%Patterns that our approach currently detects include:
+%\begin{itemize}[noitemsep]
+%\item Inline in HTML code, e.g., \code{<DIV onclick="foo();">};
+%\item DOM Event Level 1, e.g., \code{e.onclick=foo};
+%\item DOM Event Level 2 \cite{w3c-event2}, e.g., \code{e.addEventListener(\-type, foo)};
+%\item jQuery binding \cite{jquery-api}, e.g., \code{e.click(foo)}, \code{e.on(`click', foo)}, \code{e.bind(`click', foo)}. 
+%\end{itemize}
+%
+%Unbinding elements is also detected through the following two patterns: (1) \code{e.removeEventListener(type, foo)}, and \code{e.un\-bind(type)}.
+
+%Through a combination of code instrumentation and execution trace monitoring 
+%(\textsc{CollectTrace} and \textsc{GetNotVisitedFuncs} in Lines 5-6, 18-19), 
+%we detect uncovered functions and any associated clickable elements 
+%(\textsc{GetClickables}, Line 8) 
+%that have those functions as event-handlers. In addition, by inferring the static function call graph of the application, we calculate the total number of functions that (indirectly) will be %executed if such clickable elements are exercised.
+
+\headbf{2. Potential Clickable Elements}
+The second metric, used to select a state for expansion, pertains to the number of DOM elements that can potentially become clickable elements. If the event-handlers bound to those clickables are triggered, new (uncovered) functions will be executed. To obtain this number, we statically analyze the previously obtained \emph{potential uncovered functions} within a given state in search of such elements.
+%(\textsc{GetPotentialClbs}, Line 11). 
+%Functions that can potentially be attached to such elements should not have been covered before 
+%(\textsc{GetUniqFuncHandls}, Line 9), 
+%, therefore such functions are removed. 
+
+While exploring the application, the next state for expansion is selected by adding the two metrics 
+%(Line 12)
+and choosing the state with the highest sum.
+%(Line 13). 
+%If multiple clickables with the same function handler exist in the selected state, we randomly select one of those and add it to the clickable list of elements. %(\textsc{GetUniqFuncHandls}, Line 14).
+%
+%At each exploration step, the state-flow graph, execution trace, uncovered functions, as well as new detected clickables are updated as an event is fired and a new DOM state is detected.
+%($SFG$.\textsc{Update}, \textsc{CollectTrace}, \textsc{GetNotVisitedFuncs}, and $state$.\textsc{UpdateClickables}, as an event is fired and a new DOM state is detected, Lines 17--20).
+%\algref{funcCovgMax}
+The procedure repeats the aforementioned steps until the designated time limit, or state space size is reached. %(\textsc{ConstraintSatisfied}$(t,n)$). 
+
+In the running example of \figref{funcCovgExample}, in the initial state, clicking on elements with IDs \code{cell0} and \code{cell1} results in two different states due to an \code{if-else} statement in Lines 4 and 8 of \code{cellClicked}. Let's call the state in which a \code{DIV} element is located after the element with ID \code{cell0} as $s_0$, and the state in which a \code{DIV} element is placed after the element with ID  \code{cell1} as $s_1$. If state $s_0$, with the clickable \code{cell0}, is chosen for expansion, function \code{setup} is called. As shown in Line 15, \code{setup} calls \code{setDim}, and thus, by expanding $s_0$ both of the aforementioned functions get called by a single click. Moreover, a potential clickable element is also created in Line 16, with \code{start} as the event-handler. Therefore,  expanding $s_1$  results only in the execution of \code{setDim}, while expanding $s_0$ results in the execution of functions \code{setup}, \code{setDim}, and a potential execution of \code{start} in future states. 
+%Therefore, our algorithm chooses $s_0$ to potentially maximize the function coverage, in the given amount of time. 
+%Due to space constraints, we do not show the details of the above procedure on the running example.
+At the end of this step, we obtain a state-flow graph of the application that can be used in the next test generation step.

@@ -1,0 +1,45 @@
+\section{Related Work} \label{Sec:related}
+%\headbf{Test generation} \label{Sec:test-generation}
+%Different constraint-solving approaches have been proposed for test generation. For instance, path\-Crawler \cite{williams:edcc05} combines static and dynamic analysis  
+%and performs on-the-fly exploration of the input space of the application. 
+%Concolic testing has been employed in DART \cite{godefroid:pldi05} and further extended in CUTE \cite{sen:esec-fse05} and PEX \cite{tillmann:tap08}. 
+%However, it is not clear how these approaches scale when applied to dynamic web applications.
+%Meta-heuristic search approaches have been used as an alternative to constraint-based techniques. Examples of such approaches are Ribeiro \etal \cite{ ribeiro:ast08},
+%Fraser \etal \cite{fraser:qsic11} and
+%Harman \etal \cite{harman:aosd09}.
+%The success of such methods depends on the availability
+%of appropriate fitness functions that can properly guide the solution towards an optimal one \cite{malburg:ase11}. Devising such a fitness function is a significant challenge. 
+%To overcome the drawbacks of search-based approaches, Malburg \etal \cite{malburg:ase11} propose to combine constraint-based and search-based testing. 
+%The focus of these techniques is mostly on input generation to efficiently cover every possible program flow. 
+%In our work, we focus on maximizing the function coverage of the program instead of state space coverage,  as  determining the state space size of dynamic web applications is an undecidable problem.  Further, instead of generating inputs data, we create test oracles capable of detecting faults.
+
+\headbf{Web application testing}
+Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
+Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. In subsequent work \cite{mesbah:tse12}, they propose generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.  Our earlier work, \jsart \cite{mirshokraie:icwe12},  automatically infers program invariants from \javascript execution traces and uses them as regression assertions in the code. 
+Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
+The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
+Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
+They construct server interface descriptions through an inference technique that can learn communication patterns from sample data.
+Saxena \etal \cite{song:symb10} combine random test generation with the use of symbolic execution for systematically exploring a \javascript application's event space as well as its value space, for security testing.
+Our work is different in two main aspects from these: (1) they all target the generation of event sequences at the DOM level, while we also generate unit tests at the \javascript code level, which enables us to cover more and find more faults,
+and (2) they do not address the problem of test oracle generation and only check against soft oracles (e.g., invalid HTML). In contrast, we generate strong oracles that capture
+application behaviours, and can detect a much wider range of faults.
+
+Perhaps the most closely related work to ours is \artemis \cite{artzi:icse11}, which supports automated testing of \javascript applications.
+\artemis considers the event-driven execution model of a \javascript application for feedback-directed testing.
+In this paper, we quantitatively compare our approach with that of \artemis (Section \ref{Sec:evaluation}).
+
+\headbf{Oracle generation} \label{Sec:oracleGen}
+There has been limited work on oracle generation for testing. 
+Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension.
+%\shabnam{differential test generation added for issta}
+Differential test case generation approaches \cite{taneja:ase08, elbaum:tse09} are similar to mutation-based techniques in that they aim to generate test cases that show the difference between two versions of a program. However, mutation-based techniques such as ours, do not require two different versions of the application.
+Rather, the generated differences are in the form of controllable mutations that can be used to generate test cases capable of detecting
+regression faults in future versions of the program.
+%\karthik{So what's the advantage of having the differences in the form of controllable mutations ?}
+Staats \etal \cite{staats:icse12} address the problem of selecting oracle data,  which is formed as a subset of internal state variables as well as outputs for which the expected values are determined.
+They apply mutation testing to produce oracles and rank the inferred oracles in terms of their fault finding capability.
+This work is different from ours in that they merely focus on supporting the creation of test oracles by the programmer, rather than fully automating the process of test case generation. Further, (1) they do not target \javascript; 
+(2) in addition to the code-level mutation analysis, we propose DOM-related mutations to capture error-prone \cite{Ocariza:esem2013} dynamic interactions of \javascript with the DOM.  
+
+
