@@ -1,55 +1,58 @@
 \begin{table}
 %\vspace{5pt}
-        \caption{Results showing the effects of our \textbf{function coverage maximization}, \textbf{function state abstraction}, and \textbf{mutation-based oracle generation} algorithms.}
+\centering
+        \caption{Results showing the effects of our \textbf{function coverage maximization}, \textbf{function state reduction}, and \textbf{mutation-based oracle generation} algorithms.}
         \label{Table:efficiency-abs-mut-table}
 {\scriptsize
        
       %  \subtable[Experimental subjects and the corresponding exploration data]
             {
-           \begin{tabular}{c|r|r||r||r|r||r|r} \hline
+           \begin{tabular}{c|c|c||c||>{\centering}b{1.3cm}|c||>{\centering}b{1.3cm}|c||c|c} \hline
 &\multicolumn{2}{c||}{\thead{St. Coverage}} 
-& \multirow{2}{*}{\theadturn{\#Func.States w/o state reduction}} & 
-\multicolumn{2}{c||}{\thead{State Abstraction}} & \multicolumn{2}{c}{\thead{Oracles}}\\
-\cline{2-3} \cline{5-8}
+& \multirow{3}{*}{\theadturn{\#Function states w/o state removal}} & 
+\multicolumn{2}{c||}{\thead{St. Reduction-Mutation}} & \multicolumn{2}{c||}{\thead{St. Mutation-Reduction}} & \multicolumn{2}{c}{\thead{Oracles}}\\
+\cline{2-3} \cline{5-10}
 
 \theadturn{App ID} &
 
-\theadturn{Fun. cov. maximize (\%)} & \theadturn{Random exploration (\%)} & 
- &\theadturn{\#Func.States with abstraction}  &\theadturn{Func.State Reduction (\%)}
+\theadturn{Fun. cov. maximize (\%)} & \theadturn{Random exploration (\%)} &&\theadturn{\#Func.States using Reduc-Mut }  &\theadturn{Func.State Reduction (\%)}
+ &\theadturn{\#Func.States using Mut-Reduc }  &\theadturn{Func.State Reduction (\%)}
 %&\multicolumn{2}{c}{\thead{Assertions}} \\ 
 %\cline{5-6}&
 
-&\theadturn{\#Assertions w/o mutation} &\theadturn{\#Assertions with mutation}  \\  \hline
+&\theadturn{\#Assertions w/o mutation} &\theadturn{\#Assertions with mutation}  \\
+&&&&&&&&& \\
+  \hline
 
 \hline
 
-1 & 99 & 80 & 447 & 33 & 93 & 5101 & 136\\ 
+1 & 99 & 80 & 447 & 33 & 93 & & & 5101 & 136\\ 
 
-2 & 78 & 78 & 828 & 21 & 97 & 23212 & 81\\ 
+2 & 78 & 78 & 828 & 21 & 97 & & & 23212 & 81\\ 
 
-3 & 90 & 66 & 422 & 14 & 96 & 3520 & 45 \\ 
+3 & 90 & 66 & 422 & 14 & 96 & & & 3520 & 45 \\ 
 
-4 & 75 & 75 & 43 & 19 & 56 & 1232 & 109\\ 
+4 & 75 & 75 & 43 & 19 & 56 & & & 1232 & 109\\ 
 
-5 & 49 & 45 & 534 & 23 & 95 & 150 & 79\\ 
+5 & 49 & 45 & 534 & 23 & 95 & & & 150 & 79\\ 
 
-6 & 78 & 75 & 797 & 30 & 96 & 1648 & 125\\ 
+6 & 78 & 75 & 797 & 30 & 96 & & & 1648 & 125\\ 
 
-7 & 63 & 58 & 1653 & 54 & 97 & 198202 & 342\\ 
+7 & 63 & 58 & 1653 & 54 & 97 & & & 198202 & 342\\ 
 
-8 & 56 & 50 & 32 & 18 & 43 & 78 & 51 \\ 
+8 & 56 & 50 & 32 & 18 & 43 & & & 78 & 51 \\ 
 
-9 & 82 & 82 & 1509 & 49 & 97 & 65403 & 253 \\ 
+9 & 82 & 82 & 1509 & 49 & 97 & & & 65403 & 253 \\ 
 
-10 & 71 & 69 & 71 & 23 & 67 & 6584 & 96 \\ 
+10 & 71 & 69 & 71 & 23 & 67 & & & 6584 & 96 \\ 
 
-11 & 56 & 54 & 1383 & 131 & 90 & 2530 & 318 \\ 
+11 & 56 & 54 & 1383 & 131 & 90 & & & 2530 & 318 \\ 
 
-12 & 41 & 38 & 1530 & 62 & 96 & 3521 & 184 \\ 
+12 & 41 & 38 & 1530 & 62 & 96 & & & 3521 & 184 \\ 
 
-13 & 51 & 47 & 1401 & 152 & 89 & 2481 & 335 \\ \hline
+13 & 51 & 47 & 1401 & 152 & 89 & & & 2481 & 335 \\ \hline
 
-AVG& 68.4 & 62.8 & - & - & 85.5 & - & - \\  \hline
+AVG& 68.4 & 62.8 & - & - & 85.5 & & & - & - \\  \hline
           
 \hline\end{tabular}\centering
             }
