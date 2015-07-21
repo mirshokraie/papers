@@ -7,48 +7,51 @@
        
       %  \subtable[Experimental subjects and the corresponding exploration data]
             {
-           \begin{tabular}{c|c|rlllll||rr} \hline
-& & \multicolumn{6}{c||}{\thead{\tool}} & \multicolumn{2}{c}{\thead{\artemis}}\\
-\cline{3-10}
+           \begin{tabular}{c|c|rlllll||lll||rr} \hline
+& & \multicolumn{6}{c||}{\thead{\tool}} & 
+\multicolumn{3}{c||}{\thead{\tool-all states}} & 
+\multicolumn{2}{c}{\thead{\artemis}}\\
+\cline{3-13}
 
 \theadturn{App ID} &\theadturn{\# Injected Faults}
 &\theadturn{\#FN} &\theadturn{\#FP} &\theadturn{\#TP} 
 &\theadturn{Precision (\%)}  &\theadturn{Recall (\%)} & 
 %\theadturn{$\frac{\#NotDetectedByEventTest}{\#TotalDetected}$(\%)} 
-\theadturn{By func-level tests (\%)} 
+\theadturn{By func-level tests (\%)}
+&\theadturn{\#FN} &\theadturn{\#TP} &\theadturn{Recall (\%)} 
 &\theadturn{Precision (\%)} & \theadturn{Recall (\%)}  \\  \hline 
 
 \hline
 
-1  & 50 & 0 & 0 & 50 & 100 & 100 & 30 & 100 & 20  \\ 
+1  & 50 & 0 & 0 & 50 & 100 & 100 & 30 & 0 & 50 & 100 & 100 & 20  \\ 
            
-2 & 50 & 9 & 0 & 41 & 100 & 82 & 73 & 100  & 12 \\ 
+2 & 50 & 7 & 0 & 43 & 100 & 86 & 73 & 7 & 43 & 86 & 100  & 12 \\ 
 
-3 & 50 & 4 & 0 & 46 & 100 & 92 & 17 & 100 &  8 \\ 
+3 & 50 & 4 & 0 & 46 & 100 & 92 & 17 & 4 & 46 & 92 & 100 &  8 \\ 
 
-4 & 50 & 15 & 0 & 35 & 100 & 70 & 28 & 100 & 22 \\ 
+4 & 50 & 12 & 0 & 38 & 100 & 76 & 28 & 11 & 39 & 78 & 100 & 22 \\ 
 
-5 & 50 & 26 & 0 & 24 & 100 & 48 & 25 & 100 & 0 \\ 
+5 & 50 & 24 & 0 & 26 & 100 & 52 & 25 & 24 & 26 & 52 & 100 & 0 \\ 
 
-6 & 50 & 9 & 0 & 41 & 100 & 82 & 15 & 100 &  16 \\ 
+6 & 50 & 9 & 0 & 41 & 100 & 82 & 15 & 9 & 41 & 82 & 100 &  16 \\ 
 
-7 & 50 & 17 & 0 & 33 & 100 & 66 & 24 & 100 &  0%10
+7 & 50 & 16 & 0 & 34 & 100 & 68 & 24 & 14 & 36 & 72 & 100 &  0%10
 \\ 
 
-8 & 50 & 23 & 0 & 27 & 100 & 54 & 26 & 100 &  0%6
+8 & 50 & 21 & 0 & 29 & 100 & 58 & 26 & 21 & 29 & 58 & 100 &  0%6
  \\ 
 
-9 & 50 & 6 & 0 & 44 & 100 & 88 & 41 & 100 &  24 \\ 
+9 & 50 & 6 & 0 & 44 & 100 & 88 & 41 & 6 & 44 & 88 & 100 &  24 \\ 
 
-10 & 50 & 16 & 0 & 34 & 100 & 68 & 65 & 100 &  8 \\ 
+10 & 50 & 16 & 0 & 34 & 100 & 68 & 65 & 13 & 37 & 74 & 100 &  8 \\ 
 
-11 & 50 & 21 & 0 & 29 & 100 & 58 & 27 & 100 &  6 \\ 
+11 & 50 & 19 & 0 & 31 & 100 & 62 & 27 & 19 & 31 & 62 & 100 &  6 \\ 
 
-12 & 50 & 26 & 0 & 24 & 100 & 48 & 17 & 100 &  22 \\ 
+12 & 50 & 25 & 0 & 25 & 100 & 50 & 17 & 25 & 25 & 50 & 100 &  22 \\ 
 
-13 & 50 & 23 & 0 & 27 & 100 & 54 & 26 & 100 &  28 \\ \hline
+13 & 50 & 23 & 0 & 27 & 100 & 54 & 26 & 20 & 30 & 60 & 100 &  28 \\ \hline
 
-AVG & - & 15 & 0 & 35 & 100 & 70 & 32 & 100 & 12.8 \\ \hline
+AVG & - & 14 & 0 & 36 & 100 & 72 & 32 & 13.3 & 36.7 & 73.4 & 100 & 12.8 \\ \hline
 
 \hline\end{tabular}\centering
             }
