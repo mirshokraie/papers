@@ -71,25 +71,13 @@ We apply a function state reduction method to minimize the number of function-le
 Our reduction technique is based on classification of mutated function states according to the impact of mutations on the function's behaviour. A mutated state is the affected function state as a result of a given mutation. 
 Mutated states that are either mutually equivalent or have similar characteristics can be discarded. Although they are not equivalent to the original version of the program, there would be less point in including all of them as the test case that can detect a given mutation is potentially able to detect mutations with similar impacts as well.
 
-To categorize mutated states we assess the impact degree of a mutation on the function state according to the following aspects: 
-\begin{description}[noitemsep, leftmargin=0.4cm]
-\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, mutated states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  mutated states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
-global variable \code{currentDim} at the entry point falls into different boundaries. 
-\end{description}
-%For instance, a simple dimension change in the \code{hight} property of \code{endCell} in function \code{setDim} results in a different state. On a dynamic page where the properties of DOM elements frequently changes, the number of possible function states can quickly grow. In our analysis, %we reduce To reduce the number of such states, %to productive function states, 
-%To this end, we only select those function states that (1) affect the branch coverage, or capture a different behaviour in terms of the function's  (2) DOM-related operations and (3) the type of the returned value.
-
 \input{stateAbstractionAlgo}
 
-Our abstraction method is based on classification of function (entry/exit) states according to their impact on the function's behaviour, in terms of covered branches within the function, the function's return value type, and characteristics of the accessed DOM elements.
-
+To categorize mutated states we assess the impact degree of a mutation on the function state in terms of covered branches within the function, the characteristics of the function's return variable/object as well as the accessed DOM elements.
 \begin{description}[noitemsep, leftmargin=0.4cm]
-\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, function entry states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
-global variable \code{currentDim} at the entry point falls into different boundaries.   
-% \ali{so what states do we include here? what is `state' here BTW?}%However, it is not the only behaviour affecting entity in \javascript applications.
-
-\item[Return value type:] A variable's type can change in \javascript at runtime. This can result in changes in the expected outcome of the function. Going back to our example, if \code{dim} is mistakenly assigned a \code{string} value before adding it to \code{currentDim} (Line 21) in function \code{setDim}, the returned value of the function becomes the \code{string} concatenation of the two values rather than the expected numerical addition. 
-
+\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, mutated states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  mutated states of the \code{start} function that result in different covered branches, e.g., two different mutated function states where the value of the 
+global variable \code{currentDim} falls into different boundaries. 
+\item[Return variable/object characteristics:] Properties of an object can alter in \javascript at rune-time. Moreover, variable's type can dynamically change. This can result in changes in the expected outcome of the function. Going back to our example, if \code{dim} is mutated such that it is assigned a \code{string} value before adding it to \code{currentDim} (Line 21) in function \code{setDim}, the returned value of the function becomes the \code{string} concatenation of the two values rather than the expected numerical addition. 
 \item[Accessed DOM properties:] DOM elements and their properties accessed in a function can be seen as entry states. Changes in such DOM entry states can affect the behaviour of the function. For example, in line 29 \code{this} keyword refers to the clicked DOM element of which function \code{start} is an event-handler. Assuming that \code{currentDim}~$\leq$~40, depending on which DOM element is clicked, by removing the element in line 29 the resulting state of the function \code{start} differs.
 %\ali{I don't understand this example? How is start triggered? what is removed? what happens next?}.
 Therefore, we take into consideration the DOM elements accessed by the function as well as the type of accessed DOM properties.
