@@ -64,10 +64,19 @@ Once our instrumentation is carried out, we run the generated event sequences ob
 
 %\subsubsection{Function State Abstraction}
 %\label{Sec:stateAbstraction}
-\headbf{Function State Abstraction}
-As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Capturing all these different states can potentially hinder the technique's scalability for large applications. In addition, generating too many test cases can negatively affect test suite comprehension.
+\headbf{Function State Reduction}
+As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Given that each mutation can differently affect the the (entry/exit) state of  a function, capturing all these different states for the purpose of test case generation can negatively affect the test suite comprehension. 
+We apply a function state reduction method to minimize the number of function-level states needed for test generation.
+
+Our reduction technique is based on classification of mutated function states according to the impact of mutations on the function's behaviour. A mutated state is the affected function state as a result of a given mutation. 
+Mutated states that are either mutually equivalent or have similar characteristics can be discarded. Although they are not equivalent to the original version of the program, there would be less point in including all of them as the test case that can detect a given mutation is potentially able to detect mutations with similar impacts as well.
+
+To categorize mutated states we assess the impact degree of a mutation on the function state according to the following aspects: 
+\begin{description}[noitemsep, leftmargin=0.4cm]
+\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, mutated states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  mutated states of the \code{start} function that result in different covered branches, e.g., two different function states where the value of the 
+global variable \code{currentDim} at the entry point falls into different boundaries. 
+\end{description}
 %For instance, a simple dimension change in the \code{hight} property of \code{endCell} in function \code{setDim} results in a different state. On a dynamic page where the properties of DOM elements frequently changes, the number of possible function states can quickly grow. In our analysis, %we reduce To reduce the number of such states, %to productive function states, 
-We apply a function state abstraction method to minimize the number of function-level states needed for test generation.
 %To this end, we only select those function states that (1) affect the branch coverage, or capture a different behaviour in terms of the function's  (2) DOM-related operations and (3) the type of the returned value.
 
 \input{stateAbstractionAlgo}
