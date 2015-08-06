@@ -2,36 +2,36 @@
 \begin{algorithm}[t]
 {\scriptsize
 \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
-\Input{The set of function states $st_i \in ST_f$ for a given function $f$}
-\Output{The obtained reduced states set $AbsStates$}
+\Input{The set of mutated function states $mutSt_i \in MST_f$ for a given function $f$}
+\Output{The obtained reduced states set $RedStates$}
 \BlankLine
 
 \Begin {
-\nl \For{$st_i \in ST_f$}{
-\nl  $L=1$; $StSet_L \leftarrow \emptyset$\\ 
-\nl  \If{\textsc{BrnCovLns}$[st_i]\neq \textsc{BrnCovLns}[StSet]_{l=1}^L$}{
-\nl   $StSet_{L+1} \leftarrow st_i$\\
+\nl \For{$mutSt_i \in MST_f$}{
+\nl  $L=1$; $MStSet_L \leftarrow \emptyset$\\ 
+\nl  \If{\textsc{BrnCovLns}$[mutSt_i]\neq \textsc{BrnCovLns}[MStSet]_{l=1}^L$}{
+\nl   $MStSet_{L+1} \leftarrow mutSt_i$\\
 \nl   $L++$
    	 }
 \nl  \Else{
-\nl   $StSet_l \leftarrow st_i \cup StSet_l$\\
+\nl   $MStSet_l \leftarrow mutSt_i \cup MStSet_l$\\
 }
-\nl  $K=L+1$; $StSet_K \leftarrow \emptyset$\\ 
-\nl  \If{\textsc{DOMProps}$[st_i]\neq \textsc{DOMProps}[StSet]_{k=L+1}^K$ $||$ RetType$[st_i]\neq \textsc{RetType}[StSet]_{k=L+1}^K$}{
-\nl   $StSet_{K+1} \leftarrow st_i$\\
+\nl  $K=L+1$; $MStSet_K \leftarrow \emptyset$\\ 
+\nl  \If{\textsc{DOMProps}$[mutSt_i]\neq \textsc{DOMProps}[MStSet]_{k=L+1}^K$ $||$ \textsc{RetProp}$[mutSt_i]\neq \textsc{RetProp}[MStSet]_{k=L+1}^K$}{
+\nl   $MStSet_{K+1} \leftarrow mutSt_i$\\
 \nl   $K++$
 			}
 \nl  \Else{
-\nl   $StSet_k \leftarrow st_k \cup StSet_k$
+\nl   $MStSet_k \leftarrow mutSt_k \cup MStSet_k$
 }  
 		}
-\nl \While{$StSet_{K+L}\neq \emptyset$}{
-\nl  $SelectedSt \leftarrow \textsc{SelectMaxSt}({st_i|st_i\cap StSet_{j=1}^{K+L}})$\\
-\nl  $AbsStates.\textsc{add}(SelectedSt)$\\
-\nl  $StSet_{K+L} \leftarrow StSet_{K+L}-SelectedSt$
+\nl \While{$MStSet_{K+L}\neq \emptyset$}{
+\nl  $SelectedSt \leftarrow \textsc{SelectMaxSt}({mutSt_i|mutSt_i\cap MStSet_{j=1}^{K+L}})$\\
+\nl  $RedStates.\textsc{add}(SelectedSt)$\\
+\nl  $MStSet_{K+L} \leftarrow MStSet_{K+L}-SelectedSt$
 
 		}
-\nl return $AbsStates$
+\nl return $RedStates$
 }
 
 \caption{Function State Reduction} \label{Alg:stateAbstractionAlgo}
