@@ -3,7 +3,7 @@
 {\scriptsize
 \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 \Input{$\{origSt, mutSt|Mutation(f):origSt\rightarrow mutSt, origSt_i \in OST_f, mutSt_i \in MST_f \}$, where $origSt$ is the set of original function states, and $mutSt_i$ is the set of mutated function states for a given function $f$}
-\Output{The obtained reduced states set $RedStates$}
+\Output{The obtained reduced states set $reducedStates$}
 \BlankLine
 
 \Begin {
@@ -27,11 +27,27 @@
 		}
 \nl \While{$MStSet_{K+L}\neq \emptyset$}{
 \nl  $SelectedSt \leftarrow \textsc{SelectMaxSt}({mutSt_i|mutSt_i\cap MStSet_{j=1}^{K+L}})$\\
-\nl  $RedStates.\textsc{add}(SelectedSt)$\\
+\nl  $reducMStates.\textsc{add}(SelectedSt)$\\
 \nl  $MStSet_{K+L} \leftarrow MStSet_{K+L}-SelectedSt$
 
 		}
-\nl return $RedStates$
+\nl \For{$origSt_i \in OST_f$}{
+\nl  $M=1$; $origStSet_M \leftarrow \emptyset$\\ 
+\nl  \If{\textsc{BrnCovLns}$[origSt_i]\neq \textsc{BrnCovLns}[origStSet]_{m=1}^M$}{
+\nl   $origStSet_{M+1} \leftarrow origSt_i$\\
+\nl   $M++$
+   	 }
+\nl  \Else{
+\nl   $origStSet_m \leftarrow origSt_i \cup origStSet_m$\\
+	 }
+	}
+\nl $reducedStates\leftarrow \{corrOrigSt|Mutation(f):corrOrigSt\rightarrow reducMStates, corrOrigSt_i\in OST_f\}$\\	
+\nl \For{$oSt_i \in origStSet$}{
+\nl  \If{$oSt_i\cap reducedStates=\emptyset$}{
+\nl   $reducedStates\leftarrow SelectRand(oSt_i)\cup reducedStates$\\
+     } 
+    }
+\nl return $reducedStates$
 }
 
 \caption{Function State Reduction} \label{Alg:stateAbstractionAlgo}
