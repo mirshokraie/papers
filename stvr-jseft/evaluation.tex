@@ -6,9 +6,10 @@ To quantitatively assess the efficacy of our test generation approach, we have c
 
 \begin{description}[noitemsep]
 %\item [RQ1] How effective is our \emph{function coverage maximization} technique?
-\item [RQ1] How effective is \tool in generating test cases with high coverage? 
+\item [RQ1] How effective is \tool in generating test cases with high coverage?
 \item [RQ2] How capable is \tool of generating test oracles that detect regression faults?
-\item [RQ3] How does \tool compare to existing automated \javascript testing frameworks?
+\item [RQ3] How effective is our state reduction technique in reducing the number of function states?
+\item [RQ4] How does \tool compare to existing automated \javascript testing frameworks?
 \end{description} 
 
 %in which we compare \tool with an existing \javascript testing tool \artemis
@@ -44,8 +45,7 @@ We give \tool 10 minutes in total for each application.
 To measure client-side code coverage, we use \jscover \cite{jscover}, an open-source tool for measuring \javascript code coverage. We report the average results over five runs to account for the non-determinism behaviour that stems from crawling the application.
 In addition,  we assess each step in our approach separately as follows: 
 (1) compare the statement coverage achieved by our function coverage maximization with a method that chooses the next state/event for the expansion uniformly at random, 
-(2) assess the efficacy of our function state abstraction method (\algref{stateAbstractionAlgo}), and 
-(3) evaluate the effectiveness of applying mutation techniques (\algref{oracleGenAlgo}) to reduce the number of assertions generated.
+(2) evaluate the effectiveness of applying mutation techniques (\algref{oracleGenAlgo}) to reduce the number of assertions generated.
 % we provide the URL of each experimental object to the first component of \tool as depicted in \figref{approach-view}. We compare our state/event selection strategy with a random exploration method, in which the next state is chosen uniformly at random for the expansion. 
 %We generate event sequences from the two state-flow graphs obtained from each method. 
 
@@ -101,7 +101,10 @@ We measure the precision and recall as follows:
 \end{description}
 where $\textit{TP}$ (true positives), $\textit{FP}$ (false positives), and $\textit{FN}$ (false negatives) respectively represent the number of faults that are correctly detected, falsely reported, and missed.
 
-\headbf{Comparison (RQ3)} \label{comparison-setup}
+\headbf{Function State Reduction (RQ3)} \label{reduction-setup}
+To assess the efficacy of our function state reduction method (\algref{stateAbstractionAlgo}),  
+
+\headbf{Comparison (RQ4)} \label{comparison-setup}
 To assess how \tool performs with respect to existing \javascript test automation tools, we compare its coverage and fault finding capability to that of \artemis \cite{artzi:icse11}.  
 Similar to \tool, we give \artemis 10 minutes in total for each application; we observed no improvements in the results obtained from running \artemis for longer periods of time. 
 We run \artemis from the command line by setting the iteration option to 100 and enabling the coverage priority strategy, as described in \cite{artzi:icse11}. %\karthik{Earlier you said 5 minutes}. 
