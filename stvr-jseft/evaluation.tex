@@ -102,8 +102,8 @@ We measure the precision and recall as follows:
 where $\textit{TP}$ (true positives), $\textit{FP}$ (false positives), and $\textit{FN}$ (false negatives) respectively represent the number of faults that are correctly detected, falsely reported, and missed.
 
 \headbf{Function State Reduction (RQ3)} \label{reduction-setup}
-To assess the efficacy of our function state reduction method (\algref{stateAbstractionAlgo}),  
-
+To assess the efficacy of our function state reduction method (\algref{stateAbstractionAlgo}), we compare the statement coverage as well as fault finding capability before and after applying the state reduction technique. The former includes all possible function states each converted to a test case, while the latter includes reduced test cases after performing the state reduction technique. To measure the fault finding capability, the same set of mutations (50) is used in both cases using the same fault seeding procedure as described in RQ2. Since our function state reduction method is used in generating function-level test cases, in response to this research question we run only the function-level test suite on the mutated versions.  
+  
 \headbf{Comparison (RQ4)} \label{comparison-setup}
 To assess how \tool performs with respect to existing \javascript test automation tools, we compare its coverage and fault finding capability to that of \artemis \cite{artzi:icse11}.  
 Similar to \tool, we give \artemis 10 minutes in total for each application; we observed no improvements in the results obtained from running \artemis for longer periods of time. 
