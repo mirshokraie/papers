@@ -7,9 +7,9 @@
        
       %  \subtable[Experimental subjects and the corresponding exploration data]
             {
-           \begin{tabular}{c|r|r||r|r|r||r|r} \hline
-&\multicolumn{2}{c||}{\thead{St. Coverage}} & \multicolumn{3}{c||}{\thead{State Reduction}} & \multicolumn{2}{c}{\thead{Oracles}}\\
-\cline{2-8}
+           \begin{tabular}{c|r|r||r|r|r||r|r|r} \hline
+&\multicolumn{2}{c||}{\thead{St. Coverage}} & \multicolumn{3}{c||}{\thead{State Reduction}} & \multicolumn{3}{c}{\thead{Oracles}}\\
+\cline{2-9}
 
 \theadturn{App ID} &
 
@@ -18,37 +18,37 @@
 %&\multicolumn{2}{c}{\thead{Assertions}} \\ 
 %\cline{5-6}&
 
-&\theadturn{\#Assertions w/o mutation} &\theadturn{\#Assertions with mutation}  \\  \hline
+&\theadturn{\#Assertions w/o mutation \& reduction} & \theadturn{\#Assertions with reduction only} & \theadturn{\#Assertions with mutation \& reduction}  \\  \hline
 
 \hline
 
-1 & 99 & 80 & 447 & 42 & 91 & 5101 & 171\\ 
+1 & 99 & 80 & 447 & 42 & 91 & 5101 & 273 & 171\\ 
 
-2 & 78 & 78 & 828 & 23 & 97 & 23212 & 91\\ 
+2 & 78 & 78 & 828 & 23 & 97 & 23212 & 128 & 91\\ 
 
-3 & 90 & 66 & 422 & 22 & 95 & 3520 & 69 \\ 
+3 & 90 & 66 & 422 & 22 & 95 & 3520 & 137 & 69 \\ 
 
-4 & 75 & 75 & 43 & 18 & 58 & 1232 & 105\\ 
+4 & 75 & 75 & 43 & 18 & 58 & 1232 & 131 & 105\\ 
 
-5 & 49 & 45 & 534 & 31 & 94 & 150 & 103\\ 
+5 & 49 & 45 & 534 & 31 & 94 & 150 & 124 & 103\\ 
 
-6 & 78 & 75 & 797 & 38 & 95 & 1648 & 149\\ 
+6 & 78 & 75 & 797 & 38 & 95 & 1648 & 203 & 149\\ 
 
-7 & 63 & 58 & 1653 & 58 & 96 & 198202 & 365\\ 
+7 & 63 & 58 & 1653 & 58 & 96 & 198202 & 522 & 365\\ 
 
-8 & 56 & 50 & 32 & 23 & 28 & 78 & 67 \\ 
+8 & 56 & 50 & 32 & 23 & 28 & 78 & 71 & 67 \\ 
 
-9 & 82 & 82 & 1509 & 51 & 97 & 65403 & 259 \\ 
+9 & 82 & 82 & 1509 & 51 & 97 & 65403 & 417 & 259 \\ 
 
-10 & 71 & 69 & 71 & 22 & 69 & 6584 & 94 \\ 
+10 & 71 & 69 & 71 & 22 & 69 & 6584 & 136 & 94 \\ 
 
-11 & 56 & 54 & 1383 & 136 & 90 & 2530 & 334 \\ 
+11 & 56 & 54 & 1383 & 136 & 90 & 2530 & 549 & 334 \\ 
 
-12 & 41 & 38 & 1530 & 64 & 96 & 3521 & 193 \\ 
+12 & 41 & 38 & 1530 & 64 & 96 & 3521 & 253 & 193 \\ 
 
-13 & 51 & 47 & 1401 & 161 & 88 & 2481 & 361 \\ \hline
+13 & 51 & 47 & 1401 & 161 & 88 & 2481 & 638 & 361 \\ \hline
 
-AVG& 68.4 & 62.8 & - & - & 84.1 & - & - \\  \hline
+AVG& 68.4 & 62.8 & - & - & 84.1 & - & - & - \\  \hline
           
 \hline\end{tabular}\centering
             }

@@ -34,11 +34,11 @@ We also noticed that some applications required more time to achieve higher stat
 %For instance, GhostBusters (ID 3) has 27\% more coverage since it contains a large number of dynamically created clickable DOM elements that appear and then disappear within a few seconds, which our technique can handle, but the random one may not. 
 %We observed two anonymous functions, attached to clickable elements, that are missed by the random exploration technique in this application. Our technique is not only able to quickly spot such on the fly generated clickables, but it is also able to click on the ones that result in the execution of uncovered functions.
 
-The columns under ``State Abstract'' in \tabref{efficiency-abs-mut-table} present the number of function states
-before and after applying our function state abstraction algorithm.   
-The results show that the abstraction strategy reduces function states by 85.5\% on average. NarrowDesign (ID 7) and FractalViewer (ID 9) benefit the most by a 97\% state reduction rate. 
+The columns under ``State Reduction'' in \tabref{efficiency-abs-mut-table} present the number of function states
+before and after applying our function state reduction algorithm.   
+The results show that the reduction strategy reduces function states by 85.5\% on average. NarrowDesign (ID 7) and FractalViewer (ID 9) benefit the most by a 97\% state reduction rate. 
 %\karthik{What about ID 9 ?}
-Note that despite this huge reduction, our state abstraction does not adversely influence the coverage as we include at least one function state from each of the covered branch sets as described in \secref{testCaseGen}.
+Note that despite this huge reduction, our state reduction does not adversely influence the coverage as we include at least one function state from each of the covered branch sets as described in \secref{testCaseGen}.
 
 The last two columns of \tabref{efficiency-abs-mut-table}, under ``Oracles'', present the number of assertions obtained by capturing the whole application's state,  without any mutations, and with our mutation-based oracle generation algorithm respectively. The results show that the number of assertions is decreased by 86.5\% on average due to 
 our algorithm. 
@@ -89,7 +89,9 @@ For example in the SimpleCart application (ID 10), if we mutate the mathematical
 This points to the importance of incorporating function-level tests in addition to event-based tests for \javascript web applications. We also observed that even when an event-based test case detects a \javascript fault, localizing the error to the corresponding \javascript code can be quite challenging. However, function-level tests pinpoint the  corresponding function when an assertion fails, making it easier to localize the fault. 
 %For example, in SameGame (ID 1), the function \code{compactDown} is responsible for moving cells up on the board after clicking on a given cell. If the index of the global variable \code{board} array is mutated in \code{compactDown}, the event-based tests shows an incorrect \code{background} value of the \code{css} property on the corresponding DOM elements. However, tracing the fault back to the responsible function is difficult. Using function-level tests, we can easily spot the assertion that is failed after calling \code{compactDown} function (e.g., \code{equal(board[3][4], 1)} failed).    
 
-\headbf{Comparison (RQ3)}
+\headbf{Function State Reduction (RQ3)}
+
+\headbf{Comparison (RQ4)}
 \figref{coverage-graph} shows the code coverage achieved by  both \tool and \artemis on the experimental objects running for the same amount of time, \ie 10 minutes.
 %Note that while \artemis only generates DOM event tests, \tool generates both unit tests and DOM event tests. 
 %We compare the statement coverage achieved by \tool with that achieved by \artemis. 
