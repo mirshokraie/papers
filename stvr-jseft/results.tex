@@ -17,9 +17,9 @@
 \begin{figure}[!t]
   \centering
   \includegraphics[width=0.7\hsize]{r-scripts/barplot_coverage}
-  \vspace{-0.1in} 
+%  \vspace{-0.1in} 
   \mycaption{Statement coverage achieved.} 
-  \vspace{-0.25in} 
+%  \vspace{-0.25in} 
   \label{Fig:coverage-graph}
 \end{figure}
 
@@ -34,17 +34,6 @@ We also noticed that some applications required more time to achieve higher stat
 However, Tunnel (ID 2) and Fractal Viewer (ID 9) show no improvement in the statement coverage as these two applications have no dynamically generated or bound to event-listeners clickables. Instead, their few clickables are all placed in the HTML code of the application with a fixed event-handler per clikcable. Thus,  our approach achieves the same coverage as the random strategy for such applications. 
 %For instance, GhostBusters (ID 3) has 27\% more coverage since it contains a large number of dynamically created clickable DOM elements that appear and then disappear within a few seconds, which our technique can handle, but the random one may not. 
 %We observed two anonymous functions, attached to clickable elements, that are missed by the random exploration technique in this application. Our technique is not only able to quickly spot such on the fly generated clickables, but it is also able to click on the ones that result in the execution of uncovered functions.
-
-\headbf{Function State Reduction (RQ3)}
-The last two columns of \tabref{efficiency-abs-mut-table}, under ``Oracles'', present the number of assertions obtained by capturing the whole application's state,  without any mutations, and with our mutation-based oracle generation algorithm respectively. The results show that the number of assertions is decreased by 86.5\% on average due to 
-our algorithm. 
-We observe the most significant reduction of assertions for JointLondon (ID 7) from more than 198000 to 342. 
-
-The columns under ``State Reduction'' in \tabref{efficiency-abs-mut-table} present the number of function states
-before and after applying our function state reduction algorithm.   
-The results show that the reduction strategy reduces function states by 85.5\% on average. NarrowDesign (ID 7) and FractalViewer (ID 9) benefit the most by a 97\% state reduction rate. 
-%\karthik{What about ID 9 ?}
-Note that despite this huge reduction, our state reduction does not adversely influence the coverage as we include at least one function state from each of the covered branch sets as described in \secref{testCaseGen}.
 %For SameGame (ID 1) the number of executed functions remains the same, for both approaches. However, in the limited five minute period of time, as a result of dynamically detecting valid clickable elements, \tool is able to examine different paths of the applications, while the random exploration technique fails to do so as it blindly clicks on any candidate element on the DOM tree.
 
 
@@ -86,6 +75,17 @@ The table also shows that on average 32\% percent of the injected faults (ranges
 For example in the SimpleCart application (ID 10), if we mutate the mathematical operation that is responsible for computing the total amount of purchased items, the resulting error is not captured by event-based tests as the fault involves internal computations only. However, the fault is detected by a function-level test that directly checks the returned value of the function.
 This points to the importance of incorporating function-level tests in addition to event-based tests for \javascript web applications. We also observed that even when an event-based test case detects a \javascript fault, localizing the error to the corresponding \javascript code can be quite challenging. However, function-level tests pinpoint the  corresponding function when an assertion fails, making it easier to localize the fault. 
 %For example, in SameGame (ID 1), the function \code{compactDown} is responsible for moving cells up on the board after clicking on a given cell. If the index of the global variable \code{board} array is mutated in \code{compactDown}, the event-based tests shows an incorrect \code{background} value of the \code{css} property on the corresponding DOM elements. However, tracing the fault back to the responsible function is difficult. Using function-level tests, we can easily spot the assertion that is failed after calling \code{compactDown} function (e.g., \code{equal(board[3][4], 1)} failed).    
+\headbf{Function State Reduction (RQ3)}
+The last three columns of \tabref{efficiency-abs-mut-table}, under ``Oracles'', present the number of assertions obtained by (1) capturing the whole application's state,  without applying any mutation-based oracle generation or using the function state reduction strategy, (2) with enabling the state reduction technique only, and (3) with applying the state reduction as well as the mutation-based oracle generation algorithm, respectively. 
+The results show that the number of assertions is decreased by 71.5\% on average by using the state reduction technique. The number of assertions is further decreased by 30\% due to applying the combination of mutation and state reduction strategy.
+This indicates that our state reduction technique plays a more prominent role is reducing the number of assertions. 
+We observe the most significant reduction of assertions for JointLondon (ID 7) from more than 198000 to 365. 
+
+The columns under ``State Reduction'' in \tabref{efficiency-abs-mut-table} present the number of function states
+before and after applying our function state reduction algorithm.   
+The results show that the reduction strategy reduces function states by 85.5\% on average. NarrowDesign (ID 7) and FractalViewer (ID 9) benefit the most by a 97\% state reduction rate. 
+%\karthik{What about ID 9 ?}
+Note that despite this huge reduction, our state reduction does not adversely influence the coverage as we include at least one function state from each of the covered branch sets as described in \secref{testCaseGen}.
 
 \headbf{Comparison (RQ4)}
 \figref{coverage-graph} shows the code coverage achieved by  both \tool and \artemis on the experimental objects running for the same amount of time, \ie 10 minutes.
