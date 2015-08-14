@@ -366,7 +366,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Abstract Func. States}</string>
+\f0\fs24 \cf0 Reduce Func. States}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -721,8 +721,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{317.57935745533183, 583.32352991824712}</string>
-				<string>{434.19208465162552, 582.7058112386178}</string>
+				<string>{317.57935745532643, 583.32352986325043}</string>
+				<string>{434.19208465160841, 582.70581094759996}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1005,8 +1005,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{479.50000849429995, 319.96743774414074}</string>
-				<string>{479.50002303620022, 295.9999999999996}</string>
+				<string>{479.50000849429995, 319.96743774414062}</string>
+				<string>{479.50000849429995, 296}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1134,8 +1134,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{318.03384746719377, 333.94510897821516}</string>
-				<string>{332.50000003524764, 333.95054083012951}</string>
+				<string>{318.03384746719377, 333.94510897821584}</string>
+				<string>{332.50000003524764, 333.95054083013054}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1240,8 +1240,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{126.79780644350441, 211.99999999999997}</string>
-				<string>{126.79780644350441, 254.5}</string>
+				<string>{126.79780644350441, 212}</string>
+				<string>{126.79780644350441, 254.50000000000003}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1322,8 +1322,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{224.36781034128225, 295.49998397482199}</string>
-				<string>{224.20820157157468, 315.43492173530967}</string>
+				<string>{224.36815314380669, 295.4999840489088}</string>
+				<string>{224.20891376615526, 315.43492188835023}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1458,8 +1458,8 @@
 			<integer>1</integer>
 			<key>Points</key>
 			<array>
-				<string>{156.56370783861678, 277.3476950154012}</string>
-				<string>{174.53330791005391, 277.25574893683796}</string>
+				<string>{156.56370783861678, 277.34769501540086}</string>
+				<string>{174.53330791005391, 277.25574893683745}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1964,7 +1964,7 @@ Coverage}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-08-13 21:11:33 +0000</string>
+	<string>2015-08-14 19:23:27 +0000</string>
 	<key>Modifier</key>
 	<string>Shabnam Mirshokraie</string>
 	<key>NotesVisible</key>
@@ -2059,7 +2059,7 @@ Coverage}</string>
 		<key>SidebarWidth</key>
 		<integer>230</integer>
 		<key>VisibleRegion</key>
-		<string>{{-71, 67}, {718, 571}}</string>
+		<string>{{-78, 67}, {733, 571}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
