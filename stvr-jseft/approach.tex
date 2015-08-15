@@ -28,13 +28,14 @@ At a high level, our approach is composed of three main steps:
 \item In the first step (Section~\ref{Sec:funcCovg}), we dynamically explore various states of a given web 
 application, in such a way as to maximize the number of functions that are covered throughout the program execution. The output of this initial step is a state-flow graph (SFG) \cite{mesbah:tse12}, capturing the explored dynamic DOM states and event-based transitions between them. 
 
-\item In the second step (Section~\ref{Sec:testCaseGen}), %test cases are generated at the DOM event and \javascript function levels. We 
-we use the inferred SFG to generate event-based test cases. %The execution trace is collected through instrumenting the code and then automatically executing the application using the application's state machine obtained from the function exploration phase.
-We run the generated tests against an instrumented version of the application. From the execution trace obtained, we extract DOM element states as well as \javascript function states at the entry and exit points, from which we generate function-level unit tests.
-To reduce the number of generated test cases to only those that are constructive, we devise a \emph{state abstraction} algorithm that minimizes the number of states by selecting representative function states.
+\item In the second step (Section~\ref{Sec:testCaseGen}), we use the inferred SFG to generate event-based test cases.
+We run the generated tests against an instrumented version of the application. From the execution trace obtained, we extract DOM element states as well as \javascript function states at the entry and exit points.%, from which we generate function-level unit tests.
 
-\item To create effective test oracles for the two test case levels, we automatically generate mutated versions of the application (Section~\ref{Sec:oracleGen}).
-Assuming that the original version of the application is fault-free, the test oracles are then generated at the DOM and \javascript code levels by comparing the states traced from the original and the mutated versions.
+\item To reduce the number of function-level unit test cases as well as generated oracles to only those that are constructive, 
+we automatically generate mutated versions of the application (Section~\ref{Sec:oracleGen}). We devise a \emph{state reduction} algorithm that minimizes the number of states by selecting representative mutated function states. The corresponding original states are used to generate function-level unit tests.
+Assuming that the original version of the application is fault-free, the test oracles are then generated at the code level by comparing the states traced from the original and the mutated versions.
+To create effective test oracles for DOM-level test cases, we perform a DOM-based mutation analysis (Section~\ref{Sec:oracleGen}).
+The test oracles are generated at the DOM level by comparing the DOM properties inferred from the original and the mutated versions of the application.
 
 \end{enumerate}
 
