@@ -1,98 +1,45 @@
-\subsection{Generating Test Cases}
+\subsection{Extracting DOM and \javascript Function States}
 \label{Sec:testCaseGen}
 
-In the second step, our technique first extracts sequences of events from the inferred state-flow graph. These sequences of events are used in our test case generation process.
-We generate test cases at two complementary levels, as described below. %to investigate (1) the correct behaviour of the application through DOM events, and (2) the correct functionality of the individual \javascript functions.
+In the second step, our technique extracts sequences of events from the inferred state-flow graph. These sequences of events are used in our test case generation process.
 
-
-\headbf{DOM-level event-based testing} %\label{Sec:DOMEventTesting}
-To verify the behaviour of the application at the user interface level, each event path, taken from the initial state (\code{Index}) to a leaf node in the state-flow graph, is used to generate DOM event-based test cases. 
-Each extracted path is converted into a \junit \selenium-based test case, which executes the sequence of events, starting from the initial DOM state. %The generated JUnit test case is able to trigger events by using the information included in the state flow graph such as the element on which the event is triggered as well as  type of the fired event.
+\headbf{DOM-level event-based testing} To verify the behaviour of the application at the user interface level, each event path, taken from the initial state (\code{Index}) to a leaf node in the state-flow graph, is used to generate DOM event-based test cases. 
+Each extracted path is converted into a \junit \selenium-based test case, which executes the sequence of events, starting from the initial DOM state.
 Going back to our running example, one possible event sequence to generate is: \code{\$(`\#cell0').click$\rightarrow$\$(`div \#divElem').click$\rightarrow$\$(`\#st\-artCell').click}. 
 
-To collect the required trace data, we capture all DOM elements and their attributes after each event in the test path is fired. This trace is later used in our DOM oracle comparison, as explained in \secref{oracleGen}. 
+To collect the required trace data, we capture all DOM elements and their attributes after each event in the test path is fired. This trace is later used in our DOM oracle comparison, as explained in \secref{oracleGen}.
 
-\headbf{\javascript function-level unit testing} \label{Sec:jsFuncTesting}
-To generate unit tests that target \javascript functions directly (as opposed to event-triggered function executions), we log the state of each function at their entry and exit point, during execution.
-%\ali{why is this needed? Isn't this meant for the oracles actually?}. 
-%\karthik{Do we need to mention the proxy here ?}
+\headbf{Extracting \javascript function states} To generate unit tests that target \javascript functions directly (as opposed to event-triggered function executions), we log the state of each function at their entry and exit point, during execution.
 To that end, we instrument the code to trace  various entities.
-%We first parse the intercepted code into an Abstract Syntax Tree (AST), and then we traverse the AST in search of our environmental entities at entry and exit point of the function.
-%\headbf{Function State Extraction} 
-%
-%We extract the state of each function at the entry and exit point of the function.
 At the entry point of a given \javascript function we collect (1) function parameters including passed variables, objects, functions, and DOM elements, (2) global variables used in the function, and (3) the current DOM structure just before the function is executed. At the exit point of the \javascript function and before every \code{return} statement, we log the state of the (1) return value of the function, (2) global variables that have been accessed in that function, and (3) DOM elements accessed (read/written) in the function.
 At each of the above points, our instrumentation records the name, runtime type, and actual values.
-%\shabnam{the following paragraph is added for issta}
 The dynamic type is stored because \javascript is a dynamically typed language, meaning that the variable types cannot be determined statically. 
 Note that complex \javascript objects can contain circular or multiple references (e.g., in JSON format). To handle such cases, we perform a de-serialization process in which we replace such references by an object in the form
 of ${\$ref: Path}$, where $Path$ denotes a $JSONPath$ string\curl{http://goessner.net/articles/JsonPath/} that indicates the target path of the reference.
 
-In addition to function entry and exit points, we log information required for calling  the function from the generated test cases. %\javascript functions can be treated as objects. 
+In addition to function entry and exit points, we log information required for calling  the function from the generated test cases.
 \javascript functions that are accessible in the public scope are mainly defined in  (1) the global scope directly (e.g., \code{function f()\{...\}}), (2) variable assignments   in the global scope (e.g., \code{var f = function()\{...\}}), (3) constructor functions (e.g,  \code{function constructor() \{this.\ member= function()\{...\}\}}), and (4) prototypes (e.g., \code{Con\-structor.prototype.f= function() \{...\}}). 
 Functions in the first and second case are easy to call from test cases. For the third case, the constructor function is called via the \code{new} operator to create an object type, which can be used to access the object's properties
 (e.g., \code{container=new Constructor(); container.member();}).
-This allows us to access the inner function, which is a member of the \code{constructor} function in the above example.
-%The prototyping technique is used for inheritance in \javascript. 
+This allows us to access the inner function, which is a member of the \code{constructor} function in the above example. 
 For the prototype case, the function can be invoked through \code{container.f()} from a test case. 
 
 Going back to our running example in \figref{funcCovgExample}, at the entry point of \code{setDim}, we log the value and type of both the input parameter \code{dimension} and global variable \code{currentDim}, which is accessed in the function. Similarly, at the exit point, we log the values and types of the returned variable \code{dim} and \code{currentDim}.
 
 In addition to the values logged above, we need to capture the DOM state for functions that interact with the DOM. This is to address the fourth challenge outlined in \secref{motivation}.
-%To be able to unit test functions that contain DOM API calls, the expected DOM elements need to be present for the function to proceed during test execution.  Otherwise, the function may throw a null exception or produce an incorrect output. 
 To mitigate this problem, we capture the state of the DOM just before the function starts its execution, and include that as a \emph{test fixture} \cite{quint} in the generated unit test case.
 
 In the running example, at the entry point of  \code{setDim}, we log the \code{innerHTML} of the current DOM as the function contains several calls to the DOM, e.g., retrieving the element with ID \code{endCell} in Line 22. We further include in our execution trace the way DOM elements and their attributes are modified by the \javascript function at runtime. 
-%Based on the pattern in which the \javascript DOM modifications occur, we add instrumentation code to record the accessed DOM elements. 
 The information that we log for accessed DOM elements includes the ID attribute, the XPath position of the element on the DOM tree, and all the modified  attributes. Collecting this information is essential for oracle generation in the next step.
-%We keep this information so that later we can access this element to generate assertions \ali{you are mixing test generation with oracle generation here!}. 
-%Moreover, we record any changed attributes. 
-%
-%\karthik{I find this bit confusing - the example doesn't show why or how the stack is used. Also, you'd originally called this a list, but I think a stack is more appropriate}
 We use a set to keep the information about DOM modifications, so that we can record the latest changes to a DOM element without any duplication within the function. 
 For instance, we record ID as well as both \code{width} and \code{height} properties of the \code{endCell} element. 
 
-%Note that we record a deep clone of \javascript objects, global variables, and DOM elements at entry and exit points. The reason is that the trace data is buffered in the browser's memory before its size reaches to a certain threshold. Thus if changes happen to objects, global variables and DOM elements before the trace data sent to the proxy server, it does not affect the cloned entities. 
-% Once the AST is instrumented, we serialize it back to the corresponding \javascript source code and pass it to the browser. 
-Once our instrumentation is carried out, we run the generated event sequences obtained from the state-flow graph. This way, we produce an execution trace that contains:
- 
+Once our instrumentation is carried out, we run the generated event sequences obtained from the state-flow graph. This way, we produce an execution trace that contains: 
 \begin{itemize}[noitemsep]
 \item Information required for preparing the environment for each function to be executed in a test case, including its input parameters, used global variables, and the DOM tree in a state that is expected by the function;
 \item Necessary entities that need to be assessed after the function is executed, including the function's output as well as the touched DOM elements and their attributes (The actual assessment process is explained in \secref{oracleGen}).
-\end{itemize}
+\end{itemize} 
 
-
-%\subsubsection{Function State Abstraction}
-%\label{Sec:stateAbstraction}
-\headbf{Function State Reduction}
-As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Given that each mutation can differently affect the the (entry/exit) state of  a function, capturing all these different states for the purpose of test case generation can negatively affect the test suite comprehension. 
-We apply a function state reduction method to minimize the number of function-level states needed for test generation.
-
-Our reduction technique is based on classification of mutated function states according to the impact of mutations on the function's behaviour. A mutated state is the affected function state as a result of a given mutation. 
-Mutated states that are either mutually equivalent or have similar characteristics can be discarded. Although they are not equivalent to the original version of the program, there would be less point in including all of them as the test case that can detect a given mutation is potentially able to detect mutations with similar impacts as well.
-
-\input{stateAbstractionAlgo}
-
-To categorize mutated states we assess the impact degree of a mutation on the function state in terms of covered branches within the function, the characteristics of the function's return variable/object as well as the accessed DOM elements.
-\begin{description}[noitemsep, leftmargin=0.4cm]
-\item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, mutated states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  mutated states of the \code{start} function that result in different covered branches, e.g., two different mutated function states where the value of the 
-global variable \code{currentDim} falls into different boundaries. 
-\item[Return variable/object characteristics:] Properties of an object can alter in \javascript at rune-time. Moreover, variable's type can dynamically change. This can result in changes in the expected outcome of the function. Going back to our example, if \code{dim} is mutated such that it is assigned a \code{string} value before adding it to \code{currentDim} (Line 21) in function \code{setDim}, the returned value of the function becomes the \code{string} concatenation of the two values rather than the expected numerical addition. 
-\item[Accessed DOM properties:] Changes in DOM elements and their properties accessed in a function can affect the behaviour of the function. For example, in line 29 \code{this} keyword refers to the clicked DOM element of which function \code{start} is an event-handler. Assuming that \code{currentDim}~$\leq$~40, depending on which DOM element is clicked, by removing the element in line 29 the resulting state of the function \code{start} differs. If the mutation alters the element that invokes the function \code{start}, the expected outcome of the function changes as well. 
-Therefore, we take into consideration the DOM elements accessed by the function as well as the type of accessed DOM properties.
-\end{description}
-
-Removing similar mutated states can negatively affect the code coverage when the test cases are constructed from the corresponding original states. To make sure that our reduction technique does not change the coverage, we measure the branch coverage achieved by each of the original function states. Function states with equal branch coverage are categorized under the same set, and the reduced set of mutated states is compared against the categorized original states. The final set includes at least one function state from each of the covered branch original sets.
-
-\algref{stateAbstractionAlgo} shows our function state reduction algorithm. The algorithm first collects covered branches of individual functions per mutated state (\textsc{BrnCovLns}$[mutSt_i]$ in Line 3). Each mutated function's states exhibiting same covered branches are categorized under the same set of states (Lines 4 and 7). $MStSet_{l}$ corresponds to the set of mutated function states, which are classified according to their covered branches, where $l={1,...,L}$ and $L$ is the number of current classified sets in covered branch category. Similarly, affected function states with the same accessed DOM characteristics as well as return variable/object properties, are put into the same set of states (Lines 10 and 13). $MStSet_{k}$ corresponds to the set of mutated function states, which are classified according to their DOM/return properties, where $k={1,...,K}$ and $K$ is the number of current classified sets in that category.  After classifying each mutated function's states into several sets, we cover each set by selecting one of its common states.
-The state selection step is a \emph{set cover problem} \cite{Cormen:2001}, i.e., given a universe $U$ and a family $S$ of subsets of $U$, a cover is a subfamily $C \subseteq S$ of sets whose union is $U$.
-Sets to be covered in our algorithm are $MStSet_{K+L}$, where $mutSt_i \in MStSet_{K+L}$. We use a common greedy algorithm for obtaining the minimum number of states that can cover all the possible sets (Lines 15-17). To this end, $reducMStates$ (Line 16) contains reduced set of mutated states. 
-Note that there is a corresponding original state for each of the mutated function states in the reduced set ($corrOrigSt$ in Line 26). 
-As mentioned earlier, to prevent from from negative effect of the state reduction technique on the original code coverage, we further classify original function states according to the covered branches (Lines 18-25). $origStSet_m$ contains the set of categorized function states, where $m={1,...,M}$ and $M$ is the number of current classified sets. The final reduced list of original function states ($reducedStates$) contains at least one state from each of the covered branches category (Lines 27-29). The final list of states is returned in Line 30.  
-%The algorithm starts by choosing the state that can cover the maximum number of similar states (Line 15). Next, the selected state is added to the list of abstracted states (Line 16) and the covered sets and their states are removed from the current available sets (Line 17). This process iterates until all sets are covered (Line 14). 
-%         
-%\ali{In \algref{stateAbstractionAlgo}, what is $StSet$? Where does it come from? Is it a new set? (If yes, why is it not initialized to an empty set first?) What is $L$? What is K? Explain!}
-%\ali{How are we assessing the function state abstraction algorithm? How do we know if it is effective? By how much? Is this going to be part of the evaluation?}
  
  
 
