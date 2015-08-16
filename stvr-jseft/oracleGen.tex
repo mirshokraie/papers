@@ -8,11 +8,12 @@ Hence, the tester would only need to examine a small set of effective assertions
 
 In the following we describe our function state reduction technique to reduce the number of generated unit test cases, followed by our approach for generating oracles at DOM and unit level test cases.   
 
-\headbf{Function State Reduction}
-As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Given that each mutation can differently affect the the (entry/exit) state of  a function, capturing all these different states for the purpose of test case generation can negatively affect the test suite comprehension. 
-We apply a function state reduction method to minimize the number of function-level states needed for test generation.
+\subsubsection{\javascript function-level unit testing} \label{Sec:jsFuncTest}
 
-Our reduction technique is based on classification of mutated function states according to the impact of modification on the function's behaviour. A mutated state is the affected function state as a result of a given mutation. 
+As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Capturing all these different states for the purpose of test case generation can negatively affect the test suite comprehension. 
+We apply a mutation-based function state reduction method to minimize the number of function states needed for test generation. Note that these mutations are later used to create our unit level test oracles.
+
+\headbf{Function state reduction} The reduction technique is based on classification of mutated function states according to the impact of the modification on the function's behaviour. A mutated state is the affected function state as a result of a injected mutation (Details of the injected mutations are explained in \secref{oracleGen}). 
 Mutated states that are either mutually equivalent or have similar characteristics can be discarded. Although they are not equivalent to the original version of the program, there would be less point in including all of them as the test case that can detect a given mutation is potentially able to detect mutations with similar impacts as well.
 
 \input{stateAbstractionAlgo}
@@ -38,6 +39,7 @@ As mentioned earlier, to prevent from from negative effect of the state reductio
 %
 %
 \subsubsection{Oracle Generation} \label{Sec:oracleGen}
+
 \algref{oracleGenAlgo} shows our algorithm for generating test oracles. 
 At a high level, the technique iteratively executes the following steps:
 
