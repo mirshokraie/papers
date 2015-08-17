@@ -1,9 +1,15 @@
 \section{Related Work} \label{Sec:related}
-
-
 \headbf{Web application testing}
+\cite{20} propose hierarchical Finite State Machine (FSM) to mitigate the state space explosion problem in web application testing, by reducing the number of states and transitions in the generated FSM. Test cases are generated as a sequence of transitions and the input values are randomly selected.
+Probable FSM as a method for constructing test cases is explained in \cite{21}. The probabilistic FSM is manually constructed, and the test sequences are generated based on the assigned probability to a given sequence. However, the aforementioned FSM-based techniques are not fully automated as the construction of FSM requires manual effort.
+Praphamontripong \etal \cite{22} apply mutation testing for Java Server Pages (JSP) and Java Servlets. The mutation operators are specifically proposed for these types of applications. Their results show that using mutation testing is particularly effective in detecting web application errors that occur on the server-side.
+To test PHP web applications Alshahwan and Harman \cite{23} propose SWAT, a search-based method by using static analysis. Their main goal is to maximize the branch coverage.
+Heidegger \etal propose a random testing framework, called JSConTest \cite{30}. The authors propose a contract language for \javascript that allows a programmer to annotate the program with functional contracts. Annotations are used to guide the random test generation in finding counterexamples.
+Milani Fard \etal \cite{milanifard:ase14} propose Testilizer which utilizes DOM-based test suite of the web application to explore alternative paths and consequently regenerate assertions for new detected states. Our work is different from this approach in that we generate unit level code-based test cases and assertions.
+
+
 Marchetto and Tonella \cite{marchetto:search} propose a search-based algorithm for generating event-based sequences to test Ajax applications. 
-Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. In subsequent work \cite{mesbah:tse12}, they propose generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.  Our earlier work, \jsart \cite{mirshokraie:icwe12},  automatically infers program invariants from \javascript execution traces and uses them as regression assertions in the code. 
+Mesbah et al.  \cite{mesbah:tweb11} apply dynamic analysis to construct a model of the application's state space, from which event-based test cases are automatically generated. In subsequent work \cite{mesbah:tse12}, they propose generic and application-specific invariants as a form of automated soft oracles for testing \ajax applications.  Our earlier work, \jsart \cite{mirshokraie:icwe12}, automatically infers program invariants from \javascript execution traces and uses them as regression assertions in the code. 
 Sen \etal \cite{sen:fse13} recently proposed a record and replay framework called Jalangi. It incorporates selective record-replay as well as shadow values and shadow execution to enable writing of heavy-weight dynamic analyses.
 The framework is able to track generic faults such as \code{null} and \code{undefined} values as well as type inconsistencies in \javascript. 
 Jensen \etal \cite{jensen:fse13} propose a technique to test the correctness of communication patterns between client and server in \ajax applications by incorporating server interface descriptions.
@@ -19,15 +25,17 @@ In this paper, we quantitatively compare our approach with that of \artemis (Sec
 
 \headbf{Oracle generation} \label{Sec:oracleGen}
 There has been limited work on oracle generation for testing. 
-Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension.
+Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension. The authors assume that the tester will manually correct the generated oracles. However, the results on the effectiveness of such approaches which rely on the "generate-and-fix" assumption to construct test oracles are not conclusive \cite{fraser:issta13}.
 %\shabnam{differential test generation added for issta}
 Differential test case generation approaches \cite{taneja:ase08, elbaum:tse09} are similar to mutation-based techniques in that they aim to generate test cases that show the difference between two versions of a program. However, mutation-based techniques such as ours, do not require two different versions of the application.
 Rather, the generated differences are in the form of controllable mutations that can be used to generate test cases capable of detecting
 regression faults in future versions of the program.
-%\karthik{So what's the advantage of having the differences in the form of controllable mutations ?}
+Pastore \etal \cite{pastore:icst13} exploit crowd sourcing approach to check assertions. The developer produces tests and provides sufficient API documentation for the crowd such that crowd workers can determine the correctness of assertions. However, recruiting qualified crowd to generate test oracles can be quite challenging.
 Staats \etal \cite{staats:icse12} address the problem of selecting oracle data,  which is formed as a subset of internal state variables as well as outputs for which the expected values are determined.
 They apply mutation testing to produce oracles and rank the inferred oracles in terms of their fault finding capability.
 This work is different from ours in that they merely focus on supporting the creation of test oracles by the programmer, rather than fully automating the process of test case generation. Further, (1) they do not target \javascript; 
-(2) in addition to the code-level mutation analysis, we propose DOM-related mutations to capture error-prone \cite{Ocariza:esem2013} dynamic interactions of \javascript with the DOM.  
+(2) in addition to the code-level mutation analysis, we propose DOM-related mutations to capture error-prone \cite{Ocariza:esem2013} dynamic interactions of \javascript with the DOM.
+
+ 
 
 
