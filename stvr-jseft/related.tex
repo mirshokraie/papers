@@ -25,6 +25,8 @@ In this paper, we quantitatively compare our approach with that of \artemis (Sec
 There has been limited work on oracle generation for testing. 
 Fraser \etal \cite{fraser:tse12} propose $\mu$TE\-ST, which employs a mutant-based oracle generation technique.  It automatically generates unit tests for Java object-oriented classes by using a genetic algorithm to target mutations with high impact on the application's behaviour. They further identify~\cite{fraser:issta11} relevant pre-conditions on the test inputs and post-conditions on the outputs to ease human comprehension. The authors assume that the tester will manually correct the generated oracles. However, the results on the effectiveness of such approaches which rely on the "generate-and-fix" assumption to construct test oracles are not conclusive \cite{fraser:issta13}.
 %\shabnam{differential test generation added for issta}
+Xie \etal explore test oracle generation for GUI systems \cite{xie:tosem07}. 
+Eclat \cite{pacheco:ecoop05} is used for automatically generating invariant-based oracles. 
 Differential test case generation approaches \cite{taneja:ase08, elbaum:tse09} are similar to mutation-based techniques in that they aim to generate test cases that show the difference between two versions of a program. However, mutation-based techniques such as ours, do not require two different versions of the application.
 Rather, the generated differences are in the form of controllable mutations that can be used to generate test cases capable of detecting
 regression faults in future versions of the program.
