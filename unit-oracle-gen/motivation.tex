@@ -1,15 +1,14 @@
 \section{Motivation} \label{Sec:motivation}
-Unlike DOM-based testing, asserting the behaviour of a \javascript application through unit-level tests requires a tester to check the correctness of several intermediate code-level variables and object properties. The code-level operations are mainly responsible for updating the DOM throughout the application execution. Therefore, a tester needs to analyze the relation between the \javascript code and the DOM's evolution. 
-%Moreover, in order to prevent generating fragile unit tests, the testing effort should be directed towards aspects of the system behavior that are relevant to important DOM changes. 
-We believe DOM-based assertions can be utilized as a guideline to generate unit test assertions at \javascript code level. 
-
-\begin{figure}[!t]
+\begin{figure*}[!t]
   \centering
-  \includegraphics[width=1\hsize]{fig/example}
+  \includegraphics[width=.9\hsize]{fig/example}
   \vspace{-0.2in} 
   \mycaption{Running example (a) \javascript code, and (b) DOM-based test case. The line from (b) to (a) shows the point of contact between the DOM assertion and the code. The arrow lines in (a) show the backward as well as forward slices between \javascript statements.}
   \label{Fig:example}
-\end{figure}
+\end{figure*}
+Unlike DOM-based testing, asserting the behaviour of a \javascript application through unit-level tests requires a tester to check the correctness of several intermediate code-level variables and object properties. The code-level operations are mainly responsible for updating the DOM throughout the application execution. Therefore, a tester needs to analyze the relation between the \javascript code and the DOM's evolution. 
+%Moreover, in order to prevent generating fragile unit tests, the testing effort should be directed towards aspects of the system behavior that are relevant to important DOM changes. 
+We believe DOM-based assertions can be utilized as a guideline to generate unit test assertions at \javascript code level. 
 
 \figref{example} presents a snippet of a \javascript-based shopping cart application as well as a sample DOM-based \selenium test case that we will use as a running example through out this paper. The application's code (a) contains two main functions as follows:
 \begin{enumerate}
