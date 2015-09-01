@@ -35,7 +35,7 @@ We use a set to keep the information about DOM modifications, so that we can rec
 For instance, we record ID as well as both \code{width} and \code{height} properties of the \code{endCell} element. 
 
 Once our instrumentation is carried out, we run the generated event sequences obtained from the state-flow graph. This way, we produce an execution trace that contains: 
-\begin{itemize}[noitemsep]
+\begin{itemize}%[noitemsep]
 \item Information required for preparing the environment for each function to be executed in a test case, including its input parameters, used global variables, and the DOM tree in a state that is expected by the function;
 \item Necessary entities that need to be assessed after the function is executed, including the function's output as well as the touched DOM elements and their attributes (The actual assessment process is explained in \secref{oracleGen}).
 \end{itemize} 

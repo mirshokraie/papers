@@ -19,7 +19,7 @@ Mutated states that are either mutually equivalent or have similar characteristi
 \input{stateAbstractionAlgo}
 
 To categorize mutated states we assess the impact degree of a mutation on the function state in terms of covered branches within the function, the characteristics of the function's return variable/object as well as the accessed DOM elements.
-\begin{description}[noitemsep, leftmargin=0.4cm]
+\begin{description}%[noitemsep, leftmargin=0.4cm]
 \item[Branch coverage:] Taking different branches in a given function can change its behaviour. Thus, mutated states that result in a different covered branch should be taken into account while generating test cases. Going back to our example in \figref{funcCovgExample}, executing either of the branches in lines 27 and 29 clearly takes the application into a different DOM state. In this example, we need to include the  mutated states of the \code{start} function that result in different covered branches, e.g., two different mutated function states where the value of the 
 global variable \code{currentDim} falls into different boundaries. 
 \item[Return variable/object characteristics:] Properties of an object can alter in \javascript at rune-time. Moreover, variable's type can dynamically change. This can result in changes in the expected outcome of the function. Going back to our example, if \code{dim} is mutated such that it is assigned a \code{string} value before adding it to \code{currentDim} (Line 21) in function \code{setDim}, the returned value of the function becomes the \code{string} concatenation of the two values rather than the expected numerical addition. 
@@ -45,7 +45,7 @@ At a high level, the technique iteratively executes the following steps:
 
 \input{oracleGenAlgo}
 
-\begin{enumerate}[noitemsep]
+\begin{enumerate}%[noitemsep]
 \item A mutant is created by injecting a single fault into the original version of the web application (Line 9 and 19 in \algref{oracleGenAlgo} for DOM mutation and code-level mutation, respectively), 
 \item Related entry/exit program states at the DOM and \javascript function levels of the mutant and the original version are captured. $OnEvDomSt$ in Line 4 is the original DOM state on which the event $Ev$ is triggered, $AfterEvDomSt$ in line 5 is the observed DOM state after the event is triggered, $MutDom$ in line 9 is the mutated DOM, and $ChangedSt$ in line 10 is the corresponding affected state for DOM mutations. $FcExit$ in Line 22 is the exit
 state of the function in the original application and $MutFcExit$ in line 23 is the corresponding exit state for that function after the application is mutated for function-level mutations.

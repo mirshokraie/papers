@@ -31,8 +31,8 @@
 \usepackage{multirow}
 \usepackage{array}
 \let\labelindent\relax
-\usepackage{enumitem}
-\usepackage{setspace}
+%\usepackage{enumitem}
+%\usepackage{setspace}
 %\usepackage{lipsum}
 \usepackage{balance}
 
@@ -105,7 +105,7 @@
 %\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
 %\textwidth 17.8cm
 %\textheight 22.7cm
-\setstretch{0.95}
+%\setstretch{0.95}
 
 %%Terminology
 %\def\baselinestretch{2}
@@ -251,11 +251,11 @@
 
 \maketitle
 \input{intro}
-\input{related}
 \input{motivation}
 \input{approach}
 \input{tool}
 \input{evaluation}
+\input{related}
 \input{concs}
 
 % use section* for acknowledgement
@@ -263,11 +263,11 @@
 %This work was supported in part by a Strategic Project Grant (SPG) from the Natural Science and Engineering Research Council of Canada (NSERC), and a research gift from Intel Corporation. We thank the anonymous reviewers of ICST'15 for their insightful comments.
 
 \balance
-\footnotesize
-\begin{spacing}{0.9}
+%\footnotesize
+%\begin{spacing}{0.9}
 \bibliographystyle{wileyj}
 \bibliography{../biblio}
-\end{spacing}
+%\end{spacing}
 
 % that's all folks
 \end{document}

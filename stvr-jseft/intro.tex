@@ -21,7 +21,7 @@ The highly dynamic behaviour of \javascript can result in prohibitively large te
 
 Researchers have recently developed automated test generation techniques for \javascript-based applications \cite{artzi:icse11, marchetto:search, tonella:icst08, mesbah:tse12, song:symb10}. However, current web test generation techniques suffer from two main  shortcomings, namely, they:
 
-\begin{enumerate}[noitemsep, nolistsep]
+\begin{enumerate}%[noitemsep, nolistsep]
 \item Target the generation of \emph{event sequences}, which operate at the event-level or DOM-level to cover the state space of the application. These techniques fail to capture faults that  do not propagate to an observable DOM state. As such, they potentially miss this portion of code-level \javascript faults. In order to capture such faults, effective test generation techniques need to target the code at the \javascript unit-level, in addition to the event-level.
 \item Either ignore the oracle problem altogether or simplify it through generic \emph{soft oracles}, such as  W3C HTML  validation \cite{artzi:icse11,mesbah:tse12}, or  \javascript runtime exceptions \cite{artzi:icse11}.
 A generated test case without assertions is not useful since coverage alone is not the goal of software testing. For such generated test cases, the tester still needs to  manually write many assertions, which is time and effort intensive. 
