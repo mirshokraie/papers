@@ -3,8 +3,9 @@
 %\javascript's highly dynamic nature and its complex interaction with DOM make it difficult for the tester to achieve high coverage test suite. 
 In this paper, we presented a technique  to automatically generate  test cases for \javascript applications at two complementary levels: (1) individual \javascript functions, (2) event sequences. 
 Our technique is based on algorithms to maximize function coverage and minimize function states needed for efficient test generation.
-We also proposed a method for effectively generating test oracles along with the test cases, for detecting faults in \javascript code as well as on the DOM tree. We implemented our  approach in an open-source tool called \tool. We empirically evaluated \tool on 13 web applications. The results show that the generated tests by \tool achieve high coverage (68.4\% on average),  and that the injected faults can be detected with a high accuracy rate (recall 70\%, precision 100\%). 
-%In comparison, the other framework has a coverage of 45.3\%, and a recall of 10.5\% for the injected faults.
-%
-%Our future work will include improving the guided exploration technique to capture the behaviour of functions in terms of coverage as well as the execution frequency of function's statements, in addition to function coverage. Conducting larger experiments with \tool to obtain more general conclusions also forms part of our future work.
+We also proposed a method for effectively generating test oracles along with the test cases, for detecting faults in \javascript code as well as on the DOM tree. We implemented our  approach in an open-source tool called \tool. We empirically evaluated \tool on 13 web applications. The results show that the generated tests by \tool achieve high coverage (68.4\% on average),  and that the injected faults can be detected with a high accuracy rate (recall 70\%, precision 100\%).
+We also find that our approach outperforms an existing \javascript test automation framework in terms of coverage and fault detection capability. Compared with \artemis, our tool achieves 53\% more statement coverage as well as five-fold higher recall.
+
+Our future work will include applying a more robust mutation analysis technique to generate non-fragile DOM-level test assertions.
+Another possible future direction is to identify the extent of hard-to-test functions (e.g.; private function closures) written by \javascript developers through an empirical study. Automated code refactoring systems can be used to expose such functions to unit tests. \javascript developers can also make use of the results of empirical study as a coding recommendation to make their future applications more testable and consequently more maintainable.
  
