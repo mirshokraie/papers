@@ -8,7 +8,7 @@ To quantitatively assess the efficacy of our test generation approach, we have c
 %\item [RQ1] How effective is our \emph{function coverage maximization} technique?
 \item [RQ1] How effective is \tool in generating test cases with high coverage?
 \item [RQ2] How capable is \tool of generating test oracles that detect regression faults?
-\item [RQ3] How effective is our state reduction technique in reducing the number of function states?
+\item [RQ3] How effective is the state reduction technique in reducing the number of function states?
 \item [RQ4] How does \tool compare to existing automated \javascript testing frameworks?
 \end{description} 
 
@@ -101,7 +101,7 @@ We measure the precision and recall as follows:
 where $\textit{TP}$ (true positives), $\textit{FP}$ (false positives), and $\textit{FN}$ (false negatives) respectively represent the number of faults that are correctly detected, falsely reported, and missed.
 
 \headbf{Function State Reduction (RQ3)} \label{reduction-setup}
-To assess the efficacy of our function state reduction method (\algref{stateAbstractionAlgo}), we compare the statement coverage as well as fault finding capability before and after applying the state reduction technique. The former includes all possible function states each converted to a test case, while the latter includes reduced test cases after performing the state reduction technique. To measure the fault finding capability, the same set of mutations (50) is used in both cases using the same fault seeding procedure as described in RQ2. Since our function state reduction method is used in generating function-level test cases, in response to this research question we run only the function-level test suite on the mutated versions.  
+To assess the efficacy of the function state reduction method (\algref{stateAbstractionAlgo}), we compare both the statement coverage and fault finding capability, before and after applying the state reduction technique. The former includes all possible function states converted to a test case, while the latter includes reduced test cases after applying the state reduction technique. To measure the fault finding capability, the same set of mutations (50) is used in both cases using the same fault seeding procedure as described in RQ2. Since the function state reduction method is used for generating function-level test cases, we run only the function-level test suite on the mutated versions for this research question.  
   
 \headbf{Comparison (RQ4)} \label{comparison-setup}
 To assess how \tool performs with respect to existing \javascript test automation tools, we compare its coverage and fault finding capability to that of \artemis \cite{artzi:icse11}.  

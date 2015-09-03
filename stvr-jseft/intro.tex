@@ -4,7 +4,7 @@
 %ALi: (this is still the case with our test cases). Further, the test cases may break whenever there are changes to the application, which make them unstable.
  
 Further, the event-driven nature of \javascript as well as its runtime interaction with the Document Object Model (DOM) make \javascript applications error-prone \cite{Ocariza:esem2013} and difficult to test. 
-The highly dynamic behaviour of \javascript can result in prohibitively large test suites containing thousands of test cases. This hinders the test suite comprehension. Moreover, by growing the size of test suite, it can become expensive to execute on new versions of the application as such test suites often contain fragile, or redundant test cases \cite{harrold:tosem1993}. However, removing test cases may negatively affect the fault finding capability of the test suite.
+The highly dynamic behaviour of \javascript can result in prohibitively large test suites containing thousands of test cases. This hinders the test suite comprehension. Moreover, as the size of the test suite increases, it can become expensive to execute on new versions of the application as large test suites often contain fragile, or redundant test cases \cite{harrold:tosem1993}. However, removing test cases may negatively affect the fault finding capability of the test suite.
 %it challenging to effectively write stable test cases that achieve high coverage. %\karthik{Should we define stable ?} 
 %Despite these challenges, little attention has been paid to automated test generation for \javascript applications.
 %
@@ -36,7 +36,7 @@ To address these two shortcomings, we propose an automated test case  generation
 
 Our approach, called \tool (JavaScript Event and Function Testing) operates through a three step process. 
 First, it dynamically explores the event-space of the application using a \emph{function coverage maximization} method, to infer a test model. Then, it generates test cases at two complementary levels, namely, DOM event and \javascript functions. Our technique employs a novel \emph{function state abstraction} algorithm to minimize the number of function-level states needed for test generation.
-Finally,  it automatically generates test oracles, through a mutation-based algorithm. This paper is a substantially expanded and revised version of our paper from early 2015 \cite{mirshokraie:icst15}.
+Finally,  it automatically generates test oracles, through a mutation-based algorithm. This paper is a substantially expanded and revised version of our paper from early 2015 \cite{mirshokraie:icst15} (see appendix for differences from that paper).
 
 %
 %, in which a modified version of the program called a mutant is

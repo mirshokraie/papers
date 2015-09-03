@@ -74,15 +74,25 @@ For example in the SimpleCart application (ID 10), if we mutate the mathematical
 This points to the importance of incorporating function-level tests in addition to event-based tests for \javascript web applications. We also observed that even when an event-based test case detects a \javascript fault, localizing the error to the corresponding \javascript code can be quite challenging. However, function-level tests pinpoint the  corresponding function when an assertion fails, making it easier to localize the fault. 
 %For example, in SameGame (ID 1), the function \code{compactDown} is responsible for moving cells up on the board after clicking on a given cell. If the index of the global variable \code{board} array is mutated in \code{compactDown}, the event-based tests shows an incorrect \code{background} value of the \code{css} property on the corresponding DOM elements. However, tracing the fault back to the responsible function is difficult. Using function-level tests, we can easily spot the assertion that is failed after calling \code{compactDown} function (e.g., \code{equal(board[3][4], 1)} failed).    
 \headbf{Function State Reduction (RQ3)}
-The last three columns of \tabref{efficiency-abs-mut-table}, under ``Oracles'', present the number of assertions obtained by (1) capturing the whole application's state,  without applying any mutation-based oracle generation or using the function state reduction strategy, (2) with enabling the state reduction technique only, and (3) with applying the state reduction as well as the mutation-based oracle generation algorithm, respectively. 
-The results show that the number of assertions is decreased by 71.5\% on average by using the state reduction technique. The number of assertions is further decreased by 30\% due to applying the combination of mutation and state reduction strategy.
-This indicates that our state reduction technique plays a more prominent role in reducing the number of assertions. The reason is that our function state reduction technique removes considerable number of states each containing a number of oracles. This constitutes a larger portion of possible oracles in comparison with mutation based method which selectively chooses oracles within each state. 
-We observe the most significant reduction of assertions for JointLondon (ID 7) from more than 198000 to 365. 
+The last three columns of \tabref{efficiency-abs-mut-table}, under ``Oracles'', present the number of assertions obtained by capturing the whole application's state,  (1) without applying any mutation-based oracle generation or using the function state reduction strategy (baseline), (2) with enabling the state reduction technique only, and (3) with applying both the state reduction and the mutation-based oracle generation algorithm, respectively. 
+The results show that the number of assertions is decreased by 71.5\% on average by using the state reduction technique compared to the baseline. 
+The number of assertions is further decreased by 30\% when applying the combination of mutation and state reduction strategy.
+This indicates that the state reduction technique plays a more prominent role than mutation in reducing the number of assertions. The reason is that the function state reduction technique removes considerable number of states each containing a number of oracles, while the mutation based method selectively chooses oracles within each state. 
+%This constitutes a larger portion of possible oracles in comparison with mutation based method which selectively chooses oracles within each state. 
+We observe the most significant reduction of assertions for JointLondon (ID 7) from more than 198000 to 365. \textbf{Karthik: Can we give some intuition on why}
 
 The columns under ``State Reduction'' in \tabref{efficiency-abs-mut-table} show the number of function states
-before and after applying our function state reduction algorithm.   
-The results show that the reduction strategy reduces function states by 84.1\% on average. Tunnel (ID 2) and FractalViewer (ID 9) benefit the most by a 97\% state reduction rate. 
-Note that despite this huge reduction, our state reduction does not adversely influence the coverage as we include at least one function state from each of the covered branch sets as described in \secref{testCaseGen}. In addition to statement coverage, we also assess the effect of our state reduction on the fault finding capability of \tool. The columns under ``\tool-all states'' in \tabref{faultDetection-table} present the number of false negatives, true positives, and recall without applying the state reduction. As shown in the table, reducing the number of function states using our strategy marginally decreases the fault finding capability (less than 2\% in recall). Note that while it is expected to observe improvement in fault detection ability by including all possible states, this can negatively impact test comprehension. 
+before and after applying the function state reduction algorithm.   
+The results show that the reduction strategy reduces the number of function states by 84.1\% on average, with 
+the maximum reduction being 97\% in the case of Tunnel (ID 2) and FractalViewer (ID 9), and minimum reduction being 28\% in the case of JointLondon (ID 8).
+\textbf{Karthik: Again, we should say why this was the case}
+
+We evaluate the effect of the state reduction strategy on both the statement coverage and fault-finding capability of \tool.  
+We find that it does not reduce the statement coverage as it includes at least one function state from each of the covered branch sets as described in \secref{testCaseGen}. 
+%In addition to statement coverage, we also assess the effect of our state reduction on the fault finding capability of \tool. 
+For the fault-finding capability, we measured the false-negatives, true positives and recall of \tool without applying the state reduction. These values are shown in
+the columns under ``\tool-all states'' in \tabref{faultDetection-table}.  As shown in the table, there is only a marginal decrease in the fault finding capability (less than 2\% in recall) when using the state reduction strategy.  
+%Note that while it is expected to observe improvement in fault detection ability by including all possible states, this can negatively impact test comprehension. 
 
 \headbf{Comparison (RQ4)}
 \figref{coverage-graph} shows the code coverage achieved by  both \tool and \artemis on the experimental objects running for the same amount of time, \ie 10 minutes.
