@@ -1,25 +1,22 @@
 \section{Discussion} \label{Sec:discussion}
 In this section, we discuss some of the limitations of our current implementation and threats to validity of our results.
 
-\subsection{Direct testability of functions} As we described in \secref{evaluation}, it is not possible to produce test cases directly for all \javascript functions.
-Non-testable \javascript functions include (1) anonymous functions, (2) private function closures, and (3) functions that uses the \code{this} keyword as a reference to the object of which that function is a property/method.\footnote{Depending on where the function is called from, the value of \code{this} can be different.}
+\subsection{Direct testability of functions} It is not possible to produce test cases directly for all \javascript functions.
+Non-testable \javascript functions include (1) anonymous functions, (2) private function closures, and (3) functions that uses the \code{this} keyword as a reference to the object of which that function is a property/method. Depending on where the function is called from, the value of \code{this} can be different.
 While these functions can be called at the highest program scope they belong to, it is not possible to call them directly in test cases, which makes it challenging to assess their outcomes.\footnote{This is similar to testing private methods in e.g., Java} This is especially so if the tester is interested in stand-alone examination of these functions.  Based on our observations during the evaluation, there is a lot of non-testable \javascript code out there. One possible future direction is to conduct an empirical study to investigate the testability degree of \javascript code written by developers.
  
 \subsection{Undetected faults} As mentioned in \secref{results}, our test cases miss some of the faults \ie false negatives. 
-Peg (ID 4) and Fractal Viewer (ID 5) achieve the lowest fault detection recall, which relates to their low coverage compared to the other applications. 
+BunnyHunt (ID 5) and TuduList (ID 12) achieve the lowest fault detection recall, which relates to their low coverage compared to the other applications. 
 We describe possible reasons behind the observed low coverage for these applications.  
 
 \begin{enumerate}
 \item \textit{Unstable Behaviour of Test Cases:} Testing the correct behaviour of a function requires stable assertions, meaning that
-the function and its assertions should always be deterministic. 
-Thus, to achieve stability we need to remove, (1)  random generation functions as well as functions that rely on the output of a randomized function, and (2) functions that exhibit unstable behaviour in different executions due to highly dynamic nature of \javascript. 
-Traditional event based testing is not affected by such unstable behavioural characteristics of the functions as they run the events and compare the whole captured state after each event is triggered. However, by removing this set of functions from the generated function-level unit tests, the statement coverage is also negatively affected depending on the degree at which these functions exist in the application. In our evaluation, Fractal Viewer function tests are affected by the presence of four functions that rely on the output of random generators. Except for Peg, all other applications also contain such functions, which result in achieving lower coverage in function tests compared to their event-based tests.
+the the test case and its assertions should always be deterministic. 
+Thus, to achieve stability we need to remove, (1)  random generation functions as well as functions that rely on the output of a randomized function, and (2) functions or event sequences that exhibit unstable behaviour in different executions due to highly dynamic nature of \javascript. 
+Traditional event based testing is not affected by such unstable behavioural characteristics of the functions as they run the events and compare the whole captured state after each event is triggered. However, by removing this set of functions and events from the generated unit and DOM-level tests, the statement coverage is also negatively affected depending on the degree at which these functions/events exist in the application.
 
-\item \textit{Other limitations:} Our implementation is currently not able to produce tests for functions that receive as input \javascript objects with cyclic references (e.g., in JSON format). 
-This explains the lower coverage of function tests compared to DOM events for Fractal Viewer, in which multiple functions have been removed from the function tests. However, as DOM events are not affected by this limitation, we observe a high difference between  the function and DOM event test coverages for this application. 
-Further, \tool does not trigger events that depend on the keyboard movements. 
-Therefore, we obtain lower coverage from Fractal Viewer function tests compared to other experimental objects due to the presence of functions that are sensitive to keyboard movements. Note that neither of these is 
-a fundamental limitations of our design, and can be addressed by a more robust implementation. 
+\item \textit{Other limitations:} Our implementation is currently not able to trigger events that depend on the keyboard movements or drag and drop actions. 
+Therefore, we obtain lower coverage for applications that contain such events due to the presence of functions that are either sensitive to keyboard movements or executed during drag and drop actions.
 \end{enumerate}  
 
 \input{threatsToValidity}

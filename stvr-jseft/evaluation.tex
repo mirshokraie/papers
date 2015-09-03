@@ -73,17 +73,16 @@ In addition,  we assess each step in our approach separately as follows:
 %To generate test oracles at function-level, we configure \tool to inject 50 \javascript code-level faults in each application.
 %To produce DOM event-level oracles, we configure the DOM mutation module of \tool to inject 20 DOM-level faults per application. \ali{why 50? why 20? why these numbers? why are they not the same? Motivate! Do we need to include this information?} %We then run \tool on each web application to obtain the test cases with oracles.
 %
-To evaluate the fault finding capability of \tool (RQ2), we simulate web application faults by automatically seeding each application with 50 random faults. %according to the following fault category: 
-%\begin{enumerate}[noitemsep, nolistsep]
-%\item Changing conditional statements by modifying the upper/lower bounds of loop statements, 
-%changing the condition itself, as well as swapping consecutive conditional statements;
-%\item Modifying the values of global/local variables, and removing or changing their names, as well as modifying arithmetic operations;
-%\item Changing function parameters or function call arguments by swapping, removing,
-%and renaming parameters/arguments. Changing the sequence of function
-%calls within a given function if applicable;
-%\item Modifying DOM related properties.
-%\end{enumerate}
-%The first three categories target \javascript code while the last one targets both \javascript and HTML code-levels. 
+To evaluate the fault finding capability of \tool (RQ2), we simulate web application faults by automatically seeding each application with 50 random faults according to the following fault category: 
+\begin{enumerate}%[noitemsep, nolistsep]
+\item Changing conditional statements by modifying the upper/lower bounds of loop statements, changing the condition itself, as well as swapping consecutive conditional statements;
+\item Modifying the values of global/local variables, and removing or changing their names, as well as modifying arithmetic operations;
+\item Changing function parameters or function call arguments by swapping, removing,
+and renaming parameters/arguments. Changing the sequence of function
+calls within a given function if applicable;
+\item Modifying DOM related properties.
+\end{enumerate}
+The first three categories target \javascript code while the last one targets both \javascript and HTML code-levels. 
 We automatically pick a random program point and seed a fault at that point according to our fault category.
 While mutations used for oracle generation have been selectively generated (as discussed in \secref{oracleGen}), 
 mutations used for the purpose of evaluation are randomly generated from the entire application. Note that if the mutation used for the purpose of evaluation and the mutation used for generating oracles happen to be the same, we remove the mutant from the evaluation set. 
@@ -114,7 +113,7 @@ We use the output provided by \artemis to determine if the seeded mutations are 
 
 
 \input{results}
-\input{threatsToValidity}
+%\input{threatsToValidity}
 %\input{discussion}
 
 

@@ -1,8 +1,6 @@
 \subsection{Threats to Validity} \label{threatsToValidity}
-
 An external threat to the validity of our results is the limited number of web applications that we use to evaluate our approach. 
-We mitigated this threat by using \javascript applications that cover various application types.
-%\karthik{Can you explain what you did to mitigate the threat below ?}}
-Another threat is that we validate the failed assertions through manual inspection,  which can be error-prone. To mitigate this threat, we carefully inspected the code in which the assertion failed to make sure that the injected fault was indeed responsible for the assertion failure. %Similar inspection was performed on event-based failed assertions. %after an event is triggered.    
+We mitigated this threat by using \javascript applications that cover various application types and functionality.
+Another threat is that we validate the failed assertions through manual inspection,  which can be error-prone. To mitigate this threat, we carefully inspected the code in which the assertion failed to make sure that the injected fault was indeed responsible for the assertion failure.
+An internal threat to validity is that we inject mutations to assess the fault finding capability of \tool, which can be biased. However, we have attempted  to mitigate this threat by following a standard methodology for fault seeding using a random mutation location selection method and a well-defined fault category. Moreover, during the evaluation of \tool, if the mutation used to evaluate the fault finding capability of the tool and the mutation used to generate oracles happen to be the same, the mutant is removed from the evaluation set.     
 Regarding the reproducibility of our results, \tool and all the applications used in this study are publicly available, thus making the study replicable.
-%\ali{are there no other threats? Really?}
