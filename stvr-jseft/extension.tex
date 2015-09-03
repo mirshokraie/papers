@@ -1,0 +1,40 @@
+\section{Extensions w.r.t. the ICST'15 paper}
+(This appendix is for reviewers only, and will not be included in the final version).\\
+
+This paper is a revised and extended version of our paper `\tool: Automated JavaScript Unit Test Generation',  which appeared in the \emph{Proceedings of the International Conference on Software Testing, Verification and Validation (ICST 2015)} \cite{mirshokraie:icst15}.
+%It is worth mentioning that this paper received the \emph{Best Paper Runner-up Award} at ICST'13.\\
+
+The main extensions include:
+
+\begin{itemize}
+
+\item Improving the approach as follows:
+
+\begin{enumerate}
+\item Revising the function state reduction technique (explained in \secref{jsFuncTest}); The approach diagram (\figref{approach-view}), function state reduction algorithm (\algref{stateAbstractionAlgo}), and the description of unit test generation in \secref{approach} have been revised to reflect changes to the state reduction technique. 
+\end{enumerate}
+
+\item Extending the evaluation section as follows:
+
+\begin{enumerate} 
+\item Comparing the fault finding capability obtained by (1) using the state reduction mechanism and (2) including the whole application's state.
+\item Comparing the number of assertions in the following scenarios:
+(1) capturing the whole application's state, (2) with enabling the state reduction technique only, and (3) with applying the state reduction as well as the mutation-based oracle generation algorithm;
+\end{enumerate}
+
+\item Adding one more research question to the evaluation section (RQ3 in \secref{evaluation}) to discuss the results of the new comparisons. 
+
+\item The new results are presented in \secref{results}. The comparative results are presented in \tabref{efficiency-abs-mut-table} and \tabref{faultDetection-table}.
+\item A more elaborate coverage of related work (\secref{related}).
+\item Furthermore, we made a full pass over the text,
+   leading to many improvements throughout the paper,
+   including various changes that originated from discussions at the
+   ICST'15 conference and other venues where this work was presented. 
+
+\end{itemize}
+
+\medskip
+
+While difficult to measure objectively, we believe this accounts for
+   an extension of over 30\% -- a common guideline used for journal versions
+   of papers that are based on conference papers.
