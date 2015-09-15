@@ -35,7 +35,7 @@ However, to be practically useful, unit testing requires strong oracles  to dete
 To address these two shortcomings, we propose an automated test case  generation technique for \javascript applications. 
 
 Our approach, called \tool (JavaScript Event and Function Testing) operates through a three step process. 
-First, it dynamically explores the event-space of the application using a \emph{function coverage maximization} method, to infer a test model. Then, it generates test cases at two complementary levels, namely, DOM event and \javascript functions. Our technique employs a novel \emph{function state abstraction} algorithm to minimize the number of function-level states needed for test generation.
+First, it dynamically explores the event-space of the application using a \emph{function coverage maximization} method, to infer a test model. Then, it generates test cases at two complementary levels, namely, DOM event and \javascript functions. Our technique employs a novel \emph{function state reduction} algorithm to minimize the number of function-level states needed for test generation.
 Finally,  it automatically generates test oracles, through a mutation-based algorithm. This paper is a substantially expanded and revised version of our paper from early 2015 \cite{mirshokraie:icst15} (see appendix for differences from that paper).
 
 %
@@ -57,7 +57,7 @@ This work makes the following main contributions:
 \item An automatic technique to generate test cases for \javascript functions and events.
 
 %\item An algorithm for dynamic exploration guidance of the application to maximize \javascript function coverage;
-\item A combination of function converge maximization and function state abstraction algorithms to efficiently generate unit test cases;
+\item A combination of function \emph{coverage maximization} and function \emph{state reduction}  algorithms to efficiently generate unit test cases;
 %\item A novel algorithm for abstracting function states to reduce the state space in unit test generation;%\ali{add the state abstraction as a contribution}
 %\item Automatic generation of unit tests to examine the correct behaviour of the \javascript individual functions as well as DOM events.
 \item A mutation-based algorithm to effectively generate test oracles, capable of detecting regression \javascript and DOM-level faults;%capable of detecting faults in the \javascript code and the DOM tree of the  application;

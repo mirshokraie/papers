@@ -13,7 +13,7 @@ In the following we describe our function state reduction technique to reduce th
 As mentioned in \secref{motivation}, the highly dynamic nature of \javascript applications can result in a huge number of function states. Capturing all these different states for the purpose of test case generation can impede the test suite's comprehension. 
 Therefore, we apply a mutation-based function state reduction method to minimize the number of function states needed for test generation. Note that these mutations are later used to create our unit level test oracles.
 
-\headbf{Function state reduction} The reduction technique is based on classification of mutated function states according to the impact of the modification on the function's behaviour. A mutated state is the affected function state as a result of a injected mutation (details of the injected mutations are explained in \secref{oracleGen}). 
+\headbf{Function state reduction} The reduction technique is based on classification of mutated function states according to the impact of the modification on the function's behaviour. A mutated state is the affected function state as a result of an injected mutation (details of the injected mutations are explained in \secref{oracleGen}). 
 Mutated states that are either mutually equivalent or have similar characteristics can be discarded. Although they are not equivalent to the original version of the program, there would be less point in including all of them as the test case that can detect a given mutation is potentially able to detect mutations with similar impacts as well.
 
 \input{stateAbstractionAlgo}

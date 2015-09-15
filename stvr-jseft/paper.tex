@@ -112,7 +112,7 @@
 \newcommand{\rest}{\textsc{Rest}\xspace}
 \newcommand{\jsf}{\textsc{Jsf}\xspace}
 \newcommand{\ajax}{\textsc{Ajax}\xspace}
-\newcommand{\headbf}[1]{\par\noindent\textbf{#1.}}
+\newcommand{\headbf}[1]{\par\medskip\noindent\textbf{#1.}}
 \newcommand{\head}[1]{\subsubsection{#1}}
 \newcommand{\headed}[1]{\noindent\textbf{#1}\ \ }
 \newcommand{\webtwo}{\textit{Web~2.0}\xspace}
@@ -191,7 +191,7 @@
   \ifnum\count\Minute<10 0 \fi\the\count\Minute\relax}}
   
 \newboolean{showcomments}
-\setboolean{showcomments}{false}
+\setboolean{showcomments}{true}
 \ifthenelse{\boolean{showcomments}}
 {\newcommand{\nb}[2]{
 \fbox{\bfseries\sffamily\scriptsize#1}
@@ -237,7 +237,7 @@
 %Generating Test Cases with Oracles for\\ JavaScript Applications
 %\tool: Generating Regression Tests\\ for JavaScript Applications
 %\tool:  Automated Tool for JavaScript Event and Function Testing
-\tool: Automated JavaScript Unit Test Generation
+Unit Test Generation for JavaScript
 }
 
 
@@ -266,7 +266,8 @@
 \balance
 %\footnotesize
 %\begin{spacing}{0.9}
-\bibliographystyle{wileyj}
+%\bibliographystyle{wileyj}
+\bibliographystyle{abbrv}
 \bibliography{../biblio}
 %\end{spacing}
 \input{extension}

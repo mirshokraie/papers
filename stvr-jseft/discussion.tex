@@ -3,11 +3,11 @@ In this section, we discuss some of the limitations of our current implementatio
 
 \subsection{Limitations}
 
-\textbf{Direct testability of functions} Using our technique, it is not possible to produce test cases directly for all \javascript functions.
+\headbf{Direct testability of functions} Using our technique, it is not possible to produce test cases directly for all \javascript functions.
 Non-testable \javascript functions include (1) anonymous functions, (2) private function closures, and (3) functions that uses the \code{this} keyword as a reference to the object of which that function is a property/method. Depending on where the function is called from, the value of \code{this} can be different.
 While these functions can be called at the highest program scope they belong to, it is not possible to call them directly in test cases, which makes it challenging to assess their outcomes.\footnote{This is similar to testing private methods in e.g., Java} This is especially so if the tester is interested in stand-alone examination of these functions.  Based on our observations during the evaluation, there is a non-trivial amount of non-testable \javascript code out there. One possible future direction is to automatically refactor non-testable \javascript code to make it testable. 
  
-\textbf{Undetected faults} As mentioned in \secref{results}, our test cases miss some of the faults \ie result in false negatives. 
+\headbf{Undetected faults} As mentioned in \secref{results}, our test cases miss some of the faults \ie result in false negatives. 
 BunnyHunt (ID 5) and TuduList (ID 12) achieve the lowest fault detection recall, which relates to their low coverage compared to the other applications. 
 We describe possible reasons behind the observed low coverage for these applications, and possible ways to alleviate them.  
 \begin{enumerate}
