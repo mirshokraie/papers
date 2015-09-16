@@ -23,13 +23,13 @@
 \nl   		$DomAsserts_{Ev,AfterEvDomSt}=\bigcap DomAssert_i $\\
 				}
 			}
-\nl   $AbsFcSts \leftarrow Trace\textsc{.GetAbsFcSts()}$\\
+\nl   $RedFcSts \leftarrow Trace\textsc{.GetRedFcSts()}$\\
 \nl		$EquivalentCodeMut \leftarrow true$\\
 \nl		\While{$EquivalentCodeMut$}{
 \nl   	$MutApp \leftarrow \textsc{MutateJsCode}(App)$\\
 \nl   	$MutFcSts \leftarrow EvSeq\textsc{.ExecEvent}(MutApp)$\\
-\nl   	\ForEach{$FcEntry \in AbsFcSts.\textsc{GetFcEntries}$}{
-\nl   		$FcExit \leftarrow AbsFcSts\textsc{.GetFcExit}(FcEntry)$\\
+\nl   	\ForEach{$FcEntry \in RedFcSts.\textsc{GetFcEntries}$}{
+\nl   		$FcExit \leftarrow RedFcSts\textsc{.GetFcExit}(FcEntry)$\\
 \nl   		$MutFcExit \leftarrow MutFcSts\textsc{.GetMutFcExit}(FcEntry)$\\
 \nl				$Diff_{FcExit,MutFcExit} \leftarrow \textsc{Diff}(FcExit,MutFcExit)$\\
 \nl				\If{$Diff_{FcExit,MutFcExit} \neq \emptyset$}{
