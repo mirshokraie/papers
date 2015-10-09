@@ -3,10 +3,10 @@
 \begin{figure}[!t]
   \centering
   \includegraphics[width=1\hsize]{fig/intraCodeDep}
-  \vspace{-0.2in} 
+  \vspace{-0.3in} 
   \mycaption{Intra code dependency through backward slicing.}
   \label{Fig:intraCodeDep}
-%  \vspace{-0.1in} 
+  \vspace{-0.2in} 
 \end{figure}
 To determine the initial point of contact between DOM and the underlying application's code, we first cross reference the DOM element as well as the property we are interested in with a set of DOM mutations obtained from the execution trace. The desired DOM element and its property are inferred from either the intra DOM assertion dependency or the candidate DOM properties as described in \secref{extractDomRelatedInfo}. Recall that our execution trace contains information about triggered events, event handlers, and DOM mutations caused by the events. Therefore, we can identify relevant events and invoked functions corresponding to a given DOM mutation.
 For example, the collected execution trace in \figref{assertionToCode} contains information about the mutations of a \code{div} element with class \code{shopContainer}, which pertains to the DOM-based assertion.
