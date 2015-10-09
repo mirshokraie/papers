@@ -1,13 +1,13 @@
 \section{Approach} \label{Sec:approach}
-\input{algorithm}
-\begin{figure*}[!t]
+\begin{figure}[!t]
   \centering
-  \includegraphics[width=.7\hsize]{fig/approachDiagram}
+  \includegraphics[width=1\hsize]{fig/approachDiagram}
+  \vspace{-0.3in} 
   \mycaption{Overview of our assertion generation approach.}
-  \vspace{-0.1in} 
   \label{Fig:approachDiagram}
   \vspace{-0.1in} 
-\end{figure*}
+\end{figure}
+\input{algorithm}
 An overview of our unit-level assertion generation technique is depicted in \figref{approachDiagram}.
 At a high level, our approach generates unit-level assertions by utilizing human written DOM-based tests and assertions. Our code level assertions fall in the following three categories: (1) explicit assertions, which are directly inferred from analyzing the manually written DOM-based assertions, (2) implicit assertions, which are indirectly affected by the human written DOM-based assertions, and (3) candidate assertions, which are not considered in the written DOM-based assertions, yet are potentially useful to be checked by the function level test suite. We describe our approach below. The numbers below in parentheses correspond to those in the boxes of \figref{approachDiagram}.
 
