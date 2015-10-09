@@ -63,8 +63,8 @@
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="671"
-     inkscape:window-x="14"
-     inkscape:window-y="81"
+     inkscape:window-x="12"
+     inkscape:window-y="23"
      inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -133,7 +133,7 @@
          id="tspan3954"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    id="tspan4189"
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 14</tspan><tspan
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 7</tspan><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
    id="tspan4019"> function</tspan> addToCart() {</tspan><tspan
          sodipodi:role="line"
@@ -147,7 +147,7 @@
          id="tspan3971"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    id="tspan4199"
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 22</tspan><tspan
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 15</tspan><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
    id="tspan4029">  if</tspan>(!coupon.expired){</tspan><tspan
          sodipodi:role="line"
@@ -156,14 +156,14 @@
          id="tspan3973"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"
-   id="tspan4171"> 23</tspan>   coupElem.removeClass(customer.couponStatus);</tspan><tspan
+   id="tspan4171"> 16</tspan>   coupElem.removeClass(customer.couponStatus);</tspan><tspan
          sodipodi:role="line"
          x="15.671179"
          y="150.40146"
          id="tspan3975"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"
-   id="tspan4173"> 24</tspan>   customer.couponStatus= coupon.Id + <tspan
+   id="tspan4173"> 17</tspan>   customer.couponStatus= coupon.Id + <tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#800080;font-family:Consolas;-inkscape-font-specification:Consolas"
    id="tspan4078">'-'</tspan> + <tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#800080;font-family:Consolas;-inkscape-font-specification:Consolas"
@@ -174,7 +174,7 @@
          id="tspan3977"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"
-   id="tspan4175"> 25</tspan>   price -= coupElem.data(<tspan
+   id="tspan4175"> 18</tspan>   price -= coupElem.data(<tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#800080;font-family:Consolas;-inkscape-font-specification:Consolas"
    id="tspan4043">'value'</tspan>); </tspan><tspan
          sodipodi:role="line"
@@ -183,7 +183,7 @@
          id="tspan3979"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"
-   id="tspan4177"> 26</tspan>   coupElem.addClass(customer.couponStatus);</tspan><tspan
+   id="tspan4177"> 19</tspan>   coupElem.addClass(customer.couponStatus);</tspan><tspan
          sodipodi:role="line"
          x="15.671179"
          y="189.40146"
@@ -244,7 +244,7 @@
            x="-108.57143"
            y="125.21932" /></flowRegion><flowPara
          id="flowPara4252-6">...</flowPara></flowRoot>    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.74762863;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.49525714, 0.74762856;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:1.094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188,1.094;stroke-dashoffset:0"
        id="rect5955"
        width="140.90605"
        height="14.93628"
@@ -260,9 +260,9 @@
        height="14.634865"
        width="140.01283"
        id="rect5957"
-       style="fill:none;stroke:#000000;stroke-width:0.73769736;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.47539452, 0.73769726;stroke-dashoffset:0" />
+       style="fill:none;stroke:#000000;stroke-width:1.094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188,1.094;stroke-dashoffset:0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.89121622;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.78243256, 0.89121628;stroke-dashoffset:0;marker-end:url(#Arrow2Lend)"
+       style="fill:none;stroke:#000000;stroke-width:1.094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188,1.094;stroke-dashoffset:0;marker-end:url(#Arrow2Lend)"
        d="M 218.9668,196.3367 C 170.75725,235.89174 99.329373,246.22393 47.420629,225.49613 14.006926,212.15363 6.7431439,186.39112 20.36293,162.38644"
        id="path5959"
        inkscape:connector-curvature="0"
@@ -279,7 +279,7 @@
          x="471.22913"
          y="263.61816" /></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.86392236;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.72784477, 0.86392239;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:1.094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188,1.094;stroke-dashoffset:0"
        d="m 296.16648,151.87978 c -31.84624,43.85909 -81.01448,74.77264 -134.34233,84.46506 -37.78382,6.86727 -77.414662,3.27074 -113.344976,-10.28613"
        id="path3165"
        inkscape:path-effect="#path-effect3167"
