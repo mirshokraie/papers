@@ -1,4 +1,4 @@
-\documentclass{sig-alternate}
+\documentclass[10pt, conference]{IEEEtran}
 \usepackage{graphicx}
 \usepackage{latexsym}
 \usepackage{hyperref}
@@ -234,30 +234,24 @@ Atrina: Inferring Unit Oracles from GUI Test Cases
 }
 
 
-\numberofauthors{3}
-\author{
-      \alignauthor
-       Shabnam Mirshokraie
-       \alignauthor
-       Ali Mesbah
-       \alignauthor
-       Karthik Pattabiraman
-       \sharedaffiliation
-       \affaddr{University of British Columbia}\\
-       \affaddr{Vancouver, BC, Canada}\\
-       \email{\{shabnamm, amesbah, karthikp\}@ece.ubc.ca}
- }
-%\date{}
+\author{\IEEEauthorblockN{Shabnam Mirshokraie
+\hspace{0.5in}Ali Mesbah
+\hspace{0.5in}Karthik Pattabiraman}
+\IEEEauthorblockA{
+%Dept of Electrical and Computer Engineering\\
+\aff{University of British Columbia}\\
+\aff{Vancouver, BC, Canada}\\
+\aff{ \{shabnamm, amesbah, karthikp\}@ece.ubc.ca}}
+}
 \maketitle
 
 
 \input{abstract}
-\category{D.2.5}{Software Engineering}{Testing and Debugging}
-\terms{Design, Algorithms, Experimentation}
-\keywords{Test generation, oracles, JavaScript, DOM
+\begin{IEEEkeywords}
+Test generation, oracles, JavaScript, DOM
+\end{IEEEkeywords}
 
-
-
+\IEEEpeerreviewmaketitle
 
 \input{intro}
 \input{motivation}
@@ -273,7 +267,7 @@ Atrina: Inferring Unit Oracles from GUI Test Cases
 
 %\balance
 
-\bibliographystyle{abbrv}
+\bibliographystyle{IEEEtran}
 \bibliography{../biblio}
 
 
