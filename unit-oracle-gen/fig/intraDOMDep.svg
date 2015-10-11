@@ -185,7 +185,7 @@
          id="tspan3446"
          style="font-size:13px;line-height:100%">11<tspan
    id="tspan4270"
-   style="font-size:13px;line-height:100%;fill:#0000ff"> assertEquals</tspan><tspan
+   style="font-size:13px;font-weight:bold;line-height:100%;fill:#0000ff;-inkscape-font-specification:Consolas Bold"> assertEquals</tspan><tspan
    style="font-size:13px;line-height:100%;fill:#000000"
    id="tspan3454">(msg,expectedMsg);</tspan></tspan><tspan
          sodipodi:role="line"

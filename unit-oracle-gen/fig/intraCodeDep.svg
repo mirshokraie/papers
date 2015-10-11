@@ -229,7 +229,7 @@
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    id="tspan4189"
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 7</tspan><tspan
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas Bold"
    id="tspan4019">   function</tspan> addToCart() {</tspan><tspan
          sodipodi:role="line"
          x="33.135006"
@@ -249,7 +249,7 @@
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"
    id="tspan4157"> 9</tspan>    selItem= getItemInfo($(<tspan
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas Bold"
    id="tspan4041">this</tspan>));</tspan><tspan
          sodipodi:role="line"
          x="33.135006"
@@ -263,7 +263,7 @@
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    id="tspan4197"
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 14</tspan><tspan
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas Bold"
    id="tspan4027">   var</tspan> price= selItem.price * selItem.quantity;</tspan><tspan
          sodipodi:role="line"
          x="33.135006"
@@ -272,7 +272,7 @@
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Consolas;-inkscape-font-specification:Consolas"><tspan
    id="tspan4199"
    style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Consolas;-inkscape-font-specification:Consolas"> 15</tspan><tspan
-   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas"
+   style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:Consolas;-inkscape-font-specification:Consolas Bold"
    id="tspan4029">   if</tspan>(!coupon.expired){</tspan><tspan
          sodipodi:role="line"
          x="33.135006"
