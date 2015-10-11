@@ -117,8 +117,8 @@
          style="font-size:13px;line-height:101.99999809%"><tspan
    style="font-size:13px;line-height:101.99999809%;fill:#4d4d4d"
    id="tspan4601"> 9</tspan>   selItem = getItemInfo($(<tspan
-   style="font-size:13px;font-weight:bold;line-height:101.99999809%;fill:#0000ff;-inkscape-font-specification:Consolas Bold"
-   id="tspan4615">this</tspan>));</tspan><tspan
+   style="fill:#800080"
+   id="tspan3019">&quot;.merchandise&quot;</tspan>));</tspan><tspan
          sodipodi:role="line"
          x="69.659912"
          y="185.60895"

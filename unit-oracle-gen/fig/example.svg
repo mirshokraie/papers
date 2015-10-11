@@ -182,8 +182,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="390.25354"
-     inkscape:cy="222.83334"
+     inkscape:cx="479.04801"
+     inkscape:cy="565.69048"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -303,7 +303,7 @@
          id="tspan3956"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 8   <tspan
    id="tspan4053"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">var</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">var</tspan><tspan
    style="fill:#000000"
    id="tspan4045"> coupElem= $(<tspan
    style="fill:#800080"
@@ -315,15 +315,15 @@
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 9   <tspan
    style="fill:#000000"
    id="tspan4051">selItem= getItemInfo($(<tspan
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold"
-   id="tspan4069">this</tspan>));</tspan></tspan><tspan
+   style="fill:#800080"
+   id="tspan3158">&quot;.merchandise&quot;</tspan>));</tspan></tspan><tspan
          sodipodi:role="line"
          x="-8.138855"
          y="312.31274"
          id="tspan3961"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 10   <tspan
    id="tspan4073"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">for</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">for</tspan><tspan
    style="fill:#000000"
    id="tspan4055">(var i=0; i&lt;availItems.length; i++){</tspan></tspan><tspan
          sodipodi:role="line"
@@ -332,7 +332,7 @@
          id="tspan3963"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 11    <tspan
    id="tspan4075"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">if</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">if</tspan><tspan
    style="fill:#000000"
    id="tspan4057">(availItems[i].name == selItem.name)</tspan></tspan><tspan
          sodipodi:role="line"
@@ -355,7 +355,7 @@
          id="tspan3969"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 14   <tspan
    id="tspan4081"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">var</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">var</tspan><tspan
    style="fill:#000000"
    id="tspan4071"> price= selItem.price * selItem.quantity;</tspan></tspan><tspan
          sodipodi:role="line"
@@ -364,7 +364,7 @@
          id="tspan3971"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 15   <tspan
    id="tspan4087"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">if</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">if</tspan><tspan
    style="fill:#000000"
    id="tspan4079">(!coupon.expired){</tspan></tspan><tspan
          sodipodi:role="line"
@@ -440,7 +440,7 @@
          id="tspan3991"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 25  <tspan
    id="tspan4121"
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold">function</tspan><tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold">function</tspan><tspan
    style="fill:#000000"
    id="tspan4115"> viewCart(){</tspan></tspan><tspan
          sodipodi:role="line"
@@ -479,7 +479,7 @@
          y="618.21271"
          id="tspan3999"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:114.99999762%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;font-family:Consolas;-inkscape-font-specification:Consolas"> 29   <tspan
-   style="fill:#0000ff;font-weight:bold;-inkscape-font-specification:Consolas Bold"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold"
    id="tspan4137">else</tspan></tspan><tspan
          sodipodi:role="line"
          x="-8.138855"
