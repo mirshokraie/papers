@@ -6,7 +6,15 @@ Since our dynamic slice is extracted from the program run, we can track all conc
 During the run of a test case, there might be different instances where a given statement is executed. Different execution instances can lead to different behaviour. Since we are using dynamic slicing, an instance that leads to the required behaviour, which is checked through the DOM-based assertion, is on the backward slice. Given that the manually-written expected value, that is checked against the DOM's property is valid, the concrete values of related entities in the backward slice are potentially correct. Therefore, concrete value of an entity in the backward slice can be used as the expected value of the entity in unit-level assertions to test the current version of the application (discussed in \secref{discussion}).
 $explicitAsstn$ in line 23 of \algref{algorithm} contains the inferred explicit assertions.
 
-In our running example (\figref{intraCodeDep}), explicit assertions check the correctness of \code{customer.payable}, \code{coupon.expired}, as well as \code{price} and \code{quantity} properties which belong to \code{selItem} object.  
-Assuming that the original price of the item is 100, the number of selected item is 1, and the calculated discount according to the \code{value} attribute of a DOM element with ID \code{couponButt} is 30, then the expected values included in the assertions for each of the entities are 70, boolean value \code{true}, 100, and 1, respectively. 
+In our running example (\figref{intraCodeDep}), explicit assertions check the correctness of \code{customer.payable}, \code{coupon.expired}, as well as \code{price} and \code{quantity} properties which belong to \code{selItem} object.
+Assuming that the original price of the item is 100, the number of selected item is 1, and the calculated discount according to the \code{value} attribute of a DOM element with ID \code{couponButt} is 30, then the expected values included in the assertions for each of the entities are 70, boolean value \code{true}, 100, and 1, respectively. \figref{unitTest} shows a \qunit test case for \code{addToCart} function with the generated assertions. Lines 7 to 9 in the figure corresponds to the explicit assertions.
+\begin{figure}
+  \centering
+  \includegraphics[width=1\hsize]{fig/unitTest}
+   \vspace{-0.3in} 
+  \mycaption{Generated \qunit test case.}
+  \label{Fig:unitTest}
+  \vspace{-0.1in} 
+\end{figure}  
 %We compare the value of the entity immediately after the relevant statement is executed in the backward slice with the entity's value before the function exits. If value of the entity remains the same, we use it towards the expected value in the unit-level assertion.  
 %However, if the entity pertaining to a DOM change is reassigned in the code after the DOM gets updated and before the function exits, then the concrete value of the entity can be used for the purpose of regression testing unless the tester provides the proper expected value.
