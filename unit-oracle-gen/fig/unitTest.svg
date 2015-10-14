@@ -260,9 +260,7 @@
    style="fill:#4d4d4d;fill-opacity:1"
    id="tspan3865">8</tspan><tspan
    style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold"
-   id="tspan3879">  equal</tspan>(coupon.expired, <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Consolas Bold"
-   id="tspan3891">true</tspan>);</tspan><tspan
+   id="tspan3879">  ok</tspan>(coupon.expired);</tspan><tspan
          sodipodi:role="line"
          x="14.943407"
          y="197.47487"
