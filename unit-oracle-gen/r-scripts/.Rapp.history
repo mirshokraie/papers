@@ -268,47 +268,194 @@ labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
 legend("topright", labels, fill=colors, bty="n")#
 dev.off()
-data <- read.csv(file="../data/faultDetectionRate.txt", header=T)#
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
 #
-pdf("barplot-faultDetectionRate.pdf")#
+pdf("assertionTypeFaultDetec.pdf")#
 #
-#x <- data$appId#
-x <- c(1, 2, 3, 4, 5, 6, 'AVG')#
+x <- data$appId#
 #
-atrinaY<-c(data$atrina)#
-meanAtrina <- mean(atrinaY)#
-atrinaY<-c(data$atrina, meanAtrina)#
-mutationY<-data$mutation#
-meanMutation <- mean(mutationY)#
-mutationY<-c(data$mutation, meanMutation)#
-manualY<-data$manual#
-meanManual <- mean(manualY)#
-manualY<-c(data$manual, meanManual)#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
 atrinaNoFd <- data$atrinaNoFd#
-atrinaNoFdMean <- meanAtrina#
-atrinaNoFd <- c(data$atrinaNoFd, '')#
-mutationNoFd <- data$mutationNoFd#
-mutationNoFdMean <- meanMutation#
-mutationNoFd <- c(data$mutationNoFd, '')#
-manualNoFd <- data$manualNoFd#
-manualNoFdMean <- meanManual#
-manualNoFd <- c(data$manualNoFd, '')#
-#
-height <- rbind(atrinaY, mutationY, manualY)#
-#heightMean <- rbind(meanAtrina, meanMutation, meanManual)#
-length <- rbind(atrinaNoFd, mutationNoFd, manualNoFd )#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
 #colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
 #
-colors<-c("white", "lightgray", "black")#
+colors<-c("white", "lightgray", "darkgray", "black")#
 #
 mp <- barplot(height, beside = TRUE, #
 ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
-#
 text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
-myaxis <- c(2.5, 6.5, 10.5, 14.5, 18.5, 22.5, 26.5)#
-myaxislab <- c(1, 2, 3, 4, 5, 6, 'AVG')  #
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
 #
-labels <- c('Atrina', 'Mutation-based', 'Human-writen')#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
+#
+pdf("assertionTypeFaultDetec.pdf")#
+#
+x <- data$appId#
+#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaNoFd <- data$atrinaNoFd#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
+#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+colors<-c("white", "lightgray", "gray33", "black")#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
+#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
+#
+pdf("assertionTypeFaultDetec.pdf")#
+#
+x <- data$appId#
+#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaNoFd <- data$atrinaNoFd#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
+#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+colors<-c("white", "lightgray", "gray31", "black")#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
+#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
+#
+pdf("assertionTypeFaultDetec.pdf")#
+#
+x <- data$appId#
+#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaNoFd <- data$atrinaNoFd#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
+#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+colors<-c("white", "lightgray", "gray25", "black")#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
+#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
+#
+pdf("assertionTypeFaultDetec.pdf")#
+#
+x <- data$appId#
+#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaNoFd <- data$atrinaNoFd#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
+#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+colors<-c("white", "lightgray", "gray67", "black")#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
+#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
+#inset <- c(0.1, 0.1)#
+axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
+legend("topright", labels, fill=colors, bty="n")#
+dev.off()
+data <- read.csv(file="../data/assertionTypeFaultDetec.txt", header=T)#
+#
+pdf("assertionTypeFaultDetec.pdf")#
+#
+x <- data$appId#
+#
+#manualY<-data$manual#
+expY<-data$exp#
+atrinaY<-data$atrina#
+implExpY<-data$implExp#
+candidExpY<-data$candidExp#
+atrinaNoFd <- data$atrinaNoFd#
+expNoFd <- data$expNoFd#
+implExpNoFd <- data$implExpNoFd#
+candidExpNoFd <- data$candidExpNoFd#
+height <- rbind(atrinaY, expY, implExpY, candidExpY)#
+length <- rbind( atrinaNoFd, expNoFd, implExpNoFd, candidExpNoFd )#
+#colors <- grey.colors(3, start = 0.8, end = 0.4, gamma = 2.2)#
+#
+colors<-c("white", "lightgray", "darkgray", "black")#
+#
+mp <- barplot(height, beside = TRUE, #
+ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", col=colors)#
+text(mp, height, labels = format(length, 3), pos = 3, cex = .80)#
+myaxis <- c(3, 8, 13, 18, 23, 28)#
+myaxislab <- c(1, 2, 3, 4, 5, 6)  #
+#
+labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')#
 #inset <- c(0.1, 0.1)#
 axis(1, at = myaxis, labels = myaxislab, cex.axis = 1)#
 legend("topright", labels, fill=colors, bty="n")#
