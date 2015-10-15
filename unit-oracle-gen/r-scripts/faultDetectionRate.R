@@ -3,7 +3,7 @@ data <- read.csv(file="../data/faultDetectionRate.txt", header=T)
 pdf("barplot-faultDetectionRate.pdf")
 
 #x <- data$appId
-x <- c(1, 2, 3, 4, 'AVG')
+x <- c(1, 2, 3, 4, 5, 6, 'AVG')
 
 atrinaY<-c(data$atrina)
 meanAtrina <- mean(atrinaY)
@@ -19,13 +19,13 @@ manualY<-c(data$manual, meanManual)
 
 atrinaNoFd <- data$atrinaNoFd
 atrinaNoFdMean <- meanAtrina
-atrinaNoFd <- c(data$atrinaNoFd, atrinaNoFdMean)
+atrinaNoFd <- c(data$atrinaNoFd, '')
 mutationNoFd <- data$mutationNoFd
 mutationNoFdMean <- meanMutation
-mutationNoFd <- c(data$mutationNoFd, mutationNoFdMean)
+mutationNoFd <- c(data$mutationNoFd, '')
 manualNoFd <- data$manualNoFd
 manualNoFdMean <- meanManual
-manualNoFd <- c(data$manualNoFd, manualNoFdMean)
+manualNoFd <- c(data$manualNoFd, '')
 
 height <- rbind(atrinaY, mutationY, manualY)
 #heightMean <- rbind(meanAtrina, meanMutation, meanManual)
@@ -43,8 +43,8 @@ text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
 
-myaxis <- c(2.5, 6.5, 10.5, 14.5, 18.5)
-myaxislab <- c(1, 2, 3, 4, 'AVG')  
+myaxis <- c(2.5, 6.5, 10.5, 14.5, 18.5, 22.5, 26.5)
+myaxislab <- c(1, 2, 3, 4, 5, 6, 'AVG')  
 
 labels <- c('Atrina', 'Mutation-based', 'Human-writen')
 #inset <- c(0.1, 0.1)
