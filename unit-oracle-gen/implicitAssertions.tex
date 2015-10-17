@@ -5,7 +5,8 @@ We gather all the statements that explicitly affect the computations relevant to
 %A forward slice of a program with respect to a statement $st$ at program point $p$ and set of program variables $V$ consists of all statements and predicates in the program that are affected by the value of variables in $V$ at $p$.
 %\end{mydef}
 A forward slice with respect to a statement $st$,
-indicates how subsequently an operand at $st$ is being used. This can help the tester to ensure that $st$ establishes the expected outcome of the computations assumed by later statements. 
+indicates how  an operand at $st$ is being subsequently. 
+This can help the tester to ensure that $st$ establishes the expected outcome of the computations assumed by later statements. 
 %Given the importance of statements involved in code-level computations of a DOM-based assertion, using forward slice is useful to check that there are no unforeseen effects on the application's behavior by a modification to such statements. 
 
 \begin{figure}[!t]
