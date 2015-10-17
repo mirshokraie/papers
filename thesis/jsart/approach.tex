@@ -107,7 +107,7 @@ As indicated with the dotted line in \figref{invariantDetectionDiagram}, we cycl
 The next step is to make sure that the generated invariants are truly invariants. 
 An invariant assertion is called unstable when it is falsely reported as a violated assertion. Such assertions result in producing a number of false positive errors 
 during the testing phase. 
-To check the stability of the inferred invariants, we use them in the same version of the web application as assertions. Theoretically, no assertion violations should be reported because the web application has not changed. Hence, any assertion violation reported as such is a false positive and should be eliminated. Our filtering process, shown in \figref{filtering}, consists of the following four processes:
+To check the stability of the inferred invariants, we use them in the same version of the web application as assertions. From the user's perspective, no assertion violations should be reported because the web application has not changed. Hence, any assertion violation reported as such is a false positive and should be eliminated. Our filtering process, shown in \figref{filtering}, consists of the following four processes:
 
 \begin{itemize}
 \item Converting the inferred invariants into checkable assertions;
