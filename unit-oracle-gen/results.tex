@@ -43,4 +43,6 @@ We observed in several cases that the value of a DOM element property that is ch
 %, which favours mutation-based assertion generation as we discussed in \secref{setup}. 
 This points to the importance of incorporating the information that exists in human-written DOM-based test cases.       
 
-
+While the results demonstrate that \tool is more effective than mutation-based approach in terms of fault detection, we further investigate efficiency of our approach in terms of time overhead. 
+We compute overhead of \tool as the summation of time required for (1) instrumenting the application, and (2) analyzing the collected trace to compute \javascript slices. To calculate time overhead of the mutation-based approach, we consider the total time required for running the test suite multiple times (once per mutation), generating mutants, as well as the time needed to compare the original and the mutated version of the application to generate assertions. \figref{performance} shows the results of time overhead computed for each approach.    
+Our results show that the time overhead for \tool is 52 seconds on average, while the overhead computed for mutation-based technique is 123 seconds on average. As shown in the figure, for the EnterpriseStore application (ID 2), which is the largest application we considered (57K LOC), time efficiency is increased by 58\% using \tool. This indicates that our approach significantly outperforms mutation-based assertion generation as far as time efficiency is concerned. 
