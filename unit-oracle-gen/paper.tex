@@ -191,13 +191,14 @@
 \newboolean{showcomments}
 \setboolean{showcomments}{false}
 \ifthenelse{\boolean{showcomments}}
+
 {\newcommand{\nb}[2]{
 \fbox{\bfseries\sffamily\scriptsize#1}
 {\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
 }
 }
-{\newcommand{\nb}[2]{}
-}
+%{\newcommand{\nb}[2]{}
+%}
 \newcommand\ali[1]{\nb{Ali}{#1}}
 \newcommand\shabnam[1]{\nb{Shabnam}{#1}}
 \newcommand\karthik[1]{\nb{Karthik}{#1}}

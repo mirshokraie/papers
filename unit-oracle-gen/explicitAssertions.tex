@@ -7,12 +7,13 @@ During the run of a test case, there might be different instances where a given 
 $explicitAsstn$ in line 23 of \algref{algorithm} contains the inferred explicit assertions.
 
 In our running example (\figref{intraCodeDep}), explicit assertions check the correctness of \code{customer.payable}, \code{coupon.expired}, as well as \code{price} and \code{quantity} properties which belong to \code{selItem} object.
-Assuming that the original price of the item is 100, the number of selected item is 1, and the calculated discount according to the \code{value} attribute of a DOM element with ID \code{couponButt} is 30, then the expected values included in the assertions for each of the entities are 70, boolean value \code{true}, 100, and 1, respectively. \figref{unitTest} shows a \qunit test case for \code{addToCart} function with the generated assertions. \karthik{What's a \qunit test?}. Lines 7 to 9 in the figure corresponds to the explicit assertions.
+Assuming that the original price of the item is 100, the number of selected item is 1, and the calculated discount according to the \code{value} attribute of a DOM element with ID \code{couponButt} is 30, then the expected values included in the assertions for each of the entities are 70, boolean value \code{true}, 100, and 1, respectively. \figref{unitTest} shows a unit test case for \code{addToCart} function with the generated assertions in \qunit framework. %\karthik{What's a \qunit test?} 
+Lines 7 to 9 in the figure corresponds to the explicit assertions.
 \begin{figure}
   \centering
   \includegraphics[width=1\hsize]{fig/unitTest}
    \vspace{-0.3in} 
-  \mycaption{Generated \qunit test case.}
+  \mycaption{Generated \qunit test case and assertions.}
   \label{Fig:unitTest}
   \vspace{-0.1in} 
 \end{figure}  
