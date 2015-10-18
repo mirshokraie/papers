@@ -6,22 +6,28 @@
        
       %  \subtable[Experimental subjects and the corresponding exploration data]
             {
-           \begin{tabular}{c|c|c|c|c|c|c} \hline
-\theadturn{ID} &\theadturn{\# TP (LOC)} &\theadturn{\# FP (LOC)} &\theadturn{\# FN (LOC)} &\theadturn{\# Assertions} &\theadturn{Precision (\%)} &\theadturn{Recall (\%)}  \\  \hline 
-
-1  & 174 & 0 & 0 & 52 & 100 & 100    \\ \hline
+           \begin{tabular}{c|c|c|c|c|c||c|c|c|c} \hline
            
-2 & 861 & 18 & 162 & 76 & 98 & 84  \\ \hline
+&\multicolumn{5}{c||}{\thead{Backward Slice}} & \multicolumn{4}{c}{\thead{Assertions}} \\
+\cline{2-10}
+          
+           
+           
+\theadturn{App ID} &\theadturn{\# TP (LOC)} &\theadturn{\# FP (LOC)} &\theadturn{\# FN (LOC)} &\theadturn{Precision (\%)} &\theadturn{Recall (\%)} & \theadturn{\# Explicit} & \theadturn{\# Implicit} & \theadturn{\# Candidate} &\theadturn{\# Total}  \\  \hline 
+\hline 
+1  & 174 & 0 & 0 & 100 & 100 & 41 & 9 & 13 & 63     \\ \hline
+           
+2 & 861 & 18 & 162 & 98 & 84 & 51 & 19 & 26 & 96    \\ \hline
 
-3 & 193 & 0 & 0 & 103 & 100 & 100  \\ \hline
+3 & 193 & 0 & 0 & 100 & 100 & 83 & 23 & 16 & 122   \\ \hline
 
-4 & 1446 & 29 & 385 & 117 & 98 & 79 \\ \hline
+4 & 1446 & 29 & 385 & 98 & 79 & 72 & 29 & 31 & 132\\ \hline
 
-5 & 1017 & 0 & 224 & 91 & 100 & 82 \\ \hline
+5 & 1017 & 0 & 224 & 100 & 82 & 78 & 18 & 11 & 107  \\ \hline
 
-6 & 533 & 0 & 0 & 39 & 100 & 100 \\ \hline
+6 & 533 & 0 & 0 & 100 & 100 & 24 & 3 & 14 & 41  \\ \hline
 
-AVG & - & - & - & - & 99.3 & 90.8 \\ \hline
+AVG & - & - & - & 99.3 & 90.8 & - & - & - & - \\ \hline
 \hline\end{tabular}
             }
 
