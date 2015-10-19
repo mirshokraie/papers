@@ -16,8 +16,7 @@ To figure out where the mutation originated in our execution trace, we keep reco
 After inferring DOM mutant statements, we identify the control and data \emph{intra code dependency} within the application's code.
 %gather the entire set of \javascript statements responsible for mutating a given DOM element.
 \begin{mydef}[Intra Code Dependency]
-\label{def:intraCodeDep} 
- 
+\label{def:intraCodeDep}  
 An intra code dependency is defined as $<criterion, codeSts>$, where $criterion$ is a variable at the initial point of contact, and $codeSts$ is the set of control and data dependent statements that are either affected by the $ctiterion$ or have some effect on the $criterion$. 
 \end{mydef}
 

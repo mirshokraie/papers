@@ -29,9 +29,7 @@ We call the correlation between the DOM-based assertion and the application's co
 
 \begin{mydef}[Inter DOM Assertion Dependency]
 \label{def:interDOMDep} 
- 
-An inter DOM assertion dependency is defined as
-$<assert, initPoint>$, where $assert$ is the intended DOM-based assertion, and $initPoint$ is the initial line of code in the application that is responsible for mutating the property of a DOM element extracted from the intra DOM assertion dependency.
+An inter DOM assertion dependency is defined as $<assert, initPoint>$, where $assert$ is the intended DOM-based assertion, and $initPoint$ is the initial line of code in the application that is responsible for mutating the property of a DOM element extracted from the intra DOM assertion dependency.
 \end{mydef}
 In order to find the initial point of contact between the application's code and a mutated DOM property in the DOM-based test case, we track evolution of the accessed DOM elements (\textsc{GetDomMuts} in line 13 of the algorithm) as well as invoked event handlers as the test case runs. 
 We consider DOM mutation as a DOM-tree structural change (e.g.; additions and removals of child nodes), as well as DOM write operations such as changes to attributes and/or updates to child text nodes. For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
