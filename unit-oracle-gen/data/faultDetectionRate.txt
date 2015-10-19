@@ -5,3 +5,4 @@ appId, atrina, mutation, manual, atrinaNoFd, mutationNoFd, manualNoFd
 4, 62, 50, 44, 31, 25, 22 
 5, 50, 44, 36, 25, 22, 18
 6, 66, 60, 62, 33, 30, 31
+7, 78, 56, 62, 39, 28, 31 

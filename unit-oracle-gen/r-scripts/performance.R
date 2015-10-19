@@ -19,8 +19,8 @@ ylim = c(0, 200), ylab="Time (Seconds)", xlab="Experimental Objects", col=colors
 #text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
-myaxis <- c(2, 5, 8, 11)
-myaxislab <- c(1, 2, 3, 4)  
+myaxis <- c(2, 5, 8, 11, 14, 17, 20)
+myaxislab <- c(1, 2, 3, 4, 5, 6, 7)  
 
 labels <- c('Atrina', 'Mutation-based')
 #inset <- c(0.1, 0.1)

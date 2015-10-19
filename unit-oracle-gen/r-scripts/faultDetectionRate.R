@@ -3,7 +3,7 @@ data <- read.csv(file="../data/faultDetectionRate.txt", header=T)
 pdf("barplot-faultDetectionRate.pdf")
 
 #x <- data$appId
-x <- c(1, 2, 3, 4, 5, 6, 'AVG')
+x <- c(1, 2, 3, 4, 5, 6, 7, 'AVG')
 
 atrinaY<-c(data$atrina)
 meanAtrina <- mean(atrinaY)
@@ -43,8 +43,8 @@ text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
 
-myaxis <- c(2.5, 6.5, 10.5, 14.5, 18.5, 22.5, 26.5)
-myaxislab <- c(1, 2, 3, 4, 5, 6, 'AVG')  
+myaxis <- c(2.5, 6.5, 10.5, 14.5, 18.5, 22.5, 26.5, 30.5)
+myaxislab <- c(1, 2, 3, 4, 5, 6, 7, 'AVG')  
 
 labels <- c('Atrina', 'Mutation-based', 'Human-writen')
 #inset <- c(0.1, 0.1)
