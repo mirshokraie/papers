@@ -31,8 +31,8 @@ ylim = c(0, 100), ylab="Fault Detection Rate (%)", xlab="Experimental Objects", 
 text(mp, height, labels = format(length, 3), pos = 3, cex = .80)
 
 
-myaxis <- c(3, 8, 13, 18)
-myaxislab <- c(1, 2, 3, 4)  
+myaxis <- c(3, 8, 13, 18, 23, 28, 33)
+myaxislab <- c(1, 2, 3, 4, 5, 6, 7)  
 
 labels <- c('Atrina', 'Explicit Only Assertions', 'Explicit+Implicit Assertions', 'Explicit+Candidate Assertions')
 #inset <- c(0.1, 0.1)

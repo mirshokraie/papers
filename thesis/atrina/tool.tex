@@ -1,4 +1,5 @@
 \subsection{Tool Implementation: Atrina} \label{Sec:tool}
-We have implemented our \javascript unit test assertion generation in an automated tool called \atrina. The tool is written in Java and is publicly available for download \cite{atrina-dl}.
-We use proxy server to intercept HTTP responses which contain \javascript code. \javascript Mutation Summary library \cite{mutationSummary} is used to track DOM changes during the execution of the test suite. Trace information is collected by the proxy once received from the browser. To instrument Selenium test cases we convert them into an abstract syntax tree (AST) by employing Eclipse Java development tools (JDT). Once the transformation is done, we run the Java code of the changed AST on the application under test.   
+
+We have implemented our \javascript unit test assertion generation in an automated tool called \atrina. The tool is written in Java, and is publicly available for download \cite{atrina-dl}.
+We use a proxy server to intercept HTTP responses which contain \javascript code. The \javascript Mutation Summary library \cite{mutationSummary} is used to track DOM changes during the execution of the test suite. Trace information is collected by the proxy once received from the browser. To instrument Selenium test cases, we convert them into an abstract syntax tree (AST) by employing Eclipse Java development tools (JDT). Once the transformation is done, we run the Java code of the changed AST on the application under test.   
 

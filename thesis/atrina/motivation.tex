@@ -1,28 +1,36 @@
 \section{Motivation} \label{Sec:motivation}
-Unlike DOM-based testing, asserting the behaviour of a \javascript application through unit-level tests requires a tester to check the correctness of several intermediate code-level variables and object properties. The code-level operations are mainly responsible for updating the DOM throughout the application execution. Therefore, a tester needs to analyze the relation between the \javascript code and the DOM's evolution. 
-%Moreover, in order to prevent generating fragile unit tests, the testing effort should be directed towards aspects of the system behavior that are relevant to important DOM changes. 
-We believe DOM-based assertions can be utilized as a guideline to generate unit test assertions at \javascript code level. 
 
-\begin{figure*}
+Unlike DOM-based testing, asserting the behaviour of a \javascript application through unit-level tests requires a tester to check the correctness of several intermediate code-level variables and object properties. The code-level operations are mainly responsible for updating the DOM during the application execution. Therefore, a tester needs to analyze the relationship between the \javascript code and the DOM's evolution. 
+%Moreover, in order to prevent generating fragile unit tests, the testing effort should be directed towards aspects of the system behavior that are relevant to important DOM changes. 
+We believe that DOM-based assertions can be utilized as a guideline to generate unit test assertions at \javascript code level. In this section, we discuss why through an example.
+
+
+\begin{figure}[!t]
   \centering
- 
-  \includegraphics[width=1\hsize]{fig/example}
+  \includegraphics[width=.8\hsize]{fig/example}
   \vspace{0.2in} 
   \mycaption{Running example (a) \javascript code, and (b) DOM-based test case. The line from (b) to (a) shows the point of contact between the DOM assertion and the code. The arrow lines in (a) show the backward as well as forward slices between \javascript statements.}
+%  \vspace{-0.2in} 
   \label{Fig:example}
-\end{figure*}
+\end{figure}
 
-\figref{example} presents a snippet of a \javascript-based shopping cart application as well as a sample DOM-based \selenium test case that we will use as a running example. The application's code (a) contains two main functions as follows:
+
+\figref{example} presents (a) snippet of a \javascript-based shopping cart application, and (b) sample DOM-based \selenium test case.  We will use as a running example throughout this paper. The application's code (a) consists of two functions:
 \begin{enumerate}
-\item \code{addToCart} is bound to the event handler of DOM elements with class \code{merchandise}. When the element is clicked, \code{addToCart} gets the information of the selected merchandise, and sets the quantity of the current available items by updating the \code{availItems} object. If a valid discount coupon exists, \code{addToCart} calculates the discount value, and disables the selected  coupon button with ID \code{couponButt} by removing the corresponding class. Finally, \code{addToCart} updates the payable amount by setting the \code{payable} property of the \code{customer} object.
-\item \code{viewCart} is invoked by clicking on a DOM element with ID \code{shopCart}. The function appends a message to a \code{div} element with class \code{shopContai\-ner} including the final payable amount of the customer. If the  coupon button with ID \code{couponButt} is not selected and the payable amount is equal to zero, then the empty cart message is shown.    
+
+\item \code{addToCart} is bound to the event handler of DOM element with class attribute \code{merchandise}. When any of these element are clicked, \code{addToCa\-rt} gets the information of the selected merchandise, and sets the quantity of the current available items by updating the \code{availItems} object. If a valid discount coupon exists, \code{addToCart} calculates the discount value, and disables the selected  coupon button with ID \code{couponButt} by removing the corresponding class. 
+Finally, \code{addToCart} updates the payable amount by setting the \code{payable} property of the \code{customer} object.
+
+\item \code{viewCart} is invoked by clicking on a DOM element with ID \code{shopCart}. The function appends a message to a \code{div} element with class \code{shopConta\-iner} including the final payable amount of the customer. If the  coupon button with ID \code{couponButt} is not selected and the payable amount is equal to zero, then the empty cart message is shown.    
+
 \end{enumerate}
 %\figref{domTest} shows a sample DOM-based \selenium test case written for the running example. 
-Let's assume that in line 21 of \figref{example}(a) \code{selItem.price}, which is assigned by the original price of the merchandise is 100, and \code{selItem.quantity} is 1. In line 25, the discount, which is calculated based on the \code{data} value of the \code{couponButt} element is 30. 
+Let's assume that in line 14 of \figref{example}(a) \code{selItem.price}, which represents the original price of the merchandise, is 100, and \code{selItem.quantity} is 1. In line 18, the discount, which is calculated based on the \code{data} value of the \code{couponButt} element is 30. 
 The DOM-based assertion in \figref{example}(b) (line 11) checks the correctness of a text appended to a \code{div} element with class \code{shopContainer} containing the final amount payable by the customer, which is equal to 70 in this example.
-Analyzing the assertion in line 11 of \figref{example}(b) indicates that the expected value of the assertion is directly influenced by the \code{payable} property of \code{customer} object as well as the object's property \code{coupon.expired} in function \code{addToCart}. We also infer that a variable in line 16 of \figref{example}(a) which directly influences the value of \code{customer.payable}, is also used in updating the value of \code{availItems.count} in line 19.
+Analyzing the assertion in line 11 of \figref{example}(b) indicates that the expected value of the assertion is directly influenced by the \code{payable} property of \code{customer} object as well as the object's property \code{coupon.expired} in function \code{addToCart}. We also infer that the \code{selitem} variable in line 9 of \figref{example}(a), which directly influences the value of \code{customer.payable}, is also used in updating the value of \code{availItems.count} in line 12.
 
-Further, by leveraging the execution information obtained from running the DOM-based test case, we can identify DOM's evolution, which are not checked by the existing assertions, but potentially influence the fault finding capability of the test suite. For instance, DOM element with ID \code{couponButt} is accessed several times in function \code{addToCart} as well as \code{viewCart} as the test case in \figref{example}(b) runs, however it remains unchecked. Since evolution of the \code{couponBu\-tt} DOM element pertains to the underlying \javascript code, it is important to assert on code statements responsible for changing the aforementioned DOM element.             
+Further, by leveraging the execution information obtained from running the DOM-based test case, we can infer the DOM's evolution, which can influence the fault finding capability of the test suite. However, this is not checked by the DOM-based test suite.
+For instance, DOM element with ID \code{couponButt} is accessed several times in function \code{addToCart} as well as \code{viewCart} as the test case in \figref{example}(b) runs, however it remains unchecked. Since the evolution of the \code{couponButt} DOM element pertains to the underlying \javascript code, it is important to assert on code statements responsible for changing the aforementioned DOM elements.             
 
 %an expected value oracle for the given test input, confident
 %that their effort is directed towards aspects of the system
