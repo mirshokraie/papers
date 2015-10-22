@@ -15,7 +15,7 @@ We believe that DOM-based assertions can be utilized as a guideline to generate 
 \end{figure}
 
 
-\figref{example} presents (a) snippet of a \javascript-based shopping cart application, and (b) sample DOM-based \selenium test case.  We will use as a running example throughout this paper. The application's code (a) consists of two functions:
+\figref{example} presents (a) snippet of a \javascript-based shopping cart application, and (b) sample DOM-based \selenium test case.  We will use this as a running example throughout the paper. The application's code (a) consists of two functions:
 \begin{enumerate}
 
 \item \code{addToCart} is bound to the event handler of DOM element with class attribute \code{merchandise}. When any of these element are clicked, \code{addToCart} gets the information of the selected merchandise, and sets the quantity of the current available items by updating the \code{availItems} object. If a valid discount coupon exists, \code{addToCart} calculates the discount value, and disables the selected  coupon button with ID \code{couponButt} by removing the corresponding class. 
