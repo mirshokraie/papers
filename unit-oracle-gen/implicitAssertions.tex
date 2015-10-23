@@ -9,14 +9,6 @@ indicates how  an operand at $st$ is being subsequently.
 This can help the tester to ensure that $st$ establishes the expected outcome of the computations assumed by later statements. 
 %Given the importance of statements involved in code-level computations of a DOM-based assertion, using forward slice is useful to check that there are no unforeseen effects on the application's behavior by a modification to such statements. 
 
-\begin{figure}[!t]
-  \centering
-  \includegraphics[width=1\hsize]{fig/forwardSlicingExample}
-   \vspace{-0.3in} 
-  \mycaption{Intra code dependency through forward slicing.}
-  \label{Fig:forwardSlicingExample}
-  \vspace{-0.2in} 
-\end{figure}
 
 %Dynamic forward slice is performed on the subset of code statements which is previously instrumented as explained in \secref{domToCode}. 
 \textsc{GetFWSlice} in line 17 of the algorithm computes forward slice on the variable operands of a statement in the backward slice.
