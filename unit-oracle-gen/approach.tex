@@ -13,8 +13,7 @@ At a high level, our approach generates code-level assertions based on human wri
 
 In our approach we (1) execute the instrumented application by running the existing DOM-based test suite, and gather the execution trace of the application. We then extract (2) DOM-based assertions, which are executed as the test suite runs, and (3) candidate DOM element properties, which are useful DOM properties that can be used to generate assertions. We also (4) identify the initial point of connection between the application's source code and checked DOM element.
 %We collect lines of code responsible for updating the corresponding DOM element. 
-%We determine DOM mutating statements, 
-
+%We determine DOM mutating statements,
 We use the information gathered during the test suite execution to obtain the assertions. We (5) calculate the backward slice of the DOM mutating statements to find the entire code blocks that update the checked DOM element, (6) extract accessible entities from the obtained statements, and (7) form explicit assertions using the accessible entries. 
 We further (8) perform a forward slice on the extracted entities to identify statements that are implicitly affected by such entities, and (9) form implicit assertions using the collected entities, and (10) generate candidate assertions by performing steps (4), (5), and (6) on the inferred candidate DOM element properties (3).
 
