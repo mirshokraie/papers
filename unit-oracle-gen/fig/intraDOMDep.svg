@@ -72,15 +72,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.071449"
-     inkscape:cx="237.9245"
-     inkscape:cy="195.35745"
+     inkscape:cx="200.59188"
+     inkscape:cy="83.359585"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="696"
      inkscape:window-x="17"
-     inkscape:window-y="4"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -248,13 +248,13 @@
        rx="2460.9832"
        ry="0" />
     <rect
-       style="fill:none;stroke:#000000;stroke-width:1.094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188,1.094;stroke-dashoffset:0"
+       style="fill:none;stroke:#000000;stroke-width:1.09;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.18,1.09;stroke-dashoffset:0"
        id="rect4759"
-       width="79.809311"
-       height="16.093494"
-       x="235.16632"
-       y="346.17953"
-       rx="2616.5518"
+       width="27.318905"
+       height="13.554666"
+       x="203.16632"
+       y="347.11285"
+       rx="895.65155"
        ry="0" />
     <rect
        ry="0"
@@ -400,11 +400,11 @@
          y="395.13434"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif">(b)</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.09399998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.188, 1.094;stroke-dashoffset:0;marker-end:url(#Arrow2Lend)"
-       d="m 269.25799,362.75731 c -24.72522,7.62099 -69.43273,24.43105 -89.796,22.76707 -75.75684,-6.19042 -80.810533,3.84546 -95.414691,-3.2312 -31.721844,-15.37131 8.302914,-51.035 8.302914,-51.035"
+       style="fill:none;stroke:#000000;stroke-width:1.2499094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.49981876, 1.24990938;stroke-dashoffset:0;marker-end:url(#Arrow2Lend)"
+       d="M 215.04774,363.4586 C 143.73399,401.03861 39.112348,400.28896 92.093861,331.49859"
        id="path4436"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssc" />
+       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Consolas;-inkscape-font-specification:Consolas"

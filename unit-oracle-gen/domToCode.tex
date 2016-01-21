@@ -17,7 +17,7 @@ After inferring DOM mutant statements, we identify the control and data \emph{in
 %gather the entire set of \javascript statements responsible for mutating a given DOM element.
 \begin{mydef}[Intra Code Dependency]
 \label{def:intraCodeDep}  
-An intra code dependency is defined as $<criterion, codeSts>$, where $criterion$ is a variable at the initial point of contact, and $codeSts$ is the set of control and data dependent statements that are either affected by the $ctiterion$ or have some effect on the $criterion$. 
+An intra code dependency is defined as $<criterion, codeSts>$, where $criterion$ is a variable at the initial point of contact, and $codeSts$ is the set of control and data dependent statements that are either affected by the $ctiterion$ or have some effect on the $criterion$.$\square$ 
 \end{mydef}
 
 To find the intra code dependency, we perform backward as well as forward slicing by using $criterion$ as the slicing criterion.

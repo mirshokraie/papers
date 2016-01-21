@@ -1,5 +1,5 @@
 \subsection{Extracting DOM-Related Characteristics} \label{Sec:extractDomRelatedInfo}
-The DOM connects a test case to the web application's code. Therefore, we first need to analyze the DOM-based test suite and extract the following pieces of information: (1) DOM-related operations of the existing test suite that may have tight connection with the \javascript code, and (2) frequently accessed DOM properties, which are potentially influential in improving the fault finding capability of the test suite, but are left unchecked in the manually-written test suite.
+The DOM connects a test case to the web application's code. Therefore, we first need to analyze the DOM-based test suite and extract the following pieces of information: (1) DOM-related operations of the existing test suite that may have be linked with the \javascript code, and (2) frequently accessed DOM properties, which are potentially influential in improving the fault finding capability of the test suite, but are left unchecked in the manually-written test suite.
 
 \headbf{DOM-Related Operations}
 Any written test case needs to check the correctness of the application's behaviour. In a DOM-based test case, the expected behaviour is checked through DOM-based assertions. A
@@ -18,7 +18,7 @@ For each DOM-based assertion we find \emph{intra DOM assertion dependency} withi
 \begin{mydef}[Intra DOM Assertion Dependency]
 \label{def:intraDOMDep}  
 
-An intra DOM assertion dependency is defined as a three tuple of $<assert, domElems, domProps>$, where $assert$ is the intended DOM-based assertion, $domElems$ is the accessed DOM elements in the test case pertaining to the assertion, and $domProps$ is the accessed DOM properties within the assertion.
+An intra DOM assertion dependency is defined as a three tuple of $<assert, domElems, domProps>$, where $assert$ is the intended DOM-based assertion, $domElems$ is the accessed DOM elements in the test case pertaining to the assertion, and $domProps$ is the accessed DOM properties within the assertion. $\square$
 \end{mydef}
 \textsc{GetDomAcc} in line 10 of \algref{algorithm} retrieves DOM dependencies of the assertion in the test case.
 %, we instrument the test case by wrapping around method calls that accesses DOM elements.
@@ -29,7 +29,7 @@ We call the correlation between the DOM-based assertion and the application's co
 
 \begin{mydef}[Inter DOM Assertion Dependency]
 \label{def:interDOMDep} 
-An inter DOM assertion dependency is defined as $<assert, initPoint>$, where $assert$ is the intended DOM-based assertion, and $initPoint$ is the initial line of code in the application that is responsible for mutating the property of a DOM element extracted from the intra DOM assertion dependency.
+An inter DOM assertion dependency is defined as $<assert, initPoint>$, where $assert$ is the intended DOM-based assertion, and $initPoint$ is the initial line of code in the application that is responsible for mutating the property of a DOM element extracted from the intra DOM assertion dependency. $\square$
 \end{mydef}
 In order to find the initial point of contact between the application's code and a mutated DOM property in the DOM-based test case, we track evolution of the accessed DOM elements (\textsc{GetDomMuts} in line 13 of the algorithm) as well as invoked event handlers as the test case runs. 
 We consider DOM mutation as a DOM-tree structural change (e.g.; additions and removals of child nodes), as well as DOM write operations such as changes to attributes and/or updates to child text nodes. For instance, running the sample test case in \figref{example}(b) results in mutating (1) the textual value of \code{div} element with class \code{shopContainer}, and (2) the \code{class} attribute of DOM element with ID \code{couponButt}.
