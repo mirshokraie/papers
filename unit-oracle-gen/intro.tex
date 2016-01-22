@@ -11,7 +11,8 @@ Rather, the tester needs only basic knowledge of common event sequences to cover
  
 On the other hand, it is more tedious to
 write unit test assertions for web applications that have rich interaction with the DOM through their \javascript code. 
-This is because the tester needs to precisely understand the full range of interaction between the code level operations of a unit and the DOM level operations of a system. Therefore, the tester may either fail to assert the correctness of a particular behaviour when the unit is used as a part of a system, or consider too many assertions which makes the tests difficult to maintain. 
+This is because the tester needs to precisely understand the full range of interaction between the code level operations of a unit and the DOM level operations of a system, and thus may fail to assert the correctness of a particular behaviour when the unit is used as a part of a system. 
+%Therefore, the tester may either fail to assert the correctness of a particular behaviour when the unit is used as a part of a system, or consider too many assertions which makes the tests difficult to maintain. 
 Our previous findings \cite{mirshokraie:icst15} indicate that while DOM-based assertions tend to miss the related portion of
 code-level failure, more fine grained unit-level assertions can detect such faults. 
 Furthermore, finding the root cause of an error during DOM-based testing is much more expensive than during unit testing.
